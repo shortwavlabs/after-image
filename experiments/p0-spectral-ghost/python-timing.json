@@ -4,7 +4,7 @@
   {
    "check": "python_wall_time",
    "case": "N=2048 stft (4 s stereo)",
-   "value": 0.0054,
+   "value": 0.0052,
    "unit": "s (informational)",
    "limit": null,
    "result": "info"
@@ -12,7 +12,7 @@
   {
    "check": "python_wall_time",
    "case": "N=2048 freeze (4 s stereo)",
-   "value": 0.0145,
+   "value": 0.0144,
    "unit": "s (informational)",
    "limit": null,
    "result": "info"
@@ -20,7 +20,7 @@
   {
    "check": "python_wall_time",
    "case": "N=2048 loop_aligned (4 s stereo)",
-   "value": 0.0123,
+   "value": 0.0124,
    "unit": "s (informational)",
    "limit": null,
    "result": "info"
@@ -28,7 +28,7 @@
   {
    "check": "python_wall_time",
    "case": "N=2048 sustain_mean (4 s stereo)",
-   "value": 0.0147,
+   "value": 0.0145,
    "unit": "s (informational)",
    "limit": null,
    "result": "info"
@@ -36,7 +36,7 @@
   {
    "check": "python_wall_time",
    "case": "N=2048 sustain_scan (4 s stereo)",
-   "value": 0.0165,
+   "value": 0.0163,
    "unit": "s (informational)",
    "limit": null,
    "result": "info"
@@ -52,7 +52,7 @@
   {
    "check": "python_wall_time",
    "case": "N=4096 freeze (4 s stereo)",
-   "value": 0.0145,
+   "value": 0.0144,
    "unit": "s (informational)",
    "limit": null,
    "result": "info"
@@ -68,7 +68,7 @@
   {
    "check": "python_wall_time",
    "case": "N=4096 sustain_mean (4 s stereo)",
-   "value": 0.0148,
+   "value": 0.0144,
    "unit": "s (informational)",
    "limit": null,
    "result": "info"
@@ -76,7 +76,7 @@
   {
    "check": "python_wall_time",
    "case": "N=4096 sustain_scan (4 s stereo)",
-   "value": 0.0167,
+   "value": 0.0166,
    "unit": "s (informational)",
    "limit": null,
    "result": "info"
@@ -84,7 +84,7 @@
   {
    "check": "python_wall_time",
    "case": "N=8192 stft (4 s stereo)",
-   "value": 0.0049,
+   "value": 0.0052,
    "unit": "s (informational)",
    "limit": null,
    "result": "info"
@@ -92,7 +92,7 @@
   {
    "check": "python_wall_time",
    "case": "N=8192 freeze (4 s stereo)",
-   "value": 0.0147,
+   "value": 0.0148,
    "unit": "s (informational)",
    "limit": null,
    "result": "info"
@@ -100,7 +100,7 @@
   {
    "check": "python_wall_time",
    "case": "N=8192 loop_aligned (4 s stereo)",
-   "value": 0.0128,
+   "value": 0.0126,
    "unit": "s (informational)",
    "limit": null,
    "result": "info"
@@ -108,7 +108,7 @@
   {
    "check": "python_wall_time",
    "case": "N=8192 sustain_mean (4 s stereo)",
-   "value": 0.0156,
+   "value": 0.0154,
    "unit": "s (informational)",
    "limit": null,
    "result": "info"
@@ -116,7 +116,7 @@
   {
    "check": "python_wall_time",
    "case": "N=8192 sustain_scan (4 s stereo)",
-   "value": 0.0181,
+   "value": 0.0174,
    "unit": "s (informational)",
    "limit": null,
    "result": "info"
