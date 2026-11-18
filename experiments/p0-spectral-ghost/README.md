@@ -31,7 +31,7 @@ uv run python run.py all
 uv run python run.py blind
 ```
 
-`run.py all` takes about 20 s and writes about 0.9 GB of 32-bit float WAVs to
+`run.py all` takes about 20 s and writes about 0.9 GB of 32-bit float WAVs (`blind` adds 0.2 GB) to
 `renders/` (git-ignored). Use `--fft 4096`, `--only guitar`, or `--no-wav` for
 smaller runs; restricted runs write `*.partial.json` instead of the committed
 evidence files.
