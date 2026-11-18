@@ -14,7 +14,7 @@ ear.
 | Success criterion (brief §16) | Result | Evidence |
 |---|---|---|
 | 1. Cloud engine deterministic and numerically stable | **PASS** | bit-identical reruns; 0 non-finite, 0 denormal in 86 measured renders |
-| 2. Spectrally selected capture drives granular playback correctly | **PASS** | buffer = selection to −157 dB; mask rejection ≤ −66 dB |
+| 2. Spectrally selected capture drives granular playback correctly | **PASS, with one exception** | buffer = selection to −157 dB; mask rejection ≤ −66 dB. Exception: with a band-limited mask, audio adjacent in time rings into the buffer edges at −11 to −22 dB (K2) |
 | 3. TRACE/CLOUD transformation continuous and bounded | **PASS** | endpoints exact to −313 dB; loudness steps ≤ 0.89 dB |
 | 4. A non-trivial DISSOLVE compared with a crossfade | **PASS** | structural (B) and guided (C) versus parallel (A) |
 | 5. Reproducible blind listening pack | **PASS** | 16 blind sets, key kept outside the set folders |
@@ -110,13 +110,18 @@ rate with all engines and variants; they stay git-ignored.
 ## 4. Numerical test results
 
 **133 tests pass** (107 P0-A, unchanged, plus 26 new). **P0-B verification: 107
-PASS, 0 FAIL, 146 informational rows.**
+PASS, 0 FAIL, 149 informational rows.**
 
 ### Threshold provenance
 
 All 14 limits were committed in their own commit (`5c6edd6`) before any engine
 code existed. None has been edited since. One limit failed on the first run and
 the **algorithm** was changed, not the limit (see §10, U1).
+
+The limits were blind; the algorithm was not. Two DISSOLVE mapping constants
+were moved after measurements had been seen (U1 and U7), so the continuity rows
+pass for a mapping that was adjusted against them. The reverse check was also
+replaced after review: the first version compared a function with itself.
 
 ### Thresholded results
 
@@ -131,7 +136,7 @@ the **algorithm** was changed, not the limit (see §10, U1).
 | Grain edge step ÷ steepest interior step (Hann, Tukey; 40 random grains each) | 0.005, 0.007 | ≤ 1.25 |
 | Rectangular-window control | 338 | ≥ 2 |
 | Pitch error, −12 … +12 semitones | 0.0014 cent | 1 cent |
-| Reversed read vs flipped forward read | exact | −200 dB |
+| Rendered reversed grain vs the analytic result on a ramp buffer (3 speeds) | exact | −200 dB |
 | Scheduled grain count vs density × time (15 settings) | within 1 grain in 2000 | ±2 % |
 | Mean simultaneous grains vs density × duration | within 0.2 % | ±5 % |
 | Max simultaneous grains at ceilings 8 / 16 / 32 | 8 / 16 / 31 | ≤ ceiling |
@@ -158,9 +163,11 @@ All measured at 48 kHz.
 
 1. **Context frames recover real material.** The buffer is 3 hops longer than
    P0-A's interior at every size (64 ms at N = 4096, 128 ms at N = 8192). For a
-   0.25 s selection the loop period grows from 6912 → 8046 samples (N = 2048),
-   5376 → 8045 (N = 4096) and 2304 → 7553 (N = 8192). P0-A's "short selections
-   starve Loop at N = 8192" finding is largely removed.
+   0.25 s selection the loop period grows from P0-A `loop_aligned80`'s
+   6582 → 8046 samples (N = 2048), 5119 → 8045 (N = 4096) and 3072 → 7553
+   (N = 8192), and at N = 8192 the crossfade no longer falls back from 80 ms to
+   64 ms. P0-A's "short selections starve Loop at N = 8192" finding is largely
+   removed.
 2. **Grains at any setting are click-free and bounded.** Edge steps are 0.5 % of
    the steepest interior step.
 3. **Granulation adds sidebands to low partials.** On `guitar/full_spectrum` the
@@ -184,7 +191,9 @@ All measured at 48 kHz.
 
 ## 6. DISSOLVE comparison
 
-Both approaches share exact endpoints. What differs is the path. Three proxies,
+At a fixed setting both approaches share exact endpoints (the 12 s moving
+progressions end on different random realisations of the same cloud settings).
+What differs is the path. Three proxies,
 all computed on unprocessed output:
 
 - **waveform**: correlation of the render with itself one loop period later
@@ -255,14 +264,14 @@ Measured conclusions:
 - For a full-band selection the spectral path does nothing. The spectral cloud
   and the conventional cloud are the same audio.
 - For a band-limited selection the spectral cloud differs from the unfiltered
-  cloud exactly as a band-pass filter would make it differ, and a **4th-order
-  Butterworth in front of the same granulator lands within 0.2–2.8 dB of timbre
+  cloud exactly as a band-pass filter would make it differ, and a **Butterworth
+  band-pass (24 dB/octave skirts) in front of the same granulator lands within 0.2–2.8 dB of timbre
   distance and 0–9 points of in-band energy**. The remaining difference is
   filter steepness.
 - So, in this architecture, **spectral selection is a linear-phase band-pass
   filter with a time gate.** A conventional granular delay with a filter before
   it reproduces the result. The mask's only measurable advantages are steeper
-  skirts (−152 dB two octaves out at N = 4096, against a 4th-order slope) and
+  skirts (−152 dB two octaves out at N = 4096, against 24 dB/octave) and
   the fact that the band is chosen by drawing on a spectrogram.
 
 That is a negative answer to "does the spectral representation contribute
@@ -432,6 +441,7 @@ grid.
 | U4 | Tone-burst probe for neighbour leakage | Reported −13 dB "leak" for an out-of-band tone; it was measuring the click of the burst's own hard stop. Replaced by the superposition measurement (K2). |
 | U5 | Spectral selection as a differentiator | Equivalent to a pre-filter (§7.1). |
 | U6 | Spectral guide as a differentiator | Equivalent to a broadband guide except for high, narrow bands on percussive material (§7.2). |
+| U7 | Raising grain overlap only from D = 0.5 | An exploratory probe before the first formal run showed 10–13 dB of level ripple at D = 0.5 (random onsets at only 2× overlap). The overlap rise was moved to start at D = 0.1. Ripple at D = 0.5 in the pack is now 6.6–9.9 dB on three cases and 19–20 dB on guitar/long_sustain and vocal/narrow_harmonic (whose TRACE loops already ripple by 16 and 5 dB). No limit applies to ripple. |
 
 Not attempted: voice stealing, per-grain FFT, grain-synchronous pitch (PSOLA),
 feedback or live-input granulation, MOTION/WIDTH controls, any realtime

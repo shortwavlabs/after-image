@@ -58,7 +58,7 @@ none of their own audio is kept.
 | | P0-A loop | P0-B capture buffer |
 |---|---|---|
 | usable samples | (M − 3)·H | M·H |
-| 0.25 s selection, N = 8192, 48 kHz: loop period | 2304 samples (48 ms) | 7553 samples (157 ms) |
+| 0.25 s selection, N = 8192, 48 kHz: loop period | 3072 samples (64 ms) | 7553 samples (157 ms) |
 | extra wait before capture can complete | none | 2 hops (42.7 ms at 48 kHz / N = 4096) |
 
 Rules:
@@ -198,8 +198,9 @@ full selection instead of the 3-hop-shorter interior. P0-A's own
 
 ## 5. DISSOLVE
 
-All three approaches share both endpoints: D = 0 is TRACE and D = 1 is the same
-cloud with the same schedule.
+At a fixed setting all three approaches share both endpoints: D = 0 is TRACE
+and D = 1 is the same cloud with the same schedule. (A DISSOLVE that moves over
+time reaches the same settings but a different random realisation.)
 
 ### 5.1 Approach A — parallel morph (control)
 

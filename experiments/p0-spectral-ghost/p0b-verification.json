@@ -2,7 +2,7 @@
  "summary": {
   "PASS": 107,
   "FAIL": 0,
-  "info": 146
+  "info": 149
  },
  "rows": [
   {
@@ -87,24 +87,48 @@
   },
   {
    "check": "capture_reconstruction",
-   "case": "0.25 s selection N=2048: loop period with context / P0-A interior",
-   "value": "8046 / 6912",
+   "case": "0.25 s selection N=2048: loop period P0-B (context) / P0-A loop_aligned80",
+   "value": "8046 / 6582",
    "unit": "samples",
    "limit": null,
    "result": "info"
   },
   {
    "check": "capture_reconstruction",
-   "case": "0.25 s selection N=4096: loop period with context / P0-A interior",
-   "value": "8045 / 5376",
+   "case": "0.25 s selection N=2048: crossfade P0-B / P0-A (80 ms requested = 3840)",
+   "value": "3840 / 3840",
    "unit": "samples",
    "limit": null,
    "result": "info"
   },
   {
    "check": "capture_reconstruction",
-   "case": "0.25 s selection N=8192: loop period with context / P0-A interior",
-   "value": "7553 / 2304",
+   "case": "0.25 s selection N=4096: loop period P0-B (context) / P0-A loop_aligned80",
+   "value": "8045 / 5119",
+   "unit": "samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "0.25 s selection N=4096: crossfade P0-B / P0-A (80 ms requested = 3840)",
+   "value": "3840 / 3840",
+   "unit": "samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "0.25 s selection N=8192: loop period P0-B (context) / P0-A loop_aligned80",
+   "value": "7553 / 3072",
+   "unit": "samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "0.25 s selection N=8192: crossfade P0-B / P0-A (80 ms requested = 3840)",
+   "value": "3840 / 3072",
    "unit": "samples",
    "limit": null,
    "result": "info"
@@ -415,7 +439,7 @@
   },
   {
    "check": "reverse",
-   "case": "speed 1.000: reversed read vs flipped forward read",
+   "case": "speed 1.000: rendered reversed grain vs analytic ramp",
    "value": -6000.0,
    "unit": "dB",
    "limit": -200.0,
@@ -423,7 +447,7 @@
   },
   {
    "check": "reverse",
-   "case": "speed 1.498: reversed read vs flipped forward read",
+   "case": "speed 1.498: rendered reversed grain vs analytic ramp",
    "value": -6000.0,
    "unit": "dB",
    "limit": -200.0,
@@ -431,7 +455,7 @@
   },
   {
    "check": "reverse",
-   "case": "speed 0.500: reversed read vs flipped forward read",
+   "case": "speed 0.500: rendered reversed grain vs analytic ramp",
    "value": -6000.0,
    "unit": "dB",
    "limit": -200.0,
