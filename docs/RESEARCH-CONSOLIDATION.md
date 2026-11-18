@@ -142,6 +142,9 @@ implementation or an owner decision.
 | B11 | Licences of the 12 Freesound recordings unknown; no Freesound IDs in the files | Real-audio §7 | Owner fills the provenance table; until then no redistribution of the audio or renders |
 | B12 | No realtime C++ performance measurement exists | All reports | C++ benchmarks (P1-A onwards) |
 
+Status of each item after the P1-A implementation: [P1-A-QUALIFICATION.md](P1-A-QUALIFICATION.md) §10. The register
+itself is not edited: an item closes only when it is verified in a host and, where it matters, by ear.
+
 ## 6. Integration gates run before merging
 
 Run on 2026-11-18 against the PR heads listed above, before any merge. "Clean worktree" means a fresh

@@ -22,12 +22,14 @@ Scope and gates: `P1-A-REALTIME-ARCHITECTURE.md` (added with P1-A on `feature/p1
 ### Original Phase 1 checklist
 
 - [x] Select and record project/framework licensing: `AGPL-3.0-only`, JUCE AGPL route. Verify the pinned JUCE version's notices as part of the implementation/release gate.
-- [ ] CMake JUCE project, minimal AU/VST3 targets (macOS), VST3 Windows CI plan.
-- [ ] Define param IDs, host state behavior and preset contract before implementation.
-- [ ] Preallocated rolling complex-frame history.
-- [ ] Reliable command handoff / single voice ghost renderer.
-- [ ] Gain smoothing and verify 0-sample host latency for the direct BODY through-path; measure IMPRINT-to-GHOST response separately.
-- [ ] Engine tests: null/impulse/phase/silence/stereo/block boundaries.
+- [x] CMake JUCE project, minimal AU/VST3 targets (macOS). *Open:* Windows VST3 CI plan.
+- [x] Param IDs and host state behaviour (P1-A development IDs). *Open:* preset contract.
+- [x] Preallocated rolling complex-frame history.
+- [x] Reliable command handoff / two-slot voice renderer with REPLACE and CLEAR fades.
+- [x] Gain smoothing; 0-sample latency and bit-exact BODY verified; IMPRINT-to-GHOST delay measured.
+- [x] Engine tests: null/impulse/silence/stereo/block boundaries, plus parity with the Python reference.
+
+P1-A open items: host-level validation beyond `auval` (pluginval, DAW sessions, automation with the editor open), a realtime benchmark inside a host, Windows, listening to the C++ engine.
 
 ## Phase 2 — Signature interface
 

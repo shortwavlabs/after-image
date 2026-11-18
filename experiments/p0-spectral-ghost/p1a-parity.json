@@ -1,7 +1,7 @@
 {
  "note": "C++ afterimage_render against p1a_reference.py; limits fixed beforehand in p1a-limits.json.",
  "code_revision": {
-  "commit": "a860f2aaf58588313e7fb21f17d2aede406d4ea6",
+  "commit": "f3672aa51eae44133fc6f264af988dbbec283c39",
   "harness_dirty": false
  },
  "summary": {
