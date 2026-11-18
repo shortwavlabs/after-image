@@ -8,6 +8,9 @@
 #include <juce_dsp/juce_dsp.h>
 
 #include <algorithm>
+#include <mach/mach.h>
+#include <mach/mach_time.h>
+#include <mach/thread_policy.h>
 #include <chrono>
 #include <cstdio>
 #include <random>
@@ -113,20 +116,52 @@ void fftTiming (juce::String& json)
 }
 } // namespace
 
+/** Diagnostic only: the Mach time-constraint policy audio threads use. Period = the block's duration. */
+static bool makeRealtime (double periodSeconds)
+{
+    mach_timebase_info_data_t tb;
+    mach_timebase_info (&tb);
+    const double toAbs = 1e9 * tb.denom / tb.numer;
+    thread_time_constraint_policy_data_t pol;
+    pol.period = (uint32_t) (periodSeconds * toAbs);
+    pol.computation = (uint32_t) (0.5 * periodSeconds * toAbs);
+    pol.constraint = (uint32_t) (periodSeconds * toAbs);
+    pol.preemptible = 1;
+    return thread_policy_set (mach_thread_self(), THREAD_TIME_CONSTRAINT_POLICY, (thread_policy_t) &pol,
+                              THREAD_TIME_CONSTRAINT_POLICY_COUNT) == KERN_SUCCESS;
+}
+
 int main (int argc, char** argv)
 {
     juce::ScopedJuceInitialiser_GUI juceInit;
     juce::String out = "bench.json";
     int runs = 3;
     double seconds = 20.0;
+    bool rt = false; // rt=1: supplementary run on the Mach time-constraint policy (not the pre-set gate)
     for (int i = 1; i < argc; ++i)
     {
         const juce::String a (argv[i]);
         if (a.startsWith ("out=")) out = a.fromFirstOccurrenceOf ("=", false, false);
         if (a.startsWith ("runs=")) runs = a.fromFirstOccurrenceOf ("=", false, false).getIntValue();
         if (a.startsWith ("seconds=")) seconds = a.fromFirstOccurrenceOf ("=", false, false).getDoubleValue();
+        if (a == "rt=1") rt = true;
+        if (a.startsWith ("diagnose="))  // diagnose=fs,block,density,repeats[,rt]: max of each repeat, no gate
+        {
+            auto t = juce::StringArray::fromTokens (a.fromFirstOccurrenceOf ("=", false, false), ",", "");
+            const double fs = t[0].getDoubleValue(), density = t[2].getDoubleValue();
+            const int block = t[1].getIntValue(), repeats = t[3].getIntValue();
+            const bool useRt = t[4] == "rt" && makeRealtime (block / fs);
+            std::printf ("diagnostic fs=%.0f block=%d density=%.0f realtime_policy=%s\n", fs, block, density, useRt ? "yes" : "no");
+            for (int r = 0; r < repeats; ++r)
+            {
+                auto res = runOnce (fs, block, density, seconds, (unsigned) r + 1);
+                std::printf ("  repeat %2d: max %8.2f us  p99.9 %6.2f us\n", r + 1, res.s.max, res.s.p999);
+            }
+            return 0;
+        }
     }
-    juce::String json = "{\n \"note\": \"worst of " + juce::String (runs) + " runs per row; microseconds per processBlock call; ordinary thread, no realtime priority\",\n";
+    juce::String json = "{\n \"note\": \"worst of " + juce::String (runs) + " runs per row; microseconds per processBlock call; "
+                        + (rt ? "SUPPLEMENTARY: Mach time-constraint thread policy, not the pre-set gate" : "ordinary thread, no realtime priority (pre-set gate)") + "\",\n";
     fftTiming (json);
     json << " \"rows\": [";
     bool first = true;
@@ -135,6 +170,7 @@ int main (int argc, char** argv)
             for (int block : { 1, 16, 32, 64, 1024 })
             {
                 RunResult worst;
+                if (rt) makeRealtime (block / fs);
                 for (int r = 0; r < runs; ++r)
                 {
                     auto res = runOnce (fs, block, density, seconds, (unsigned) r + 1);
