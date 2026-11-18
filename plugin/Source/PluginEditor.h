@@ -49,9 +49,14 @@ public:
         sel = { true, s0, s1, lo, hi, cols.empty() ? 0u : cols.back().epoch };
     }
 
-private:
+    // test hooks
+    size_t numColumns() const { return cols.size(); }
+    float columnX (size_t i) const { return (float) ((double) i * getWidth() / (double) (cols.size() - 1)); }
+    int64_t centre (size_t i) const;
     int64_t sampleAtX (float x) const;
     float xForSample (int64_t s) const;
+
+private:
     double hzAtY (float y) const;
     float yForHz (double hz) const;
     void updateSelection();
@@ -77,6 +82,7 @@ public:
     double knobValue (int i) const { return knobs[(size_t) i].slider->getValue(); }
     void select (int64_t s0, int64_t s1, double lowHz, double highHz) { spectrogram.setSelectionForTest (s0, s1, lowHz, highHz); }
     void pressImprint() { imprint(); }
+    SpectrogramView& view() { return spectrogram; }
 
 private:
     void timerCallback() override;

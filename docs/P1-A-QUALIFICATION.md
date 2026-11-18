@@ -89,7 +89,7 @@ Everything below was measured by automated tests and tools on one machine. **Nob
 | Loop timing and capture boundaries have explicit validated behaviour | **PASS**: period = selection exactly; `s0 = 0` captures; `s0 < 0` rejected | §5 |
 | IMPRINT, CLEAR and REPLACE click-safe under tested conditions | **PASS** after one fix (raised-cosine release) | §5, §9 |
 | Outputs finite and bounded under a documented gain policy | **PASS** for finiteness and the documented policy; the policy itself allows BODY + GHOST above 0 dBFS | §5, architecture §9 |
-| C++ reference parity measured | **PASS**: 136 of 136 rows within the pre-set limits | §4 |
+| C++ reference parity measured | **PASS**: 148 of 148 rows within the pre-set limits | §4 |
 | Development UI can audition real audio | **PARTIAL**: builds, is tested offline against real engine state, AU passes `auval`; not yet used by a person in a host | §7 |
 | Musical value | **NOT ASSESSED** | |
 
@@ -109,18 +109,18 @@ fetch), `cmake --build build -j 14` (46 s), `ctest` passes. Build warnings in pr
 
 ## 4. C++ against the Python reference (§1.2)
 
-`run_p1a_parity.py` at `f3672aa`, all four rates, FULL and FILTERED, five source/duration/DISSOLVE cases per rate and
-source, plus a stress-density case per rate. Evidence: `experiments/p0-spectral-ghost/p1a-parity.json`.
+`run_p1a_parity.py`, all four rates, FULL and FILTERED, five source/duration/DISSOLVE cases per rate and source, a
+stress-density case per rate, and mono cases (FULL and FILTERED) at 48 and 96 kHz. Evidence: `experiments/p0-spectral-ghost/p1a-parity.json`.
 
 | # | Rows | Worst measured | Limit |
 |---|---:|---:|---:|
 | A1–A3 reference vs P0 | 3 pytest checks | identical schedule; reconstruction ≤ −200 dB; P0's own render | as set |
 | P1 STFT frames | 4 | −137.7 dB | −100 dB |
-| P2 FULL loop | 24 | −155.8 dB, period identical, ρ identical to 6 decimals | −120 dB |
-| P3 FILTERED loop | 20 | −135.1 dB, period identical | −90 dB |
-| P4 grain table | 44 | integers identical; position 9.1e-13 samples; gains 2.1e-12 relative; 528 of 880 grains dropped identically at the stress density | 1e-6 |
+| P2 FULL loop | 26 | −155.8 dB, period identical, ρ identical to 6 decimals | −120 dB |
+| P3 FILTERED loop | 22 | −135.1 dB, period identical | −90 dB |
+| P4 grain table | 48 | integers identical; position 9.1e-13 samples; gains 2.1e-12 relative; 528 of 880 grains dropped identically at the stress density | 1e-6 |
 | P5 TRACE output | 8 | −136.0 dB | −100 dB |
-| P6 CLOUD output | 28 | −133.6 dB | −80 dB |
+| P6 CLOUD output | 32 | −133.6 dB | −80 dB |
 | P7 DISSOLVE 0.5 | 8 | −133.5 dB | −80 dB |
 
 Cross-language differences are float32 rounding only (C++ float32 FFT, history and buffers; reference float64). The
@@ -128,7 +128,7 @@ random sequence is shared (SplitMix64), so grain timing is identical, not merely
 
 ## 5. C++ unit tests (§1.3)
 
-`afterimage_tests`: 22 groups, 4,269 checks, 0 failed. Python: 164 tests (159 research + 5 reference anchors).
+`afterimage_tests`: 25 groups, 4,304 checks, 0 failed. Python: 164 tests (159 research + 5 reference anchors).
 
 | Area | Measured |
 |---|---|
@@ -146,6 +146,10 @@ random sequence is shared (SplitMix64), so grain timing is identical, not merely
 | Gain contract | ghost RMS re loop RMS (decay removed): D 0 +0.001 dB (±0.1), D 0.5 −0.51 dB (±1), D 1 −1.07 dB (±1.5) |
 | Post-roll seam | ρ = 1.000 for a continuing tone; ρ = 0.000 with silent post-roll, loop starts at 0, output finite |
 | State | restoring state never starts a capture or voice |
+| Silence and transients | a capture of digital silence plays exact zeros with ρ = 0; an impulse inside the selection recurs at exactly the same offset in each of four periods (48 and 96 kHz, FULL and FILTERED) |
+| Mono | parity at 48 and 96 kHz, FULL and FILTERED (§4), and the dry-path tests |
+| Allocations | macOS `malloc_logger` filtered to the audio thread, with a positive control: **0 allocations** in 3,000 blocks of 64 samples containing captures, REPLACE, CLEAR and host-style automation of every parameter on that thread, with the editor closed and open |
+| Spectrogram mapping | after a display-FIFO overflow leaves a time gap, every column's centre maps to its own x and back (≤ 1 sample, < 0.01 px) |
 | Editor | status text matches the engine's real state (idle, `TOO_SHORT`, a 750 ms FILTERED capture); an off-thread parameter change reaches the knob only on the next poll |
 
 ### Request-to-sound delay
@@ -224,6 +228,7 @@ display of the ghost itself. It was exercised by an automated test, not by a per
 | Tools linking the plugin's shared-code target | Did not see JUCE headers. Replaced by one interface library compiled into each target |
 | AU manufacturer code `Swlb` | Did not match the other Shortwav Labs plugins (`SwLb`); changed before any release |
 | Benchmark gate | Not met in two runs (§6) |
+| Spectrogram time mapping | Drawn by column index but mapped by linear time between the first and last column, so a gap in the columns (left by a FIFO overflow, or by dropping columns while a drag held the view) shifted selections off the audio they marked. Found in review; both directions now go through the column index, columns are left queued (not dropped) during a drag, and stale columns are discarded when the editor opens. Test added |
 | Three first-run test failures | All test bugs (a request stamped before its selection ended, a step check including the first sample, a wrong decay expectation), fixed in the tests; the engine was not changed for them |
 
 ## 10. Blocker register after P1-A
@@ -241,10 +246,13 @@ where it matters, by ear.
 | B6 | Capture burst | **Bounded**: one frame of FFTs per 64 samples, never with an analysis hop; measured in §6 |
 | B7 | Small-buffer realtime | Gate not met on an ordinary thread (§6); no host measurement |
 | B8 | Sample-rate / FFT changes | Four rates tested; `prepareToPlay` rebuilds and bumps the epoch. Rate changes during a session not tested in a host |
-| B9 | Stereo and mono compatibility | Stereo preserved by design (same position, positive balance); mono fold-down not measured in C++ |
+| B9 | Stereo and mono compatibility | Stereo preserved by design (same position, positive balance); mono in/out tested (parity, dry path); mono fold-down of a stereo ghost not measured in C++ |
 | B10 | Automation and state restore | Unit tests (restore, malformed state, bypass, polled UI links) and `auval`. No DAW session; decimal-comma locale not tested |
 | B11 | Freesound licences | Unchanged: unknown |
 | B12 | No realtime C++ measurement | Offline C++ benchmark exists (§6); host measurement still missing |
+
+Realtime rules (no allocation, lock or blocking call in the callback): allocations **measured** at 0 (§5); locks and
+blocking calls checked by inspection only.
 
 Further known limitations: one capture builds at a time (`BUSY`); SOURCE applies at IMPRINT only; GHOST defaults to
 −6 dB, which is a starting point, not a measured choice; FOCUS and GLITCH are not implemented.

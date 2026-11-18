@@ -4,6 +4,8 @@
 #include <PluginEditor.h>
 
 #include <thread>
+#include <malloc/malloc.h>
+#include <pthread.h>
 
 #include <cstdio>
 #include <functional>
@@ -697,6 +699,148 @@ void testEditor()
         CHECK (juce::PNGImageFormat().writeImageToStream (img, os));
     }
 }
+
+void testSpectrogramMapping()
+{
+    currentTest = "spectrogram time mapping";
+    Rig rig (48000.0, 2, 512);
+    std::unique_ptr<AfterimageEditor> ed (dynamic_cast<AfterimageEditor*> (rig.proc.createEditor()));
+    rig.run (noise (2, 48000, 1, 0.1f), 512);
+    ed->refreshNow();
+    rig.run (noise (2, 15 * 48000, 2, 0.1f), 512); // nobody reads: the display FIFO fills and drops columns
+    ed->refreshNow();
+    rig.run (noise (2, 48000, 3, 0.1f), 512);
+    ed->refreshNow();
+    auto& v = ed->view();
+    const int H = rig.proc.engine().hop();
+    bool gap = false;
+    double worstSample = 0, worstX = 0;
+    for (size_t i = 0; i < v.numColumns(); ++i)
+    {
+        if (i > 0) gap |= v.centre (i) - v.centre (i - 1) > H;
+        worstSample = std::max (worstSample, (double) std::abs (v.sampleAtX (v.columnX (i)) - v.centre (i)));
+        worstX = std::max (worstX, (double) std::abs (v.xForSample (v.centre (i)) - v.columnX (i)));
+    }
+    CHECK (gap); // the scenario really has a time gap
+    CHECK (worstSample <= 1.0);
+    CHECK (worstX <= 0.01);
+    std::printf ("    %zu columns with a gap; worst x->sample %.0f samples, sample->x %.4f px\n", v.numColumns(), worstSample, worstX);
+}
+
+void testSilentAndTransientCaptures()
+{
+    currentTest = "silent and transient captures";
+    for (double fs : { 48000.0, 96000.0 })
+        for (auto src : { Source::Full, Source::Filtered })
+        {
+            // digital silence: plays, exactly zero, finite
+            Engine e;
+            auto y = runEngine (e, fs, Sig (2, std::vector<float> ((size_t) (3.0 * fs), 0.0f)), ghostOnly (0.5f), 256,
+                                [&] (Engine& en) { en.submit (imprint (en, (int64_t) (2.0 * fs), (int64_t) (0.5 * fs), (int64_t) (1.2 * fs), src, 100, 8000)); });
+            CHECK (e.status.captures.load() == 1);
+            CHECK (afterimage::exactly (e.lastCapture().rho, 0.0));
+            CHECK (allFinite (y));
+            bool zero = true;
+            for (auto& ch : y) for (float v : ch) zero &= afterimage::exactly (v, 0.0);
+            CHECK (zero);
+
+            // an impulse inside the selection: TRACE repeats it exactly once per period
+            Sig x (2, std::vector<float> ((size_t) (5.0 * fs), 0.0f));
+            const auto s0 = (int64_t) (1.0 * fs), s1 = s0 + (int64_t) (0.5 * fs), at = s0 + (int64_t) (0.2 * fs);
+            x[0][(size_t) at] = x[1][(size_t) at] = 0.9f;
+            Engine t;
+            auto z = runEngine (t, fs, x, ghostOnly (0.0f, 30.0f), 256, [&] (Engine& en) { en.submit (imprint (en, (int64_t) (2.0 * fs), s0, s1, src, 20, fs / 2)); });
+            const auto start = t.lastCapture().startedAt, R = t.lastCapture().period;
+            std::vector<int64_t> peaks;
+            for (int k = 0; k < 4; ++k)
+            {
+                int64_t best = 0;
+                for (int64_t i = 0; i < R; ++i)
+                    if (std::abs (z[0][(size_t) (start + k * R + i)]) > std::abs (z[0][(size_t) (start + k * R + best)])) best = i;
+                peaks.push_back (best);
+            }
+            CHECK (peaks[1] == peaks[0] && peaks[2] == peaks[0] && peaks[3] == peaks[0]);
+            CHECK (peaks[0] == at - s0);
+            CHECK (allFinite (z));
+        }
+}
+
+// ---- allocation gate on the audio thread (juce-plugin skill: host-automation-and-editor-sync) ----
+using MallocLogger = void (uint32_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uint32_t);
+extern "C" MallocLogger* malloc_logger;
+std::atomic<pthread_t> watched { nullptr };
+std::atomic<int> watchedAllocs { 0 };
+void countAllocs (uint32_t type, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uint32_t)
+{
+    if ((type & 2) != 0 && pthread_equal (pthread_self(), watched.load())) watchedAllocs.fetch_add (1); // 2 = allocation
+}
+
+/** Runs `blocks` processBlock calls on a separate thread, which also automates every parameter like a host,
+    and counts that thread's allocations while it does so. */
+int allocationsOnAudioThread (Rig& rig, int blocks, bool positiveControl)
+{
+    int result = -1;
+    std::thread audio ([&] {
+        juce::AudioBuffer<float> buf (2, 64);
+        juce::MidiBuffer midi;
+        std::vector<juce::RangedAudioParameter*> params;
+        for (auto* id : { "body", "ghost", "memory_t60", "dissolve", "source" })
+            params.push_back (dynamic_cast<juce::RangedAudioParameter*> (rig.proc.apvts.getParameter (id)));
+        std::mt19937 rng (4);
+        std::uniform_real_distribution<float> u (0.0f, 1.0f);
+        std::vector<float> noiseBlock (64);
+        for (auto& v : noiseBlock) v = u (rng) - 0.5f; // prepared before counting starts
+        watchedAllocs = 0;
+        watched = pthread_self();
+        malloc_logger = countAllocs;
+        if (positiveControl)
+        {
+            void* volatile p = std::malloc (64); // volatile: the compiler may not elide the pair
+            std::free (p);
+        }
+        for (int b = 0; b < blocks; ++b)
+        {
+            for (int c = 0; c < 2; ++c) buf.copyFrom (c, 0, noiseBlock.data(), 64);
+            if (b % 50 == 0) params[(size_t) (b / 50) % params.size()]->setValueNotifyingHost (u (rng)); // host automation
+            rig.proc.processBlock (buf, midi);
+        }
+        malloc_logger = nullptr;
+        watched = nullptr;
+        result = watchedAllocs.load();
+    });
+    audio.join();
+    return result;
+}
+
+void testNoAllocationsInCallback()
+{
+    currentTest = "no allocations on the audio thread";
+    Rig rig (48000.0, 2, 64);
+    rig.run (noise (2, 3 * 48000, 1, 0.2f), 64);
+    // captures, a REPLACE and a CLEAR fall inside the counted window
+    for (int k = 0; k < 3; ++k)
+    {
+        afterimage::Command c;
+        c.epoch = rig.proc.engine().epoch();
+        c.s0 = 20000 + k * 1000;
+        c.s1 = c.s0 + 30000;
+        c.source = k == 1 ? afterimage::Source::Filtered : afterimage::Source::Full;
+        c.lowHz = 100;
+        c.highHz = 8000;
+        rig.proc.postCommand (c);
+    }
+    afterimage::Command clear;
+    clear.type = afterimage::Command::Type::Clear;
+    CHECK (allocationsOnAudioThread (rig, 1, true) >= 1); // positive control: the counter sees a malloc
+    const int closed = allocationsOnAudioThread (rig, 3000, false);
+    rig.proc.postCommand (clear);
+    std::unique_ptr<juce::AudioProcessorEditor> ed (rig.proc.createEditor());
+    const int open = allocationsOnAudioThread (rig, 3000, false);
+    std::printf ("    allocations on the audio thread: editor closed %d, editor open %d (3000 blocks each, with automation)\n", closed, open);
+    CHECK (rig.proc.engine().status.captures.load() >= 1);
+    CHECK (closed == 0);
+    CHECK (open == 0);
+}
 } // namespace
 
 int main (int argc, char** argv)
@@ -712,7 +856,8 @@ int main (int argc, char** argv)
                         { "clicks", testClearReplaceClicks }, { "rapid", testRapidParameters }, { "nonfinite2", testNonFiniteNeverStored },
                         { "gain", testGainContract }, { "postroll", testPostRollSeam }, { "delay", testCaptureDelay },
                         { "statecap", testStateNeverImprints }, { "bypass2", testBypassResumesGhostFromZero },
-                        { "denormal", testNoDenormalsAfterDecay }, { "editor", testEditor } };
+                        { "denormal", testNoDenormalsAfterDecay }, { "editor", testEditor }, { "mapping", testSpectrogramMapping },
+                        { "silence", testSilentAndTransientCaptures }, { "alloc", testNoAllocationsInCallback } };
     for (auto& t : tests)
         if (only == nullptr || std::strcmp (only, t.name) == 0)
         {

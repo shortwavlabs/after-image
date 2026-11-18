@@ -13,10 +13,10 @@ not the finished plugin: FOCUS, GLITCH, MOTION, WIDTH, presets and the productio
 
 | Item | Choice |
 |---|---|
-| Framework | JUCE **9.0.5**, commit `d60b7a78030661574a615b586d9325ba7a7fa7dd`, fetched by CMake `FetchContent` from the official GitHub archive with a pinned SHA-256 (`8237b297…d9f5`). Used under JUCE's AGPLv3 option. |
+| Framework | JUCE **9.0.5**, commit `d60b7a78030661574a615b586d9325ba7a7fa7dd`, cloned by CMake `FetchContent` from the official GitHub repository at that commit (`GIT_TAG`). Offline builds can point `FETCHCONTENT_SOURCE_DIR_JUCE` at a checkout of the same commit. Used under JUCE's AGPLv3 option. |
 | Language / build | C++20, CMake ≥ 3.22 (tested with 4.4.5), Xcode 27.2 / Apple clang 21 on macOS 26.6 (arm64) |
 | Formats | AU, VST3, Standalone (development). macOS only; no Windows claim until built and tested there. |
-| Other targets | `afterimage_tests` (unit tests, CTest), `afterimage_render` (offline renderer for parity fixtures), `afterimage_bench` (worst-case callback benchmark). They link the plugin's shared-code target, so they test the same code the plugin runs. |
+| Other targets | `afterimage_tests` (unit tests, CTest), `afterimage_render` (offline renderer for parity fixtures), `afterimage_bench` (worst-case callback benchmark). Each compiles the same `afterimage_shared` interface library (processor, editor, engine) as the plugin, so they test the code the plugin runs. |
 | Third-party code | JUCE only. No other library, no network access at runtime, no assets. Notices: [THIRD-PARTY-NOTICES.md](../THIRD-PARTY-NOTICES.md). |
 
 The DSP lives in `plugin/Source/dsp/` and depends only on `juce_dsp` (FFT) and the standard library; the processor in
@@ -185,10 +185,12 @@ The scheduler streams the P0 `schedule()` semantics: grains are generated in nom
 start one grain length before voice time 0 so the overlap is in steady state at the first sample, are admitted at their
 onset in onset order, and are dropped whole when the voice already has 32 sounding.
 
-**Extension point for FOCUS and GLITCH.** The scheduler takes its grain parameters as a plain struct and its grain
-positions from a position policy (uniform spray for CLOUD). FOCUS adds a position CDF computed at capture time from
-the capture's frames; GLITCH adds per-band parameter sets over band-split loop buffers. Neither changes the voice,
-capture, scheduling or gain structure.
+**What FOCUS and GLITCH would change.** There is no abstraction for them yet; the CLOUD settings are engine members
+and the grain position is one expression in `Engine::generateGrains`. FOCUS (P0-B `position_cdf`) would add a per-voice
+position table computed from the capture's frames during the build (one more unit of work) and replace that one
+expression with a lookup. GLITCH (P0-C S3) is larger: band-split loop buffers in each voice slot and one scheduler per
+band with its own parameters, within the same 32-grain budget. In both cases the capture validation, unit scheduling,
+voice lifecycle, DISSOLVE and gain stages stay as they are.
 
 ## 8. Parameters, state, bypass and tail
 

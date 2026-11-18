@@ -21,17 +21,19 @@ The signature interaction is **painting a musical memory**, not simply pressing 
 
 Requires CMake ≥ 3.22, Xcode command-line tools and network access on first configure (JUCE 9.0.5 is fetched by commit).
 
+Build out of the source tree (the repository has no ignore rule for build folders):
+
 ```bash
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake -S . -B ../afterimage-build -DCMAKE_BUILD_TYPE=Release
 ```
 ```bash
-cmake --build build -j 8
+cmake --build ../afterimage-build -j 8
 ```
 ```bash
-ctest --test-dir build --output-on-failure
+ctest --test-dir ../afterimage-build --output-on-failure
 ```
 
-Products are in `build/AFTERIMAGE_artefacts/Release/{AU,VST3,Standalone}`; nothing is installed automatically. To audition in a host, copy the AU to `~/Library/Audio/Plug-Ins/Components` or the VST3 to `~/Library/Audio/Plug-Ins/VST3`. Parity against the Python reference: `uv run python run_p1a_parity.py --render build/afterimage_render_artefacts/Release/afterimage_render` in `experiments/p0-spectral-ghost`.
+Products are in `../afterimage-build/AFTERIMAGE_artefacts/Release/{AU,VST3,Standalone}`; nothing is installed automatically. To audition in a host, copy the AU to `~/Library/Audio/Plug-Ins/Components` or the VST3 to `~/Library/Audio/Plug-Ins/VST3`. Parity against the Python reference: `uv run python run_p1a_parity.py --render ../../../afterimage-build/afterimage_render_artefacts/Release/afterimage_render` in `experiments/p0-spectral-ghost`.
 
 ## Proposed MVP
 

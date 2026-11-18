@@ -35,13 +35,17 @@ const juce::Colour bg (0xff0d0f14), cyan (0xff7fe7f2), violet (0xffb48cff), mage
 double bandHz (double band, double fs) { return 20.0 * std::pow (fs / 40.0, band / DisplayColumn::bands); }
 } // namespace
 
-SpectrogramView::SpectrogramView (AfterimageProcessor& p) : proc (p) {}
+SpectrogramView::SpectrogramView (AfterimageProcessor& p) : proc (p)
+{
+    auto& e = proc.engine(); // columns queued while no editor was reading are stale: discard them
+    e.displayFifo.read (e.displayFifo.getNumReady());
+}
 
 void SpectrogramView::pull()
 {
+    if (frozen) return; // leave columns queued while the user drags (the FIFO holds about 11 s), so the view holds still
     auto& e = proc.engine();
     const auto scope = e.displayFifo.read (e.displayFifo.getNumReady());
-    if (frozen) return; // columns arriving while the user drags are dropped, so the drag maps to a fixed view
     scope.forEach ([&] (int i) {
         const auto& c = e.display[(size_t) i];
         if (! cols.empty() && cols.back().epoch != c.epoch) cols.clear();
@@ -51,21 +55,35 @@ void SpectrogramView::pull()
     while (cols.size() > maxCols) cols.pop_front();
 }
 
+// Column i is drawn at x = i * width / (n - 1); its time is its window centre (end_sample - N/2), as in
+// p0.capture.frames_for_interval. Both mappings go through the column index, so they stay consistent with what is
+// drawn even if the column list has a time gap (a FIFO overflow while no editor was reading).
+int64_t SpectrogramView::centre (size_t i) const { return cols[i].endSample - proc.engine().fftSize() / 2; }
+
 int64_t SpectrogramView::sampleAtX (float x) const
 {
-    // a column's time is its window centre (end_sample - N/2), as in p0.capture.frames_for_interval
     if (cols.size() < 2) return 0;
-    const auto half = proc.engine().fftSize() / 2;
-    const double t0 = (double) (cols.front().endSample - half), t1 = (double) (cols.back().endSample - half);
-    return (int64_t) std::llround (t0 + (t1 - t0) * juce::jlimit (0.0f, 1.0f, x / (float) getWidth()));
+    const double idx = juce::jlimit (0.0, (double) (cols.size() - 1), (double) x / getWidth() * (double) (cols.size() - 1));
+    const auto i = std::min ((size_t) idx, cols.size() - 2);
+    const double f = idx - (double) i;
+    return (int64_t) std::llround ((double) centre (i) + f * (double) (centre (i + 1) - centre (i)));
 }
 
 float SpectrogramView::xForSample (int64_t s) const
 {
     if (cols.size() < 2) return 0.0f;
-    const auto half = proc.engine().fftSize() / 2;
-    const double t0 = (double) (cols.front().endSample - half), t1 = (double) (cols.back().endSample - half);
-    return (float) (((double) s - t0) / (t1 - t0) * getWidth());
+    const double step = (double) getWidth() / (double) (cols.size() - 1);
+    const auto hop = (double) proc.engine().hop();
+    if (s <= centre (0)) return (float) (((double) (s - centre (0)) / hop) * step);
+    if (s >= centre (cols.size() - 1)) return (float) ((double) getWidth() + (double) (s - centre (cols.size() - 1)) / hop * step);
+    size_t lo = 0, hi = cols.size() - 1; // centres increase with the index
+    while (hi - lo > 1)
+    {
+        const auto mid = (lo + hi) / 2;
+        (centre (mid) <= s ? lo : hi) = mid;
+    }
+    const double f = (double) (s - centre (lo)) / (double) (centre (hi) - centre (lo));
+    return (float) (((double) lo + f) * step);
 }
 
 double SpectrogramView::hzAtY (float y) const

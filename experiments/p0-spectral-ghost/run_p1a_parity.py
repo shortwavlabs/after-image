@@ -65,14 +65,14 @@ def frames_parity(r, rows):
         rows.append(row("P1 STFT frames", f"guitar fs={fs} N={N} frames 0-40", round(v, 1), LIM["P1_stft_frames_db"], v <= LIM["P1_stft_frames_db"]))
 
 
-def capture_parity(r, rows, fs, src, source, dur, D, low=350.0, high=5000.0, seed=11, t60=5.0, density=0.0):
-    x = fixtures.make(src, fs)
+def capture_parity(r, rows, fs, src, source, dur, D, low=350.0, high=5000.0, seed=11, t60=5.0, density=0.0, mono=False):
+    x = fixtures.make(src, fs)[:, :1] if mono else fixtures.make(src, fs)
     N = 4096 if fs <= 48000 else 8192
     s0 = int(1.0 * fs)
     s1 = s0 + int(round(dur * fs))
     at = int(3.0 * fs)
-    case = f"{src} fs={fs} {source} {dur:.2f}s D={D}" + (f" density={density:g}/s" if density else "")
-    name = f"cap_{src}_{fs}_{source}_{int(dur * 100)}_{int(D * 100)}_{int(density)}"
+    case = f"{src} fs={fs} {source} {dur:.2f}s D={D}" + (f" density={density:g}/s" if density else "") + (" mono" if mono else "")
+    name = f"cap_{src}_{fs}_{source}_{int(dur * 100)}_{int(D * 100)}_{int(density)}_{int(mono)}"
     pre, info, xf = r(name, x, fs, f"imprint={at},{s0},{s1},{source},{low},{high}", f"dissolve={D}", f"t60={t60}",
                       f"seed={seed}", "pad=3.5", "grainlog=1", f"density={density}")
     cap = info["captures"][0]
@@ -129,6 +129,9 @@ def main():
                     delays.append(capture_parity(r, rows, fs, src, source, dur, D))
             # stress density: the 32-grain ceiling drops grains, exercising the admission rule
             capture_parity(r, rows, fs, "guitar", "full", 0.75, 1.0, density=400.0)
+            if fs in (48000, 96000):  # mono: one channel in, one out, no stereo balance
+                for source in ("full", "filtered"):
+                    capture_parity(r, rows, fs, "guitar", source, 0.75, 1.0, mono=True)
     summary = {k: sum(r_["result"] == k for r_ in rows) for k in ("PASS", "FAIL")}
     X.dump({"note": "C++ afterimage_render against p1a_reference.py; limits fixed beforehand in p1a-limits.json.",
             "code_revision": X.code_revision(), "summary": summary, "rows": rows, "capture_delay": delays},
