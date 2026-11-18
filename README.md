@@ -20,15 +20,19 @@ Design and acceptance criteria are proposed in the development docs on the conce
 ## Proposed MVP
 
 - JUCE 9 / C++20, CMake; macOS AU/VST3 and Windows VST3 (subject to build validation).
-- Stereo real-time STFT capture; ~3–4 second rolling complex-spectral buffer.
+- Stereo real-time STFT capture; proposed ~6-second internal complex-spectral history with ~4 seconds visible for selection.
 - Visual selection of a recent time–frequency fragment; one capturable GHOST layer.
 - Seamless loop / sustained ghost with decay, filtering, stereo spread, and safe clear/replace behavior.
-- BODY/GHOST blend, host automation and preset persistence.
+- Zero-latency BODY through-path, additive GHOST blend, automatable continuous controls, and parameter preset persistence (captured audio is ephemeral).
 - Audio-first technical tests; no audio-thread allocation or locks.
+
+## Downloads and releases
+
+AFTERIMAGE will be distributed **free of charge** through [GitHub Releases](https://github.com/shortwavlabs/after-image/releases), with downloadable **macOS (AU/VST3)** and **Windows (VST3)** installers once built and qualified. There are **no installers available yet**. The release will also include corresponding source, build instructions, license notices and checksums. See [release and licensing policy](docs/LICENSING.md).
 
 ## Licensing and attribution
 
-**AFTERIMAGE is free and open-source software licensed under the GNU Affero General Public License v3.0 only (`AGPL-3.0-only`).** See [LICENSE](LICENSE) for the complete license text and [licensing guidance](docs/LICENSING.md) for framework, contribution, attribution, and asset requirements (the guidance document is part of the design PR until merged).
+**AFTERIMAGE is free and open-source software licensed under the GNU Affero General Public License v3.0 only (`AGPL-3.0-only`).** See [LICENSE](LICENSE) for the complete license text and [licensing guidance](docs/LICENSING.md) for framework, contribution, attribution, and asset requirements (included in the project's design documentation).
 
 JUCE 9 will be used under its **AGPLv3** option, not a commercial JUCE license. No purchase is required for that choice, but the application's distribution must respect AGPL obligations. Third-party code, fonts, and artwork require separate licence verification. The Shortwav Labs name and logos are trademarks/branding; the software licence does not itself grant trademark rights.
 
