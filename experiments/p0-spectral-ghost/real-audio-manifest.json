@@ -1,0 +1,4633 @@
+{
+ "schema": 1,
+ "phase": "P0-C",
+ "code_revision": {
+  "commit": "f80845d4bf01b6a7bc79267aeae161f0d9ad1ec6",
+  "harness_dirty": false
+ },
+ "environment": {
+  "python": "3.13.15",
+  "numpy": "2.3.4",
+  "scipy": "1.16.3"
+ },
+ "config": {
+  "note": "Case regions are read from experiments.json (same selections as P0-A/P0-B). guitar_dist is a synthetic derived source (see p0/split_experiment.py).",
+  "fs": 48000,
+  "fft_size": 4096,
+  "seed": 20261120,
+  "crossovers_full": {
+   "mode": "absolute",
+   "hz": [
+    250.0,
+    2000.0
+   ]
+  },
+  "crossovers_filtered": {
+   "mode": "relative",
+   "fractions": [
+    0.3333333333333333,
+    0.6666666666666666
+   ]
+  },
+  "crossover_width_oct": 1.0,
+  "render": {
+   "ghost_seconds": 6.0,
+   "t60_seconds": 5.0,
+   "progression_seconds": 12.0,
+   "progression_hold_s": 2.0,
+   "progression_ramp_s": 6.0,
+   "progression_t60_seconds": 12.0,
+   "onset_fade_s": 0.03,
+   "target_rms_dbfs": -23.0,
+   "level_window_s": 2.0,
+   "xfade_s": 0.08,
+   "freq_feather_oct": 0.16666666666666666,
+   "time_feather_s": 0.05
+  },
+  "cases": [
+   "guitar/long_sustain",
+   "guitar/full_spectrum",
+   "guitar_dist/full_spectrum",
+   "drums/full_spectrum",
+   "synth/upper_harmonics",
+   "vocal/mid_band_rfc"
+  ]
+ },
+ "strategies": {
+  "s1": {
+   "0.0": [
+    0.0,
+    0.3536,
+    1.0
+   ],
+   "0.25": [
+    0.0,
+    0.3536,
+    1.0
+   ],
+   "0.5": [
+    0.0,
+    0.3536,
+    1.0
+   ],
+   "0.75": [
+    0.0,
+    0.3536,
+    1.0
+   ],
+   "1.0": [
+    0.0,
+    0.3536,
+    1.0
+   ]
+  },
+  "s2_keep": {
+   "0.0": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "0.25": [
+    0.0,
+    0.0,
+    0.6836
+   ],
+   "0.5": [
+    0.0,
+    0.5,
+    1.0
+   ],
+   "0.75": [
+    0.0,
+    1.0,
+    1.0
+   ],
+   "1.0": [
+    0.0,
+    1.0,
+    1.0
+   ]
+  },
+  "s2_fade": {
+   "0.0": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "0.25": [
+    0.0,
+    0.0,
+    0.6836
+   ],
+   "0.5": [
+    0.0,
+    0.5,
+    1.0
+   ],
+   "0.75": [
+    0.3164,
+    1.0,
+    1.0
+   ],
+   "1.0": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "s3": {
+   "0.0": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "0.25": [
+    0.25,
+    0.25,
+    0.25
+   ],
+   "0.5": [
+    0.5,
+    0.5,
+    0.5
+   ],
+   "0.75": [
+    0.75,
+    0.75,
+    0.75
+   ],
+   "1.0": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  }
+ },
+ "band_params_s1_s2": [
+  {
+   "grain_s": 0.2,
+   "density_hz": 20.0,
+   "spray": 1.0,
+   "scan": 1.0,
+   "jitter": 1.0,
+   "pitch_st": 0.0,
+   "octave_prob": 0.0,
+   "reverse_prob": 0.5,
+   "spread": 0.8,
+   "amp_var": 0.0,
+   "coherence": 0.0,
+   "window": "hann"
+  },
+  {
+   "grain_s": 0.2,
+   "density_hz": 20.0,
+   "spray": 1.0,
+   "scan": 1.0,
+   "jitter": 1.0,
+   "pitch_st": 0.0,
+   "octave_prob": 0.0,
+   "reverse_prob": 0.5,
+   "spread": 0.8,
+   "amp_var": 0.0,
+   "coherence": 0.0,
+   "window": "hann"
+  },
+  {
+   "grain_s": 0.2,
+   "density_hz": 20.0,
+   "spray": 1.0,
+   "scan": 1.0,
+   "jitter": 1.0,
+   "pitch_st": 0.0,
+   "octave_prob": 0.0,
+   "reverse_prob": 0.5,
+   "spread": 0.8,
+   "amp_var": 0.0,
+   "coherence": 0.0,
+   "window": "hann"
+  }
+ ],
+ "band_params_s3": [
+  {
+   "grain_s": 0.3,
+   "density_hz": 13.333333333333334,
+   "spray": 0.5,
+   "scan": 1.0,
+   "jitter": 1.0,
+   "pitch_st": 0.0,
+   "octave_prob": 0.0,
+   "reverse_prob": 0.0,
+   "spread": 0.2,
+   "amp_var": 0.0,
+   "coherence": 0.0,
+   "window": "hann"
+  },
+  {
+   "grain_s": 0.15491666666666667,
+   "density_hz": 25.820333512641206,
+   "spray": 0.75,
+   "scan": 1.0,
+   "jitter": 1.0,
+   "pitch_st": 0.0,
+   "octave_prob": 0.0,
+   "reverse_prob": 0.25,
+   "spread": 0.6000000000000001,
+   "amp_var": 0.0,
+   "coherence": 0.0,
+   "window": "hann"
+  },
+  {
+   "grain_s": 0.08,
+   "density_hz": 50.0,
+   "spray": 1.0,
+   "scan": 1.0,
+   "jitter": 1.0,
+   "pitch_st": 0.0,
+   "octave_prob": 0.0,
+   "reverse_prob": 0.5,
+   "spread": 1.0,
+   "amp_var": 0.0,
+   "coherence": 0.0,
+   "window": "hann"
+  }
+ ],
+ "grain_budgets": [
+  6,
+  10,
+  16
+ ],
+ "max_grains_total": 32,
+ "notes": "Every render is RMS-matched to target_rms_dbfs over level_window_s BEFORE the MEMORY envelope; match_gain_db is recorded per render. FULL renders use crossovers_full; FILTERED renders use crossovers_filtered resolved inside the selected band, so FULL vs FILTERED differ in source AND crossover placement. WAVs are not committed.",
+ "skipped_inputs": [],
+ "failures": [],
+ "renders": [
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/trace",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/trace.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "trace",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -12.0,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "b58603b74b75e89ec241e189d9e23fd502a0cfa59f3151431948aa6debbe9503"
+  },
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/p0b_cloud",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/p0b_cloud.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "p0b_cloud",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -11.32,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "055b70713ed82a17ac3a4f9d732c4a8531f7c17b69ff358b4a399627ab2486d4"
+  },
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/p0b_focus",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/p0b_focus.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "p0b_focus",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -12.25,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "d645c4e50ba39698d86a8e1dfd6688de66a4bb7da5b007d1c73f405f80e8c62f"
+  },
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/split_s1",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/split_s1.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -12.05,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "433baf68f3e08773b1275a4fa1679a33e3936f84c3c2f7d2f4928eda690f702e"
+  },
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/split_s2_keep_100",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/split_s2_keep_100.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s2_keep_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -11.66,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "dfd5afd68c1efff7a27c4c7d9202e0ff5d25f8d66b73fe65c98ca103734e0db8"
+  },
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/split_s3_100",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/split_s3_100.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -11.97,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "2d7b553e608365657fba167c8d910483d6be25d9f4b7d34dfdab6f7460af940c"
+  },
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/conv_s1",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/conv_s1.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "conv_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -11.94,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "62ea40a30bf828fe8c67810c2619a4331db57d18c2249924a99b0d94be9a222c"
+  },
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/conv_s3_100",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/conv_s3_100.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "conv_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -11.54,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "937867f24952be0844d53b69279cb2eaa79c50b266b180290809af4b4c7bc526"
+  },
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/split_s1_detune",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/split_s1_detune.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s1_detune",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -12.05,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "af69c09b548aafa97101a2f79de76d56c6c35fc61e19d41f7db636730df2a9cc"
+  },
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/split_s1_octaves",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/split_s1_octaves.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s1_octaves",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -12.05,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "d6bfffe6505fe6e8e01a14b2917289c7a10cca732906e13f9bb2f422f0e93175"
+  },
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/progression_parallel",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/progression_parallel.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "progression_parallel",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -12.0,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "49ed84812e8859b4d01284df87238bfa9622eae1386a66597319b7cf29e9312c"
+  },
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/progression_s2_keep",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/progression_s2_keep.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "progression_s2_keep",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -12.0,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "1910835f933a680e1264f8fd2b77e54034ebc486e9846579615e59cd3723ad5c"
+  },
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/progression_s2_fade",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/progression_s2_fade.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "progression_s2_fade",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -12.0,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "87c147adf81aabe4f705c9dc12d0dca422ace99d1ab65c803f19518de5cd63cd"
+  },
+  {
+   "id": "user_01_distorted_guitar_chord/full_spectrum/progression_s3",
+   "path": "user_01_distorted_guitar_chord/full_spectrum/progression_s3.wav",
+   "source": "user_01_distorted_guitar_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "progression_s3",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -12.0,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 7.45,
+    "t1": 8.2,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "88cf38992c23e6e115f7113d1f4398c81f43417191d9753e63db8596199df902"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/trace",
+   "path": "user_02_clean_electric_guitar/full_spectrum/trace.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "trace",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -7.38,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "7843e01c5bbc5f0a1d0363dd85b7406a6d7d94349ee85470bac155220794fd65"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/p0b_cloud",
+   "path": "user_02_clean_electric_guitar/full_spectrum/p0b_cloud.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_cloud",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -8.15,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "022611c559819a56e812758218600a2e966f5fdf237c8ad524d2d3fd45af4f97"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/p0b_focus",
+   "path": "user_02_clean_electric_guitar/full_spectrum/p0b_focus.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_focus",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -7.73,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "c8298babaf34f54063d673dabc94a95b479cf71ab409d7c940f74cecb40ccf7f"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/split_s1",
+   "path": "user_02_clean_electric_guitar/full_spectrum/split_s1.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -6.92,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "06383581ae32875918f8e8b05befa08a7a36e7953e79da2f83ea44b844f18aa2"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/split_s2_keep_100",
+   "path": "user_02_clean_electric_guitar/full_spectrum/split_s2_keep_100.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s2_keep_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -7.63,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "d7befa6d9ccb01cb363f1e19c3356a609257e1b64c0daf0de91107efb6ed38e8"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/split_s3_100",
+   "path": "user_02_clean_electric_guitar/full_spectrum/split_s3_100.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -7.36,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "3a3b721454fecf2fe5beb4e9f80aa5444e63a8403f6526c28a3be13038dc6ca5"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/conv_s1",
+   "path": "user_02_clean_electric_guitar/full_spectrum/conv_s1.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -7.18,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "0c95ba94cc831bc0e48aa4e1392670148feeb8b6b39b40fd33c1eebac001512e"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/conv_s3_100",
+   "path": "user_02_clean_electric_guitar/full_spectrum/conv_s3_100.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -7.47,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "6b5d690185d0764889f0ddcaf03f84ceb016472797b7794dc74878c9ef484047"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/split_s1_detune",
+   "path": "user_02_clean_electric_guitar/full_spectrum/split_s1_detune.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_detune",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -6.92,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "00d0c859a567a3b55dd8b51b36211d6aa0e514104d08837a57a16edfc2ccc797"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/split_s1_octaves",
+   "path": "user_02_clean_electric_guitar/full_spectrum/split_s1_octaves.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_octaves",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -6.92,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "3a09e57043779bd4318df0827bf1df70a8a052d1946a16db55d628eb52b2e182"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/progression_parallel",
+   "path": "user_02_clean_electric_guitar/full_spectrum/progression_parallel.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_parallel",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -7.38,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "e321c6cda0077d2ac2e35c70bea9c895183b169291d39582f8e372dc5d195854"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/progression_s2_keep",
+   "path": "user_02_clean_electric_guitar/full_spectrum/progression_s2_keep.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_keep",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -7.38,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "62595247b703a3146ff7f188d77dd17c4ce997df9e73336051c08bc2991ccd13"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/progression_s2_fade",
+   "path": "user_02_clean_electric_guitar/full_spectrum/progression_s2_fade.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_fade",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -7.38,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "d5f6639c08d5cdcd8ddf65d00088747c9d1e731409b8b09a9a43d3acaf8fc7ad"
+  },
+  {
+   "id": "user_02_clean_electric_guitar/full_spectrum/progression_s3",
+   "path": "user_02_clean_electric_guitar/full_spectrum/progression_s3.wav",
+   "source": "user_02_clean_electric_guitar",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s3",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -7.38,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "221ee8d18849a3faac4e3affea6161a6d0864b79a05f2970dd76da0bfcb6ba52"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/trace",
+   "path": "user_03_acoustic_drum_break/full_spectrum/trace.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "trace",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -9.25,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "868825e59ff52c8668c438d5c28408a6b2f445ea6d69eb8fa624da73244a8a1f"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/p0b_cloud",
+   "path": "user_03_acoustic_drum_break/full_spectrum/p0b_cloud.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_cloud",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -11.0,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "d1af160951b35e120562ac80f7e33ffd694ddd383baaa4c4c1c88a94e24a258b"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/p0b_focus",
+   "path": "user_03_acoustic_drum_break/full_spectrum/p0b_focus.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_focus",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -11.2,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "96512717c16acbb296c8396313afb380f4a9d3b2d1049bd19ad03ab024a75308"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/split_s1",
+   "path": "user_03_acoustic_drum_break/full_spectrum/split_s1.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -9.26,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "6acadddb5450b2583f91587449f9d9ad518f460ee299cf5ac1c767a489cdb70c"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/split_s2_keep_100",
+   "path": "user_03_acoustic_drum_break/full_spectrum/split_s2_keep_100.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s2_keep_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -9.2,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "3a79bf5183112da9e09eefc1248e9d7d09b936db90a9615b019661ffe83a0608"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/split_s3_100",
+   "path": "user_03_acoustic_drum_break/full_spectrum/split_s3_100.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -8.97,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "ce56be8a8f53cdd6a0e6e42c458e0b8b1d55458c9a833aac2036a70ec7ec2060"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/conv_s1",
+   "path": "user_03_acoustic_drum_break/full_spectrum/conv_s1.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -9.22,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "0f92ebf60eefe98724e7a397cfa35d0588be6e0117c05557479cbae6570e3a8e"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/conv_s3_100",
+   "path": "user_03_acoustic_drum_break/full_spectrum/conv_s3_100.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -8.97,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "afec27a69a0431f73bb04003ec557eceb8d80f200ae5aad8f6324685ef22beec"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/split_s1_detune",
+   "path": "user_03_acoustic_drum_break/full_spectrum/split_s1_detune.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_detune",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -9.26,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "d0764dec72f3c3043c09a1ed15e03245519893c10105f6901c86c603a8e24b9c"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/split_s1_octaves",
+   "path": "user_03_acoustic_drum_break/full_spectrum/split_s1_octaves.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_octaves",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -9.2,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "42819dc17688e3e4ce429077d8cfb07215461fe554b7f86a34158222ae4c6bd2"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/progression_parallel",
+   "path": "user_03_acoustic_drum_break/full_spectrum/progression_parallel.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_parallel",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -9.25,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "5d70002029e11098c985989a47c5153f0ebfa0845a2a8e892b98a495c92a116f"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/progression_s2_keep",
+   "path": "user_03_acoustic_drum_break/full_spectrum/progression_s2_keep.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_keep",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -9.25,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "13646b225ef10f6b2946aefb6f520c0da7e06a267c247d39e938028891a3e1da"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/progression_s2_fade",
+   "path": "user_03_acoustic_drum_break/full_spectrum/progression_s2_fade.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_fade",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -9.25,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "539adad677348a084131501c06e5e827857bbdad13ccf314775d29a8f38380de"
+  },
+  {
+   "id": "user_03_acoustic_drum_break/full_spectrum/progression_s3",
+   "path": "user_03_acoustic_drum_break/full_spectrum/progression_s3.wav",
+   "source": "user_03_acoustic_drum_break",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s3",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -9.25,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 2.67,
+    "t1": 4.13,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "43086b1284c4abf68f0c8caf845c1573672fe514733214d3afefeaa736aab9b2"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/trace",
+   "path": "user_04_sustained_vocal/full_spectrum/trace.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "trace",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 0.66,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "8a654e797735a8b2e027a500ba513e8e0ebe1c45b95b09ea225192814aa3d980"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/p0b_cloud",
+   "path": "user_04_sustained_vocal/full_spectrum/p0b_cloud.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "p0b_cloud",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 0.4,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "9f6a9649c7c2435af2cded3a07c329c67789ae9a8a8b1c00266940f9b83041d9"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/p0b_focus",
+   "path": "user_04_sustained_vocal/full_spectrum/p0b_focus.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "p0b_focus",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -0.21,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "804d76932da100ebe798727a244c8d72310b2f374c93a3cf1c868dbded4788e2"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/split_s1",
+   "path": "user_04_sustained_vocal/full_spectrum/split_s1.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 0.66,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "0bb9001fd891b77c06cdef40c0f5a3e348a5fe60645b6297306767ec53f8eabb"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/split_s2_keep_100",
+   "path": "user_04_sustained_vocal/full_spectrum/split_s2_keep_100.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s2_keep_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 1.01,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "6fb2075023a0fd7e2285c07ed0a51d36ceb8f4db6db4adf9279877db17b48635"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/split_s3_100",
+   "path": "user_04_sustained_vocal/full_spectrum/split_s3_100.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 0.76,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "e6e3911d8b484b5b42dede45ed982f8b7cd1b9bc1280fe5d0c88a512ef9b107f"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/conv_s1",
+   "path": "user_04_sustained_vocal/full_spectrum/conv_s1.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "conv_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 0.63,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "83d4f5d99e62d5247e1ca72452bb2506ffb108a0565bae143c09b797282b1f1b"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/conv_s3_100",
+   "path": "user_04_sustained_vocal/full_spectrum/conv_s3_100.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "conv_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 0.84,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "bc902ed5140c3c04d1862dd801e050df00073ad51f2430e8b5dcfda6be6256a6"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/split_s1_detune",
+   "path": "user_04_sustained_vocal/full_spectrum/split_s1_detune.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s1_detune",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 0.66,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "fd5b2b265bd0d74ed59803fac47ff05a3189fada70b588a771e9cbbc1c11e39f"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/split_s1_octaves",
+   "path": "user_04_sustained_vocal/full_spectrum/split_s1_octaves.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s1_octaves",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 0.66,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "fced66bc9cf0c356ec68b568976295d418952f1202dd4d1d8aab8e1ecd2f2254"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/progression_parallel",
+   "path": "user_04_sustained_vocal/full_spectrum/progression_parallel.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "progression_parallel",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": 0.66,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "18267a86e2965c58007e8a0de23b1d31274ae9039a47d6c705f94b69258a449a"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/progression_s2_keep",
+   "path": "user_04_sustained_vocal/full_spectrum/progression_s2_keep.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "progression_s2_keep",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": 0.66,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "f5d52c126232dc542bbb352f204256c2944a1bc3f30a5ad3bc51b22bc1fd6f1b"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/progression_s2_fade",
+   "path": "user_04_sustained_vocal/full_spectrum/progression_s2_fade.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "progression_s2_fade",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": 0.66,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "aa0a0f555c5a30785eed6c5925ba5b50869703e60a6c7291d846413df15886b6"
+  },
+  {
+   "id": "user_04_sustained_vocal/full_spectrum/progression_s3",
+   "path": "user_04_sustained_vocal/full_spectrum/progression_s3.wav",
+   "source": "user_04_sustained_vocal",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "progression_s3",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": 0.66,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 11.75,
+    "t1": 12.5,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "f3efda1a5ed742051e5e6a08cf6b913dd45a162edd6e657eff8fa97d9394eeda"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/trace",
+   "path": "user_05_evolving_synth_pad/full_spectrum/trace.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "trace",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 3.24,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "4e2f0a9702e27df6dedb4c530f53af439e80c5e711223f177c2af8f79eb1afb6"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/p0b_cloud",
+   "path": "user_05_evolving_synth_pad/full_spectrum/p0b_cloud.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_cloud",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 3.21,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "09ae1e8603c65303240e9e44957fe551d890c858cb243d9685bc73398eb4f430"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/p0b_focus",
+   "path": "user_05_evolving_synth_pad/full_spectrum/p0b_focus.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_focus",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 3.03,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "408e8fd60ce74e56258bd336fc33ae4467338bca40cb61a7d70de8a1d5347ae2"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/split_s1",
+   "path": "user_05_evolving_synth_pad/full_spectrum/split_s1.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 2.91,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "60435c6e4b6519f995d6b461ddf5b9fb36e37e39e4f1e47bdee36a07071bc4dd"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/split_s2_keep_100",
+   "path": "user_05_evolving_synth_pad/full_spectrum/split_s2_keep_100.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s2_keep_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 3.35,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "fd3f13bf8ad82eae7eda0434600e5321988500516bad43ed92d222676ab9a583"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/split_s3_100",
+   "path": "user_05_evolving_synth_pad/full_spectrum/split_s3_100.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 2.67,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "90dde14af6412f889d3be5efde1f9ff9bd9bb5b15d1ffd624e96c4bedf89c97b"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/conv_s1",
+   "path": "user_05_evolving_synth_pad/full_spectrum/conv_s1.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 3.32,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "506607db46b6e0560b7d8d3d40e2cec2582cbe422f936338d69b0dbdd5ed7d5a"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/conv_s3_100",
+   "path": "user_05_evolving_synth_pad/full_spectrum/conv_s3_100.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 3.37,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "dd15f63111845498781bae4a7237250f500c266db75aeafdd8e8e96038e73ea1"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/split_s1_detune",
+   "path": "user_05_evolving_synth_pad/full_spectrum/split_s1_detune.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_detune",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 2.91,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "5e0d37a81572727fee8bd3a1caac482179a1dc667bcf8ea671f0a92ee2a91a2f"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/split_s1_octaves",
+   "path": "user_05_evolving_synth_pad/full_spectrum/split_s1_octaves.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_octaves",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 2.91,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "0f23cc9f5a9f55a6ba5016f4954ba777ff5ab8a1e05cc92e34da80275914d315"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/progression_parallel",
+   "path": "user_05_evolving_synth_pad/full_spectrum/progression_parallel.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_parallel",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": 3.24,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "32f6f190314166208d153b367b301e39473ba7305ecfa6d1a4e98276ea164dcb"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/progression_s2_keep",
+   "path": "user_05_evolving_synth_pad/full_spectrum/progression_s2_keep.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_keep",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": 3.24,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "5d437a1776bfae99fd3f9b15a77897e3d2699c3b7d0626820b1cf0bb7a2f4d68"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/progression_s2_fade",
+   "path": "user_05_evolving_synth_pad/full_spectrum/progression_s2_fade.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_fade",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": 3.24,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "c2cf0bfc4989f7381416c3a8816f7b7d3086fc2c22f5aac63ce1fdfd97fa109f"
+  },
+  {
+   "id": "user_05_evolving_synth_pad/full_spectrum/progression_s3",
+   "path": "user_05_evolving_synth_pad/full_spectrum/progression_s3.wav",
+   "source": "user_05_evolving_synth_pad",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s3",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": 3.24,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 44.3,
+    "t1": 45.05,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "44df0234a12dc53d3593f2f43220ebd47d09e3756d7b2b743036ac63aed3f098"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/trace",
+   "path": "user_06_piano_chord/full_spectrum/trace.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "trace",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -0.92,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "f281ba9a6047ff12d3f649482a0a3bb897304974f53a0098ccafb4ded8f8ec71"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/p0b_cloud",
+   "path": "user_06_piano_chord/full_spectrum/p0b_cloud.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "p0b_cloud",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -0.86,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "9d31d8cdabd4617d04596bf6dff0d40dacbd32f36ea340f29840762de4f3ca53"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/p0b_focus",
+   "path": "user_06_piano_chord/full_spectrum/p0b_focus.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "p0b_focus",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -1.14,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "78e69fc51f67a0f3041d8fb442655c2a7b78c8b117ad56b9b14055130fd3909b"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/split_s1",
+   "path": "user_06_piano_chord/full_spectrum/split_s1.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -0.91,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "a3b207cbbe0e4d2956263fec06dcf2d6a5fe92a7c022ccbabe8be9da3f06847e"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/split_s2_keep_100",
+   "path": "user_06_piano_chord/full_spectrum/split_s2_keep_100.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s2_keep_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -0.98,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "48521fbb5013bb841e81a18334ff998c391b96735d9cf8c7fbe8efdac8959254"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/split_s3_100",
+   "path": "user_06_piano_chord/full_spectrum/split_s3_100.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -0.84,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "c528b2d0738fd4dfe848c399797887c4e1911ce9f94167cdd745a04b4feac090"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/conv_s1",
+   "path": "user_06_piano_chord/full_spectrum/conv_s1.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "conv_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -0.84,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "c7b2e1e769fbfd613fc9f10cfc3e0989d3306d90a4d9517b4539776acb12a165"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/conv_s3_100",
+   "path": "user_06_piano_chord/full_spectrum/conv_s3_100.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "conv_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -0.77,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "39021216b06c191a509b536efe884e1728d141da616a419f7041aea1739ebe61"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/split_s1_detune",
+   "path": "user_06_piano_chord/full_spectrum/split_s1_detune.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s1_detune",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -0.91,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "9c003a9e637c7b25c1c81d2452087820438b26840cb6360f92eb3f1ce2838725"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/split_s1_octaves",
+   "path": "user_06_piano_chord/full_spectrum/split_s1_octaves.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "split_s1_octaves",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -0.91,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "33744b4fa020b291c2b36a866bd410e917089ae0126c7909040affb75565c07a"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/progression_parallel",
+   "path": "user_06_piano_chord/full_spectrum/progression_parallel.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "progression_parallel",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -0.92,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "c1bf16ebd0fbd4db4906718e05635344c247021642e14ab36bfbac9f4fbbec61"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/progression_s2_keep",
+   "path": "user_06_piano_chord/full_spectrum/progression_s2_keep.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "progression_s2_keep",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -0.92,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "332bb25247c949be699ba0c40da3f2748ffbfc91e3e414c4f9cfa60aacf5fbab"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/progression_s2_fade",
+   "path": "user_06_piano_chord/full_spectrum/progression_s2_fade.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "progression_s2_fade",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -0.92,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "c614946943393e940c6b20f7382390112a43984bb0e649ae91a1d60fc4bfd4e0"
+  },
+  {
+   "id": "user_06_piano_chord/full_spectrum/progression_s3",
+   "path": "user_06_piano_chord/full_spectrum/progression_s3.wav",
+   "source": "user_06_piano_chord",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "progression_s3",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -0.92,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "f3109eee4434129af64a342a48880fcdc1b25e8dc6cb10f753b6f82c0bb1c795"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/trace",
+   "path": "user_07_bass_sustained/full_spectrum/trace.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "trace",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -15.1,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "d06ee6e5492ca87761a60bd0ba5567b40f50146ffee847cf8c1ad427c00ac1a6"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/p0b_cloud",
+   "path": "user_07_bass_sustained/full_spectrum/p0b_cloud.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_cloud",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -15.42,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "af140cba8c9cad3bd95e8e93a93b082ae6481d410e0bd78e6cd007fa903947ae"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/p0b_focus",
+   "path": "user_07_bass_sustained/full_spectrum/p0b_focus.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_focus",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -15.7,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "736297129610c11d359f32f6cd6308b860aa201399199ebb9e6c7e48f43c7831"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/split_s1",
+   "path": "user_07_bass_sustained/full_spectrum/split_s1.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -15.1,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "c88f9eee8d83fff9c56de2cd82766a58ef410dc6c327ffe40c0da88552b7063e"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/split_s2_keep_100",
+   "path": "user_07_bass_sustained/full_spectrum/split_s2_keep_100.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s2_keep_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -15.1,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "080b7008a2a500ec1cd2f131e00cd2652b9f2740218f8aad6aca380616cab5d0"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/split_s3_100",
+   "path": "user_07_bass_sustained/full_spectrum/split_s3_100.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -14.12,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "d4846900add8cfa37ae9c84fd4daf28ac47eb8703a2677e7b62fc5fb04c49bcb"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/conv_s1",
+   "path": "user_07_bass_sustained/full_spectrum/conv_s1.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -15.11,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "979257308fe33410c34d2b4b1d80739d5d07e39ea2498d9a6189cdadf80a3bc6"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/conv_s3_100",
+   "path": "user_07_bass_sustained/full_spectrum/conv_s3_100.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -14.1,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "a02dd67c2c17beffd1841e44eb3e1f26b7df4959549a0c01e2758a9165102539"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/split_s1_detune",
+   "path": "user_07_bass_sustained/full_spectrum/split_s1_detune.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_detune",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -15.1,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "fa40b0b8f3da6822d882fd36fb4b02ef3e7526f3c7ef303d279c695bf25dff80"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/split_s1_octaves",
+   "path": "user_07_bass_sustained/full_spectrum/split_s1_octaves.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_octaves",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -15.1,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "adfea079231f5e211ad55ebefd18f8a2ff83d1d0474e410a1f8d00f8c1e26912"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/progression_parallel",
+   "path": "user_07_bass_sustained/full_spectrum/progression_parallel.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_parallel",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -15.1,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "a3f8d3356b7424652c30bb76657573904556e034b972931cb9f25557cf30dae2"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/progression_s2_keep",
+   "path": "user_07_bass_sustained/full_spectrum/progression_s2_keep.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_keep",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -15.1,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "21777bd5949c73c0147c8e1641f49cbeadef18ef0f6c1961210f53543c84f46b"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/progression_s2_fade",
+   "path": "user_07_bass_sustained/full_spectrum/progression_s2_fade.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_fade",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -15.1,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "456387ca97b01b8e5fa8e73fcaab817f7c2bbd6f5a0d38c3ff1db1f87f86e6e2"
+  },
+  {
+   "id": "user_07_bass_sustained/full_spectrum/progression_s3",
+   "path": "user_07_bass_sustained/full_spectrum/progression_s3.wav",
+   "source": "user_07_bass_sustained",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s3",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -15.1,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.05,
+    "t1": 0.8,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "121f5ea15f3126240fc30eac4bb78b72f7d6a68e97b6b522d71a7213dda15d5e"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/trace",
+   "path": "user_08_spoken_voice/full_spectrum/trace.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "trace",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.02,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "23198a9ac5f74eacd6aae4c3c27bb3f60a84e81bd6d0321fc74046d3d2531605"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/p0b_cloud",
+   "path": "user_08_spoken_voice/full_spectrum/p0b_cloud.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_cloud",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -1.93,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "983143c498f7ed170f407d6f86a4e98eecc8e7fe7e11c319831bb54b1c5c2ba0"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/p0b_focus",
+   "path": "user_08_spoken_voice/full_spectrum/p0b_focus.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_focus",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -4.99,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "522d83dc4eb3f05e5d6efa7de4f622d3ca3c5e1c330af14aaf12de5efa98ead1"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/split_s1",
+   "path": "user_08_spoken_voice/full_spectrum/split_s1.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.28,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "21c1b5be9b9750db5bb7315217a4fc4ec0d825355e7a09d07eab15c2a5145b7d"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/split_s2_keep_100",
+   "path": "user_08_spoken_voice/full_spectrum/split_s2_keep_100.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s2_keep_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.38,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "1274d3a75c9e1e9406abf3e492648ecb6e85b9f1535248f455fd610aa61e6010"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/split_s3_100",
+   "path": "user_08_spoken_voice/full_spectrum/split_s3_100.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.82,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "12418b21a70cfae6714d5654414485bfc4b325a7700d3fbea8f01e864f5c66f1"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/conv_s1",
+   "path": "user_08_spoken_voice/full_spectrum/conv_s1.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.24,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "4c1938e4e43926112764f562a010a68a7c969fade61d7d2462262940cbfb4ad6"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/conv_s3_100",
+   "path": "user_08_spoken_voice/full_spectrum/conv_s3_100.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.54,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "8e4324e70c0b2edd34f4dee89e4405c9142f3e08255ea51579c365123617bd72"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/split_s1_detune",
+   "path": "user_08_spoken_voice/full_spectrum/split_s1_detune.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_detune",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.28,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "f59dee11e0cac61b19ee116bade9a4b9a6c808740c37290e4a840d65bb00d2a0"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/split_s1_octaves",
+   "path": "user_08_spoken_voice/full_spectrum/split_s1_octaves.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_octaves",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.28,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "1e9adb0d25b0433268bba93da3e228c5d392a3834f9aad219d0e20c8e332618b"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/progression_parallel",
+   "path": "user_08_spoken_voice/full_spectrum/progression_parallel.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_parallel",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -2.02,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "cfbf22853512e8f61ce07fdd5f7ed061893f13a82f29e8055f3df4a196d8b810"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/progression_s2_keep",
+   "path": "user_08_spoken_voice/full_spectrum/progression_s2_keep.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_keep",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -2.02,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "a416f3b154c0acbefc69e32e6c18139cbfaeff8672022f513c0123d24a5b8f31"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/progression_s2_fade",
+   "path": "user_08_spoken_voice/full_spectrum/progression_s2_fade.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_fade",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -2.02,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "abbfb797752195d706ba21660fa90274a5e614802fd81352ca2c9b1780f1ece6"
+  },
+  {
+   "id": "user_08_spoken_voice/full_spectrum/progression_s3",
+   "path": "user_08_spoken_voice/full_spectrum/progression_s3.wav",
+   "source": "user_08_spoken_voice",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s3",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -2.02,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.36,
+    "t1": 1.52,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "99a0e8021819fac7873c42867eedd9889bd548f55f096e0b899d82cf783e0639"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/trace",
+   "path": "user_10_ambient_field_recording/full_spectrum/trace.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "trace",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 7.33,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "8450dac673d15b3cddf0493fac69c70a90c71e5c1465465785b281f80932e05b"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/p0b_cloud",
+   "path": "user_10_ambient_field_recording/full_spectrum/p0b_cloud.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_cloud",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 6.94,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "d6f04229f537d23f89d84ea1d299dc1ff6f864f8cf71a8e20f5531cc7b54dc8a"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/p0b_focus",
+   "path": "user_10_ambient_field_recording/full_spectrum/p0b_focus.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_focus",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 6.73,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "117b828ada1e0bd868113d32240b471723a824181bcf5f77879d5161fdb6dac0"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/split_s1",
+   "path": "user_10_ambient_field_recording/full_spectrum/split_s1.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 7.54,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "c7bd7eb3240e803f217a175f00b90256d68607c83ac9cf7e1a0c8cd7edfc41d8"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/split_s2_keep_100",
+   "path": "user_10_ambient_field_recording/full_spectrum/split_s2_keep_100.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s2_keep_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 7.41,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "2c2655dfedfb132d800353f54e40a2a98ae11b53253878c68a145e2806b6d429"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/split_s3_100",
+   "path": "user_10_ambient_field_recording/full_spectrum/split_s3_100.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 7.4,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "bd897a92a166febceaa55c1d2fcbb9a3064b34b4c03daf8f00000fe9278b78f9"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/conv_s1",
+   "path": "user_10_ambient_field_recording/full_spectrum/conv_s1.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 7.92,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "236b89af2aa9abde0c5a86c6053b78f54be87d75251fdd25fd06fcec3da1db36"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/conv_s3_100",
+   "path": "user_10_ambient_field_recording/full_spectrum/conv_s3_100.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 7.31,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "3f8b42ea04a503ef050c7cb3dddb973ffabebd26a76dd4849f02e99d1e3f30ac"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/split_s1_detune",
+   "path": "user_10_ambient_field_recording/full_spectrum/split_s1_detune.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_detune",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 7.56,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "8f60f92c38b201757edcbc1bb55da7ebb763c2110cb594f8df7c1888e49be8d6"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/split_s1_octaves",
+   "path": "user_10_ambient_field_recording/full_spectrum/split_s1_octaves.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_octaves",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 7.57,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "06c6a4435ccc52d63d4c6e91c1301d0fc2585847074298d4cb657b4d88e89816"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/progression_parallel",
+   "path": "user_10_ambient_field_recording/full_spectrum/progression_parallel.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_parallel",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": 7.33,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "aea36e3a125b8dfadeaeac8d846e78fbf0ce1f7d36bba64e53b9b4036caa0763"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/progression_s2_keep",
+   "path": "user_10_ambient_field_recording/full_spectrum/progression_s2_keep.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_keep",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": 7.33,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "854373198747cc9b5f8fa1a268856f56276d75436e7b0bfedeec5d073719209f"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/progression_s2_fade",
+   "path": "user_10_ambient_field_recording/full_spectrum/progression_s2_fade.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_fade",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": 7.33,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "613e9f082a827ed90a88b991a6ccdf11e8af13cde5988dfa2d97fde3efc399c1"
+  },
+  {
+   "id": "user_10_ambient_field_recording/full_spectrum/progression_s3",
+   "path": "user_10_ambient_field_recording/full_spectrum/progression_s3.wav",
+   "source": "user_10_ambient_field_recording",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s3",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": 7.33,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 68.95,
+    "t1": 69.7,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "015afa1018ec53eeead138794559d7bb1b1f9899127f4d08535f58162b6baed8"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/trace",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/trace.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "trace",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -7.06,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "38f4032f56b93833e0c40c213ca1dd2a93b977ef940b1c2c5cf594981a1183e5"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/p0b_cloud",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/p0b_cloud.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_cloud",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -7.12,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "1b1c5b7c9dc110b26fe98adabe333fd9aba5585dd737d158adf095190b9b853a"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/p0b_focus",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/p0b_focus.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_focus",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -10.1,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "88f59d031bb583f080c38a573d9472f263319351f5c9c5840a7c4d2492c6e051"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/split_s1",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/split_s1.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -6.98,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "7f49db877a96dadc08b8d34c61137994e68a945f3326986f22fb778814599742"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/split_s2_keep_100",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/split_s2_keep_100.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s2_keep_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -6.88,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "84686d1ceb0b7adf911c593c8ed21f9da7accda1fb1b1faf608ee24b1f1b00f7"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/split_s3_100",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/split_s3_100.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -6.32,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "067d6abc2710924b6e5a9f802f3d0948b2a8309628cc7364396b74da43482c0c"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/conv_s1",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/conv_s1.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -6.98,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "98b381030a432d3d1587c9f437040c4e930ed53f768d058ace7bcef231a3adda"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/conv_s3_100",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/conv_s3_100.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -6.2,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "4c7edd7418e302da58f5adcd272df01ba3125df8b17558b072caae95cbdec6b3"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/split_s1_detune",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/split_s1_detune.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_detune",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -6.98,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "62cc1399b5b7e21b1f928243e873de3f94ecf4c6b1f38ee68b05ecec940300c7"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/split_s1_octaves",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/split_s1_octaves.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_octaves",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -6.97,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "ea001199d7cac3daee01540ef72fec1e435a293a3b25d982ea5fa5bd7059b8ce"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/progression_parallel",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/progression_parallel.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_parallel",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -7.06,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "19d9ff41671e121804ef1773ad1e7fcb78b4c3abc339d1057cd7b123815be154"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/progression_s2_keep",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/progression_s2_keep.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_keep",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -7.06,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "99eb60f34ac6b2e0ceaa28818abcef2bea291d00cf6d92bbf93610667f2d2b5a"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/progression_s2_fade",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/progression_s2_fade.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_fade",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -7.06,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "2083851a62900969245fbaaf113539d6f3e8984541f576c00aca005a804f65ba"
+  },
+  {
+   "id": "user_11_dense_rhythmic_percussion/full_spectrum/progression_s3",
+   "path": "user_11_dense_rhythmic_percussion/full_spectrum/progression_s3.wav",
+   "source": "user_11_dense_rhythmic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s3",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -7.06,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.61,
+    "t1": 2.97,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "1330e926b7b559d5ea0c6270c6380705673e05ba54cbabd9451a0149ad04ae1c"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/trace",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/trace.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "trace",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -3.02,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "302450b0fa875772fbf178a2169bb721bf5c23cd5eb8a39e101d4f12e7177d4f"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/p0b_cloud",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/p0b_cloud.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_cloud",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -3.14,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "d6272e209ded8f772ee99a6d127feb3c69e9cb705a3ad0a3f3acc0b3f5fb233c"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/p0b_focus",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/p0b_focus.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_focus",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.58,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "4f865911fe9ebedb7a303a521929234fa966190167194287cf92ba7e9211f15a"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/split_s1",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/split_s1.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.96,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "910f4c3f405e509764c64cbf2bfb8d5653a6a919cce8ad427cca84196b86500e"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/split_s2_keep_100",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/split_s2_keep_100.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s2_keep_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.91,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "96aa88943a6e643da4b9b0b64191c47e87688e609fca7b6b043a226f2fe3aae8"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/split_s3_100",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/split_s3_100.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -3.3,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "8c5ce717adcc1c355485a5c500167ef081190f5380348807247e9cdf428cff53"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/conv_s1",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/conv_s1.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -3.0,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "b764b6273957828ed54a5e0fe59c1756c4518b4b7a74d925cb9eb8f45c92e1c9"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/conv_s3_100",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/conv_s3_100.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -3.43,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "7cb3f549a886f18da2058233e23700480251abe2147047888598f34dcf2b4e31"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/split_s1_detune",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/split_s1_detune.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_detune",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.96,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "dfd47012bab88704f4600165a279fbcd69e1bca0a5816e38d44c29edcca0b041"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/split_s1_octaves",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/split_s1_octaves.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_octaves",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.96,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "84ad9fa33fe69294a0ef0f2f2b7cdfc899badef2edb29c5169f01fca23cfc1ba"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/progression_parallel",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/progression_parallel.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_parallel",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -3.02,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "09729cb2b3af7481a2a9cc612f6ed0a90f58078acbdc8d58ebffb10a8cfdc609"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/progression_s2_keep",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/progression_s2_keep.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_keep",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -3.02,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "898747e742fc4b12ff00bd9c59325679568f56db5d7350511125cc1fd3b013fc"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/progression_s2_fade",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/progression_s2_fade.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_fade",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -3.02,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "6b26cc7ac9d0747160f761b1e0bba34a4df2f2afcecfd228ebe386dd4308ed1e"
+  },
+  {
+   "id": "user_12_single_acoustic_pluck/full_spectrum/progression_s3",
+   "path": "user_12_single_acoustic_pluck/full_spectrum/progression_s3.wav",
+   "source": "user_12_single_acoustic_pluck",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s3",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -3.02,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "99981af64fe1ed2ad4f8df4906c872e61c6a7cde524b75443477b429433bab3f"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/trace",
+   "path": "user_09_metallic_percussion/full_spectrum/trace.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "trace",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.06,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "73b8fcd80516f6aef5fc5454d897f0626bcf4fb79d768865d4bcca6c090d1d57"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/p0b_cloud",
+   "path": "user_09_metallic_percussion/full_spectrum/p0b_cloud.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_cloud",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -1.57,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "611fe9d6c0b5ec37cb2c1abbb174718c6d283e615c53c9334e505f090313e584"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/p0b_focus",
+   "path": "user_09_metallic_percussion/full_spectrum/p0b_focus.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "p0b_focus",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -3.71,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "d986a2289e5428ad5c78a06e6c2107819298050bc1cb84566dae1abbfb15e8af"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/split_s1",
+   "path": "user_09_metallic_percussion/full_spectrum/split_s1.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -1.75,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "d2a7bd65ea4a27d11fd1b106f0ebcaba90023320b109d3eda9aedf9c4c0b2a83"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/split_s2_keep_100",
+   "path": "user_09_metallic_percussion/full_spectrum/split_s2_keep_100.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s2_keep_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -1.75,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "23f7da72a6f9530ebff6e260389c0aed57be4cd2d802f922bb65f84d78401c70"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/split_s3_100",
+   "path": "user_09_metallic_percussion/full_spectrum/split_s3_100.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -2.13,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "0eee6b33bbb7246745740d5f9277a258a648294358a6c971ee3e1101756bba3d"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/conv_s1",
+   "path": "user_09_metallic_percussion/full_spectrum/conv_s1.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s1",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -1.85,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "2c2fdc0f605bafc8f8fed983af8d1d8c0d57679c725e9ad3ab45c66aade49715"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/conv_s3_100",
+   "path": "user_09_metallic_percussion/full_spectrum/conv_s3_100.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "conv_s3_100",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -1.94,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "6ac66f4469a5ab09ea89e94a119629a6e3e8a85071912a06da67c0852cf8d0cf"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/split_s1_detune",
+   "path": "user_09_metallic_percussion/full_spectrum/split_s1_detune.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_detune",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -1.55,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "368e5422cb5a1179a57e58f0f2ed2f1c80ab53bd2fc002399b6f7e604b1eb0cf"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/split_s1_octaves",
+   "path": "user_09_metallic_percussion/full_spectrum/split_s1_octaves.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "split_s1_octaves",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -1.6,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "a9fc340be0ff48522da653f8d9847fb90402ff57784f6874401aa0e7ece13bd0"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/progression_parallel",
+   "path": "user_09_metallic_percussion/full_spectrum/progression_parallel.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_parallel",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -2.06,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "622aa21d571728a3ac3a3dfb442c57125e33d3f2f6645ac3605629c2c5e9921a"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/progression_s2_keep",
+   "path": "user_09_metallic_percussion/full_spectrum/progression_s2_keep.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_keep",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -2.06,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "d598179d9029edb96460a802c3abba5f5fd4b2055b77c4e0b822666318262f83"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/progression_s2_fade",
+   "path": "user_09_metallic_percussion/full_spectrum/progression_s2_fade.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s2_fade",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -2.06,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "73df16500f0ed45f71b5b8b6fd04a6b689a624e26b85b739753d067cac0c4eed"
+  },
+  {
+   "id": "user_09_metallic_percussion/full_spectrum/progression_s3",
+   "path": "user_09_metallic_percussion/full_spectrum/progression_s3.wav",
+   "source": "user_09_metallic_percussion",
+   "source_kind": "user",
+   "case": "full_spectrum",
+   "fs": 44100,
+   "fft_size": 4096,
+   "engine": "progression_s3",
+   "seed": 20261120,
+   "t60_seconds": 12.0,
+   "match_gain_db": -2.06,
+   "capture_source": "full",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    250.0,
+    2000.0
+   ],
+   "roi": {
+    "t0": 0.01,
+    "t1": 0.34,
+    "low_hz": 20,
+    "high_hz": null
+   },
+   "sha256_float32": "72b08cc166faf7c7a81099cfcb9a65e7fcb3f49a9eef19bff39cc94505e208ca"
+  }
+ ]
+}
