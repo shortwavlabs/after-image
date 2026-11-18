@@ -1,0 +1,17 @@
+{
+ "note": "NumPy wall-clock on the machine that ran this; not a realtime indicator.",
+ "rows": [
+  {
+   "case": "capture buffer + shared seam",
+   "seconds": 0.014
+  },
+  {
+   "case": "6 s structural DISSOLVE = 1",
+   "seconds": 0.056
+  },
+  {
+   "case": "6 s cloud at ceiling (300 ms, 100/s)",
+   "seconds": 0.422
+  }
+ ]
+}
