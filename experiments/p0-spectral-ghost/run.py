@@ -47,7 +47,7 @@ def main():
                 print("  FAIL", r["check"], r["case"], r["value"], r["unit"])
         status = 1 if result["summary"]["FAIL"] else 0
     if a.command in ("render", "all"):
-        manifest, metrics = experiment.run(a.out, only=a.only, fft_sizes=a.fft, write_audio=not a.no_wav)
+        manifest, metrics = experiment.run(a.out, inputs_dir=experiment.evidence_inputs(a.only), only=a.only, fft_sizes=a.fft, write_audio=not a.no_wav)
         partial = bool(a.only or a.fft)
         suffix = ".partial" if partial else ""  # never overwrite the committed full-run evidence
         experiment.dump(manifest, ROOT / f"manifest{suffix}.json")

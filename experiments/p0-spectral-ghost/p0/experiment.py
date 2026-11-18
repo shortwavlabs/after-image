@@ -64,13 +64,20 @@ def write_wav(path, fs, x):
     wavfile.write(path, fs, np.ascontiguousarray(x, dtype=np.float32))
 
 
+def evidence_inputs(only):
+    """The inputs folder a command-line run may read. User WAVs only enter a run that names
+    them (`--only user_<name>`); a default run writes the committed evidence and sees the
+    synthetic fixtures alone, so local recordings in inputs/ cannot leak into it."""
+    return ROOT / "inputs" if only and any(n.startswith("user_") for n in only) else None
+
+
 def load_sources(cfg, inputs_dir):
-    """Synthetic fixtures plus any user-owned WAVs in inputs/ (see inputs/README.md)."""
+    """Synthetic fixtures plus any user-owned WAVs in inputs_dir (see inputs/README.md); None = fixtures only."""
     sources, skipped = [], []
     for name in fixtures.NAMES:
         sources.append({"name": name, "kind": "synthetic", "cases": cfg["cases"][name],
                         "load": lambda fs, name=name: fixtures.make(name, fs), "native_fs": None})
-    for wav in sorted(Path(inputs_dir).glob("*.wav")) if Path(inputs_dir).is_dir() else []:
+    for wav in sorted(Path(inputs_dir).glob("*.wav")) if inputs_dir and Path(inputs_dir).is_dir() else []:
         fs, x = read_wav(wav)
         if fs not in S.SAMPLE_RATES:
             skipped.append({"file": wav.name, "reason": f"unsupported sample rate {fs}"})
