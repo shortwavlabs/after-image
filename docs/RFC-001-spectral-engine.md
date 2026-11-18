@@ -1,12 +1,14 @@
 # RFC-001 — Rolling spectral history and ghost resynthesis
 
-**Status:** Design proposal / requires P0 sonic experiments. Do not implement as validated until numerical and listening tests pass.
+**Status:** Early design proposal / requires P0 sonic experiments. Do not implement as validated until numerical and listening tests pass.
+
+> **Supersession note:** [DSP-ARCHITECTURE.md](DSP-ARCHITECTURE.md) is the current normative architecture for the additive MVP. It chooses a **zero-latency direct BODY** plus an independently synthesized GHOST, ~6 s internal history/~4 s visible history, and staged capture. Earlier discussion below of delay-compensated BODY or necessarily reported global STFT latency is superseded; this RFC remains for historical comparison of resynthesis candidates.
 
 ## Proposed architecture
 
 ```
 Input
-  ├─ delay-compensated BODY ───────────────────────────────┐
+  ├─ direct zero-latency BODY ─────────────────────────────┐
   └─ stereo analysis STFT → rolling complex frames        │
                    │                                     │
                    ├─ decimated visualization data       │
@@ -25,9 +27,9 @@ Input
 
 ### Analysis
 
-Prototype FFT 2048, 4096 and 8192 points with Hann/WOLA, hop N/4, measuring artifact/CPU tradeoffs at 44.1/48/96 kHz. 4096 at 48 kHz gives ~85 ms window and ~11.7 Hz/bin; 1024-sample hop gives ~21 ms new frame cadence. These are prototype parameters, **not a commitment**. Note: buffered STFT introduces latency; explicitly report and compensate *actual* processing latency to host.
+Prototype FFT 2048, 4096 and 8192 points with Hann/WOLA, hop N/4, measuring artifact/CPU tradeoffs at 44.1/48/96 kHz. 4096 at 48 kHz gives ~85 ms window and ~11.7 Hz/bin; 1024-sample hop gives ~21 ms new frame cadence. These are prototype parameters, **not a commitment**. Note: buffered STFT introduces latency inside the GHOST synthesis path. The current additive design keeps BODY undelayed and reports 0 host latency; measure actual IMPRINT-to-GHOST onset separately. If the signal topology changes to processed-through, revisit host latency/PDC.
 
-Keep 3–4 s of **complex** stereo STFT frames. For 48 kHz, N=4096, hop=1024: ~188 frames × 2049 positive bins × 2 channels × 8 bytes/complex float ≈ 6.2 MB, excluding metadata/masks and overhead. At 96 kHz, ≈ 12.3 MB for the same window duration with unchanged hop. Allocate fixed buffers off audio thread and avoid per-block dynamic growth.
+For the current MVP, keep ~6 s of **complex** stereo STFT frames (~4 s visible with ~2 s guard); the following per-frame cost example remains illustrative of the older 4-second proposal. For 48 kHz, N=4096, hop=1024: ~188 frames × 2049 positive bins × 2 channels × 8 bytes/complex float ≈ 6.2 MB, excluding metadata/masks and overhead. At 96 kHz, ≈ 12.3 MB for the same window duration with unchanged hop. Allocate fixed buffers off audio thread and avoid per-block dynamic growth.
 
 Retain exact frame indices and timestamps. The spectrogram is a decimated *view* of immutable/recent analysis records. UI selections are absolute time/index plus frequency limits; clamp when regions expire and visually mark invalid selections. Never pretend that editing a view retroactively changes audio that has already passed.
 
@@ -60,7 +62,7 @@ Avoid “perfect reconstruction” language for the processed effect. If BODY is
 
 - No lock, file/network IO, dynamic allocations, or UI calls in processBlock.
 - Preallocate analysis/synthesis rings, plans, FFT workspaces, ghost voice, parameter smoothing.
-- Support variable block sizes and channels. Handle transport, sample-rate, buffer, and state changes without stale frame indices.
+- Support variable block sizes and channels. Handle transport, sample-rate, buffer, and state changes without stale frame indices. Implement the detailed clock, epoch, bounded-copy, and state-machine rules in [DSP-ARCHITECTURE.md](DSP-ARCHITECTURE.md).
 - Pass downsampled visualization via sequence-numbered snapshots or triple-buffering. UI must never directly lock the audio processor.
 - Rate-limit spectrogram updates (target 20–30 fps at most). Interactive drawing should not affect audio thread scheduling.
 
