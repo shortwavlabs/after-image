@@ -1,0 +1,14 @@
+[project]
+name = "afterimage-p0"
+version = "0.0.0"
+description = "AFTERIMAGE P0-A offline spectral-ghost feasibility harness"
+license = "AGPL-3.0-only"
+requires-python = "==3.13.*"
+dependencies = ["numpy==2.3.4", "scipy==1.16.3"]
+
+[dependency-groups]
+dev = ["pytest==8.4.2"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
