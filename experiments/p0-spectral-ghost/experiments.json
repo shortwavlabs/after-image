@@ -1,0 +1,47 @@
+{
+  "render": {
+    "ghost_seconds": 6.0,
+    "t60_seconds": 5.0,
+    "onset_fade_s": 0.03,
+    "target_rms_dbfs": -23.0,
+    "level_window_s": 2.0,
+    "freq_feather_oct": 0.16666666666666666,
+    "time_feather_s": 0.05
+  },
+  "primary_fs": 48000,
+  "fft_sizes": [2048, 4096, 8192],
+  "variant_fft_size": 4096,
+  "rate_sweep": [[44100, 4096], [88200, 8192], [96000, 8192]],
+  "rate_sweep_cases": ["synth/full_spectrum", "drums/full_spectrum"],
+  "cases": {
+    "guitar": [
+      {"name": "full_spectrum", "t0": 0.60, "t1": 1.35, "low_hz": 20, "high_hz": null},
+      {"name": "narrow_harmonic", "t0": 0.60, "t1": 1.35, "low_hz": 300, "high_hz": 360},
+      {"name": "upper_harmonics", "t0": 0.60, "t1": 1.35, "low_hz": 2000, "high_hz": 10000},
+      {"name": "short_transient", "t0": 1.95, "t1": 2.20, "low_hz": 20, "high_hz": null},
+      {"name": "long_sustain", "t0": 2.30, "t1": 3.80, "low_hz": 350, "high_hz": 5000}
+    ],
+    "vocal": [
+      {"name": "full_spectrum", "t0": 1.00, "t1": 1.75, "low_hz": 20, "high_hz": null},
+      {"name": "narrow_harmonic", "t0": 1.00, "t1": 1.75, "low_hz": 500, "high_hz": 620},
+      {"name": "mid_band_rfc", "t0": 1.00, "t1": 1.80, "low_hz": 350, "high_hz": 5000},
+      {"name": "long_sustain", "t0": 1.50, "t1": 3.00, "low_hz": 350, "high_hz": 5000}
+    ],
+    "drums": [
+      {"name": "full_spectrum", "t0": 0.90, "t1": 1.65, "low_hz": 20, "high_hz": null},
+      {"name": "short_transient", "t0": 0.95, "t1": 1.20, "low_hz": 20, "high_hz": null},
+      {"name": "upper_harmonics", "t0": 0.90, "t1": 1.65, "low_hz": 5000, "high_hz": 16000}
+    ],
+    "synth": [
+      {"name": "full_spectrum", "t0": 1.00, "t1": 1.75, "low_hz": 20, "high_hz": null},
+      {"name": "narrow_harmonic", "t0": 1.00, "t1": 1.75, "low_hz": 480, "high_hz": 540},
+      {"name": "upper_harmonics", "t0": 1.00, "t1": 1.75, "low_hz": 2000, "high_hz": 10000},
+      {"name": "short_capture", "t0": 1.00, "t1": 1.25, "low_hz": 350, "high_hz": 5000},
+      {"name": "long_sustain", "t0": 1.00, "t1": 2.50, "low_hz": 350, "high_hz": 5000}
+    ]
+  },
+  "user_input_default_cases": [
+    {"name": "full_spectrum", "t0": 1.00, "t1": 1.75, "low_hz": 20, "high_hz": null},
+    {"name": "mid_band", "t0": 1.00, "t1": 1.75, "low_hz": 350, "high_hz": 5000}
+  ]
+}

@@ -107,9 +107,13 @@ def band_energy_fraction(x, fs, low_hz, high_hz):
 
 
 def log_spectral_distance_db(a, b, fs, bands_per_oct=3, fmin=40.0):
-    """RMS difference (dB) of level-normalised fractional-octave band spectra.
+    """RMS level difference (dB) between the long-term fractional-octave band
+    spectra of two signals, each normalised to its own total energy.
 
-    A coarse long-term timbre distance; 0 = same average spectrum shape.
+    Only bands holding at least -30 dB of the total energy in either signal are
+    compared, and band levels are floored at -40 dB, so near-empty bands cannot
+    dominate. A coarse timbre distance: 0 = same average spectral shape. It is
+    blind to temporal structure.
     """
     def bands(x):
         x = np.atleast_2d(x.T).T
@@ -119,8 +123,10 @@ def log_spectral_distance_db(a, b, fs, bands_per_oct=3, fmin=40.0):
         e = np.array([p[(f >= lo) & (f < hi)].sum() for lo, hi in zip(edges[:-1], edges[1:])])
         return e / max(e.sum(), EPS)
     ea, eb = bands(a), bands(b)
-    keep = (ea > 1e-6) | (eb > 1e-6)  # ignore bands that are empty in both
-    la, lb = 10 * np.log10(np.maximum(ea[keep], 1e-9)), 10 * np.log10(np.maximum(eb[keep], 1e-9))
+    keep = (ea > 1e-3) | (eb > 1e-3)
+    if not keep.any():
+        return float("nan")
+    la, lb = 10 * np.log10(np.maximum(ea[keep], 1e-4)), 10 * np.log10(np.maximum(eb[keep], 1e-4))
     return float(np.sqrt(np.mean((la - lb) ** 2)))
 
 

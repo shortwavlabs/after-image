@@ -192,8 +192,13 @@ def capture(history, req, min_s=MIN_ROI_SECONDS, max_s=MAX_ROI_SECONDS):
     dur = n * hop(N) / fs
     if dur < min_s - 1e-9:
         raise CaptureRejected("TOO_SHORT", f"{dur:.3f} s < {min_s} s")
-    if dur > max_s + 1e-9:
-        raise CaptureRejected("TOO_LONG", f"{dur:.3f} s > {max_s} s")
+    # The upper limit is a frame count, matching the voice-slot sizing of
+    # DSP-ARCHITECTURE 4.2 (ceil(max_s * fs / H) payload frames). A limit in
+    # seconds would reject some "exactly 1.5 s" selections depending on how the
+    # selection edges fall on the hop grid.
+    max_frames = math.ceil(max_s * fs / hop(N))
+    if n > max_frames:
+        raise CaptureRejected("TOO_LONG", f"{n} frames ({dur:.3f} s) > {max_frames} frames ({max_s} s)")
     fmask = frequency_mask(N, fs, req.low_hz, req.high_hz, req.freq_feather_oct)
     if int(np.sum(fmask >= 0.5)) < MIN_BINS:
         raise CaptureRejected("TOO_FEW_BINS", f"band covers < {MIN_BINS} bins at N={N}")

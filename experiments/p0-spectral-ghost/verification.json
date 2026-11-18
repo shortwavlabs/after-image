@@ -1,0 +1,2406 @@
+{
+ "summary": {
+  "PASS": 178,
+  "FAIL": 0,
+  "info": 107
+ },
+ "rows": [
+  {
+   "check": "reconstruction",
+   "case": "fs=44100 N=2048 complex128 worst=sine_1k",
+   "value": -313.7,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=44100 N=2048 complex64 worst=sine_1k",
+   "value": -143.9,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=44100 N=4096 complex128 worst=impulse@1023",
+   "value": -311.3,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=44100 N=4096 complex64 worst=impulse@1023",
+   "value": -142.3,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=44100 N=8192 complex128 worst=impulse@1",
+   "value": -306.8,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=44100 N=8192 complex64 worst=sine_offbin",
+   "value": -141.9,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=48000 N=2048 complex128 worst=sine_offbin",
+   "value": -313.5,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=48000 N=2048 complex64 worst=stereo",
+   "value": -143.9,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=48000 N=4096 complex128 worst=impulse@1023",
+   "value": -311.3,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=48000 N=4096 complex64 worst=impulse@1023",
+   "value": -142.3,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=48000 N=8192 complex128 worst=impulse@1",
+   "value": -306.8,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=48000 N=8192 complex64 worst=impulse@2047",
+   "value": -142.1,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=88200 N=2048 complex128 worst=sine_1k",
+   "value": -313.7,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=88200 N=2048 complex64 worst=noise",
+   "value": -144.0,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=88200 N=4096 complex128 worst=impulse@1023",
+   "value": -311.3,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=88200 N=4096 complex64 worst=impulse@1023",
+   "value": -142.3,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=88200 N=8192 complex128 worst=impulse@1",
+   "value": -306.8,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=88200 N=8192 complex64 worst=impulse@2047",
+   "value": -142.1,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=96000 N=2048 complex128 worst=noise",
+   "value": -313.8,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=96000 N=2048 complex64 worst=noise",
+   "value": -144.0,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=96000 N=4096 complex128 worst=impulse@1023",
+   "value": -311.3,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=96000 N=4096 complex64 worst=impulse@1023",
+   "value": -142.3,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=96000 N=8192 complex128 worst=impulse@1",
+   "value": -306.8,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reconstruction",
+   "case": "fs=96000 N=8192 complex64 worst=impulse@2047",
+   "value": -142.1,
+   "unit": "dB re ref",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=2048 f=55.3 Hz (2.6 bins)",
+   "value": -0.0001005,
+   "unit": "Hz error",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=2048 f=110.7 Hz (5.1 bins)",
+   "value": 2.382e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=2048 f=441.37 Hz (20.5 bins)",
+   "value": -1.84e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=2048 f=1000.5 Hz (46.5 bins)",
+   "value": -5.496e-08,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=2048 f=3777.7 Hz (175.4 bins)",
+   "value": -2.866e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=2048 f=9000.1 Hz (418.0 bins)",
+   "value": -7.887e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=4096 f=55.3 Hz (5.1 bins)",
+   "value": -7.313e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=4096 f=110.7 Hz (10.3 bins)",
+   "value": 6.989e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=4096 f=441.37 Hz (41.0 bins)",
+   "value": 2.995e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=4096 f=1000.5 Hz (92.9 bins)",
+   "value": 3.321e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=4096 f=3777.7 Hz (350.9 bins)",
+   "value": -3.067e-08,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=4096 f=9000.1 Hz (835.9 bins)",
+   "value": -1.093e-08,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=8192 f=55.3 Hz (10.3 bins)",
+   "value": -1.213e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=8192 f=110.7 Hz (20.6 bins)",
+   "value": 1.83e-06,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=8192 f=441.37 Hz (82.0 bins)",
+   "value": 1.105e-06,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=8192 f=1000.5 Hz (185.9 bins)",
+   "value": -4.07e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=8192 f=3777.7 Hz (701.7 bins)",
+   "value": -1.21e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=44100 N=8192 f=9000.1 Hz (1671.9 bins)",
+   "value": -5.23e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=2048 f=55.3 Hz (2.4 bins)",
+   "value": -0.0003687,
+   "unit": "Hz error",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=2048 f=110.7 Hz (4.7 bins)",
+   "value": -3.891e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=2048 f=441.37 Hz (18.8 bins)",
+   "value": -2.34e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=2048 f=1000.5 Hz (42.7 bins)",
+   "value": -1.996e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=2048 f=3777.7 Hz (161.2 bins)",
+   "value": -3.018e-08,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=2048 f=9000.1 Hz (384.0 bins)",
+   "value": 4.406e-08,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=4096 f=55.3 Hz (4.7 bins)",
+   "value": 2.011e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=4096 f=110.7 Hz (9.4 bins)",
+   "value": -1.291e-06,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=4096 f=441.37 Hz (37.7 bins)",
+   "value": -1.008e-06,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=4096 f=1000.5 Hz (85.4 bins)",
+   "value": -2.345e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=4096 f=3777.7 Hz (322.4 bins)",
+   "value": -1.117e-08,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=4096 f=9000.1 Hz (768.0 bins)",
+   "value": 1.269e-08,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=8192 f=55.3 Hz (9.4 bins)",
+   "value": -3.288e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=8192 f=110.7 Hz (18.9 bins)",
+   "value": -5.968e-06,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=8192 f=441.37 Hz (75.3 bins)",
+   "value": -2.083e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=8192 f=1000.5 Hz (170.8 bins)",
+   "value": -1.499e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=8192 f=3777.7 Hz (644.7 bins)",
+   "value": 8.426e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=48000 N=8192 f=9000.1 Hz (1536.0 bins)",
+   "value": 2.006e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=2048 f=55.3 Hz (1.3 bins)",
+   "value": 0.02465,
+   "unit": "Hz error",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=2048 f=110.7 Hz (2.6 bins)",
+   "value": -0.0001252,
+   "unit": "Hz error",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=2048 f=441.37 Hz (10.2 bins)",
+   "value": -8.663e-06,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=2048 f=1000.5 Hz (23.2 bins)",
+   "value": 1.847e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=2048 f=3777.7 Hz (87.7 bins)",
+   "value": -2.693e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=2048 f=9000.1 Hz (209.0 bins)",
+   "value": -7.349e-10,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=4096 f=55.3 Hz (2.6 bins)",
+   "value": -0.0001005,
+   "unit": "Hz error",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=4096 f=110.7 Hz (5.1 bins)",
+   "value": 2.381e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=4096 f=441.37 Hz (20.5 bins)",
+   "value": -1.84e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=4096 f=1000.5 Hz (46.5 bins)",
+   "value": -5.69e-08,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=4096 f=3777.7 Hz (175.4 bins)",
+   "value": -4.125e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=4096 f=9000.1 Hz (418.0 bins)",
+   "value": -3.041e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=8192 f=55.3 Hz (5.1 bins)",
+   "value": -7.313e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=8192 f=110.7 Hz (10.3 bins)",
+   "value": 6.988e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=8192 f=441.37 Hz (41.0 bins)",
+   "value": 2.993e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=8192 f=1000.5 Hz (92.9 bins)",
+   "value": 3.325e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=8192 f=3777.7 Hz (350.9 bins)",
+   "value": -3.015e-08,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=88200 N=8192 f=9000.1 Hz (835.9 bins)",
+   "value": -1.442e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=2048 f=55.3 Hz (1.2 bins)",
+   "value": 0.03729,
+   "unit": "Hz error",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=2048 f=110.7 Hz (2.4 bins)",
+   "value": -0.001109,
+   "unit": "Hz error",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=2048 f=441.37 Hz (9.4 bins)",
+   "value": 1.825e-06,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=2048 f=1000.5 Hz (21.3 bins)",
+   "value": 4.263e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=2048 f=3777.7 Hz (80.6 bins)",
+   "value": 4.916e-10,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=2048 f=9000.1 Hz (192.0 bins)",
+   "value": 1.2e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=4096 f=55.3 Hz (2.4 bins)",
+   "value": -0.0003687,
+   "unit": "Hz error",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=4096 f=110.7 Hz (4.7 bins)",
+   "value": -3.891e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=4096 f=441.37 Hz (18.8 bins)",
+   "value": -2.338e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=4096 f=1000.5 Hz (42.7 bins)",
+   "value": -1.986e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=4096 f=3777.7 Hz (161.2 bins)",
+   "value": -2.778e-08,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=4096 f=9000.1 Hz (384.0 bins)",
+   "value": 3.102e-08,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=8192 f=55.3 Hz (4.7 bins)",
+   "value": 2.011e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=8192 f=110.7 Hz (9.4 bins)",
+   "value": -1.291e-06,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=8192 f=441.37 Hz (37.7 bins)",
+   "value": -1.009e-06,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=8192 f=1000.5 Hz (85.4 bins)",
+   "value": -2.348e-07,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=8192 f=3777.7 Hz (322.4 bins)",
+   "value": -1.328e-08,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "frequency_estimate",
+   "case": "fs=96000 N=8192 f=9000.1 Hz (768.0 bins)",
+   "value": 7.327e-09,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_frequency",
+   "case": "fs=48000 N=2048",
+   "value": 1.25e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_ripple",
+   "case": "fs=48000 N=2048",
+   "value": 0.0003,
+   "unit": "dB p-p",
+   "limit": 0.5,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_level",
+   "case": "fs=48000 N=2048",
+   "value": -0.0002,
+   "unit": "dB re source",
+   "limit": 0.1,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_frequency",
+   "case": "fs=48000 N=4096",
+   "value": -2.096e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_ripple",
+   "case": "fs=48000 N=4096",
+   "value": 0.0,
+   "unit": "dB p-p",
+   "limit": 0.5,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_level",
+   "case": "fs=48000 N=4096",
+   "value": 0.0001,
+   "unit": "dB re source",
+   "limit": 0.1,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_frequency",
+   "case": "fs=48000 N=8192",
+   "value": 6.553e-06,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_ripple",
+   "case": "fs=48000 N=8192",
+   "value": 0.0,
+   "unit": "dB p-p",
+   "limit": 0.5,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_level",
+   "case": "fs=48000 N=8192",
+   "value": 0.0001,
+   "unit": "dB re source",
+   "limit": 0.1,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_frequency",
+   "case": "fs=44100 N=4096",
+   "value": 1.398e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_ripple",
+   "case": "fs=44100 N=4096",
+   "value": 0.0,
+   "unit": "dB p-p",
+   "limit": 0.5,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_level",
+   "case": "fs=44100 N=4096",
+   "value": 0.0001,
+   "unit": "dB re source",
+   "limit": 0.1,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_frequency",
+   "case": "fs=96000 N=8192",
+   "value": -2.084e-05,
+   "unit": "Hz error",
+   "limit": 0.05,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_ripple",
+   "case": "fs=96000 N=8192",
+   "value": 0.0,
+   "unit": "dB p-p",
+   "limit": 0.5,
+   "result": "PASS"
+  },
+  {
+   "check": "sustain_sine_level",
+   "case": "fs=96000 N=8192",
+   "value": 0.0001,
+   "unit": "dB re source",
+   "limit": 0.1,
+   "result": "PASS"
+  },
+  {
+   "check": "source_ripple",
+   "case": "sine",
+   "value": 0.0,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click_control_hard_wrap",
+   "case": "sine",
+   "value": 26.76,
+   "unit": "ratio",
+   "limit": 2.0,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_click",
+   "case": "sine equal_power 30ms",
+   "value": 0.724,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "sine equal_power 30ms rho=0.91",
+   "value": 2.019,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "sine equal_power 80ms",
+   "value": 0.691,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "sine equal_power 80ms rho=1.00",
+   "value": 2.875,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "sine linear 30ms",
+   "value": 0.995,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "sine linear 30ms rho=0.91",
+   "value": 0.132,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "sine linear 80ms",
+   "value": 0.976,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "sine linear 80ms rho=1.00",
+   "value": 0.0,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "sine aligned 30ms",
+   "value": 0.979,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "sine aligned 30ms rho=1.00",
+   "value": 0.0,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "sine aligned 80ms",
+   "value": 0.977,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "sine aligned 80ms rho=1.00",
+   "value": 0.0,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "source_ripple",
+   "case": "two_partials_26Hz_apart",
+   "value": 2.519,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click_control_hard_wrap",
+   "case": "two_partials_26Hz_apart",
+   "value": 7.55,
+   "unit": "ratio",
+   "limit": 2.0,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_click",
+   "case": "two_partials_26Hz_apart equal_power 30ms",
+   "value": 0.865,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "two_partials_26Hz_apart equal_power 30ms rho=0.25",
+   "value": 2.966,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "two_partials_26Hz_apart equal_power 80ms",
+   "value": 0.739,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "two_partials_26Hz_apart equal_power 80ms rho=0.71",
+   "value": 4.468,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "two_partials_26Hz_apart linear 30ms",
+   "value": 0.873,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "two_partials_26Hz_apart linear 30ms rho=0.25",
+   "value": 3.818,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "two_partials_26Hz_apart linear 80ms",
+   "value": 0.958,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "two_partials_26Hz_apart linear 80ms rho=0.71",
+   "value": 2.551,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "two_partials_26Hz_apart aligned 30ms",
+   "value": 0.886,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "two_partials_26Hz_apart aligned 30ms rho=1.00",
+   "value": 2.52,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "two_partials_26Hz_apart aligned 80ms",
+   "value": 0.958,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "two_partials_26Hz_apart aligned 80ms rho=0.89",
+   "value": 3.149,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "source_ripple",
+   "case": "harmonic_110Hz",
+   "value": 0.02,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click_control_hard_wrap",
+   "case": "harmonic_110Hz",
+   "value": 5.32,
+   "unit": "ratio",
+   "limit": 2.0,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_click",
+   "case": "harmonic_110Hz equal_power 30ms",
+   "value": 0.055,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "harmonic_110Hz equal_power 30ms rho=0.96",
+   "value": 2.096,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "harmonic_110Hz equal_power 80ms",
+   "value": 0.038,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "harmonic_110Hz equal_power 80ms rho=-0.50",
+   "value": 2.814,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "harmonic_110Hz linear 30ms",
+   "value": 0.061,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "harmonic_110Hz linear 30ms rho=0.96",
+   "value": 0.073,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "harmonic_110Hz linear 80ms",
+   "value": 0.038,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "harmonic_110Hz linear 80ms rho=-0.50",
+   "value": 5.464,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "harmonic_110Hz aligned 30ms",
+   "value": 0.061,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "harmonic_110Hz aligned 30ms rho=1.00",
+   "value": 0.02,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "harmonic_110Hz aligned 80ms",
+   "value": 0.053,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "harmonic_110Hz aligned 80ms rho=1.00",
+   "value": 0.02,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "source_ripple",
+   "case": "noise",
+   "value": 0.611,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click_control_hard_wrap",
+   "case": "noise",
+   "value": 0.53,
+   "unit": "ratio",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "noise equal_power 30ms",
+   "value": 0.505,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "noise equal_power 30ms rho=-0.05",
+   "value": 0.632,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "noise equal_power 80ms",
+   "value": 0.476,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "noise equal_power 80ms rho=0.02",
+   "value": 0.588,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "noise linear 30ms",
+   "value": 0.503,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "noise linear 30ms rho=-0.05",
+   "value": 2.281,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "noise linear 80ms",
+   "value": 0.476,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "noise linear 80ms rho=0.02",
+   "value": 3.126,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "noise aligned 30ms",
+   "value": 0.523,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "noise aligned 30ms rho=0.09",
+   "value": 0.614,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_click",
+   "case": "noise aligned 80ms",
+   "value": 0.561,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "loop_ripple",
+   "case": "noise aligned 80ms rho=0.05",
+   "value": 0.667,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "sine freeze_delta",
+   "value": 0.0,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "sine freeze_delta",
+   "value": 0.0,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "sine sustain_mean",
+   "value": 0.0,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "sine sustain_mean",
+   "value": 0.0,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "sine sustain_mean_phase_lock",
+   "value": 0.0,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "sine sustain_mean_phase_lock",
+   "value": 0.0,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "sine sustain_scan",
+   "value": 0.0,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "sine sustain_scan",
+   "value": 0.0,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "two_partials_26Hz_apart freeze_delta",
+   "value": 10.466,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "two_partials_26Hz_apart freeze_delta",
+   "value": -2.48,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "two_partials_26Hz_apart sustain_mean",
+   "value": 2.56,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "two_partials_26Hz_apart sustain_mean",
+   "value": -0.04,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "two_partials_26Hz_apart sustain_mean_phase_lock",
+   "value": 0.02,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "two_partials_26Hz_apart sustain_mean_phase_lock",
+   "value": -2.8,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "two_partials_26Hz_apart sustain_scan",
+   "value": 2.868,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "two_partials_26Hz_apart sustain_scan",
+   "value": -0.13,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "harmonic_110Hz freeze_delta",
+   "value": 0.414,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "harmonic_110Hz freeze_delta",
+   "value": -0.18,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "harmonic_110Hz sustain_mean",
+   "value": 0.029,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "harmonic_110Hz sustain_mean",
+   "value": -0.0,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "harmonic_110Hz sustain_mean_phase_lock",
+   "value": 0.022,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "harmonic_110Hz sustain_mean_phase_lock",
+   "value": -0.0,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "harmonic_110Hz sustain_scan",
+   "value": 0.026,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "harmonic_110Hz sustain_scan",
+   "value": 0.0,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "noise freeze_delta",
+   "value": 0.768,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "noise freeze_delta",
+   "value": -1.79,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "noise sustain_mean",
+   "value": 0.844,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "noise sustain_mean",
+   "value": -0.98,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "noise sustain_mean_phase_lock",
+   "value": 0.198,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "noise sustain_mean_phase_lock",
+   "value": -3.92,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "ripple",
+   "case": "noise sustain_scan",
+   "value": 1.13,
+   "unit": "dB p-p",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "level",
+   "case": "noise sustain_scan",
+   "value": -2.32,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_short_roi",
+   "case": "N=2048 frames=23 xfade_req=30ms",
+   "value": {
+    "interior_ms": 213.3,
+    "period_ms": 164.9,
+    "xfade_ms": 30.0,
+    "fallback_short_xfade": false
+   },
+   "unit": "",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_short_roi",
+   "case": "N=2048 frames=23 xfade_req=80ms",
+   "value": {
+    "interior_ms": 213.3,
+    "period_ms": 125.1,
+    "xfade_ms": 80.0,
+    "fallback_short_xfade": false
+   },
+   "unit": "",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_short_roi",
+   "case": "N=4096 frames=12 xfade_req=30ms",
+   "value": {
+    "interior_ms": 192.0,
+    "period_ms": 150.5,
+    "xfade_ms": 30.0,
+    "fallback_short_xfade": false
+   },
+   "unit": "",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_short_roi",
+   "case": "N=4096 frames=12 xfade_req=80ms",
+   "value": {
+    "interior_ms": 192.0,
+    "period_ms": 88.2,
+    "xfade_ms": 80.0,
+    "fallback_short_xfade": false
+   },
+   "unit": "",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_short_roi",
+   "case": "N=8192 frames=6 xfade_req=30ms",
+   "value": {
+    "interior_ms": 128.0,
+    "period_ms": 84.0,
+    "xfade_ms": 30.0,
+    "fallback_short_xfade": false
+   },
+   "unit": "",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "loop_short_roi",
+   "case": "N=8192 frames=6 xfade_req=80ms",
+   "value": {
+    "interior_ms": 128.0,
+    "period_ms": 64.0,
+    "xfade_ms": 64.0,
+    "fallback_short_xfade": true
+   },
+   "unit": "",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_near_centre_source_corr",
+   "case": "centred harmonic + -40 dB independent noise",
+   "value": 0.9999,
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_source_corr",
+   "case": "synth fixture ROI",
+   "value": -0.06,
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_centre_stays_centre",
+   "case": "freeze",
+   "value": 0.0,
+   "unit": "max |L-R| / peak",
+   "limit": 1e-06,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_antiphase_preserved",
+   "case": "freeze",
+   "value": -1.0,
+   "unit": "corr",
+   "limit": -0.999999,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_near_centre_corr_early_late",
+   "case": "freeze",
+   "value": [
+    0.9946,
+    0.9844
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_corr_early_late",
+   "case": "freeze",
+   "value": [
+    -0.077,
+    -0.086
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_mono_compat",
+   "case": "freeze",
+   "value": -3.1,
+   "unit": "dB (mono sum re channels)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_centre_stays_centre",
+   "case": "freeze_random",
+   "value": 0.0,
+   "unit": "max |L-R| / peak",
+   "limit": 1e-06,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_antiphase_preserved",
+   "case": "freeze_random",
+   "value": -1.0,
+   "unit": "corr",
+   "limit": -0.999999,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_near_centre_corr_early_late",
+   "case": "freeze_random",
+   "value": [
+    0.9999,
+    0.9999
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_corr_early_late",
+   "case": "freeze_random",
+   "value": [
+    0.109,
+    0.125
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_mono_compat",
+   "case": "freeze_random",
+   "value": -2.54,
+   "unit": "dB (mono sum re channels)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_centre_stays_centre",
+   "case": "loop_aligned",
+   "value": 0.0,
+   "unit": "max |L-R| / peak",
+   "limit": 1e-06,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_antiphase_preserved",
+   "case": "loop_aligned",
+   "value": -1.0,
+   "unit": "corr",
+   "limit": -0.999999,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_near_centre_corr_early_late",
+   "case": "loop_aligned",
+   "value": [
+    0.9999,
+    0.9999
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_corr_early_late",
+   "case": "loop_aligned",
+   "value": [
+    -0.005,
+    -0.028
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_mono_compat",
+   "case": "loop_aligned",
+   "value": -3.18,
+   "unit": "dB (mono sum re channels)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_centre_stays_centre",
+   "case": "loop_equal_power",
+   "value": 0.0,
+   "unit": "max |L-R| / peak",
+   "limit": 1e-06,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_antiphase_preserved",
+   "case": "loop_equal_power",
+   "value": -1.0,
+   "unit": "corr",
+   "limit": -0.999999,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_near_centre_corr_early_late",
+   "case": "loop_equal_power",
+   "value": [
+    0.9999,
+    0.9999
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_corr_early_late",
+   "case": "loop_equal_power",
+   "value": [
+    0.028,
+    -0.05
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_mono_compat",
+   "case": "loop_equal_power",
+   "value": -3.09,
+   "unit": "dB (mono sum re channels)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_centre_stays_centre",
+   "case": "sustain_shared",
+   "value": 0.0,
+   "unit": "max |L-R| / peak",
+   "limit": 1e-06,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_antiphase_preserved",
+   "case": "sustain_shared",
+   "value": -1.0,
+   "unit": "corr",
+   "limit": -0.999999,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_near_centre_corr_early_late",
+   "case": "sustain_shared",
+   "value": [
+    0.9998,
+    0.9998
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_corr_early_late",
+   "case": "sustain_shared",
+   "value": [
+    -0.446,
+    -0.362
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_mono_compat",
+   "case": "sustain_shared",
+   "value": -5.23,
+   "unit": "dB (mono sum re channels)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_centre_stays_centre",
+   "case": "sustain_independent",
+   "value": 0.0,
+   "unit": "max |L-R| / peak",
+   "limit": 1e-06,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_antiphase_preserved",
+   "case": "sustain_independent",
+   "value": -1.0,
+   "unit": "corr",
+   "limit": -0.999999,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_near_centre_corr_early_late",
+   "case": "sustain_independent",
+   "value": [
+    0.9974,
+    0.99
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_corr_early_late",
+   "case": "sustain_independent",
+   "value": [
+    0.039,
+    -0.007
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_mono_compat",
+   "case": "sustain_independent",
+   "value": -2.98,
+   "unit": "dB (mono sum re channels)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_centre_stays_centre",
+   "case": "sustain_scan",
+   "value": 0.0,
+   "unit": "max |L-R| / peak",
+   "limit": 1e-06,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_antiphase_preserved",
+   "case": "sustain_scan",
+   "value": -1.0,
+   "unit": "corr",
+   "limit": -0.999999,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo_near_centre_corr_early_late",
+   "case": "sustain_scan",
+   "value": [
+    0.9998,
+    0.9998
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_corr_early_late",
+   "case": "sustain_scan",
+   "value": [
+    -0.365,
+    -0.352
+   ],
+   "unit": "corr 0-1s, 3-4s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo_wide_mono_compat",
+   "case": "sustain_scan",
+   "value": -4.58,
+   "unit": "dB (mono sum re channels)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "silent_capture_gives_silence",
+   "case": "freeze",
+   "value": 0.0,
+   "unit": "peak",
+   "limit": 0.0,
+   "result": "PASS"
+  },
+  {
+   "check": "full_scale_noise_finite",
+   "case": "freeze",
+   "value": 6.53,
+   "unit": "dBFS peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "tiny_input_finite",
+   "case": "freeze",
+   "value": 3.5e-30,
+   "unit": "peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "deterministic",
+   "case": "freeze",
+   "value": "aaf6519b64833e4c",
+   "unit": "sha256",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "silent_capture_gives_silence",
+   "case": "freeze_random",
+   "value": 0.0,
+   "unit": "peak",
+   "limit": 0.0,
+   "result": "PASS"
+  },
+  {
+   "check": "full_scale_noise_finite",
+   "case": "freeze_random",
+   "value": 2.78,
+   "unit": "dBFS peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "tiny_input_finite",
+   "case": "freeze_random",
+   "value": 2.4e-30,
+   "unit": "peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "deterministic",
+   "case": "freeze_random",
+   "value": "127b752bc8b578d2",
+   "unit": "sha256",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "silent_capture_gives_silence",
+   "case": "loop_aligned",
+   "value": 0.0,
+   "unit": "peak",
+   "limit": 0.0,
+   "result": "PASS"
+  },
+  {
+   "check": "full_scale_noise_finite",
+   "case": "loop_aligned",
+   "value": 2.63,
+   "unit": "dBFS peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "tiny_input_finite",
+   "case": "loop_aligned",
+   "value": 4.71e-30,
+   "unit": "peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "deterministic",
+   "case": "loop_aligned",
+   "value": "ff889f41746b1577",
+   "unit": "sha256",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "silent_capture_gives_silence",
+   "case": "loop_equal_power",
+   "value": 0.0,
+   "unit": "peak",
+   "limit": 0.0,
+   "result": "PASS"
+  },
+  {
+   "check": "full_scale_noise_finite",
+   "case": "loop_equal_power",
+   "value": 2.84,
+   "unit": "dBFS peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "tiny_input_finite",
+   "case": "loop_equal_power",
+   "value": 4.71e-30,
+   "unit": "peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "deterministic",
+   "case": "loop_equal_power",
+   "value": "9b9b5edb02aa12d5",
+   "unit": "sha256",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "silent_capture_gives_silence",
+   "case": "sustain_mean",
+   "value": 0.0,
+   "unit": "peak",
+   "limit": 0.0,
+   "result": "PASS"
+  },
+  {
+   "check": "full_scale_noise_finite",
+   "case": "sustain_mean",
+   "value": 7.48,
+   "unit": "dBFS peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "tiny_input_finite",
+   "case": "sustain_mean",
+   "value": 4.23e-30,
+   "unit": "peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "deterministic",
+   "case": "sustain_mean",
+   "value": "975edf8431fc1e6d",
+   "unit": "sha256",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "silent_capture_gives_silence",
+   "case": "sustain_lock",
+   "value": 0.0,
+   "unit": "peak",
+   "limit": 0.0,
+   "result": "PASS"
+  },
+  {
+   "check": "full_scale_noise_finite",
+   "case": "sustain_lock",
+   "value": 3.97,
+   "unit": "dBFS peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "tiny_input_finite",
+   "case": "sustain_lock",
+   "value": 2.66e-30,
+   "unit": "peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "deterministic",
+   "case": "sustain_lock",
+   "value": "48c56ff842e7f88c",
+   "unit": "sha256",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "silent_capture_gives_silence",
+   "case": "sustain_scan",
+   "value": 0.0,
+   "unit": "peak",
+   "limit": 0.0,
+   "result": "PASS"
+  },
+  {
+   "check": "full_scale_noise_finite",
+   "case": "sustain_scan",
+   "value": 6.59,
+   "unit": "dBFS peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "tiny_input_finite",
+   "case": "sustain_scan",
+   "value": 3.77e-30,
+   "unit": "peak",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "deterministic",
+   "case": "sustain_scan",
+   "value": "3513d173775d7f44",
+   "unit": "sha256",
+   "limit": null,
+   "result": "PASS"
+  },
+  {
+   "check": "decay_tail_denormals",
+   "case": "T60=0.25 s over 20 s",
+   "value": 0,
+   "unit": "samples",
+   "limit": 0,
+   "result": "PASS"
+  },
+  {
+   "check": "decay_tail_retires_to_zero",
+   "case": "T60=0.25 s over 20 s",
+   "value": 0.0,
+   "unit": "peak after 1 s",
+   "limit": 0.0,
+   "result": "PASS"
+  },
+  {
+   "check": "memory_history_plus_two_slots",
+   "case": "fs=44100 N=4096 history=261 slot=67 frames",
+   "value": 12.35,
+   "unit": "MiB",
+   "limit": 12.35,
+   "result": "PASS"
+  },
+  {
+   "check": "memory_loop_time_domain_period",
+   "case": "fs=44100 N=4096 max ROI",
+   "value": 0.5,
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory_history_plus_two_slots",
+   "case": "fs=48000 N=4096 history=284 slot=73 frames",
+   "value": 13.44,
+   "unit": "MiB",
+   "limit": 13.44,
+   "result": "PASS"
+  },
+  {
+   "check": "memory_loop_time_domain_period",
+   "case": "fs=48000 N=4096 max ROI",
+   "value": 0.55,
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory_history_plus_two_slots",
+   "case": "fs=88200 N=8192 history=261 slot=67 frames",
+   "value": 24.69,
+   "unit": "MiB",
+   "limit": 24.69,
+   "result": "PASS"
+  },
+  {
+   "check": "memory_loop_time_domain_period",
+   "case": "fs=88200 N=8192 max ROI",
+   "value": 1.0,
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory_history_plus_two_slots",
+   "case": "fs=96000 N=8192 history=284 slot=73 frames",
+   "value": 26.88,
+   "unit": "MiB",
+   "limit": 26.88,
+   "result": "PASS"
+  },
+  {
+   "check": "memory_loop_time_domain_period",
+   "case": "fs=96000 N=8192 max ROI",
+   "value": 1.09,
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost_model",
+   "case": "fs=44100 N=4096",
+   "value": {
+    "hop_ms": 23.22,
+    "analysis_fft_per_hop": 2,
+    "freeze_or_sustain_ifft_per_hop": 2,
+    "sustain_replace_overlap_ifft_per_hop": 4,
+    "loop_steady_state_ifft_per_hop": 0,
+    "loop_prepare_ifft_total_max_roi": 134,
+    "nlog2n_units_per_second_analysis_plus_sustain": 8467200,
+    "sustain_per_bin_ops_per_hop": 4098
+   },
+   "unit": "counts",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost_model",
+   "case": "fs=48000 N=2048",
+   "value": {
+    "hop_ms": 10.67,
+    "analysis_fft_per_hop": 2,
+    "freeze_or_sustain_ifft_per_hop": 2,
+    "sustain_replace_overlap_ifft_per_hop": 4,
+    "loop_steady_state_ifft_per_hop": 0,
+    "loop_prepare_ifft_total_max_roi": 286,
+    "nlog2n_units_per_second_analysis_plus_sustain": 8448000,
+    "sustain_per_bin_ops_per_hop": 2050
+   },
+   "unit": "counts",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost_model",
+   "case": "fs=48000 N=4096",
+   "value": {
+    "hop_ms": 21.33,
+    "analysis_fft_per_hop": 2,
+    "freeze_or_sustain_ifft_per_hop": 2,
+    "sustain_replace_overlap_ifft_per_hop": 4,
+    "loop_steady_state_ifft_per_hop": 0,
+    "loop_prepare_ifft_total_max_roi": 146,
+    "nlog2n_units_per_second_analysis_plus_sustain": 9216000,
+    "sustain_per_bin_ops_per_hop": 4098
+   },
+   "unit": "counts",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost_model",
+   "case": "fs=48000 N=8192",
+   "value": {
+    "hop_ms": 42.67,
+    "analysis_fft_per_hop": 2,
+    "freeze_or_sustain_ifft_per_hop": 2,
+    "sustain_replace_overlap_ifft_per_hop": 4,
+    "loop_steady_state_ifft_per_hop": 0,
+    "loop_prepare_ifft_total_max_roi": 76,
+    "nlog2n_units_per_second_analysis_plus_sustain": 9984000,
+    "sustain_per_bin_ops_per_hop": 8194
+   },
+   "unit": "counts",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost_model",
+   "case": "fs=96000 N=8192",
+   "value": {
+    "hop_ms": 21.33,
+    "analysis_fft_per_hop": 2,
+    "freeze_or_sustain_ifft_per_hop": 2,
+    "sustain_replace_overlap_ifft_per_hop": 4,
+    "loop_steady_state_ifft_per_hop": 0,
+    "loop_prepare_ifft_total_max_roi": 146,
+    "nlog2n_units_per_second_analysis_plus_sustain": 19968000,
+    "sustain_per_bin_ops_per_hop": 8194
+   },
+   "unit": "counts",
+   "limit": null,
+   "result": "info"
+  }
+ ]
+}

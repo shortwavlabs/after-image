@@ -1,0 +1,125 @@
+{
+ "note": "NumPy wall-clock on the machine that ran this; not a realtime indicator.",
+ "rows": [
+  {
+   "check": "python_wall_time",
+   "case": "N=2048 stft (4 s stereo)",
+   "value": 0.0054,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=2048 freeze (4 s stereo)",
+   "value": 0.0145,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=2048 loop_aligned (4 s stereo)",
+   "value": 0.0123,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=2048 sustain_mean (4 s stereo)",
+   "value": 0.0147,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=2048 sustain_scan (4 s stereo)",
+   "value": 0.0165,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=4096 stft (4 s stereo)",
+   "value": 0.0036,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=4096 freeze (4 s stereo)",
+   "value": 0.0145,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=4096 loop_aligned (4 s stereo)",
+   "value": 0.0125,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=4096 sustain_mean (4 s stereo)",
+   "value": 0.0148,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=4096 sustain_scan (4 s stereo)",
+   "value": 0.0167,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=8192 stft (4 s stereo)",
+   "value": 0.0049,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=8192 freeze (4 s stereo)",
+   "value": 0.0147,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=8192 loop_aligned (4 s stereo)",
+   "value": 0.0128,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=8192 sustain_mean (4 s stereo)",
+   "value": 0.0156,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "python_wall_time",
+   "case": "N=8192 sustain_scan (4 s stereo)",
+   "value": 0.0181,
+   "unit": "s (informational)",
+   "limit": null,
+   "result": "info"
+  }
+ ]
+}
