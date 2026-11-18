@@ -100,6 +100,12 @@ void Engine::prepare (double sampleRate, int numChannels, int /*maxBlockSize*/)
         if (f >= 20.0)
             bandOf[(size_t) k] = std::min (DisplayColumn::bands - 1, (int) (DisplayColumn::bands * std::log (f / 20.0) / std::log (fs / 40.0)));
     }
+    // bands narrower than a bin (the lowest ones) show their nearest bin instead of staying empty
+    for (int b = 0; b < DisplayColumn::bands; ++b)
+    {
+        const double centre = 20.0 * std::pow (fs / 40.0, (b + 0.5) / DisplayColumn::bands);
+        bandBin[(size_t) b] = std::clamp ((int) std::lround (centre * N / fs), 1, K - 1);
+    }
     double wsum = 0.0;
     for (auto w : anaWin) wsum += w;
     bandRef = (float) ((wsum / 2) * (wsum / 2));
@@ -271,6 +277,8 @@ void Engine::analyse() noexcept
             if (const int b = bandOf[(size_t) k]; b >= 0)
                 power[(size_t) b] = std::max (power[(size_t) b], std::norm (dst[k]));
         }
+        for (int b = 0; b < DisplayColumn::bands; ++b)
+            power[(size_t) b] = std::max (power[(size_t) b], std::norm (dst[bandBin[(size_t) b]]));
     }
     histIds[slot] = m;
 

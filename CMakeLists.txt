@@ -31,6 +31,7 @@ juce_add_plugin(AFTERIMAGE
 add_library(afterimage_shared INTERFACE)
 target_sources(afterimage_shared INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/plugin/Source/PluginProcessor.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/plugin/Source/PluginEditor.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/plugin/Source/dsp/Engine.cpp)
 target_include_directories(afterimage_shared INTERFACE plugin/Source)
 target_compile_definitions(afterimage_shared INTERFACE

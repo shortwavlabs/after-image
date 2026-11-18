@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 #include "PluginProcessor.h"
+#include "PluginEditor.h"
 
 namespace
 {
@@ -81,7 +82,7 @@ double AfterimageProcessor::getTailLengthSeconds() const
 
 juce::AudioProcessorEditor* AfterimageProcessor::createEditor()
 {
-    return new juce::GenericAudioProcessorEditor (*this);
+    return new AfterimageEditor (*this);
 }
 
 void AfterimageProcessor::getStateInformation (juce::MemoryBlock& dest)

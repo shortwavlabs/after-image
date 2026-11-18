@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // AFTERIMAGE C++ unit tests. Plain checks, no framework; exit code = number of failed checks.
 #include <PluginProcessor.h>
+#include <PluginEditor.h>
+
+#include <thread>
 
 #include <cstdio>
 #include <functional>
@@ -628,12 +631,79 @@ void testNoDenormalsAfterDecay()
     CHECK (denormals == 0);
     CHECK (rig.proc.engine().status.voices.load() == 0);
 }
+
+const char* snapshotPath = nullptr;
+
+void testEditor()
+{
+    currentTest = "development editor";
+    Rig rig (48000.0, 2, 512);
+    rig.set ("body", 0.8f);
+    rig.set ("ghost", 1.0f);
+    rig.set ("dissolve", 0.6f);
+    std::unique_ptr<AfterimageEditor> ed (dynamic_cast<AfterimageEditor*> (rig.proc.createEditor()));
+    CHECK (ed != nullptr);
+    if (ed == nullptr) return;
+
+    auto x = sine (2, 3 * 48000, 48000.0, 330.0, 0.3f);
+    auto n = noise (2, 3 * 48000, 4, 0.1f);
+    for (int c = 0; c < 2; ++c)
+        for (size_t i = 0; i < x[0].size(); ++i) x[(size_t) c][i] += n[(size_t) c][i];
+    rig.run (x, 512);
+    ed->refreshNow();
+    CHECK (ed->statusText().contains ("CAPTURE  IDLE"));
+    CHECK (ed->statusText().contains ("last capture  none"));
+
+    // a rejected selection shows its code
+    ed->select (100, 200, 100, 5000); // 2 ms: too short
+    ed->pressImprint();
+    rig.run (noise (2, 4800, 5, 0.1f), 512);
+    ed->refreshNow();
+    CHECK (ed->statusText().contains ("TOO_SHORT"));
+
+    // a valid FILTERED selection: status shows the capture the engine actually made
+    rig.set ("source", 1.0f);
+    ed->select (48000, 84000, 200, 4000);
+    ed->pressImprint();
+    rig.run (x, 512);
+    ed->refreshNow();
+    CHECK (ed->statusText().contains ("voices 1"));
+    CHECK (ed->statusText().contains ("FILTERED, selected 750.0 ms, loop period 750.0 ms (36000 samples)"));
+
+    // polled attachment: an off-thread change reaches the control only on the next poll
+    const double before = ed->knobValue (0);
+    std::thread t ([&] { auto* p = rig.proc.apvts.getParameter ("body"); p->setValueNotifyingHost (0.25f); });
+    t.join();
+    CHECK (afterimage::exactly (ed->knobValue (0), before));
+    ed->refreshNow();
+    CHECK (std::abs (ed->knobValue (0) - 0.25) < 1e-6);
+
+    if (snapshotPath != nullptr)
+    {
+        // a capture inside the visible 4 s (magenta) and a pending selection (violet), on real engine data
+        rig.set ("source", 0.0f);
+        const auto now = rig.proc.engine().samplesSeen();
+        ed->select (now - 96000, now - 60000, 20, 24000);
+        ed->pressImprint();
+        rig.run (sine (2, 24000, 48000.0, 220.0, 0.2f), 512);
+        ed->refreshNow();
+        const auto now2 = rig.proc.engine().samplesSeen();
+        ed->select (now2 - 40000, now2 - 12000, 250, 2500);
+        ed->refreshNow();
+        auto img = ed->createComponentSnapshot (ed->getLocalBounds(), true, 1.0f);
+        juce::File f (snapshotPath);
+        f.deleteFile();
+        juce::FileOutputStream os (f);
+        CHECK (juce::PNGImageFormat().writeImageToStream (img, os));
+    }
+}
 } // namespace
 
 int main (int argc, char** argv)
 {
     juce::ScopedJuceInitialiser_GUI juce;
     const char* only = argc > 1 ? argv[1] : nullptr;
+    snapshotPath = argc > 2 ? argv[2] : nullptr; // afterimage_tests editor <png>
     struct T { const char* name; void (*fn)(); };
     const T tests[] = { { "layouts", testLayouts }, { "dry", testDryPathExact }, { "bypass", testVariableBlocksAndBypass },
                         { "body", testBodyGainRamp }, { "nonfinite", testNonFinite }, { "state", testStateRestore },
@@ -642,7 +712,7 @@ int main (int argc, char** argv)
                         { "clicks", testClearReplaceClicks }, { "rapid", testRapidParameters }, { "nonfinite2", testNonFiniteNeverStored },
                         { "gain", testGainContract }, { "postroll", testPostRollSeam }, { "delay", testCaptureDelay },
                         { "statecap", testStateNeverImprints }, { "bypass2", testBypassResumesGhostFromZero },
-                        { "denormal", testNoDenormalsAfterDecay } };
+                        { "denormal", testNoDenormalsAfterDecay }, { "editor", testEditor } };
     for (auto& t : tests)
         if (only == nullptr || std::strcmp (only, t.name) == 0)
         {

@@ -246,6 +246,7 @@ private:
     std::vector<int64_t> histIds;
     std::vector<float> raw;
     std::vector<int> bandOf;
+    std::array<int, DisplayColumn::bands> bandBin {};
     float bandRef = 1.0f;
     std::array<std::vector<float>, numVoices> slotData;
     std::array<Voice, numVoices> voices;
