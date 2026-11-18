@@ -24,12 +24,13 @@ Listener: ____  Date: ____  Monitoring: ____  Level: ____
 | guitar_dist__full_spectrum__progression | | | |
 | drums__full_spectrum__progression | | | |
 | guitar_dist__full_spectrum__strategies | | | |
-| guitar_dist__full_spectrum__implementation | | | |
-| drums__full_spectrum__implementation | | | |
+| drums__full_spectrum__implementation_s1 | | | |
+| guitar_dist__full_spectrum__implementation_s1 | | | |
+| guitar_dist__full_spectrum__implementation_s3 | | | |
 | guitar__long_sustain__source | | | |
 | guitar_dist__full_spectrum__pitch | | | |
 
-## Remaining sets (24)
+## Remaining sets (29)
 
 | set | preferred | least liked | comments |
 |---|---|---|---|
@@ -42,7 +43,7 @@ Listener: ____  Date: ____  Monitoring: ____  Level: ____
 3. Progressions: is a band-ordered dissolve (lows last, or lows never) preferred to the plain crossfade you chose in P0-B?
 4. S1 vs S2 keep-low vs S3: is per-band grain behaviour (S3) worth having?
 5. Implementation sets: can the two be told apart at all? (The measurements say no.)
-6. FULL vs FILTERED with the same mode: are both wanted? Is the quieter, receding FILTERED ghost still the effect you liked?
+6. FULL vs FILTERED with the same mode: are both wanted? `filtered_split_s1_native.wav` (in the case folder, not blind) is the FILTERED render without make-up gain: is that receding level the effect you liked, or was it the unfiltered cloud sitting back at equal RMS?
 7. Pitch in the top band: none, detune or octaves?
 8. Artifacts: thinning near 250 Hz, pre-echo on drum hits, harsh peaks on the distorted chord, bass roughness?
 9. In the BODY + GHOST mixes, does the ghost help the dry signal?

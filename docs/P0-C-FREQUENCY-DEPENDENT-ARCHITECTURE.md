@@ -126,8 +126,10 @@ sum to the periodic source (the loop), and every band shares one period, so
 grains in different bands address the same source instants.
 
 Side effect, measured: the 80 ms seam crossfade sits exactly where P0-B's edge
-leakage (K2) lives. Neighbouring audio in a band buffer is −19 to −25 dB within
-20 ms of an edge before the seam and −61 to −64 dB in the first 20 ms after it.
+leakage (K2) lives. For a FULL source, neighbouring audio in a band buffer is
+−19 to −25 dB within 20 ms of an edge before the seam and −61 to −64 dB in the
+first 20 ms after it. For FILTERED selections, whose 1/6-octave feather rings
+longer, the seam helps less: −12.5 to −23.7 dB before, −33.7 to −48.2 dB after.
 
 ## 5. Grain routing and scheduling
 

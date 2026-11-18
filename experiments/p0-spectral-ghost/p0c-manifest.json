@@ -2,7 +2,7 @@
  "schema": 1,
  "phase": "P0-C",
  "code_revision": {
-  "commit": "4a4013b4539582a3adf9828d3df7eb77a98b493a",
+  "commit": "732ee585fedc686e801eb7036491211f8a73d1a5",
   "harness_dirty": false
  },
  "environment": {
@@ -938,6 +938,32 @@
    "sha256_float32": "df52ec1a7f90ad45fd08b3d15fe2d08d180b421ddb6d6241635ee7146f1027a9"
   },
   {
+   "id": "guitar/long_sustain/filtered_split_s1_native",
+   "path": "guitar/long_sustain/filtered_split_s1_native.wav",
+   "source": "guitar",
+   "source_kind": "synthetic",
+   "case": "long_sustain",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "filtered_split_s1_native",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": 1.04,
+   "capture_source": "filtered",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    849.2,
+    2060.6
+   ],
+   "roi": {
+    "t0": 2.3,
+    "t1": 3.8,
+    "low_hz": 350,
+    "high_hz": 5000
+   },
+   "sha256_float32": "e81eb5daed9f49a2995101e1f8af638a8b00299588fdfde5ffd10c18b8ede980"
+  },
+  {
    "id": "guitar/long_sustain/progression_parallel",
    "path": "guitar/long_sustain/progression_parallel.wav",
    "source": "guitar",
@@ -1352,6 +1378,32 @@
     "high_hz": 5000
    },
    "sha256_float32": "f2cee66e98be6afb2ded5bcc46bad871598c2be42e35d16e3d13ef677af3672b"
+  },
+  {
+   "id": "vocal/mid_band_rfc/filtered_split_s1_native",
+   "path": "vocal/mid_band_rfc/filtered_split_s1_native.wav",
+   "source": "vocal",
+   "source_kind": "synthetic",
+   "case": "mid_band_rfc",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "filtered_split_s1_native",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -6.52,
+   "capture_source": "filtered",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    849.2,
+    2060.6
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.8,
+    "low_hz": 350,
+    "high_hz": 5000
+   },
+   "sha256_float32": "9455409d063f0bf154fb1690c1b99aa9e8bc5351f000e6e9a3c5152b5f77a483"
   },
   {
    "id": "vocal/mid_band_rfc/progression_parallel",
@@ -2132,6 +2184,32 @@
     "high_hz": 10000
    },
    "sha256_float32": "e718447688f91b431ecb50c13f72f210a07f73c5ddf522832d3cf202fec26889"
+  },
+  {
+   "id": "synth/upper_harmonics/filtered_split_s1_native",
+   "path": "synth/upper_harmonics/filtered_split_s1_native.wav",
+   "source": "synth",
+   "source_kind": "synthetic",
+   "case": "upper_harmonics",
+   "fs": 48000,
+   "fft_size": 4096,
+   "engine": "filtered_split_s1_native",
+   "seed": 20261120,
+   "t60_seconds": 5.0,
+   "match_gain_db": -6.41,
+   "capture_source": "filtered",
+   "decomposition": "spectral",
+   "crossovers_hz": [
+    3420.0,
+    5848.0
+   ],
+   "roi": {
+    "t0": 1.0,
+    "t1": 1.75,
+    "low_hz": 2000,
+    "high_hz": 10000
+   },
+   "sha256_float32": "786c610f98fa2938d51300086dc0ca000ceeabb7af6c4fa7278e02a201c4c6a6"
   },
   {
    "id": "synth/upper_harmonics/progression_parallel",

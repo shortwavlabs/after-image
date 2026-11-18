@@ -51,6 +51,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.01,
   "low_sideband_db": -21.6
  },
  "guitar/full_spectrum/p0b_cloud": {
@@ -95,6 +96,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.94,
   "low_sideband_db": -7.0
  },
  "guitar/full_spectrum/p0b_focus": {
@@ -139,6 +141,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.89,
   "low_sideband_db": -6.8
  },
  "guitar/full_spectrum/split_s1": {
@@ -207,6 +210,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.09,
   "low_sideband_db": -16.9,
   "mix_peak_dbfs": -6.0
  },
@@ -276,6 +280,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.83,
   "low_sideband_db": -12.2
  },
  "guitar/full_spectrum/split_s3_100": {
@@ -344,6 +349,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -37.62,
   "low_sideband_db": -9.9
  },
  "guitar/full_spectrum/conv_s1": {
@@ -412,6 +418,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.63,
   "low_sideband_db": -16.2
  },
  "guitar/full_spectrum/conv_s3_100": {
@@ -480,6 +487,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -37.48,
   "low_sideband_db": -9.7
  },
  "guitar/full_spectrum/split_s1_detune": {
@@ -548,6 +556,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.1,
   "low_sideband_db": -16.9
  },
  "guitar/full_spectrum/split_s1_octaves": {
@@ -616,6 +625,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.1,
   "low_sideband_db": -16.9
  },
  "guitar/full_spectrum/split_s2_keep_025": {
@@ -684,6 +694,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.03,
   "low_sideband_db": -21.6
  },
  "guitar/full_spectrum/split_s2_keep_050": {
@@ -752,6 +763,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.24,
   "low_sideband_db": -15.1
  },
  "guitar/full_spectrum/split_s2_keep_075": {
@@ -820,6 +832,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.83,
   "low_sideband_db": -12.2
  },
  "guitar/full_spectrum/split_s2_fade_025": {
@@ -888,6 +901,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.03,
   "low_sideband_db": -21.6
  },
  "guitar/full_spectrum/split_s2_fade_050": {
@@ -956,6 +970,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.24,
   "low_sideband_db": -15.1
  },
  "guitar/full_spectrum/split_s2_fade_075": {
@@ -1024,6 +1039,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.83,
   "low_sideband_db": -10.6
  },
  "guitar/full_spectrum/split_s2_fade_100": {
@@ -1092,6 +1108,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -37.17,
   "low_sideband_db": -7.4
  },
  "guitar/full_spectrum/split_s3_025": {
@@ -1160,6 +1177,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.2,
   "low_sideband_db": -16.7
  },
  "guitar/full_spectrum/split_s3_050": {
@@ -1228,6 +1246,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.73,
   "low_sideband_db": -12.3
  },
  "guitar/full_spectrum/split_s3_075": {
@@ -1296,6 +1315,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -37.33,
   "low_sideband_db": -10.2
  },
  "guitar/full_spectrum/progression_parallel": {
@@ -1333,6 +1353,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -32.86,
   "low_sideband_db": -16.0
  },
  "guitar/full_spectrum/progression_s2_keep": {
@@ -1401,6 +1422,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -32.86,
   "low_sideband_db": -21.3,
   "mix_peak_dbfs": -6.0
  },
@@ -1470,6 +1492,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -32.86,
   "low_sideband_db": -21.3
  },
  "guitar/full_spectrum/progression_s3": {
@@ -1538,6 +1561,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -32.86,
   "low_sideband_db": -17.7
  },
  "guitar/full_spectrum/seed_to_seed_third_octave_distance_db": {
@@ -1619,6 +1643,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -34.59,
   "low_sideband_db": -21.5
  },
  "guitar/long_sustain/p0b_cloud": {
@@ -1663,6 +1688,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -35.68,
   "low_sideband_db": -7.5
  },
  "guitar/long_sustain/p0b_focus": {
@@ -1707,6 +1733,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -37.15,
   "low_sideband_db": -6.4
  },
  "guitar/long_sustain/split_s1": {
@@ -1775,6 +1802,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -35.41,
   "low_sideband_db": -17.3,
   "mix_peak_dbfs": -6.0
  },
@@ -1844,6 +1872,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -37.38,
   "low_sideband_db": -12.4
  },
  "guitar/long_sustain/split_s3_100": {
@@ -1912,6 +1941,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.24,
   "low_sideband_db": -7.2
  },
  "guitar/long_sustain/conv_s1": {
@@ -1980,6 +2010,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -35.25,
   "low_sideband_db": -16.6
  },
  "guitar/long_sustain/conv_s3_100": {
@@ -2048,6 +2079,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.41,
   "low_sideband_db": -8.3
  },
  "guitar/long_sustain/split_s1_detune": {
@@ -2116,6 +2148,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -35.41,
   "low_sideband_db": -17.3
  },
  "guitar/long_sustain/split_s1_octaves": {
@@ -2184,6 +2217,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -35.41,
   "low_sideband_db": -17.3
  },
  "guitar/long_sustain/filtered_cloud": {
@@ -2228,6 +2262,7 @@
    849.2,
    2060.6
   ],
+  "a_weighted_dbfs_first_2s": -32.31,
   "low_sideband_db": -8.0
  },
  "guitar/long_sustain/filtered_split_s1": {
@@ -2296,6 +2331,77 @@
    849.2,
    2060.6
   ],
+  "a_weighted_dbfs_first_2s": -31.84,
+  "low_sideband_db": -21.2
+ },
+ "guitar/long_sustain/filtered_split_s1_native": {
+  "finite": true,
+  "peak_dbfs": -14.13,
+  "rms_dbfs_first_2s": -33.61,
+  "native_level_db_re_roi": 0.82,
+  "match_gain_db": 1.04,
+  "crest_db": 14.07,
+  "ripple_db": 14.73,
+  "corr_early": 0.916,
+  "corr_late": 0.9,
+  "mono_compat_db": -0.36,
+  "in_band_energy_fraction": 0.999829,
+  "timbre_distance_db_re_roi": 5.55,
+  "denormals_float32": 0,
+  "sha256_float32": "e81eb5daed9f49a2995101e1f8af638a8b00299588fdfde5ffd10c18b8ede980",
+  "engine_info": {
+   "strategy": "s1",
+   "bands": [
+    {
+     "d_min": 0.0,
+     "d_max": 0.0,
+     "budget": 6,
+     "grains": 0,
+     "dropped": 0,
+     "max_active": 0
+    },
+    {
+     "d_min": 0.3535533905932738,
+     "d_max": 0.3535533905932738,
+     "budget": 10,
+     "grains": 124,
+     "dropped": 0,
+     "max_active": 5
+    },
+    {
+     "d_min": 1.0,
+     "d_max": 1.0,
+     "budget": 16,
+     "grains": 124,
+     "dropped": 0,
+     "max_active": 5
+    }
+   ],
+   "naive": false,
+   "pitch": "none",
+   "policy": "spray",
+   "max_active_total": 10,
+   "trace_readers": 3,
+   "level": "gain of split_s1"
+  },
+  "rms_db_re_trace": -0.07,
+  "changed_db_re_trace": -11.5,
+  "peak_db_re_trace": -0.21,
+  "band_period_autocorr": [
+   0.99,
+   0.766,
+   0.041
+  ],
+  "band_level_db_re_trace": [
+   -0.02,
+   -0.22,
+   -1.37
+  ],
+  "crossovers_hz": [
+   849.2,
+   2060.6
+  ],
+  "a_weighted_dbfs_first_2s": -36.13,
   "low_sideband_db": -21.2
  },
  "guitar/long_sustain/split_s2_keep_025": {
@@ -2364,6 +2470,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -34.66,
   "low_sideband_db": -21.5
  },
  "guitar/long_sustain/split_s2_keep_050": {
@@ -2432,6 +2539,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.0,
   "low_sideband_db": -15.4
  },
  "guitar/long_sustain/split_s2_keep_075": {
@@ -2500,6 +2608,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -37.38,
   "low_sideband_db": -12.4
  },
  "guitar/long_sustain/split_s2_fade_025": {
@@ -2568,6 +2677,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -34.66,
   "low_sideband_db": -21.5
  },
  "guitar/long_sustain/split_s2_fade_050": {
@@ -2636,6 +2746,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.0,
   "low_sideband_db": -15.4
  },
  "guitar/long_sustain/split_s2_fade_075": {
@@ -2704,6 +2815,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -37.34,
   "low_sideband_db": -10.7
  },
  "guitar/long_sustain/split_s2_fade_100": {
@@ -2772,6 +2884,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -37.58,
   "low_sideband_db": -7.8
  },
  "guitar/long_sustain/split_s3_025": {
@@ -2840,6 +2953,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -35.08,
   "low_sideband_db": -15.6
  },
  "guitar/long_sustain/split_s3_050": {
@@ -2908,6 +3022,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -35.82,
   "low_sideband_db": -10.9
  },
  "guitar/long_sustain/split_s3_075": {
@@ -2976,6 +3091,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.42,
   "low_sideband_db": -8.2
  },
  "guitar/long_sustain/progression_parallel": {
@@ -3013,6 +3129,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -32.15,
   "low_sideband_db": -16.5
  },
  "guitar/long_sustain/progression_s2_keep": {
@@ -3081,6 +3198,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -32.15,
   "low_sideband_db": -21.1,
   "mix_peak_dbfs": -6.0
  },
@@ -3150,6 +3268,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -32.15,
   "low_sideband_db": -21.1
  },
  "guitar/long_sustain/progression_s3": {
@@ -3218,6 +3337,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -32.15,
   "low_sideband_db": -16.6
  },
  "guitar/long_sustain/seed_to_seed_third_octave_distance_db": {
@@ -3298,7 +3418,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.86
  },
  "vocal/mid_band_rfc/p0b_cloud": {
   "finite": true,
@@ -3341,7 +3462,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.74
  },
  "vocal/mid_band_rfc/p0b_focus": {
   "finite": true,
@@ -3384,7 +3506,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.41
  },
  "vocal/mid_band_rfc/split_s1": {
   "finite": true,
@@ -3452,6 +3575,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -30.93,
   "mix_peak_dbfs": -4.58
  },
  "vocal/mid_band_rfc/split_s2_keep_100": {
@@ -3519,7 +3643,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.95
  },
  "vocal/mid_band_rfc/split_s3_100": {
   "finite": true,
@@ -3586,7 +3711,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -31.01
  },
  "vocal/mid_band_rfc/conv_s1": {
   "finite": true,
@@ -3653,7 +3779,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.95
  },
  "vocal/mid_band_rfc/conv_s3_100": {
   "finite": true,
@@ -3720,7 +3847,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -31.05
  },
  "vocal/mid_band_rfc/split_s1_detune": {
   "finite": true,
@@ -3787,7 +3915,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -31.04
  },
  "vocal/mid_band_rfc/split_s1_octaves": {
   "finite": true,
@@ -3854,7 +3983,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -31.04
  },
  "vocal/mid_band_rfc/filtered_cloud": {
   "finite": true,
@@ -3897,7 +4027,8 @@
   "crossovers_hz": [
    849.2,
    2060.6
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.71
  },
  "vocal/mid_band_rfc/filtered_split_s1": {
   "finite": true,
@@ -3964,7 +4095,77 @@
   "crossovers_hz": [
    849.2,
    2060.6
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.89
+ },
+ "vocal/mid_band_rfc/filtered_split_s1_native": {
+  "finite": true,
+  "peak_dbfs": -12.27,
+  "rms_dbfs_first_2s": -30.78,
+  "native_level_db_re_roi": 0.07,
+  "match_gain_db": -6.52,
+  "crest_db": 13.57,
+  "ripple_db": 3.78,
+  "corr_early": 0.948,
+  "corr_late": 0.932,
+  "mono_compat_db": -0.15,
+  "in_band_energy_fraction": 0.999982,
+  "timbre_distance_db_re_roi": 0.7,
+  "denormals_float32": 0,
+  "sha256_float32": "9455409d063f0bf154fb1690c1b99aa9e8bc5351f000e6e9a3c5152b5f77a483",
+  "engine_info": {
+   "strategy": "s1",
+   "bands": [
+    {
+     "d_min": 0.0,
+     "d_max": 0.0,
+     "budget": 6,
+     "grains": 0,
+     "dropped": 0,
+     "max_active": 0
+    },
+    {
+     "d_min": 0.3535533905932738,
+     "d_max": 0.3535533905932738,
+     "budget": 10,
+     "grains": 124,
+     "dropped": 0,
+     "max_active": 5
+    },
+    {
+     "d_min": 1.0,
+     "d_max": 1.0,
+     "budget": 16,
+     "grains": 124,
+     "dropped": 0,
+     "max_active": 5
+    }
+   ],
+   "naive": false,
+   "pitch": "none",
+   "policy": "spray",
+   "max_active_total": 10,
+   "trace_readers": 3,
+   "level": "gain of split_s1"
+  },
+  "rms_db_re_trace": -0.01,
+  "changed_db_re_trace": -3.3,
+  "peak_db_re_trace": 2.78,
+  "band_period_autocorr": [
+   0.959,
+   0.744,
+   -0.01
+  ],
+  "band_level_db_re_trace": [
+   -0.0,
+   0.09,
+   -0.2
+  ],
+  "crossovers_hz": [
+   849.2,
+   2060.6
+  ],
+  "a_weighted_dbfs_first_2s": -30.94
  },
  "vocal/mid_band_rfc/split_s2_keep_025": {
   "finite": true,
@@ -4031,7 +4232,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.78
  },
  "vocal/mid_band_rfc/split_s2_keep_050": {
   "finite": true,
@@ -4098,7 +4300,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.97
  },
  "vocal/mid_band_rfc/split_s2_keep_075": {
   "finite": true,
@@ -4165,7 +4368,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.95
  },
  "vocal/mid_band_rfc/split_s2_fade_025": {
   "finite": true,
@@ -4232,7 +4436,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.78
  },
  "vocal/mid_band_rfc/split_s2_fade_050": {
   "finite": true,
@@ -4299,7 +4504,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.97
  },
  "vocal/mid_band_rfc/split_s2_fade_075": {
   "finite": true,
@@ -4366,7 +4572,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.95
  },
  "vocal/mid_band_rfc/split_s2_fade_100": {
   "finite": true,
@@ -4433,7 +4640,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.95
  },
  "vocal/mid_band_rfc/split_s3_025": {
   "finite": true,
@@ -4500,7 +4708,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.74
  },
  "vocal/mid_band_rfc/split_s3_050": {
   "finite": true,
@@ -4567,7 +4776,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.74
  },
  "vocal/mid_band_rfc/split_s3_075": {
   "finite": true,
@@ -4634,7 +4844,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -30.84
  },
  "vocal/mid_band_rfc/progression_parallel": {
   "finite": true,
@@ -4670,7 +4881,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -27.37
  },
  "vocal/mid_band_rfc/progression_s2_keep": {
   "finite": true,
@@ -4738,6 +4950,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -27.37,
   "mix_peak_dbfs": -3.31
  },
  "vocal/mid_band_rfc/progression_s2_fade": {
@@ -4805,7 +5018,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -27.37
  },
  "vocal/mid_band_rfc/progression_s3": {
   "finite": true,
@@ -4872,7 +5086,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -27.37
  },
  "vocal/mid_band_rfc/seed_to_seed_third_octave_distance_db": {
   "s1": 0.64,
@@ -4941,7 +5156,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -40.74
  },
  "drums/full_spectrum/p0b_cloud": {
   "finite": true,
@@ -4984,7 +5200,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -42.7
  },
  "drums/full_spectrum/p0b_focus": {
   "finite": true,
@@ -5027,7 +5244,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -43.54
  },
  "drums/full_spectrum/split_s1": {
   "finite": true,
@@ -5095,6 +5313,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -39.1,
   "mix_peak_dbfs": -6.0
  },
  "drums/full_spectrum/split_s2_keep_100": {
@@ -5162,7 +5381,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -38.77
  },
  "drums/full_spectrum/split_s3_100": {
   "finite": true,
@@ -5229,7 +5449,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -39.59
  },
  "drums/full_spectrum/conv_s1": {
   "finite": true,
@@ -5296,7 +5517,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -39.14
  },
  "drums/full_spectrum/conv_s3_100": {
   "finite": true,
@@ -5363,7 +5585,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -39.51
  },
  "drums/full_spectrum/split_s1_detune": {
   "finite": true,
@@ -5430,7 +5653,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -39.19
  },
  "drums/full_spectrum/split_s1_octaves": {
   "finite": true,
@@ -5497,7 +5721,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -38.45
  },
  "drums/full_spectrum/split_s2_keep_025": {
   "finite": true,
@@ -5564,7 +5789,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -39.51
  },
  "drums/full_spectrum/split_s2_keep_050": {
   "finite": true,
@@ -5631,7 +5857,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -39.0
  },
  "drums/full_spectrum/split_s2_keep_075": {
   "finite": true,
@@ -5698,7 +5925,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -38.77
  },
  "drums/full_spectrum/split_s2_fade_025": {
   "finite": true,
@@ -5765,7 +5993,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -39.51
  },
  "drums/full_spectrum/split_s2_fade_050": {
   "finite": true,
@@ -5832,7 +6061,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -39.0
  },
  "drums/full_spectrum/split_s2_fade_075": {
   "finite": true,
@@ -5899,7 +6129,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -39.15
  },
  "drums/full_spectrum/split_s2_fade_100": {
   "finite": true,
@@ -5966,7 +6197,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -40.29
  },
  "drums/full_spectrum/split_s3_025": {
   "finite": true,
@@ -6033,7 +6265,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -40.52
  },
  "drums/full_spectrum/split_s3_050": {
   "finite": true,
@@ -6100,7 +6333,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -40.08
  },
  "drums/full_spectrum/split_s3_075": {
   "finite": true,
@@ -6167,7 +6401,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -39.72
  },
  "drums/full_spectrum/progression_parallel": {
   "finite": true,
@@ -6203,7 +6438,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.42
  },
  "drums/full_spectrum/progression_s2_keep": {
   "finite": true,
@@ -6271,6 +6507,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.42,
   "mix_peak_dbfs": -4.57
  },
  "drums/full_spectrum/progression_s2_fade": {
@@ -6338,7 +6575,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.42
  },
  "drums/full_spectrum/progression_s3": {
   "finite": true,
@@ -6405,7 +6643,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.42
  },
  "drums/full_spectrum/seed_to_seed_third_octave_distance_db": {
   "s1": 0.74,
@@ -6485,7 +6724,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.71
  },
  "synth/upper_harmonics/p0b_cloud": {
   "finite": true,
@@ -6528,7 +6768,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.84
  },
  "synth/upper_harmonics/p0b_focus": {
   "finite": true,
@@ -6571,7 +6812,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.58
  },
  "synth/upper_harmonics/split_s1": {
   "finite": true,
@@ -6639,6 +6881,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -36.9,
   "mix_peak_dbfs": -5.64
  },
  "synth/upper_harmonics/split_s2_keep_100": {
@@ -6706,7 +6949,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.61
  },
  "synth/upper_harmonics/split_s3_100": {
   "finite": true,
@@ -6773,7 +7017,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.74
  },
  "synth/upper_harmonics/conv_s1": {
   "finite": true,
@@ -6840,7 +7085,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.88
  },
  "synth/upper_harmonics/conv_s3_100": {
   "finite": true,
@@ -6907,7 +7153,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.68
  },
  "synth/upper_harmonics/split_s1_detune": {
   "finite": true,
@@ -6974,7 +7221,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.87
  },
  "synth/upper_harmonics/split_s1_octaves": {
   "finite": true,
@@ -7041,7 +7289,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.92
  },
  "synth/upper_harmonics/filtered_cloud": {
   "finite": true,
@@ -7084,7 +7333,8 @@
   "crossovers_hz": [
    3420.0,
    5848.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -29.45
  },
  "synth/upper_harmonics/filtered_split_s1": {
   "finite": true,
@@ -7151,7 +7401,77 @@
   "crossovers_hz": [
    3420.0,
    5848.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -29.46
+ },
+ "synth/upper_harmonics/filtered_split_s1_native": {
+  "finite": true,
+  "peak_dbfs": -29.77,
+  "rms_dbfs_first_2s": -48.61,
+  "native_level_db_re_roi": 0.0,
+  "match_gain_db": -6.41,
+  "crest_db": 14.06,
+  "ripple_db": 2.64,
+  "corr_early": 0.015,
+  "corr_late": 0.012,
+  "mono_compat_db": -2.93,
+  "in_band_energy_fraction": 0.999996,
+  "timbre_distance_db_re_roi": 0.63,
+  "denormals_float32": 0,
+  "sha256_float32": "786c610f98fa2938d51300086dc0ca000ceeabb7af6c4fa7278e02a201c4c6a6",
+  "engine_info": {
+   "strategy": "s1",
+   "bands": [
+    {
+     "d_min": 0.0,
+     "d_max": 0.0,
+     "budget": 6,
+     "grains": 0,
+     "dropped": 0,
+     "max_active": 0
+    },
+    {
+     "d_min": 0.3535533905932738,
+     "d_max": 0.3535533905932738,
+     "budget": 10,
+     "grains": 124,
+     "dropped": 0,
+     "max_active": 5
+    },
+    {
+     "d_min": 1.0,
+     "d_max": 1.0,
+     "budget": 16,
+     "grains": 124,
+     "dropped": 0,
+     "max_active": 5
+    }
+   ],
+   "naive": false,
+   "pitch": "none",
+   "policy": "spray",
+   "max_active_total": 10,
+   "trace_readers": 3,
+   "level": "gain of split_s1"
+  },
+  "rms_db_re_trace": -0.01,
+  "changed_db_re_trace": -15.8,
+  "peak_db_re_trace": 0.07,
+  "band_period_autocorr": [
+   0.989,
+   0.791,
+   0.095
+  ],
+  "band_level_db_re_trace": [
+   -0.0,
+   -0.13,
+   -0.86
+  ],
+  "crossovers_hz": [
+   3420.0,
+   5848.0
+  ],
+  "a_weighted_dbfs_first_2s": -47.39
  },
  "synth/upper_harmonics/split_s2_keep_025": {
   "finite": true,
@@ -7218,7 +7538,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.74
  },
  "synth/upper_harmonics/split_s2_keep_050": {
   "finite": true,
@@ -7285,7 +7606,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.89
  },
  "synth/upper_harmonics/split_s2_keep_075": {
   "finite": true,
@@ -7352,7 +7674,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.61
  },
  "synth/upper_harmonics/split_s2_fade_025": {
   "finite": true,
@@ -7419,7 +7742,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.74
  },
  "synth/upper_harmonics/split_s2_fade_050": {
   "finite": true,
@@ -7486,7 +7810,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.89
  },
  "synth/upper_harmonics/split_s2_fade_075": {
   "finite": true,
@@ -7553,7 +7878,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.72
  },
  "synth/upper_harmonics/split_s2_fade_100": {
   "finite": true,
@@ -7620,7 +7946,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.92
  },
  "synth/upper_harmonics/split_s3_025": {
   "finite": true,
@@ -7687,7 +8014,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.75
  },
  "synth/upper_harmonics/split_s3_050": {
   "finite": true,
@@ -7754,7 +8082,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.77
  },
  "synth/upper_harmonics/split_s3_075": {
   "finite": true,
@@ -7821,7 +8150,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -36.77
  },
  "synth/upper_harmonics/progression_parallel": {
   "finite": true,
@@ -7857,7 +8187,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -33.23
  },
  "synth/upper_harmonics/progression_s2_keep": {
   "finite": true,
@@ -7925,6 +8256,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -33.23,
   "mix_peak_dbfs": -5.46
  },
  "synth/upper_harmonics/progression_s2_fade": {
@@ -7992,7 +8324,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -33.23
  },
  "synth/upper_harmonics/progression_s3": {
   "finite": true,
@@ -8059,7 +8392,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -33.23
  },
  "synth/upper_harmonics/seed_to_seed_third_octave_distance_db": {
   "s1": 0.24,
@@ -8128,7 +8462,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.2
  },
  "guitar_dist/full_spectrum/p0b_cloud": {
   "finite": true,
@@ -8171,7 +8506,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.59
  },
  "guitar_dist/full_spectrum/p0b_focus": {
   "finite": true,
@@ -8214,7 +8550,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.38
  },
  "guitar_dist/full_spectrum/split_s1": {
   "finite": true,
@@ -8282,6 +8619,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -35.39,
   "mix_peak_dbfs": -5.43
  },
  "guitar_dist/full_spectrum/split_s2_keep_100": {
@@ -8349,7 +8687,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.38
  },
  "guitar_dist/full_spectrum/split_s3_100": {
   "finite": true,
@@ -8416,7 +8755,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.83
  },
  "guitar_dist/full_spectrum/conv_s1": {
   "finite": true,
@@ -8483,7 +8823,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.7
  },
  "guitar_dist/full_spectrum/conv_s3_100": {
   "finite": true,
@@ -8550,7 +8891,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.83
  },
  "guitar_dist/full_spectrum/split_s1_detune": {
   "finite": true,
@@ -8617,7 +8959,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.39
  },
  "guitar_dist/full_spectrum/split_s1_octaves": {
   "finite": true,
@@ -8684,7 +9027,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.41
  },
  "guitar_dist/full_spectrum/split_s2_keep_025": {
   "finite": true,
@@ -8751,7 +9095,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.28
  },
  "guitar_dist/full_spectrum/split_s2_keep_050": {
   "finite": true,
@@ -8818,7 +9163,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.42
  },
  "guitar_dist/full_spectrum/split_s2_keep_075": {
   "finite": true,
@@ -8885,7 +9231,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.38
  },
  "guitar_dist/full_spectrum/split_s2_fade_025": {
   "finite": true,
@@ -8952,7 +9299,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.28
  },
  "guitar_dist/full_spectrum/split_s2_fade_050": {
   "finite": true,
@@ -9019,7 +9367,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.42
  },
  "guitar_dist/full_spectrum/split_s2_fade_075": {
   "finite": true,
@@ -9086,7 +9435,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.36
  },
  "guitar_dist/full_spectrum/split_s2_fade_100": {
   "finite": true,
@@ -9153,7 +9503,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.61
  },
  "guitar_dist/full_spectrum/split_s3_025": {
   "finite": true,
@@ -9220,7 +9571,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.37
  },
  "guitar_dist/full_spectrum/split_s3_050": {
   "finite": true,
@@ -9287,7 +9639,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.61
  },
  "guitar_dist/full_spectrum/split_s3_075": {
   "finite": true,
@@ -9354,7 +9707,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -35.8
  },
  "guitar_dist/full_spectrum/progression_parallel": {
   "finite": true,
@@ -9390,7 +9744,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -31.77
  },
  "guitar_dist/full_spectrum/progression_s2_keep": {
   "finite": true,
@@ -9458,6 +9813,7 @@
    250.0,
    2000.0
   ],
+  "a_weighted_dbfs_first_2s": -31.77,
   "mix_peak_dbfs": -5.23
  },
  "guitar_dist/full_spectrum/progression_s2_fade": {
@@ -9525,7 +9881,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -31.77
  },
  "guitar_dist/full_spectrum/progression_s3": {
   "finite": true,
@@ -9592,7 +9949,8 @@
   "crossovers_hz": [
    250.0,
    2000.0
-  ]
+  ],
+  "a_weighted_dbfs_first_2s": -31.77
  },
  "guitar_dist/full_spectrum/seed_to_seed_third_octave_distance_db": {
   "s1": 0.46,

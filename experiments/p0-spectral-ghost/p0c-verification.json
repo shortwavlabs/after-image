@@ -1,8 +1,8 @@
 {
  "summary": {
-  "PASS": 66,
+  "PASS": 69,
   "FAIL": 0,
-  "info": 167
+  "info": 173
  },
  "rows": [
   {
@@ -740,6 +740,30 @@
    "unit": "grains",
    "limit": null,
    "result": "info"
+  },
+  {
+   "check": "bounded",
+   "case": "s2_keep at DISSOLVE 1: peak re source peak, against the analytic ceiling +29.2 dB",
+   "value": 5.21,
+   "unit": "dB",
+   "limit": "analytic ceiling",
+   "result": "PASS"
+  },
+  {
+   "check": "bounded",
+   "case": "s2_fade at DISSOLVE 1: peak re source peak, against the analytic ceiling +29.2 dB",
+   "value": 6.13,
+   "unit": "dB",
+   "limit": "analytic ceiling",
+   "result": "PASS"
+  },
+  {
+   "check": "bounded",
+   "case": "s3 at DISSOLVE 1: peak re source peak, against the analytic ceiling +29.2 dB",
+   "value": 3.41,
+   "unit": "dB",
+   "limit": "analytic ceiling",
+   "result": "PASS"
   },
   {
    "check": "polyphony",
@@ -1625,6 +1649,54 @@
    "check": "edge_leak",
    "case": "FULL source, high band, after the 80 ms seam crossfade: whole periodic buffer / first 20 ms",
    "value": "-85.4 / -63.8",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "edge_leak",
+   "case": "FILTERED source 350-5000 Hz: neighbour audio re selected audio, whole buffer / within 20 ms of an edge",
+   "value": "-34.9 / -23.7",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "edge_leak",
+   "case": "FILTERED source 350-5000 Hz, after the 80 ms seam crossfade: whole periodic buffer / first 20 ms / 20-80 ms",
+   "value": "-59.6 / -43.2 / -57.1",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "edge_leak",
+   "case": "FILTERED source 1000-2000 Hz: neighbour audio re selected audio, whole buffer / within 20 ms of an edge",
+   "value": "-32.7 / -22.0",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "edge_leak",
+   "case": "FILTERED source 1000-2000 Hz, after the 80 ms seam crossfade: whole periodic buffer / first 20 ms / 20-80 ms",
+   "value": "-64.7 / -48.2 / -72.3",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "edge_leak",
+   "case": "FILTERED source 100-200 Hz: neighbour audio re selected audio, whole buffer / within 20 ms of an edge",
+   "value": "-24.7 / -12.5",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "edge_leak",
+   "case": "FILTERED source 100-200 Hz, after the 80 ms seam crossfade: whole periodic buffer / first 20 ms / 20-80 ms",
+   "value": "-49.3 / -33.7 / -44.7",
    "unit": "dB",
    "limit": null,
    "result": "info"

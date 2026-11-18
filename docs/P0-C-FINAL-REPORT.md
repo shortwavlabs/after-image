@@ -18,10 +18,10 @@ Every number is measured; nothing here says how anything sounds. Sections marked
 | 3. DISSOLVE moves bands independently without discontinuities | **PASS** | monotonic mappings; loudness steps ≤ 0.26 dB; worst crossover dip 1.27 dB (limit 1.5) |
 | 4. Deterministic and bounded | **PASS** | bit-identical reruns; 0 non-finite; at most 15 of 32 grains at defaults, budgets hold under 8× overload |
 | 5. P0-A and P0-B verification intact | **PASS** | their `verification.json` and `metrics.json` files regenerate byte-identical; no P0-A/P0-B source file was edited |
-| 6. Reproducible blind pack against granular and multiband baselines | **PASS** | 33 blind sets, key outside the set folders |
+| 6. Reproducible blind pack against granular and multiband baselines | **PASS** | 39 blind sets, key outside the set folders |
 | 7. Headroom, stereo, CPU/memory measured or bounded | **PASS** | §10, §11 |
 | **Overall technical verdict** | **PASS** | |
-| SPLIT is distinguishable from a conventional multiband granulator | **NOT SUPPORTED** | §8: the two renders are 0.17–0.45 dB apart in third-octave spectrum |
+| SPLIT is distinguishable from a conventional multiband granulator | **NOT SUPPORTED** | §8: the two renders are 0.17–0.45 dB apart in long-term third-octave spectrum and ≤ 0.26 dB in level. That is all this rests on: their transient and phase differences are measured (§5) but not judged by ear |
 | Realtime feasibility | **NOT ASSESSED** | counts only; capture work is 6× P0-B's |
 | Musical value | **NOT ASSESSED** | needs the owner's ears (§13) |
 
@@ -102,7 +102,7 @@ Cross-machine identity is untested.
 ## 4. Test results and threshold provenance
 
 **158 tests pass** (133 from P0-A/P0-B, unchanged, plus 25 new). **P0-C
-verification: 66 PASS, 0 FAIL, 167 informational rows.**
+verification: 69 PASS, 0 FAIL, 173 informational rows.**
 
 ### Provenance
 
@@ -113,6 +113,9 @@ on the first formal run**, so no algorithm was adjusted against them afterwards.
 One design decision did precede that run: the two-mask scheme (D1) was adopted
 because the analysis predicted the one-mask scheme would fail the 1.5 dB limit.
 That prediction was then confirmed by measuring the rejected scheme.
+
+Three PASS rows were added after review ("DISSOLVE 1 is bounded"). They compare
+the measured peak with an analytic ceiling, not with a new tuned constant.
 
 Two limits could not have failed and are reported as such: the low-partial pitch
 row and the low-band part of the sideband row, because S1's lowest band is TRACE
@@ -135,6 +138,7 @@ below 400 Hz, including the crossover transition where grains are present.
 | Loudness step between settings 0.05 apart / range, stationary material | 0.26 / 0.96 dB | 1.0 / 3.0 dB |
 | Simultaneous grains, all bands | 15 | 32 |
 | Per-band budget under 8× density (6 / 10 / 16) | 6 / 10 / 16 | budget |
+| S2 / S3 at DISSOLVE 1: peak re source peak | +6.1 dB | analytic ceiling +29.2 dB |
 | Same seed → same hash, other seed → different | true | true |
 | "Assume coherent" policy at zero spray | +0.04 dB | +0.5 dB |
 | Dual-mono source through S1 / S2 / S3: mono compatibility | −0.82 dB | ≥ −3.02 dB |
@@ -196,6 +200,9 @@ Measured conclusions:
   granulating bass at all, not of the grain length tried here.
 - **The benefit is the crossover, not the spectrum.** The conventional S1 is
   within 0.5 dB of the spectral one.
+- The 0.83 (not 1.00) for S2 keep-low's low band is the measurement, not the
+  band: the analysis band is a brick wall at 250 Hz, which includes half of the
+  crossover transition, where the fully dissolved mid band's grains are.
 - No pitch drift anywhere: median frequency of the lowest partial stays within
   4 cents of TRACE in every render (the *spread* is what grows).
 
@@ -243,11 +250,24 @@ Measured conclusions:
 - **S2's progression is band-ordered as designed**: at D = 0.5 the top band is
   gone, the mid band is half, the low band is intact (0.92 / 0.48 / 0.03 on the
   guitar).
-- Loudness through DISSOLVE is flat for all three (≤ 0.26 dB per 0.05 step,
-  ≤ 0.96 dB over the range). The parallel crossfade is equal-power, so SPLIT
-  does not itself produce the "receding" level the owner liked in the
-  unfiltered cloud; that came from the MEMORY envelope and the comparison's
-  level matching, and is preserved here unchanged.
+- Loudness through DISSOLVE is flat for all three in RMS (≤ 0.26 dB per 0.05
+  step, ≤ 0.96 dB over the range): the per-band crossfade is equal-power.
+
+### S2 and S3 across DISSOLVE (guitar_dist/full_spectrum)
+
+Low / mid / high band still the loop, and how much of the ghost has changed:
+
+| DISSOLVE | S2 keep-low | S2 fade-low | S3 |
+|---|---|---|---|
+| 0.25 | 1.00 / 0.99 / 0.31, −14.7 dB | same | 0.85 / 0.85 / 0.85, −8.1 dB |
+| 0.50 | 0.94 / 0.46 / 0.02, −4.3 dB | same | 0.49 / 0.47 / 0.50, −2.2 dB |
+| 0.75 | 0.86 / −0.06 / 0.00, +0.3 dB | 0.66 / −0.05 / 0.00, +0.7 dB | 0.14 / 0.12 / 0.14, +1.0 dB |
+| 1.00 | 0.86 / −0.06 / 0.00, +0.3 dB | 0.01 / −0.04 / 0.00, +3.0 dB | 0.01 / 0.00 / 0.00, +3.1 dB |
+
+S2 disperses the bands in order (top first), S3 all together. **S2 keep-low has
+nothing left to do above DISSOLVE 0.7**: its top and mid bands are fully
+dissolved by then and its low band never moves, so the last 30 % of the control
+is dead (K11).
 
 *Hypothesis:* S1 and S2 keep-low are the candidates for "weight stays, top
 shimmers". Whether the dispersed top band is audible enough over an intact low
@@ -315,10 +335,32 @@ strategy where the grains themselves differ by band.
   (material and crossover placement). That is unavoidable if both are to have
   three populated bands; it is recorded per render in the manifest.
 - FILTERED ghosts are natively quieter (−4.6 and −18.1 dB on the guitar and
-  synth selections). The pack level-matches every file and records the gain
-  applied (+5.3 and +11.5 dB against +1.0 and −6.4 dB for FULL). In a product,
-  FILTERED would simply be quieter unless compensated; the owner asked that
-  receding level not be "fixed" automatically, so nothing compensates here.
+  synth selections). **The blind sets compensate for that**: every file is
+  level-matched, with +5.3 and +11.5 dB applied to the FILTERED renders against
+  +1.0 and −6.4 dB for FULL (gains are in the manifest). The engine itself
+  compensates nothing. To hear the uncompensated relationship, each band-limited
+  case also has `filtered_split_s1_native.wav`, which is the FILTERED render
+  with FULL's gain: it sits 4.2 dB (guitar) and 17.9 dB (synth) below
+  `split_s1.wav`, as it would in a product without make-up gain.
+
+### A possible account of the "receding" unfiltered cloud
+
+The owner preferred the unfiltered cloud in P0-B's ON/OFF sets and described its
+level as dropping. All three files in those sets shared one envelope and one RMS
+match, so neither explains the difference. An A-weighted level (a rough loudness
+proxy that discounts bass) does separate them. At matched RMS, in this pack:
+
+| Case | FULL cloud, A-weighted | FILTERED cloud, A-weighted | Difference |
+|---|---:|---:|---:|
+| guitar/long_sustain | −35.7 dBFS | −32.3 dBFS | FULL 3.4 dB lower |
+| synth/upper_harmonics | −36.8 dBFS | −29.5 dBFS | FULL 7.4 dB lower |
+| vocal/mid_band_rfc | −30.7 dBFS | −30.7 dBFS | none |
+
+A full-band ghost carries bass that counts fully toward RMS and little toward
+loudness, so RMS matching leaves it quieter to the ear than a band-limited one.
+*Hypothesis:* that offset is what was heard as the unfiltered cloud sitting
+further back. It is a property of comparing at equal RMS, not of the engine, and
+nothing here changes it.
 
 ## 10. Headroom, stereo and aliasing
 
@@ -440,15 +482,27 @@ listening question (`__pitch` sets).
 | K5 | No anti-aliasing on upward transposition | full-level alias above fs/4 |
 | K6 | Six band buffers and six reconstructions per capture | §11 |
 | K7 | Top band holds little energy on most fixtures | 0.4–18 % |
-| K8 | Edge leakage (P0-B K2) per band buffer | −19 to −25 dB within 20 ms of an edge before the seam; **−61 to −64 dB after it** |
+| K8 | Edge leakage (P0-B K2) | FULL-source bands: −19 to −25 dB before the seam, −61 to −64 dB after. FILTERED selections: −12.5 to −23.7 dB before, −33.7 to −48.2 dB after |
 | K9 | Crossovers, width, band count, S1 amounts and S3 settings were chosen without listening | architecture §6 |
 | K10 | Synthetic sources only | D8; the real-recording gate is still open |
+| K11 | S2 keep-low stops changing at DISSOLVE 0.7 | §7 |
 
-K8 is an improvement worth stating: SPLIT's band buffers do leak neighbouring
-audio at their edges, but the leak falls inside the 80 ms seam crossfade, which
-attenuates it by about 40 dB. The same is true of P0-B's periodic buffers; no
-edge guard was needed and the selection was not shortened. When bands are
-unmodified the leaks cancel in the sum (−174 dB).
+K8 in full. SPLIT does not make P0-B's edge leakage worse, and the seam
+crossfade (which sits exactly where the leak is) reduces it, by an amount that
+depends on how long the mask rings:
+
+| Buffer | Leak within 20 ms of an edge, before the seam | First 20 ms after the seam | 20–80 ms after |
+|---|---:|---:|---:|
+| FULL source, SPLIT bands (1-octave transitions) | −19 to −25 dB | −61 to −64 dB | — |
+| FILTERED 350–5000 Hz (1/6-octave feather) | −23.7 dB | −43.2 dB | −57.1 dB |
+| FILTERED 1000–2000 Hz | −22.0 dB | −48.2 dB | −72.3 dB |
+| FILTERED 100–200 Hz | −12.5 dB | −33.7 dB | −44.7 dB |
+
+So the seam is an effective bounded edge guard for SPLIT's own bands and a
+partial one for FILTERED selections: a narrow, low selection still carries
+neighbouring audio at −34 dB at the start of its loop. P0-B's K2 is reduced, not
+closed. The selection is not shortened by any of this. When bands are unmodified
+their leaks cancel in the sum (−174 dB).
 
 Not attempted: per-bin dissolve amounts (flat at crossovers with two buffers but
 unusable under a moving DISSOLVE), more than five bands, structural morph inside
@@ -458,7 +512,7 @@ realtime mechanics.
 ## 13. Blind listening instructions
 
 Renders are local and git-ignored:
-`experiments/p0-spectral-ghost/renders/p0c/` (242 WAVs, 583 MB, 48 kHz float32).
+`experiments/p0-spectral-ghost/renders/p0c/` (263 WAVs, 618 MB, 48 kHz float32).
 The P0-B pack in `renders/p0b/` was not touched.
 
 Score in `listening-notes-p0c.md` before opening
@@ -467,7 +521,7 @@ are matched to −23 dBFS RMS over their first 2 s before the MEMORY envelope; t
 gain applied to each is in `p0c-manifest.json`. `reference_roi.wav` is the
 selected audio played once.
 
-There are 33 sets. A suggested first pass of nine, about 30 minutes:
+There are 39 sets. A suggested first pass of ten, about 30 minutes:
 
 1. **`guitar_dist__full_spectrum__cloud_vs_split`** and
    **`guitar__long_sustain__cloud_vs_split`**: CLOUD, FOCUS and SPLIT S1. *Does
@@ -478,10 +532,15 @@ There are 33 sets. A suggested first pass of nine, about 30 minutes:
    *Is any of them better than the plain crossfade?*
 3. **`guitar_dist__full_spectrum__strategies`**: S1, S2 keep-low and S3 at
    full dissolve.
-4. **`guitar_dist__full_spectrum__implementation`** and
-   **`drums__full_spectrum__implementation`**: spectral versus conventional
-   multiband. *Can you tell them apart at all?* The measurements say no.
-5. **`guitar__long_sustain__source`**: FULL versus FILTERED, same mode.
+4. **`drums__full_spectrum__implementation_s1`**,
+   **`guitar_dist__full_spectrum__implementation_s1`** and
+   **`guitar_dist__full_spectrum__implementation_s3`**: spectral versus
+   conventional multiband. The S1 pairs are the ones that carry TRACE bands,
+   where the two differ in phase and transient ringing; drums are the hardest
+   case. *Can you tell them apart at all?* The long-term spectrum says no.
+5. **`guitar__long_sustain__source`**: FULL versus FILTERED, same mode, level
+   matched. Then compare `split_s1.wav` with `filtered_split_s1_native.wav` in
+   the case folder for the uncompensated level.
 6. **`guitar_dist__full_spectrum__pitch`**: none, detune, octave jumps in the
    top band only.
 
