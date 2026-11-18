@@ -9,36 +9,17 @@ Target: better than -90 dB, both for float64 spectra and for complex64 spectra
 """
 import numpy as np
 import pytest
-from scipy.signal import ShortTimeFFT, chirp
+from scipy.signal import ShortTimeFFT
 
 from p0 import stft as S
 from p0.metrics import error_db, is_finite
+from p0.verify import test_signals
 
 TARGET_DB = -90.0
 GRID = [(fs, N) for fs in S.SAMPLE_RATES for N in S.FFT_SIZES]
 
 
-def signals(fs, N):
-    rng = np.random.default_rng(1234)
-    L = 3 * N + 777  # deliberately not a multiple of the hop
-    t = np.arange(L) / fs
-    imp = {}
-    for pos in (0, 1, S.hop(N) - 1, S.hop(N), N, L // 2, L - 1):
-        s = np.zeros(L)
-        s[pos] = 1.0
-        imp[f"impulse@{pos}"] = s
-    noise = rng.standard_normal(L) * 0.25
-    return {
-        **imp,
-        "silence": np.zeros(L),
-        "dc": np.full(L, 0.5),
-        "sine_1k": 0.5 * np.sin(2 * np.pi * 1000 * t),
-        "sine_offbin": 0.5 * np.sin(2 * np.pi * 441.37 * t + 0.3),
-        "chirp": 0.5 * chirp(t, 20, t[-1], 0.45 * fs, method="logarithmic"),
-        "noise": noise,
-        "stereo": np.stack([noise, 0.5 * np.sin(2 * np.pi * 220 * t)], axis=1),
-        "stereo_antiphase": np.stack([noise, -noise], axis=1),
-    }
+signals = test_signals
 
 
 def test_wola_gain_is_exact():
