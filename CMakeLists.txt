@@ -17,7 +17,7 @@ FetchContent_MakeAvailable(JUCE)
 juce_add_plugin(AFTERIMAGE
     COMPANY_NAME "Shortwav Labs"
     BUNDLE_ID com.shortwavlabs.afterimage
-    PLUGIN_MANUFACTURER_CODE Swlb
+    PLUGIN_MANUFACTURER_CODE SwLb
     PLUGIN_CODE Aftr
     FORMATS AU VST3 Standalone
     PRODUCT_NAME "AFTERIMAGE"
@@ -38,7 +38,12 @@ target_compile_definitions(afterimage_shared INTERFACE
     JUCE_WEB_BROWSER=0
     JUCE_USE_CURL=0
     JUCE_VST3_CAN_REPLACE_VST2=0
-    JUCE_DISPLAY_SPLASH_SCREEN=0)
+    JUCE_DISPLAY_SPLASH_SCREEN=0
+    # audio codecs and WebP are not used; leaving them out keeps their code out of the binaries
+    JUCE_USE_FLAC=0
+    JUCE_USE_OGGVORBIS=0
+    JUCE_USE_OPUS=0
+    JUCE_USE_WEBP=0)
 target_link_libraries(afterimage_shared INTERFACE
     juce::juce_audio_utils juce::juce_dsp
     juce::juce_recommended_config_flags juce::juce_recommended_lto_flags juce::juce_recommended_warning_flags)
