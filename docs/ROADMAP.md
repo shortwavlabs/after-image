@@ -2,16 +2,24 @@
 
 **Start:** 2026-11-18. **Submission cutoff:** confirm the current official Jam page before release; initial working target is Jan 2027. This schedule is a planning proposal, not evidence of completed work.
 
+> **Status update (2026-11-18):** offline research P0-A, P0-B, P0-C and real-audio qualification is complete and consolidated in [RESEARCH-CONSOLIDATION.md](RESEARCH-CONSOLIDATION.md). The GHOST is now **granular** (CLOUD core engine, FOCUS later, GLITCH experimental) over a captured buffer, with a parallel TRACE → CLOUD DISSOLVE and FULL / FILTERED SOURCE. Where this document describes a spectral-only ghost, that text is kept for history and is superseded by the consolidation record and `P1-A-REALTIME-ARCHITECTURE.md` (added with P1-A on `feature/p1a-realtime-core`).
+
 ## Phase 0 — Sonic feasibility (highest priority)
 
-- [ ] Commit controlled experiment harness and four properly attributed dry example recordings.
-- [ ] Implement offline complex-STFT capture for region selections.
-- [ ] Compare WOLA loop/crossfade against phase-continuous spectral sustain on same input.
-- [ ] Export documented A/B WAVs for guitar, voice, drums, synth.
-- [ ] Validate no NaN, bounded peak, no obvious capture/clear clicks, chosen approach musically useful.
-- [ ] **Go/no-go:** if ghost only sounds like a poor spectral freeze, change the sound engine before making a UI.
+**Done 2026-11-18** as P0-A, P0-B, P0-C and real-audio qualification (shortwavlabs/after-image#2–#5). The checklist below is the original plan, ticked where it was met; two items were not met as written and say so.
 
-## Phase 1 — Host skeleton and realtime safety
+- [x] Commit controlled experiment harness. *Not met:* no recordings are committed; 12 local Freesound files have unknown licences (blocker B11).
+- [x] Implement offline complex-STFT capture for region selections.
+- [x] Compare WOLA loop/crossfade against phase-continuous spectral sustain on same input (P0-A); then granular (P0-B) and multiband (P0-C).
+- [x] Export documented A/B WAVs for guitar, voice, drums, synth (synthetic and real; WAVs git-ignored).
+- [x] Validate no NaN and chosen approach musically useful (owner listening, consolidation §2). *Not met:* bounded peak at the product output is open (B3, B4).
+- [x] **Go/no-go:** the engine was changed — granular CLOUD was preferred over the spectral loop and freeze.
+
+## Phase 1 — P1-A realtime foundation (current)
+
+Scope and gates: `P1-A-REALTIME-ARCHITECTURE.md` (added with P1-A on `feature/p1a-realtime-core`), results: `P1-A-QUALIFICATION.md` (same branch). JUCE shell and zero-latency BODY, C++ STFT history and capture, CLOUD with parallel DISSOLVE, bounded capture scheduling, production gain contract, C++ tests and Python parity, a minimal development UI. FOCUS and GLITCH follow once CLOUD is realtime-qualified. The original Phase 1 checklist follows.
+
+### Original Phase 1 checklist
 
 - [x] Select and record project/framework licensing: `AGPL-3.0-only`, JUCE AGPL route. Verify the pinned JUCE version's notices as part of the implementation/release gate.
 - [ ] CMake JUCE project, minimal AU/VST3 targets (macOS), VST3 Windows CI plan.
@@ -64,4 +72,5 @@
 
 - **RESOLVED:** Project licence = AGPL-3.0-only; JUCE AGPLv3 route. See [licensing policy](LICENSING.md).
 - Target DAWs/platform order if time forces reductions.
-- Whether to prioritize **musical sustain** (phase-continuous spectral hold) or **faithful timbral playback** (frame WOLA loop) after listening.
+- ~~Whether to prioritize musical sustain or faithful timbral playback after listening.~~ Resolved 2026-11-18: granular CLOUD; see consolidation §3.
+- License provenance of the 12 local Freesound recordings (B11).

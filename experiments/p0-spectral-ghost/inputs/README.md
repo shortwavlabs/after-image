@@ -31,5 +31,9 @@ long, and `high_hz: null` means Nyquist.
 uv run python run.py render --only user_name
 ```
 
+Recordings here are read **only** by a run that names them (`--only user_<name>`)
+or by `run_real.py`. A default `run.py` / `run_p0b.py` / `run_p0c.py` run uses the
+synthetic fixtures alone, so local recordings can never reach the committed evidence.
+
 A restricted run (`--only`/`--fft`) writes `manifest.partial.json` and
 `metrics.partial.json` so the committed full-run evidence is not overwritten.

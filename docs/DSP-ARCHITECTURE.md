@@ -2,10 +2,12 @@
 
 **Document ID:** DSP-ARCH-001  
 **Revision:** 0.1 (2026-11-18)  
-**Status:** **PROPOSED — NOT IMPLEMENTED OR VALIDATED**  
+**Status:** **PROPOSED — NOT IMPLEMENTED OR VALIDATED** (2026-11-18: partly superseded, see note below)  
 **Scope:** P0 sonic experiments through realtime MVP and Jam qualification  
 **Product:** Shortwav Labs AFTERIMAGE  
 **Related:** [PRD](PRD.md) · [RFC-001](RFC-001-spectral-engine.md) · [UI concept](UI-CONCEPT.md) · [Roadmap](ROADMAP.md)
+
+> **Status update (2026-11-18):** offline research P0-A, P0-B, P0-C and real-audio qualification is complete and consolidated in [RESEARCH-CONSOLIDATION.md](RESEARCH-CONSOLIDATION.md). The GHOST is now **granular** (CLOUD core engine, FOCUS later, GLITCH experimental) over a captured buffer, with a parallel TRACE → CLOUD DISSOLVE and FULL / FILTERED SOURCE. Sections 6–7 (spectral Loop / Sustain as the GHOST) and the engine rows of §0 and §2.1 are kept for history and is superseded by the consolidation record and `P1-A-REALTIME-ARCHITECTURE.md` (added with P1-A on `feature/p1a-realtime-core`). The BODY contract (§1), STFT indexing (§3.1), history and capture safety (§4), realtime rules (§10) and host contract (§11) remain normative.
 
 > **Design invariant:** An undelayed BODY plus one independently synthesized GHOST. Users paint a time–frequency fragment in recent audio history; AFTERIMAGE captures it and makes it persist as a transformable, fading voice.
 

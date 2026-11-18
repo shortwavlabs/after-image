@@ -1,0 +1,425 @@
+[
+ {
+  "file": "01_distorted_guitar_chord.wav",
+  "bytes": 3362500,
+  "sha256": "baafc951422eea9bcd9c572c668ff6ae9d0cd1b007ab1d83cc17616250cc409f",
+  "codec": "pcm_s16le",
+  "bits_raw": null,
+  "tags": {},
+  "sample_rate": 48000,
+  "channels": 2,
+  "dtype": "int16",
+  "duration_s": 17.513,
+  "supported_rate": true,
+  "peak_dbfs": -1.68,
+  "rms_dbfs": -14.39,
+  "crest_db": 12.71,
+  "full_scale_samples": 0,
+  "longest_full_scale_run": 0,
+  "dc_offset": [
+   -2e-06,
+   8e-06
+  ],
+  "silent_fraction_below_-60dbfs": 0.049,
+  "leading_silence_s": 0.0,
+  "trailing_silence_s": 1.41,
+  "interchannel_corr": 0.665,
+  "energy_share_below_250_250_2000_above_2000": [
+   0.9027,
+   0.078,
+   0.0193
+  ],
+  "class": "sustained"
+ },
+ {
+  "file": "02_clean_electric_guitar.wav",
+  "bytes": 948194,
+  "sha256": "6cb3def3cfd2239fbbfb87e50ea1d897e65f893f915f10076eab149579e62e25",
+  "codec": "pcm_s16le",
+  "bits_raw": null,
+  "tags": {},
+  "sample_rate": 44100,
+  "channels": 1,
+  "dtype": "int16",
+  "duration_s": 10.75,
+  "supported_rate": true,
+  "peak_dbfs": -0.0,
+  "rms_dbfs": -18.42,
+  "crest_db": 18.42,
+  "full_scale_samples": 1,
+  "longest_full_scale_run": 1,
+  "dc_offset": [
+   -0.0
+  ],
+  "silent_fraction_below_-60dbfs": 0.042,
+  "leading_silence_s": 0.05,
+  "trailing_silence_s": 0.6,
+  "interchannel_corr": null,
+  "energy_share_below_250_250_2000_above_2000": [
+   0.0507,
+   0.9455,
+   0.0038
+  ],
+  "class": "sustained"
+ },
+ {
+  "file": "03_acoustic_drum_break.wav",
+  "bytes": 1948108,
+  "sha256": "f9504ff86aeac0eac3f1377c5dd4b6505ded6de736cab6eea990cde1f839b30e",
+  "codec": "pcm_s16le",
+  "bits_raw": null,
+  "tags": {
+   "comment": "Modified by FL Studio 12",
+   "encoder": "FL Studio 12"
+  },
+  "sample_rate": 44100,
+  "channels": 2,
+  "dtype": "int16",
+  "duration_s": 11.042,
+  "supported_rate": true,
+  "peak_dbfs": -0.0,
+  "rms_dbfs": -13.66,
+  "crest_db": 13.66,
+  "full_scale_samples": 471,
+  "longest_full_scale_run": 30,
+  "dc_offset": [
+   -9e-06,
+   -1.3e-05
+  ],
+  "silent_fraction_below_-60dbfs": 0.0,
+  "leading_silence_s": 0.0,
+  "trailing_silence_s": 0.04,
+  "interchannel_corr": 0.901,
+  "energy_share_below_250_250_2000_above_2000": [
+   0.8002,
+   0.1309,
+   0.0689
+  ],
+  "class": "rhythmic"
+ },
+ {
+  "file": "04_sustained_vocal.wav",
+  "bytes": 17982488,
+  "sha256": "0b6c64911be6885b7f1ec76abc1404c0dd5c5a39e9851906497c28b1288fffb4",
+  "codec": "pcm_s24le",
+  "bits_raw": "24",
+  "tags": {},
+  "sample_rate": 48000,
+  "channels": 2,
+  "dtype": "int32",
+  "duration_s": 62.439,
+  "supported_rate": true,
+  "peak_dbfs": -10.86,
+  "rms_dbfs": -31.14,
+  "crest_db": 20.28,
+  "full_scale_samples": 0,
+  "longest_full_scale_run": 0,
+  "dc_offset": [
+   -0.0,
+   -0.0
+  ],
+  "silent_fraction_below_-60dbfs": 0.056,
+  "leading_silence_s": 2.45,
+  "trailing_silence_s": 5.54,
+  "interchannel_corr": -0.076,
+  "energy_share_below_250_250_2000_above_2000": [
+   0.2381,
+   0.7234,
+   0.0384
+  ],
+  "class": "sustained"
+ },
+ {
+  "file": "05_evolving_synth_pad.wav",
+  "bytes": 18446444,
+  "sha256": "e7bac8b7581ed0b30a6c074536ea26241367537bd393d143fc92a749f940616d",
+  "codec": "pcm_f32le",
+  "bits_raw": null,
+  "tags": {},
+  "sample_rate": 44100,
+  "channels": 2,
+  "dtype": "float32",
+  "duration_s": 52.286,
+  "supported_rate": true,
+  "peak_dbfs": -17.7,
+  "rms_dbfs": -31.4,
+  "crest_db": 13.7,
+  "full_scale_samples": 0,
+  "longest_full_scale_run": 0,
+  "dc_offset": [
+   -2e-06,
+   -2e-06
+  ],
+  "silent_fraction_below_-60dbfs": 0.003,
+  "leading_silence_s": 0.15,
+  "trailing_silence_s": 0.24,
+  "interchannel_corr": 1.0,
+  "energy_share_below_250_250_2000_above_2000": [
+   0.8753,
+   0.1235,
+   0.0012
+  ],
+  "class": "sustained"
+ },
+ {
+  "file": "06_piano_chord.wav",
+  "bytes": 3456690,
+  "sha256": "ce7e36cc386c52e07f01704144efa10effcdd73639d8ded0630ba0d60f20d943",
+  "codec": "pcm_s24le",
+  "bits_raw": "24",
+  "tags": {
+   "encoded_by": "REAPER",
+   "date": "2026-10-27",
+   "creation_time": "21-09-32",
+   "time_reference": "17280000"
+  },
+  "sample_rate": 48000,
+  "channels": 2,
+  "dtype": "int32",
+  "duration_s": 12.0,
+  "supported_rate": true,
+  "peak_dbfs": -8.47,
+  "rms_dbfs": -28.24,
+  "crest_db": 19.78,
+  "full_scale_samples": 0,
+  "longest_full_scale_run": 0,
+  "dc_offset": [
+   -5.7e-05,
+   -5.7e-05
+  ],
+  "silent_fraction_below_-60dbfs": 0.054,
+  "leading_silence_s": 0.0,
+  "trailing_silence_s": 3.05,
+  "interchannel_corr": 0.162,
+  "energy_share_below_250_250_2000_above_2000": [
+   0.5421,
+   0.4569,
+   0.001
+  ],
+  "class": "sustained"
+ },
+ {
+  "file": "07_bass_sustained.aiff",
+  "bytes": 974716,
+  "sha256": "ba026e5c01ff3341e9d6952c1a3f4806e86562b3e5f8d4c246791dcc86f7c4da",
+  "codec": "pcm_s24be",
+  "bits_raw": "24",
+  "tags": {},
+  "converted_to": "07_bass_sustained.wav"
+ },
+ {
+  "file": "07_bass_sustained.wav",
+  "bytes": 970722,
+  "sha256": "17b12e4f02cb340831d67a4aa083fa2571c5b6291e7c6a33b0d3e66dcb7d071b",
+  "codec": "pcm_s24le",
+  "bits_raw": "24",
+  "tags": {
+   "encoder": "Lavf63.1.102"
+  },
+  "converted_from": "07_bass_sustained.aiff",
+  "sample_rate": 44100,
+  "channels": 2,
+  "dtype": "int32",
+  "duration_s": 3.668,
+  "supported_rate": true,
+  "peak_dbfs": -2.0,
+  "rms_dbfs": -13.6,
+  "crest_db": 11.6,
+  "full_scale_samples": 0,
+  "longest_full_scale_run": 0,
+  "dc_offset": [
+   0.000135,
+   0.000139
+  ],
+  "silent_fraction_below_-60dbfs": 0.014,
+  "leading_silence_s": 0.0,
+  "trailing_silence_s": 0.12,
+  "interchannel_corr": 1.0,
+  "energy_share_below_250_250_2000_above_2000": [
+   0.9965,
+   0.0034,
+   0.0
+  ],
+  "class": "sustained"
+ },
+ {
+  "file": "08_spoken_voice.wav",
+  "bytes": 378928,
+  "sha256": "d0d9f99a3cbcf6a86fbacd444462842de3c97275aa6ac6946a1b1882ee8f721a",
+  "codec": "pcm_s16le",
+  "bits_raw": null,
+  "tags": {},
+  "sample_rate": 44100,
+  "channels": 2,
+  "dtype": "int16",
+  "duration_s": 2.148,
+  "supported_rate": true,
+  "peak_dbfs": -3.0,
+  "rms_dbfs": -24.17,
+  "crest_db": 21.17,
+  "full_scale_samples": 0,
+  "longest_full_scale_run": 0,
+  "dc_offset": [
+   0.0,
+   0.0
+  ],
+  "silent_fraction_below_-60dbfs": 0.0,
+  "leading_silence_s": 0.35,
+  "trailing_silence_s": 0.6,
+  "interchannel_corr": 0.986,
+  "energy_share_below_250_250_2000_above_2000": [
+   0.3956,
+   0.5298,
+   0.0746
+  ],
+  "class": "event"
+ },
+ {
+  "file": "09_metallic_percussion.wav",
+  "bytes": 533098,
+  "sha256": "e31a7ea4f2c90682a0471640bdbf9861a292ee8529dcdbf18854be526d790402",
+  "codec": "pcm_s16le",
+  "bits_raw": null,
+  "tags": {
+   "artist": "InspectorJ (www.jshaw.co.uk)"
+  },
+  "sample_rate": 44100,
+  "channels": 2,
+  "dtype": "int16",
+  "duration_s": 3.02,
+  "supported_rate": true,
+  "peak_dbfs": -3.37,
+  "rms_dbfs": -28.65,
+  "crest_db": 25.28,
+  "full_scale_samples": 0,
+  "longest_full_scale_run": 0,
+  "dc_offset": [
+   1.7e-05,
+   0.0
+  ],
+  "silent_fraction_below_-60dbfs": 0.733,
+  "leading_silence_s": 0.0,
+  "trailing_silence_s": 2.47,
+  "interchannel_corr": 0.742,
+  "energy_share_below_250_250_2000_above_2000": [
+   0.0004,
+   0.0041,
+   0.9955
+  ],
+  "class": "event"
+ },
+ {
+  "file": "10_ambient_field_recording.wav",
+  "bytes": 15892674,
+  "sha256": "38ac953473e89b82e0e70a9397d59fc6ea8faed3aebbe9c0dba73ebaacf646c9",
+  "codec": "pcm_s16le",
+  "bits_raw": null,
+  "tags": {
+   "title": "Mathews Hill",
+   "artist": "tladb",
+   "comment": "Freesound 90 secs",
+   "date": "2017",
+   "genre": "Field "
+  },
+  "sample_rate": 44100,
+  "channels": 2,
+  "dtype": "int16",
+  "duration_s": 90.093,
+  "supported_rate": true,
+  "peak_dbfs": -15.8,
+  "rms_dbfs": -35.08,
+  "crest_db": 19.29,
+  "full_scale_samples": 0,
+  "longest_full_scale_run": 0,
+  "dc_offset": [
+   2e-06,
+   -5e-06
+  ],
+  "silent_fraction_below_-60dbfs": 0.0,
+  "leading_silence_s": 0.0,
+  "trailing_silence_s": 0.04,
+  "interchannel_corr": 0.215,
+  "energy_share_below_250_250_2000_above_2000": [
+   0.3521,
+   0.4964,
+   0.1516
+  ],
+  "class": "sustained"
+ },
+ {
+  "file": "11_dense_rhythmic_percussion.wav",
+  "bytes": 1209648,
+  "sha256": "8f86e102e5e71a343c7524ab28321e03d31fc003bfdf1cac62917f1a00718631",
+  "codec": "pcm_s16le",
+  "bits_raw": null,
+  "tags": {},
+  "sample_rate": 44100,
+  "channels": 2,
+  "dtype": "int16",
+  "duration_s": 6.857,
+  "supported_rate": true,
+  "peak_dbfs": -0.0,
+  "rms_dbfs": -15.85,
+  "crest_db": 15.85,
+  "full_scale_samples": 2,
+  "longest_full_scale_run": 1,
+  "dc_offset": [
+   -9.8e-05,
+   -0.000175
+  ],
+  "silent_fraction_below_-60dbfs": 0.0,
+  "leading_silence_s": 0.0,
+  "trailing_silence_s": 0.01,
+  "interchannel_corr": 0.928,
+  "energy_share_below_250_250_2000_above_2000": [
+   0.7382,
+   0.1876,
+   0.0742
+  ],
+  "class": "rhythmic"
+ },
+ {
+  "file": "12_single_acoustic_pluck.flac",
+  "bytes": 1110377,
+  "sha256": "c9313b50985169a228c73f5b160844f67a1508fcd51a4f6edd08eaf72d7b1be4",
+  "codec": "flac",
+  "bits_raw": "24",
+  "tags": {},
+  "converted_to": "12_single_acoustic_pluck.wav"
+ },
+ {
+  "file": "12_single_acoustic_pluck.wav",
+  "bytes": 1850214,
+  "sha256": "ada8b2443018513fb5d8751872864b052a49007c66d9e8205293e497a3f4d666",
+  "codec": "pcm_s24le",
+  "bits_raw": "24",
+  "tags": {
+   "encoder": "Lavf63.1.102"
+  },
+  "converted_from": "12_single_acoustic_pluck.flac",
+  "sample_rate": 44100,
+  "channels": 2,
+  "dtype": "int32",
+  "duration_s": 6.992,
+  "supported_rate": true,
+  "peak_dbfs": -1.62,
+  "rms_dbfs": -22.01,
+  "crest_db": 20.39,
+  "full_scale_samples": 0,
+  "longest_full_scale_run": 0,
+  "dc_offset": [
+   0.0,
+   -0.0
+  ],
+  "silent_fraction_below_-60dbfs": 0.007,
+  "leading_silence_s": 0.15,
+  "trailing_silence_s": 0.14,
+  "interchannel_corr": 0.947,
+  "energy_share_below_250_250_2000_above_2000": [
+   0.9139,
+   0.0858,
+   0.0003
+  ],
+  "class": "sustained"
+ }
+]

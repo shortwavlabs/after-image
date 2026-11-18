@@ -49,3 +49,15 @@ def test_user_wav_is_picked_up(tmp_path):
     assert {r["fft_size"] for r in manifest["renders"]} == {4096}
     assert manifest["skipped_inputs"] == [{"file": "odd_rate.wav", "reason": "unsupported sample rate 22050"}]
     assert (tmp_path / "out" / "user_take" / "full_spectrum" / "fs44100_N4096" / "sustain_mean.wav").exists()
+
+
+def test_default_runs_never_read_local_recordings(tmp_path, monkeypatch):
+    """A WAV in inputs/ must not reach a default (committed-evidence) run, only a run naming it."""
+    from scipy.io import wavfile
+    monkeypatch.setattr(experiment, "ROOT", tmp_path)
+    (tmp_path / "inputs").mkdir()
+    wavfile.write(tmp_path / "inputs" / "take.wav", 48000, np.zeros(96000, np.int16))
+    cfg = json.loads((experiment.Path(__file__).resolve().parents[1] / "experiments.json").read_text())
+    users = lambda only: [s["name"] for s in experiment.load_sources(cfg, experiment.evidence_inputs(only))[0] if s["kind"] == "user"]
+    assert users(None) == [] and users(["drums", "guitar"]) == []
+    assert users(["user_take"]) == ["user_take"]

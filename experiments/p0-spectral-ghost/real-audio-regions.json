@@ -1,0 +1,122 @@
+[
+ {
+  "file": "01_distorted_guitar_chord.wav",
+  "class": "sustained",
+  "t0": 7.45,
+  "t1": 8.2,
+  "default_ok": false,
+  "region_rms_dbfs": -11.06,
+  "region_peak_dbfs": -1.68,
+  "reason": "default is -19.5 dBFS (quietest 50 ms block -21.4) against a loudest 0.75 s window of -11.1 dBFS; replaced by the loudest steady 0.75 s (-11.1 dBFS)"
+ },
+ {
+  "file": "02_clean_electric_guitar.wav",
+  "class": "sustained",
+  "t0": 1.0,
+  "t1": 1.75,
+  "default_ok": true,
+  "region_rms_dbfs": -15.15,
+  "region_peak_dbfs": -0.15,
+  "reason": "default kept: -15.1 dBFS, loudest 0.75 s window -13.2 dBFS"
+ },
+ {
+  "file": "03_acoustic_drum_break.wav",
+  "class": "rhythmic",
+  "t0": 2.67,
+  "t1": 4.13,
+  "default_ok": false,
+  "region_rms_dbfs": -14.02,
+  "region_peak_dbfs": -0.0,
+  "reason": "rhythmic: beat period 1.38 s (onset autocorrelation 0.65), 1 period(s) plus the 80 ms seam, starting 90 ms before the strongest onset"
+ },
+ {
+  "file": "04_sustained_vocal.wav",
+  "class": "sustained",
+  "t0": 11.75,
+  "t1": 12.5,
+  "default_ok": false,
+  "region_rms_dbfs": -23.64,
+  "region_peak_dbfs": -10.86,
+  "reason": "default is -76.1 dBFS (quietest 50 ms block -77.1) against a loudest 0.75 s window of -23.6 dBFS; replaced by the loudest steady 0.75 s (-23.6 dBFS)"
+ },
+ {
+  "file": "05_evolving_synth_pad.wav",
+  "class": "sustained",
+  "t0": 44.3,
+  "t1": 45.05,
+  "default_ok": false,
+  "region_rms_dbfs": -26.23,
+  "region_peak_dbfs": -17.76,
+  "reason": "default is -37.0 dBFS (quietest 50 ms block -40.4) against a loudest 0.75 s window of -26.2 dBFS; replaced by the loudest steady 0.75 s (-26.2 dBFS)"
+ },
+ {
+  "file": "06_piano_chord.wav",
+  "class": "sustained",
+  "t0": 1.0,
+  "t1": 1.75,
+  "default_ok": true,
+  "region_rms_dbfs": -22.1,
+  "region_peak_dbfs": -10.35,
+  "reason": "default kept: -22.1 dBFS, loudest 0.75 s window -20.0 dBFS"
+ },
+ {
+  "file": "07_bass_sustained.wav",
+  "class": "sustained",
+  "t0": 0.05,
+  "t1": 0.8,
+  "default_ok": false,
+  "region_rms_dbfs": -7.94,
+  "region_peak_dbfs": -2.96,
+  "reason": "default is -17.9 dBFS (quietest 50 ms block -22.7) against a loudest 0.75 s window of -7.7 dBFS; replaced by the loudest steady 0.75 s (-7.9 dBFS)"
+ },
+ {
+  "file": "08_spoken_voice.wav",
+  "class": "event",
+  "t0": 0.36,
+  "t1": 1.52,
+  "default_ok": false,
+  "region_rms_dbfs": -21.5,
+  "region_peak_dbfs": -3.0,
+  "reason": "short event: blocks within 30 dB of the loudest 10 ms"
+ },
+ {
+  "file": "09_metallic_percussion.wav",
+  "class": "event",
+  "t0": 0.01,
+  "t1": 0.34,
+  "default_ok": false,
+  "region_rms_dbfs": -19.04,
+  "region_peak_dbfs": -3.37,
+  "reason": "short event: blocks within 30 dB of the loudest 10 ms"
+ },
+ {
+  "file": "10_ambient_field_recording.wav",
+  "class": "sustained",
+  "t0": 68.95,
+  "t1": 69.7,
+  "default_ok": false,
+  "region_rms_dbfs": -30.3,
+  "region_peak_dbfs": -15.8,
+  "reason": "default is -39.8 dBFS (quietest 50 ms block -40.6) against a loudest 0.75 s window of -28.1 dBFS; replaced by the loudest steady 0.75 s (-30.3 dBFS)"
+ },
+ {
+  "file": "11_dense_rhythmic_percussion.wav",
+  "class": "rhythmic",
+  "t0": 1.61,
+  "t1": 2.97,
+  "default_ok": false,
+  "region_rms_dbfs": -16.45,
+  "region_peak_dbfs": -0.06,
+  "reason": "rhythmic: beat period 1.28 s (onset autocorrelation 0.49), 1 period(s) plus the 80 ms seam, starting 90 ms before the strongest onset"
+ },
+ {
+  "file": "12_single_acoustic_pluck.wav",
+  "class": "sustained",
+  "t0": 1.0,
+  "t1": 1.75,
+  "default_ok": true,
+  "region_rms_dbfs": -19.94,
+  "region_peak_dbfs": -11.47,
+  "reason": "default kept: -19.9 dBFS, loudest 0.75 s window -14.5 dBFS"
+ }
+]

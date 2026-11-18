@@ -44,7 +44,7 @@ def main():
                 print("  FAIL", r["check"], r["case"], r["value"], r["unit"])
         status = 1 if result["summary"]["FAIL"] else 0
     if a.command in ("render", "all"):
-        manifest, metrics = cloud_experiment.run(a.out, only=a.only, write_audio=not a.no_wav)
+        manifest, metrics = cloud_experiment.run(a.out, inputs_dir=experiment.evidence_inputs(a.only), only=a.only, write_audio=not a.no_wav)
         suffix = ".partial" if a.only else ""  # never overwrite the committed full-run evidence
         experiment.dump(manifest, ROOT / f"p0b-manifest{suffix}.json")
         experiment.dump(metrics, ROOT / f"p0b-metrics{suffix}.json")

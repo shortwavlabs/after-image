@@ -4,6 +4,8 @@
 **Product:** Shortwav Labs AFTERIMAGE — spectral memory instrument.  
 **Companion docs:** [PRD](PRD.md), [spectral engine RFC](RFC-001-spectral-engine.md), [roadmap](ROADMAP.md).
 
+> **Status update (2026-11-18):** the optical-instrument art direction below remains the concept for the production UI phase. P1-A ships only a minimal development interface (no Blender assets). Controls now also include DISSOLVE, SOURCE (FULL/FILTERED) and an engine choice; see [RESEARCH-CONSOLIDATION.md](RESEARCH-CONSOLIDATION.md).
+
 ## 1. Art direction: an instrument you can peer inside
 
 **Design thesis:** *Prismatica looks like an instrument you can touch. AFTERIMAGE should look like an instrument you can touch and peer inside.*

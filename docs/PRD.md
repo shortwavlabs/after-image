@@ -1,6 +1,8 @@
 # AFTERIMAGE — Product Requirements (Draft v0.1)
 
-**Status:** Proposed; not implemented. **Product:** Shortwav Labs AFTERIMAGE. **Use:** The Audio Programmer Plugin Jam 2026–27.
+**Status:** Proposed; research complete, realtime implementation starting (P1-A). **Product:** Shortwav Labs AFTERIMAGE. **Use:** The Audio Programmer Plugin Jam 2026–27.
+
+> **Status update (2026-11-18):** offline research P0-A, P0-B, P0-C and real-audio qualification is complete and consolidated in [RESEARCH-CONSOLIDATION.md](RESEARCH-CONSOLIDATION.md). The GHOST is now **granular** (CLOUD core engine, FOCUS later, GLITCH experimental) over a captured buffer, with a parallel TRACE → CLOUD DISSOLVE and FULL / FILTERED SOURCE. Where this document describes a spectral-only ghost, that text is kept for history and is superseded by the consolidation record and `P1-A-REALTIME-ARCHITECTURE.md` (added with P1-A on `feature/p1a-realtime-core`).
 
 ## Positioning
 
@@ -33,6 +35,9 @@ Audience: ambient producers, guitarists, electronic composers, sound designers. 
 | MOTION | Slow evolution of captured texture | Minimal, bounded drift |
 | WIDTH | Ghost stereo diffusion | Mono-compatible operation |
 | SELECTION | Spectrogram time-frequency rectangle | Mouse/touch; spectral feathering |
+| DISSOLVE | TRACE (captured loop) → CLOUD (granular) | Added 2026-11-18 from P0-B/P0-C; parallel crossfade by default |
+| SOURCE | FULL / FILTERED | Added 2026-11-18: whole time slice vs. the painted time-frequency region |
+| ENGINE | CLOUD (FOCUS later) | Added 2026-11-18; GLITCH experimental, not MVP. MOTION and WIDTH above are unresearched |
 
 One voice in MVP; multiple accumulating ghosts are **stretch**, not baseline. No user accounts, AI API, cloud, convolution libraries, or neural inference.
 
@@ -63,6 +68,7 @@ Polyphonic pitch tracking; arbitrary high-quality offline time stretching; multi
 
 ## Main risks
 
+- Superseded risk list for the granular direction: see the blocker register in [RESEARCH-CONSOLIDATION.md](RESEARCH-CONSOLIDATION.md) §5.
 - Phase-vocoder smearing and metallic artifacts from short, isolated spectral regions.
 - Buffer size/time-frequency resolution tradeoff.
 - CPU cost of real-time FFT + spectrogram rendering.
@@ -72,8 +78,8 @@ Polyphonic pitch tracking; arbitrary high-quality offline time stretching; multi
 ## Decision log (open)
 
 1. **RESOLVED:** Original project code `AGPL-3.0-only`; JUCE 9 via AGPLv3 path. See [licensing and release policy](LICENSING.md).
-2. Default selection: whole-band recent slice versus time-frequency rectangular paint.
-3. Ghost algorithm: complex frame-loop overlap-add versus phase-accumulator spectral sustain.
+2. **RESOLVED (provisional, 2026-11-18):** both, as SOURCE = FULL | FILTERED. See [consolidation](RESEARCH-CONSOLIDATION.md) §3.
+3. **RESOLVED (provisional, 2026-11-18):** neither as the main ghost; granular CLOUD over a captured buffer, with the frame loop kept as the TRACE end of DISSOLVE. Sustain was not preferred in any listening set.
 4. **DEFERRED:** IMPRINT MIDI/host automation beyond GUI trigger, pending event and state-restore contract.
 5. Whether transient routing receives a dedicated parameter.
 
