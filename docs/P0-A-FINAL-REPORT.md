@@ -82,7 +82,7 @@ uv run python run.py blind
 | # | Deviation | Justification |
 |---|---|---|
 | D1 | Synthetic fixtures instead of four recorded stems | No redistributable recordings exist in the repo and none may be downloaded. `inputs/` accepts user-owned WAVs. The musical gate is therefore **not** met. |
-| D2 | The 1.5 s maximum ROI is enforced as a **frame count** `ceil(1.5·Fs/H)`, not in seconds | With a seconds limit, an "exactly 1.5 s" selection was rejected or accepted depending on where its edges fell on the hop grid (6 of the first 51 captures were rejected `TOO_LONG` at 1.504–1.536 s). The frame rule matches the voice-slot sizing in DSP-ARCHITECTURE §4.2. |
+| D2 | The 1.5 s maximum ROI is enforced as a **frame count** `ceil(1.5·Fs/H)`, not in seconds | With a seconds limit, an "exactly 1.5 s" selection was rejected or accepted depending on where its edges fell on the hop grid (6 of the 57 captures in the first full run were rejected `TOO_LONG` at 1.504–1.536 s). The frame rule matches the voice-slot sizing in DSP-ARCHITECTURE §4.2. |
 | D3 | Loop ignores the capture's time feather and uses only the fully overlapped interior, `(M − 3)` hops | The ISTFT of `M` isolated frames is a faithful copy of the source only where four frames overlap. The seam crossfade replaces the time feather. |
 | D4 | Third loop seam strategy `aligned` added to the two in §12 | The two fixed-end strategies produce a measurable level bump or dip that depends on seam correlation (section 3). |
 | D5 | Sustain estimates frequency as the energy-weighted circular mean of the heterodyned cross-spectrum over all captured frame pairs | Same quantity as §7.1 for one pair; averaging avoids dividing by small magnitudes and gives a per-bin stability figure for free. |
@@ -152,7 +152,7 @@ Equal-power is right only for uncorrelated material and linear only for correlat
 
 **A4. The loop is an exact copy of the source outside the crossfade.** With a unity mask, the loop between seams matches the original audio to better than −90 dB. Median level change against the ROI: +0.01 dB. This is the property the other two engines do not have.
 
-**A5. Stereo is preserved exactly.** Centred input gives bit-identical channels; anti-phase stays at correlation −1; the wide synth pad keeps its correlation and mono compatibility within 0.3 dB at every FFT size; correlation does not drift.
+**A5. Stereo is preserved exactly.** Centred input gives bit-identical channels; anti-phase stays at correlation −1; the wide synth pad keeps its mono compatibility within 0.3 dB at every FFT size. Early and late correlation differ by at most 0.16; because the output is exactly periodic, that is the measurement window landing on different parts of the loop, not drift.
 
 **A6. Repetition is inherent and measurable.** The loop reproduces whatever envelope the capture had, once per period (0.06–1.4 s in these renders). Where the source decays or contains a hit, that becomes a periodic pattern:
 
@@ -166,7 +166,7 @@ On drums the Loop is a beat repeat, not a sustained voice. Whether a 5 dB sawtoo
 
 **A7. Short selections lose most of their length.** The usable interior is `M − 3` hops, so a 0.25 s selection keeps 213 ms at N = 2048, 192 ms at N = 4096 and only 128 ms at N = 8192. At N = 8192 the 80 ms crossfade does not fit and falls back to 64 ms with a 64 ms period (15.6 Hz repetition). This fallback fired in 6 renders and is recorded per render (`fallback_short_xfade`). With 3 frames or fewer the engine refuses (`EngineError`), which is tested.
 
-**A8. Transients survive.** Median crest-factor change against the ROI: −0.3 to −0.5 dB.
+**A8. Transients survive.** Median crest-factor change against the ROI: −0.5 to 0.0 dB across FFT sizes.
 
 **A9. Level matching does not bound peaks.** One Loop render reaches **+0.52 dBFS** (drums, upper harmonics, N = 8192: crest 23 dB at −23 dBFS RMS). Float WAVs hold it without clipping; a product needs an explicit headroom policy (DSP-ARCHITECTURE §1.1 already says not to promise unclipped output).
 
@@ -209,7 +209,7 @@ A 23 dB ripple on a single-harmonic selection is close to full amplitude nulls. 
 
 Forcing one frequency on two channels that really hold different frequencies freezes an arbitrary phase offset per bin. Per-channel estimation fixes that case but drifts on near-centred material: a centred tone with −40 dB independent noise per channel goes from correlation 0.9974 to 0.990 in 4 s (shared: 0.9998, stable), and on the guitar fixture from 0.79 to 0.46. Neither mode is right for both source types. Both keep an exactly centred source exactly centred and anti-phase at −1.
 
-**B6. Level loss.** Median −1.4 dB against the ROI (range about −2.3 to −0.02 dB at N = 4096), because averaged magnitudes of moving partials do not sum coherently. Compensated by level matching in the renders; a product would need make-up gain.
+**B6. Level loss.** Median −1.4 dB against the ROI (range about −2.3 to −0.1 dB at N = 4096), because averaged magnitudes of moving partials do not sum coherently. Compensated by level matching in the renders; a product would need make-up gain.
 
 **B7. Low-energy bins are numerically harmless.** No division by magnitude anywhere. Silent bins resolve to the bin-centre frequency with zero amplitude. A fully silent capture renders exact zeros; 1e-30-scale input and full-scale noise stay finite. More than 99.9 % of output energy stays inside the selected band in every render (minimum 0.9990).
 
@@ -318,7 +318,7 @@ Failures encountered during development and how they were handled:
 - The freeze/sustain equivalence test compared outputs started from different frames; fixed to start both from the same frame.
 - The first timbre-distance metric was dominated by near-empty bands (Loop scored 10 dB against the audio it copies). The metric was redefined (bands within 30 dB of total energy, 40 dB floor) before any conclusion was drawn from it.
 - A level test assumed the T60 envelope removes 1–4 dB over 2 s; it removes 7.4 dB. The expectation was corrected.
-- 6 of the first 51 captures were rejected `TOO_LONG` (K9).
+- 6 of the 57 captures in the first full run were rejected `TOO_LONG` (K9).
 
 Limits of the evidence:
 
