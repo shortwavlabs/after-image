@@ -87,12 +87,30 @@ def loop(cap, n_samples, xfade_s=0.08, strategy="equal_power", max_lag_s=0.025):
                     linear gains normalised by sqrt(a^2 + b^2 + 2*rho*a*b) so
                     the expected power stays constant through the seam
     """
-    N, H, fs = cap.N, hop(cap.N), cap.fs
+    N, H = cap.N, hop(cap.N)
     M = cap.frames.shape[0]
     P = (M - 3) * H
     if P < 2:
         raise EngineError(f"capture of {M} frames has no fully overlapped interior at N={N}")
     seg = istft_buffer(cap.frames.astype(np.complex128), N)[N - H:M * H]
+    per, info = loop_period(seg, cap.fs, xfade_s, strategy, max_lag_s)
+    R, X = info["period_samples"], info["xfade_samples"]
+    reps = -(-n_samples // R)
+    out = np.tile(per, (reps, 1))[:n_samples]
+    info["seams"] = [s for i in range(reps + 1) for s in (i * R, i * R + X) if 0 < s < n_samples]
+    return out, info
+
+
+def loop_period(seg, fs, xfade_s=0.08, strategy="equal_power", max_lag_s=0.025, period=None):
+    """One seam-crossfaded period of the time-domain segment `seg` (see loop()).
+
+    Extracted from loop() in P0-B without changing its arithmetic, so the
+    granular engine can make other capture buffers periodic the same way.
+    `period` forces the loop length (skipping the "aligned" search) so that two
+    buffers of the same selection can share one seam; the gains still use the
+    segment's own correlation at that period.
+    """
+    P = len(seg)
     X_req = 0 if strategy == "hard" else int(round(xfade_s * fs))
     X = min(X_req, P // 2)  # fallback: a loop must be at least twice its crossfade
     R, rho, lag = P - X, None, 0
@@ -104,7 +122,11 @@ def loop(cap, n_samples, xfade_s=0.08, strategy="equal_power", max_lag_s=0.025):
             d = np.sqrt(np.sum(head ** 2) * np.sum(t ** 2))
             return float(np.sum(head * t) / d) if d > 0 else 0.0
 
-        if strategy == "aligned":
+        if period is not None:
+            if not X <= period <= P - X:
+                raise EngineError(f"forced period {period} outside [{X}, {P - X}]")
+            R, lag = int(period), P - X - int(period)
+        elif strategy == "aligned":
             lo = max(X, P - X - int(max_lag_s * fs))
             cands = np.arange(lo, P - X + 1)
             scores = np.array([corr(r) for r in cands])
@@ -128,13 +150,10 @@ def loop(cap, n_samples, xfade_s=0.08, strategy="equal_power", max_lag_s=0.025):
         per = seg[:R].copy()
     else:
         raise EngineError(f"interior of {P} samples is too short for any crossfade")
-    reps = -(-n_samples // R)
-    out = np.tile(per, (reps, 1))[:n_samples]
-    seams = [s for i in range(reps + 1) for s in (i * R, i * R + X) if 0 < s < n_samples]
     info = {"period_samples": R, "period_s": R / fs, "interior_samples": P, "xfade_samples": X,
             "xfade_requested_samples": X_req, "fallback_short_xfade": bool(X < X_req),
-            "seam_correlation": rho, "align_lag_samples": lag, "strategy": strategy, "seams": seams}
-    return out, info
+            "seam_correlation": rho, "align_lag_samples": lag, "strategy": strategy}
+    return per, info
 
 
 # --------------------------------------------------------------------------
