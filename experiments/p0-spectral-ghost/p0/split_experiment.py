@@ -197,6 +197,10 @@ def run(out_dir, cfg_path=ROOT / "experiments-p0c.json", inputs_dir=ROOT / "inpu
                     mix[start:] += final
                     emit(f"{base}/mix_{name}.wav", fs, mix)
                     m["mix_peak_dbfs"] = round(Mx.db(Mx.peak(mix)), 2)
+            # yardstick for the comparison below: the same engine with a different seed
+            scatter = {st: round(Mx.log_spectral_distance_db(raws[nm], SP.render_split(full, fs, n, st, 1.0, seed + 100)[0], fs), 2)
+                       for st, nm in (("s1", "split_s1"), ("s3", "split_s3_100"))}
+            metrics[f"{base}/seed_to_seed_third_octave_distance_db"] = scatter
             metrics[f"{base}/spectral_vs_conventional"] = {
                 s: {"third_octave_distance_db": round(Mx.log_spectral_distance_db(raws[a], raws[b], fs), 2),
                     "rms_difference_db": round(Mx.db(Mx.rms(raws[a]) / max(Mx.rms(raws[b]), Mx.EPS)), 2),
@@ -268,6 +272,8 @@ def summarize(metrics):
         sv = metrics[f"{b}/spectral_vs_conventional"]
         out.append(f"\nSpectral vs conventional: S1 third-octave distance {sv['s1']['third_octave_distance_db']} dB, level difference {sv['s1']['rms_difference_db']} dB; "
                    f"S3 {sv['s3']['third_octave_distance_db']} dB, {sv['s3']['rms_difference_db']} dB.")
+        sc = metrics[f"{b}/seed_to_seed_third_octave_distance_db"]
+        out.append(f"Same engine, another seed: S1 {sc['s1']} dB, S3 {sc['s3']} dB.")
     ghosts = {k: m for k, m in metrics.items() if isinstance(m, dict) and "finite" in m}
     out.append(f"\nRenders measured: {len(ghosts)}; non-finite: {sum(not m['finite'] for m in ghosts.values())}; "
                f"with float32 denormals: {sum(m['denormals_float32'] > 0 for m in ghosts.values())}; "
