@@ -26,6 +26,10 @@ Design and acceptance criteria are proposed in the development docs on the conce
 - BODY/GHOST blend, host automation and preset persistence.
 - Audio-first technical tests; no audio-thread allocation or locks.
 
+## Downloads and releases
+
+AFTERIMAGE will be distributed **free of charge** through [GitHub Releases](https://github.com/shortwavlabs/after-image/releases), with downloadable **macOS (AU/VST3)** and **Windows (VST3)** installers once built and qualified. There are **no installers available yet**. The release will also include corresponding source, build instructions, license notices and checksums. See [release and licensing policy](docs/LICENSING.md).
+
 ## Licensing and attribution
 
 **AFTERIMAGE is free and open-source software licensed under the GNU Affero General Public License v3.0 only (`AGPL-3.0-only`).** See [LICENSE](LICENSE) for the complete license text and [licensing guidance](docs/LICENSING.md) for framework, contribution, attribution, and asset requirements (the guidance document is part of the design PR until merged).
