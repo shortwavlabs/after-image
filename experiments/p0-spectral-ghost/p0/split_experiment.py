@@ -29,7 +29,8 @@ ROOT = X.ROOT
 BLIND_SETS = {  # set -> (render names, band-limited selections only?)
     "cloud_vs_split": (("p0b_cloud", "p0b_focus", "split_s1"), False),
     "strategies": (("split_s1", "split_s2_keep_100", "split_s3_100"), False),
-    "implementation": (("split_s3_100", "conv_s3_100"), False),
+    "implementation_s1": (("split_s1", "conv_s1"), False),   # TRACE-carrying bands: where phase and ringing differ
+    "implementation_s3": (("split_s3_100", "conv_s3_100"), False),
     "source": (("split_s1", "filtered_split_s1"), True),
     "pitch": (("split_s1", "split_s1_detune", "split_s1_octaves"), False),
     "progression": (("progression_parallel", "progression_s2_keep", "progression_s2_fade", "progression_s3"), False),
@@ -98,6 +99,9 @@ def render_case(c, fs, N, rcfg, seed):
     if filt is not None:
         out["filtered_cloud"] = (*G.cloud(filt.per_src, fs, n, nop, seed), "ghost", filt)
         out["filtered_split_s1"] = (*SP.render_split(filt, fs, n, "s1", 1.0, seed), "ghost", filt)
+        # the same render WITHOUT its own level match: FULL split_s1's gain, so it sits as much lower as it natively is
+        out["filtered_split_s1_native"] = (out["filtered_split_s1"][0], dict(out["filtered_split_s1"][1], level="gain of split_s1"),
+                                           "native:split_s1", filt)
     # metrics only: the remaining static settings of the brief
     for strat, D in (("s2_keep", 0.25), ("s2_keep", 0.5), ("s2_keep", 0.75), ("s2_fade", 0.25), ("s2_fade", 0.5),
                      ("s2_fade", 0.75), ("s2_fade", 1.0), ("s3", 0.25), ("s3", 0.5), ("s3", 0.75)):
@@ -109,6 +113,16 @@ def render_case(c, fs, N, rcfg, seed):
     for strat in ("s2_keep", "s2_fade", "s3"):
         out[f"progression_{strat}"] = (*SP.render_split(full, fs, npg, strat, traj, seed), "progression", full)
     return out
+
+
+def a_weighted_db(x, fs):
+    """A-weighted RMS in dB re full scale (IEC 61672 curve applied in the frequency
+    domain). A rough loudness proxy: plain RMS counts bass the ear barely weighs."""
+    X = np.fft.rfft(x, axis=0)
+    f = np.fft.rfftfreq(len(x), 1 / fs)
+    ra = lambda v: 12194.0 ** 2 * v ** 4 / ((v ** 2 + 20.6 ** 2) * np.sqrt((v ** 2 + 107.7 ** 2) * (v ** 2 + 737.9 ** 2)) * (v ** 2 + 12194.0 ** 2))
+    A = ra(f) / ra(1000.0)
+    return Mx.db(np.sqrt(2 * np.mean(np.sum(np.abs(X * A[:, None]) ** 2, axis=0))) / len(x))
 
 
 def split_metrics(raw, fs, dec, n):
@@ -170,14 +184,19 @@ def run(out_dir, cfg_path=ROOT / "experiments-p0c.json", inputs_dir=ROOT / "inpu
                                                               "band_energy_share": share(c["filt"]),
                                                               "level_db_re_full": round(Mx.db(Mx.rms(c["filt"].src) / max(Mx.rms(full.src), Mx.EPS)), 2)}}
             outs = render_case(c, fs, N, rcfg, seed)
-            raws = {}
+            raws, gains = {}, {}
             for name, (raw, info, kind, dec) in outs.items():
                 rid = f"{base}/{name.lstrip('_')}"
                 t60 = rcfg["progression_t60_seconds" if kind == "progression" else "t60_seconds"]
                 matched, gain = E.match_level(raw, fs, rcfg["target_rms_dbfs"], rcfg["level_window_s"])
+                if kind.startswith("native:"):
+                    gain = gains[kind.split(":")[1]]
+                    matched = raw * gain
+                gains[name] = gain
                 final = matched * E.envelope(len(raw), fs, t60, rcfg["onset_fade_s"])
                 m = X.ghost_metrics(raw, final, fs, c["cap"], info, dec.src, gain)
                 m.update(split_metrics(raw, fs, dec, n))
+                m["a_weighted_dbfs_first_2s"] = round(a_weighted_db(final[:int(rcfg["level_window_s"] * fs)], fs), 2)
                 if src["name"] == "guitar":
                     m["low_sideband_db"] = round(V.sideband_ratio_db(raw[:n], fs, V.guitar_partials(400.0), 400.0), 1)
                 metrics[rid] = m
@@ -252,21 +271,22 @@ def blind_pack(out_dir, seed=20261121, metrics_path=ROOT / "p0c-metrics.json"):
 def summarize(metrics):
     out = []
     bases = sorted(k.rsplit("/", 1)[0] for k in metrics if k.endswith("/capture"))
-    names = ["trace", "p0b_cloud", "p0b_focus", "split_s1", "conv_s1", "split_s2_keep_050", "split_s2_keep_100", "split_s2_fade_050",
-             "split_s2_fade_100", "split_s3_050", "split_s3_100", "conv_s3_100", "split_s1_detune", "split_s1_octaves",
-             "filtered_cloud", "filtered_split_s1", "progression_parallel", "progression_s2_keep", "progression_s2_fade", "progression_s3"]
+    names = ["trace", "p0b_cloud", "p0b_focus", "split_s1", "conv_s1", "split_s2_keep_025", "split_s2_keep_050", "split_s2_keep_075",
+             "split_s2_keep_100", "split_s2_fade_025", "split_s2_fade_050", "split_s2_fade_075", "split_s2_fade_100", "split_s3_025",
+             "split_s3_050", "split_s3_075", "split_s3_100", "conv_s3_100", "split_s1_detune", "split_s1_octaves",
+             "filtered_cloud", "filtered_split_s1", "filtered_split_s1_native", "progression_parallel", "progression_s2_keep", "progression_s2_fade", "progression_s3"]
     for b in bases:
         cp = metrics[f"{b}/capture"]
         out.append(f"\n**{b}** - FULL crossovers {cp['full']['crossovers_hz']} Hz, band energy share {cp['full']['band_energy_share']}"
                    + (f"; FILTERED crossovers {cp['filtered']['crossovers_hz']} Hz, share {cp['filtered']['band_energy_share']}, "
                       f"level {cp['filtered']['level_db_re_full']} dB re FULL" if cp["filtered"] else "") + "\n")
-        out.append("| render | RMS re TRACE (dB) | changed re TRACE (dB) | peak re TRACE (dB) | final peak (dBFS) | match gain (dB) | ripple (dB) | band repetition low / mid / high "
+        out.append("| render | RMS re TRACE (dB) | changed re TRACE (dB) | peak re TRACE (dB) | final peak (dBFS) | match gain (dB) | A-weighted (dBFS) | ripple (dB) | band repetition low / mid / high "
                    "| band level re TRACE (dB) | low sidebands (dB) | corr early / late | mono compat (dB) |")
-        out.append("|---|---:|---:|---:|---:|---:|---:|---|---|---:|---:|---:|")
+        out.append("|---|---:|---:|---:|---:|---:|---:|---:|---|---|---:|---:|---:|")
         for nme in names:
             m = metrics.get(f"{b}/{nme}")
             if m:
-                out.append(f"| {nme} | {m['rms_db_re_trace']:+.2f} | {m['changed_db_re_trace']:.1f} | {m['peak_db_re_trace']:+.2f} | {m['peak_dbfs']:.2f} | {m['match_gain_db']:+.1f} | {m['ripple_db']:.1f} "
+                out.append(f"| {nme} | {m['rms_db_re_trace']:+.2f} | {m['changed_db_re_trace']:.1f} | {m['peak_db_re_trace']:+.2f} | {m['peak_dbfs']:.2f} | {m['match_gain_db']:+.1f} | {m['a_weighted_dbfs_first_2s']:.1f} | {m['ripple_db']:.1f} "
                            f"| {' / '.join(f'{v:.2f}' for v in m['band_period_autocorr'])} | {' / '.join(f'{v:+.1f}' for v in m['band_level_db_re_trace'])} "
                            f"| {m.get('low_sideband_db', '')} | {m['corr_early']:.2f} / {m['corr_late']:.2f} | {m['mono_compat_db']:.2f} |")
         sv = metrics[f"{b}/spectral_vs_conventional"]

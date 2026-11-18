@@ -268,6 +268,14 @@ def polyphony_and_determinism():
         rows.append(_row("polyphony", f"{strat} D={D}: simultaneous grains total / per band (budget {SP.BUDGET_3})",
                          f"{info['max_active_total']} / {[a for a, _ in per]}", "grains", ok, TOTAL_GRAINS_MAX))
         rows.append(_row("polyphony", f"{strat} D={D}: grains dropped per band", str([b["dropped"] for b in info["bands"]]), "grains"))
+    # DISSOLVE 1 is bounded analytically (not a tuned limit): every band's TRACE peak plus its whole grain budget
+    # at maximum gain, balance and interpolator overshoot.
+    gmax = 1 / np.sqrt(G.S_REF) * np.sqrt(2) * 1.25
+    bound = sum(Mx.peak(t) + b * gmax * Mx.peak(c) for t, c, b in zip(dec.trace, dec.cloud, SP.BUDGET_3))
+    for strat in ("s2_keep", "s2_fade", "s3"):
+        pk = Mx.peak(SP.render_split(dec, fs, n, strat, 1.0, seed=1, pitch="octaves")[0])
+        rows.append(_row("bounded", f"{strat} at DISSOLVE 1: peak re source peak, against the analytic ceiling {Mx.db(bound / Mx.peak(dec.per_src)):+.1f} dB",
+                         round(Mx.db(pk / Mx.peak(dec.per_src)), 2), "dB", bool(np.isfinite(pk) and pk <= bound), "analytic ceiling"))
     R = len(dec.per_src)
     for i, (q, bud) in enumerate(zip(SP.band_params("s3", fs, 3, R), SP.BUDGET_3)):
         g = G.schedule(R, fs, n, G.CloudParams(**{**q.__dict__, "density_hz": 8 * q.density_hz}), seed=1, max_grains=bud)
@@ -487,6 +495,19 @@ def edge_leak():
                          f"{Mx.db(Mx.rms(leak) / Mx.rms(own)):.1f} / {Mx.db(Mx.rms(edge(leak)) / Mx.rms(edge(own))):.1f}", "dB"))
         rows.append(_row("edge_leak", f"FULL source, {name} band, after the 80 ms seam crossfade: whole periodic buffer / first 20 ms",
                          f"{Mx.db(Mx.rms(pl) / Mx.rms(po)):.1f} / {Mx.db(Mx.rms(pl[:e]) / Mx.rms(po[:e])):.1f}", "dB"))
+    # FILTERED sources: the selection mask itself (1/6-octave feather), where P0-B found K2
+    for low, high in ((350, 5000), (1000, 2000), (100, 200)):
+        pf = VC.prepare(x, fs, N, t0, t1, low, high, xfade_s=None)
+        lk = VC.prepare(y, fs, N, t0, t1, low, high, xfade_s=None)["spectral"]
+        own = pf["spectral"] - lk
+        sm = E.loop_period(pf["spectral"], fs, 0.08, "aligned")[1]
+        pl, po = SP.apply_seam(lk, sm), SP.apply_seam(own, sm)
+        edge = lambda v: np.concatenate([v[:e], v[-e:]])
+        rows.append(_row("edge_leak", f"FILTERED source {low}-{high} Hz: neighbour audio re selected audio, whole buffer / within 20 ms of an edge",
+                         f"{Mx.db(Mx.rms(lk) / Mx.rms(own)):.1f} / {Mx.db(Mx.rms(edge(lk)) / Mx.rms(edge(own))):.1f}", "dB"))
+        rows.append(_row("edge_leak", f"FILTERED source {low}-{high} Hz, after the 80 ms seam crossfade: whole periodic buffer / first 20 ms / 20-80 ms",
+                         f"{Mx.db(Mx.rms(pl) / Mx.rms(po)):.1f} / {Mx.db(Mx.rms(pl[:e]) / Mx.rms(po[:e])):.1f} / "
+                         f"{Mx.db(Mx.rms(pl[e:4 * e]) / Mx.rms(po[e:4 * e])):.1f}", "dB"))
     leak = sum(G.capture_buffer(q["history"], replace(q["cap"], freq_mask=b))[0] for b in B)
     rows.append(_row("edge_leak", "FULL source, sum of the three bands: neighbour audio (cancels when bands are unmodified)",
                      round(Mx.db(Mx.rms(leak) / Mx.rms(p["spectral"])), 1), "dB"))

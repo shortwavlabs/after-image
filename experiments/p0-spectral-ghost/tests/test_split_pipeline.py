@@ -25,7 +25,7 @@ def test_two_runs_are_bit_identical_and_blind_pack_is_clean(tmp_path):
     experiment.dump(x1, tmp_path / "metrics.json")
     sets = SE.blind_pack(tmp_path / "a", metrics_path=tmp_path / "metrics.json")
     key = json.loads((tmp_path / "a" / "blind-KEY-do-not-open.json").read_text())
-    assert sets == 5  # the full-band drum case has no FULL-vs-FILTERED set
+    assert sets == 6  # the full-band drum case has no FULL-vs-FILTERED set
     assert not list((tmp_path / "a" / "blind").rglob("*.json"))
     for folder in {k.rsplit("/", 1)[0] for k in key}:
         lengths = {len(wavfile.read(f)[1]) for f in (tmp_path / "a" / "blind" / folder).glob("[ABCD].wav")}
@@ -43,5 +43,7 @@ def test_user_wav_gets_every_split_render(tmp_path):
     assert not manifest["failures"] and {r["source"] for r in manifest["renders"]} == {"user_take"}
     assert {r["fs"] for r in manifest["renders"]} == {44100}
     names = {r["engine"] for r in manifest["renders"] if r["case"] == "mid_band"}
-    assert {"split_s1", "split_s3_100", "conv_s3_100", "filtered_split_s1", "progression_s2_keep"} <= names
+    assert {"split_s1", "split_s3_100", "conv_s3_100", "filtered_split_s1", "filtered_split_s1_native", "progression_s2_keep"} <= names
+    m = metrics["user_take/mid_band/filtered_split_s1_native"]
+    assert m["match_gain_db"] == metrics["user_take/mid_band/split_s1"]["match_gain_db"]  # FULL's gain, not its own
     assert (tmp_path / "out" / "user_take" / "mid_band" / "filtered_split_s1.wav").exists()
