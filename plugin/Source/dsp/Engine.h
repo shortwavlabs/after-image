@@ -1,10 +1,20 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-// AFTERIMAGE realtime engine. Owned and driven by the audio callback only.
-// Design: docs/P1-A-REALTIME-ARCHITECTURE.md
+// AFTERIMAGE realtime engine. Owned and driven by the audio callback only; the UI talks to it through the
+// command queue (Engine::submit, called on the audio thread after the processor's FIFO), the status atomics
+// and the display FIFO. Design: docs/P1-A-REALTIME-ARCHITECTURE.md
 #pragma once
 
+#include <array>
+#include <atomic>
+#include <complex>
 #include <cstdint>
 #include <functional>
+#include <memory>
+#include <vector>
+
+#include <juce_core/juce_core.h>
+
+namespace juce::dsp { class FFT; }
 
 namespace afterimage
 {
@@ -43,30 +53,210 @@ struct Ramp
     bool atRest() const noexcept { return remaining == 0; }
 };
 
+/** SplitMix64; uniform() = (z >> 11) * 2^-53, as p1a_reference.SplitMix64. */
+struct SplitMix64
+{
+    uint64_t s = 0;
+    double uniform() noexcept
+    {
+        s += 0x9E3779B97F4A7C15ull;
+        uint64_t z = s;
+        z = (z ^ (z >> 30)) * 0xBF58476D1CE4E5B9ull;
+        z = (z ^ (z >> 27)) * 0x94D049BB133111EBull;
+        return (double) ((z ^ (z >> 31)) >> 11) * 0x1.0p-53;
+    }
+};
+
+enum class Source : int { Full = 0, Filtered = 1 };
+
+enum class Reject : int { None = 0, StaleEpoch, BeforeStream, TooShort, TooLong, Future, InvalidBand, TooFewBins, Expired, Busy, QueueFull };
+const char* rejectName (Reject) noexcept;
+
+enum class CaptureState : int { Idle = 0, Waiting, Building };
+
+struct Command
+{
+    enum class Type : int { Imprint, Clear };
+    Type type = Type::Imprint;
+    uint32_t epoch = 0;
+    int64_t s0 = 0, s1 = 0;          // selection [s0, s1) in stream samples
+    double lowHz = 0.0, highHz = 0.0; // FILTERED band; ignored for FULL
+    Source source = Source::Full;
+    int64_t at = 0;                   // apply when this stream sample is reached (0 = at once)
+};
+
+struct GrainRecord
+{
+    int64_t onset = 0;
+    int length = 0;
+    double pos = 0.0, amp = 1.0, gain = 1.0, gl = 1.0, gr = 1.0;
+    bool reverse = false, dropped = false;
+};
+
+struct CaptureInfo
+{
+    int64_t s0 = 0, s1 = 0, period = 0, seam = 0, acceptedAt = 0, startedAt = 0;
+    double rho = 0.0;
+    Source source = Source::Full;
+    int slot = -1;
+    uint64_t seed = 0;
+};
+
+struct DisplayColumn
+{
+    static constexpr int bands = 160;
+    int64_t endSample = 0;
+    uint32_t epoch = 0;
+    std::array<float, bands> db {};
+};
+
 class Engine
 {
 public:
+    static constexpr int maxChannels = 2, maxGrainsPerVoice = 32, numVoices = 2, unitStride = 64, maxPendingCommands = 16;
+    static constexpr double seamSeconds = 0.08, onsetFadeSeconds = 0.03, releaseSeconds = 0.05,
+                            minSelectionSeconds = 0.20, maxSelectionSeconds = 1.50, historySeconds = 6.0, featherOct = 1.0 / 6.0;
+
+    Engine();
+    ~Engine();
+
+    /** Allocates everything; not realtime. Starts a new epoch. */
     void prepare (double sampleRate, int numChannels, int maxBlockSize);
 
-    /** In-place processing of `numChannels` channels. Non-finite input samples are replaced by 0
-        (counted); with BODY at rest at exactly 1 and no sounding ghost the buffer is left untouched. */
+    /** In place. Non-finite input samples are replaced by 0 (counted) before BODY, analysis and capture. */
     void process (float* const* io, int numChannels, int numSamples, const Params& p) noexcept;
 
-    /** Host bypass: output = input exactly; gains restart from (BODY 1, GHOST 0) on resume. */
-    void processBypassed (float* const* io, int numChannels, int numSamples) noexcept;
+    /** Host bypass: output = input exactly; analysis and voices keep running, ghost muted. */
+    void processBypassed (float* const* io, int numChannels, int numSamples, const Params& p) noexcept;
 
+    /** Queue a command (audio thread). Applied at its `at` sample, in order. False if the queue is full. */
+    bool submit (const Command&) noexcept;
+
+    // configuration
     double sampleRate() const noexcept { return fs; }
     int channels() const noexcept { return numCh; }
+    int fftSize() const noexcept { return N; }
+    int hop() const noexcept { return H; }
     int64_t samplesSeen() const noexcept { return streamPos; }
+    uint32_t epoch() const noexcept { return epochId; }
+    int64_t historySamples() const noexcept { return rawCap; }
     uint64_t nonFiniteInputs() const noexcept { return nonFinite; }
 
+    /** Written by the audio thread at the end of every block; read anywhere. */
+    struct Status
+    {
+        std::atomic<int> state { 0 }, lastReject { 0 }, voices { 0 }, grains { 0 };
+        std::atomic<uint32_t> epoch { 0 };
+        std::atomic<int64_t> samplesSeen { 0 }, lastS0 { 0 }, lastS1 { 0 }, lastPeriod { 0 }, lastSeam { 0 }, lastDelay { 0 };
+        std::atomic<float> lastRho { 0.0f }, blockPeak { 0.0f };
+        std::atomic<uint64_t> rejects { 0 }, captures { 0 }, overs { 0 }, nonFinite { 0 };
+        std::atomic<int> lastSource { 0 };
+    } status;
+
+    /** Analysis columns for the display (audio thread writes, one reader). */
+    juce::AbstractFifo displayFifo { 512 };
+    std::array<DisplayColumn, 512> display;
+
+    // ---- test and tool hooks (not used by the plugin) ----
+    void setSeed (uint64_t s) noexcept { baseSeed = s; }
+    void setGrainLog (GrainRecord* records, int capacity) noexcept { log = records; logCap = capacity; logCount = 0; }
+    int grainLogCount() const noexcept { return logCount; }
+    void setDensityOverride (double grainsPerSecond); // stress tests and benchmark; not realtime
+    const CaptureInfo& lastCapture() const noexcept { return lastCap; }
+    const float* loopChannel (int slot, int c) const noexcept { return slotData[(size_t) slot].data() + (size_t) c * (size_t) slotCap; }
+    int maxActiveGrains() const noexcept { return maxActiveSeen; }
+    int maxActiveGrainsTotal() const noexcept { return maxActiveTotalSeen; }
+    CaptureState captureState() const noexcept { return job.state; }
+    /** Stored analysis frame `m`, channel `c` (K bins), or nullptr if it is not in the ring. */
+    const std::complex<float>* frame (int64_t m, int c) const noexcept
+    {
+        return frameAvailable (m) ? hist.data() + ((size_t) (m % histFrames) * (size_t) numCh + (size_t) c) * (size_t) K : nullptr;
+    }
+
 private:
+    struct Grain
+    {
+        int64_t onset = 0, end = 0;
+        double pos = 0.0;
+        float amp = 1.0f, gl = 1.0f, gr = 1.0f;
+        bool reverse = false;
+        int logIndex = -1;
+    };
+
+    struct Voice
+    {
+        bool active = false, releasing = false;
+        int slot = 0;
+        int64_t R = 0, t = 0;
+        double decay = 1.0, release = 1.0, releaseStep = 0.0;
+        SplitMix64 rng;
+        double tNominal = 0.0;
+        std::array<Grain, 64> pending {};
+        int nPending = 0;
+        std::array<Grain, maxGrainsPerVoice> grains {};
+        int nGrains = 0;
+    };
+
+    struct Job
+    {
+        CaptureState state = CaptureState::Idle;
+        Command cmd;
+        int slot = -1;
+        int64_t R = 0, len = 0, mLo = 0, mHi = 0, nextM = 0, copied = 0, acceptedAt = 0;
+    };
+
+    void processImpl (float* const* io, int nch, int n, const Params& p, bool bypassed) noexcept;
+    void apply (const Command&) noexcept;
+    void reject (Reject) noexcept;
+    void analyse() noexcept;
+    void captureUnit() noexcept;
+    void startVoice() noexcept;
+    void renderVoice (Voice&, float* out) noexcept;
+    bool generateGrains (Voice&, int64_t upTo) noexcept;
+    int admitGrains (Voice&, int64_t upTo) noexcept;
+    bool frameAvailable (int64_t m) const noexcept;
+    int freeSlot() const noexcept;
+    void computeMask (double low, double high) noexcept;
+    float rawAt (int c, int64_t s) const noexcept { return raw[(size_t) c * (size_t) rawCap + (size_t) (((s % rawCap) + rawCap) % rawCap)]; }
+
+    // configuration
     double fs = 0.0;
-    int numCh = 0;
+    int numCh = 0, N = 0, H = 0, K = 0, histFrames = 0, X = 0, onsetLen = 0, releaseLen = 0;
+    int64_t rawCap = 0, slotCap = 0, minR = 0, maxR = 0;
+    uint32_t epochId = 0;
+    double invScale = 1.0;
+
+    // grain configuration (CLOUD)
+    int grainLen = 0;
+    double interval = 0.0, spray = 1.0, scan = 1.0, jitter = 1.0, reverseProb = 0.5, spread = 0.8, grainGain = 1.0;
+    std::vector<float> grainWin;
+
+    // state
     int64_t streamPos = 0;
-    uint64_t nonFinite = 0;
-    bool wasBypassed = false;
-    Ramp bodyGain, ghostGain;
+    uint64_t nonFinite = 0, baseSeed = 1, captureCount = 0;
+    bool firstBlock = true, wasBypassed = false;
+    Ramp bodyGain, ghostGain, dissolveRamp;
+    double cD = 1.0, sD = 0.0;
+    double decayK = 1.0;
+
+    std::unique_ptr<juce::dsp::FFT> fft;
+    std::vector<float> fftBuf, anaWin, synWin, mask;
+    std::vector<std::complex<float>> hist;
+    std::vector<int64_t> histIds;
+    std::vector<float> raw;
+    std::vector<int> bandOf;
+    float bandRef = 1.0f;
+    std::array<std::vector<float>, numVoices> slotData;
+    std::array<Voice, numVoices> voices;
+    Job job;
+    std::array<Command, maxPendingCommands> queue;
+    int nQueued = 0;
+    CaptureInfo lastCap;
+
+    GrainRecord* log = nullptr;
+    int logCap = 0, logCount = 0, maxActiveSeen = 0, maxActiveTotalSeen = 0;
+    float peak = 0.0f;
+    uint64_t overs = 0;
 };
 
 } // namespace afterimage

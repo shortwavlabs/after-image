@@ -60,7 +60,7 @@ void AfterimageProcessor::processBlockBypassed (juce::AudioBuffer<float>& buffer
 {
     juce::ScopedNoDenormals noDenormals;
     const int nch = juce::jmin (getMainBusNumOutputChannels(), buffer.getNumChannels());
-    dsp.processBypassed (buffer.getArrayOfWritePointers(), nch, buffer.getNumSamples());
+    dsp.processBypassed (buffer.getArrayOfWritePointers(), nch, buffer.getNumSamples(), readParams());
 }
 
 double AfterimageProcessor::getTailLengthSeconds() const
