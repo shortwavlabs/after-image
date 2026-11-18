@@ -28,7 +28,9 @@ Design and acceptance criteria are proposed in the development docs on the conce
 
 ## Licensing and attribution
 
-This is a public repository, **not yet licensed for redistribution**. The owner must decide an open-source licence *before the Jam submission*. JUCE 9 modules are dual-licensed under **AGPLv3 or a commercial JUCE licence**; the choice of framework licence must be resolved together with this repository's code licence. Do not assume public source equals permission to reuse.
+**AFTERIMAGE is free and open-source software licensed under the GNU Affero General Public License v3.0 only (`AGPL-3.0-only`).** See [LICENSE](LICENSE) for the complete license text and [licensing guidance](docs/LICENSING.md) for framework, contribution, attribution, and asset requirements (the guidance document is part of the design PR until merged).
+
+JUCE 9 will be used under its **AGPLv3** option, not a commercial JUCE license. No purchase is required for that choice, but the application's distribution must respect AGPL obligations. Third-party code, fonts, and artwork require separate licence verification. The Shortwav Labs name and logos are trademarks/branding; the software licence does not itself grant trademark rights.
 
 See [JUCE licensing](https://github.com/juce-framework/JUCE/blob/master/LICENSE.md) and the [Jam's official overview](https://www.theaudioprogrammer.com/events/plugin-jam).
 
@@ -40,4 +42,4 @@ See [JUCE licensing](https://github.com/juce-framework/JUCE/blob/master/LICENSE.
 4. Keep real-time audio execution deterministic, bounded, allocation-free, and lock-free.
 5. Keep experiments distinct from validated behavior, and document decisions.
 
-© 2026 Shortwav Labs. All rights reserved pending a repository licence decision.
+Copyright © 2026 Shortwav Labs contributors. Original project code is licensed under AGPL-3.0-only unless otherwise noted.
