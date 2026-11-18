@@ -86,9 +86,11 @@ def capture_reconstruction():
     # 0.25 s selection: how much loop material each method leaves
     for N in S.FFT_SIZES:
         p = prepare(fixtures.make("synth", FS), FS, N, 1.0, 1.25, 350, 5000)
-        rows.append(_row("capture_reconstruction", f"0.25 s selection N={N}: loop period with context / P0-A interior",
-                         f"{p['seam']['period_samples']} / {max(p['info']['p0a_interior_samples'] - p['seam']['xfade_samples'], 0)}",
-                         "samples"))
+        p0a = E.loop(p["cap"], FS, 0.08, "aligned")[1]  # what P0-A's loop_aligned80 actually does with this capture
+        rows.append(_row("capture_reconstruction", f"0.25 s selection N={N}: loop period P0-B (context) / P0-A loop_aligned80",
+                         f"{p['seam']['period_samples']} / {p0a['period_samples']}", "samples"))
+        rows.append(_row("capture_reconstruction", f"0.25 s selection N={N}: crossfade P0-B / P0-A (80 ms requested = 3840)",
+                         f"{p['seam']['xfade_samples']} / {p0a['xfade_samples']}", "samples"))
     return rows
 
 
@@ -229,10 +231,19 @@ def pitch_and_reverse():
         cents = 1200 * np.log2(Mx.sine_frequency(y, fs) / (440 * 2 ** (st / 12)))
         rows.append(_row("pitch", f"{st:+d} st: measured vs intended frequency", round(float(cents), 4), "cents",
                          abs(cents) <= PITCH_TOL_CENTS, PITCH_TOL_CENTS))
-    nb = _noise(seconds=0.5)
+    # Reverse, checked independently of read(): on a ramp buffer (value = index) a
+    # rendered grain must equal (pos + speed * (L - 1 - k)) * window, i.e. the same
+    # source span as the forward grain, traversed backwards.
+    R, L = 60000, 9600
+    ramp = np.arange(R, dtype=np.float64)[:, None]
+    w = G.grain_window(L, "hann")
     for speed in (1.0, 2 ** (7 / 12), 0.5):
-        e = Mx.error_db(G.read(nb, 1000.25, 9600, speed, True), G.read(nb, 1000.25, 9600, speed)[::-1])
-        rows.append(_row("reverse", f"speed {speed:.3f}: reversed read vs flipped forward read", round(e, 1), "dB",
+        g = np.zeros(1, dtype=G.GRAIN_FIELDS)
+        g["onset"], g["length"], g["pos"], g["speed"], g["reverse"] = 0, L, 1000.25, speed, True
+        g["amp"], g["gain"], g["gl"], g["gr"] = 1, 1, 1, 1
+        want = (1000.25 + speed * (L - 1 - np.arange(L))) * w
+        e = Mx.error_db(G.render(ramp, g, L, "hann")[:, 0], want)
+        rows.append(_row("reverse", f"speed {speed:.3f}: rendered reversed grain vs analytic ramp", round(e, 1), "dB",
                          e <= REVERSE_ERR_DB, REVERSE_ERR_DB))
     return rows
 

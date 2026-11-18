@@ -176,7 +176,11 @@ def run(out_dir, cfg_path=ROOT / "experiments-p0b.json", inputs_dir=ROOT / "inpu
                 log(f"FAILED {base}: {err}")
                 continue
             n = int(rcfg["ghost_seconds"] * fs)
-            emit(f"{base}/roi_oneshot.wav", fs, c["spec"])
+            k = int(0.005 * fs)  # 5 ms fades on the emitted reference only: the buffer itself starts and ends mid-signal
+            fade = np.ones(len(c["spec"]))
+            fade[:k] = 0.5 - 0.5 * np.cos(np.pi * np.arange(k) / k)
+            fade[-k:] = fade[:k][::-1]
+            emit(f"{base}/roi_oneshot.wav", fs, c["spec"] * fade[:, None])
             metrics[f"{base}/capture"] = dict(c["info"], band_limited=c["band_limited"],
                                               seam={k: (round(v, 6) if isinstance(v, float) else v) for k, v in c["seam"].items()},
                                               spectral_vs_raw_buffer_db=round(Mx.error_db(c["spec"], c["raw"]), 2))
