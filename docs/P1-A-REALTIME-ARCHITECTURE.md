@@ -95,6 +95,14 @@ Consequence: a capture needs `X` samples after `s1` (FULL) or every frame overla
 i.e. up to `s1 + X + N`). If the selection ends close to "now", the capture **waits** for that audio; the wait is
 at most `X + N + H` samples (≈ 190 ms at 48 kHz) and is part of the reported delay. The UI shows WAITING.
 
+**Trade-off.** The first `X` samples of every period are a blend that ends in audio from *after* the selection. If
+the selection is followed by silence or by an unrelated hit, each repeat starts with that material fading out (silence:
+the loop fades in over 80 ms, ρ ≈ 0 so the gains are the equal-power-like `1/sqrt(a'² + b'²)`). The alternative,
+**pre-roll** (blend the end of the period with audio from *before* `s0`), has the mirror problem at the end of each
+period and fails at `s0 = 0`, where there is no pre-roll. Post-roll was chosen because a selection usually ends on
+material that continues (a sustained note, the next beat). Both cases are tested (ρ ≈ 0 with silent post-roll, ρ ≈ 1
+with a continuing tone); whether post-roll is the right default is a listening question.
+
 Not covered by this contract: hop quantisation of what the user drew on a spectrogram. The request is sample-exact;
 the development UI converts its drawn rectangle to samples and displays the resulting duration.
 
@@ -128,7 +136,12 @@ for every block size.
 | Seam | correlation + blend over `X` samples | one slot after the last build unit |
 | Voice start | the new voice plays from the sample after the seam unit | |
 
-`S = 64` samples at every rate. Because `S` divides `H` and build slots sit at `S/2` offsets, a build unit **never**
+`S = 64` samples at every rate.
+
+Block-size independence: because work happens at stream-sample times, output is bit-identical for any block size
+**when commands carry a sample stamp and parameters are fixed** (the offline renderer and the tests do this). In the
+plugin a command from the UI is applied at the start of the block it arrives in, so its timing depends on the host's
+block size by up to one block, as any UI event does. Because `S` divides `H` and build slots sit at `S/2` offsets, a build unit **never**
 falls on the same sample as an analysis frame. The worst work at any single stream sample is therefore one frame of
 FFTs (analysis or build), plus grain rendering. A callback of `B` samples contains at most
 `ceil(B / H)` analysis frames and `ceil(B / S)` build units.
@@ -159,8 +172,8 @@ columns through a second SPSC FIFO; it never touches DSP buffers.
 |---|---|---|
 | Grain parameters | P0-B `dissolve_params(1.0)` with pitch off: 200 ms Hann grains, 20 grains/s (4× overlap), spray 1, jitter 1, reverse 0.5, spread 0.8, coherence 0 | the configuration the owner picked as CLOUD (`p0b_cloud`) |
 | Per-grain gain | `nominal_gain` (overlap-power normalisation, S_REF = 0.75) | P0-B |
-| Polyphony | 32 grains per voice; a grain that would be the 33rd is dropped whole (never truncated) | P0-B |
-| Random numbers | SplitMix64, 8 uniform draws per grain whatever the parameters | **departure**: NumPy's PCG64 is replaced by a generator that is trivial to reproduce in both languages; the parity reference uses the same generator |
+| Polyphony | 32 grains per voice; a grain that would be the 33rd is dropped whole (never truncated). During a 50 ms REPLACE fade two voices sound, so the hard ceiling is 64 grains; the benchmark includes it | P0-B |
+| Random numbers | SplitMix64, 8 uniform draws per grain whatever the parameters; ties in rounding resolved half-to-even (`std::nearbyint`) like Python's `round`; positions kept in double with a floor-mod | **departure**: NumPy's PCG64 is replaced by a generator that is trivial to reproduce in both languages. The reference scheduler takes its draws from an injectable source and is checked against `granular.schedule` with PCG64 draws |
 | Interpolation | 4-point Catmull-Rom, exact at integer positions | P0-B |
 | Stereo | both channels read the same position; positive-gain balance | P0-B |
 | Pitch / octave | off (speed 1) | blocker B5 |
@@ -220,8 +233,9 @@ scale source; it is a default, not a guarantee.
 
 - No allocation, lock, blocking call, file I/O, logging or UI call in `processBlock`. All buffers, FFT plans and FIFOs
   are created in `prepareToPlay`; the processor's state functions run on host threads, not the audio callback.
-- `juce::ScopedNoDenormals` in the callback; NaN/Inf in the input are replaced by 0 for analysis and capture (the BODY
-  path passes the input through unchanged, because altering the dry path is not the plugin's decision).
+- `juce::ScopedNoDenormals` in the callback. NaN/Inf input samples are replaced by 0 **before** BODY, analysis and
+  capture, and counted; so the output stays finite and no non-finite value enters history or a loop. This is the only
+  case where the dry path differs from the input, and the count is shown in the development UI.
 - Parameter values are read from APVTS atomics once per block.
 - The development editor uses polled parameter attachments (an atomic flag per control, a 30 Hz timer), not the stock
   APVTS attachments, so host automation with the editor open does no message-thread work on the audio thread.
