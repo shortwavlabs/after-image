@@ -1,0 +1,2033 @@
+{
+ "summary": {
+  "PASS": 107,
+  "FAIL": 0,
+  "info": 146
+ },
+ "rows": [
+  {
+   "check": "capture_reconstruction",
+   "case": "fs=48000 N=2048 full band, 4 fixtures",
+   "value": -157.9,
+   "unit": "dB",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "fs=48000 N=2048 usable samples gained over P0-A interior",
+   "value": 1536,
+   "unit": "samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "fs=48000 N=4096 full band, 4 fixtures",
+   "value": -157.8,
+   "unit": "dB",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "fs=48000 N=4096 usable samples gained over P0-A interior",
+   "value": 3072,
+   "unit": "samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "fs=48000 N=8192 full band, 4 fixtures",
+   "value": -157.6,
+   "unit": "dB",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "fs=48000 N=8192 usable samples gained over P0-A interior",
+   "value": 6144,
+   "unit": "samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "fs=44100 N=4096 full band, 4 fixtures",
+   "value": -157.6,
+   "unit": "dB",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "fs=44100 N=4096 usable samples gained over P0-A interior",
+   "value": 3072,
+   "unit": "samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "fs=96000 N=8192 full band, 4 fixtures",
+   "value": -157.6,
+   "unit": "dB",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "fs=96000 N=8192 usable samples gained over P0-A interior",
+   "value": 6144,
+   "unit": "samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "0.25 s selection N=2048: loop period with context / P0-A interior",
+   "value": "8046 / 6912",
+   "unit": "samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "0.25 s selection N=4096: loop period with context / P0-A interior",
+   "value": "8045 / 5376",
+   "unit": "samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "capture_reconstruction",
+   "case": "0.25 s selection N=8192: loop period with context / P0-A interior",
+   "value": "7553 / 2304",
+   "unit": "samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "neighbour_isolation",
+   "case": "audio outside the context frames replaced by noise: buffer change",
+   "value": 0.0,
+   "unit": "abs",
+   "limit": 0.0,
+   "result": "PASS"
+  },
+  {
+   "check": "neighbour_isolation",
+   "case": "full band, 0 dBFS-scale noise right up to both selection edges: buffer vs source",
+   "value": -150.5,
+   "unit": "dB",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "neighbour_isolation",
+   "case": "N=2048 band 1000-2000 Hz, guitar: neighbour audio in buffer, whole / within 20 ms of an edge / deeper than 50 ms",
+   "value": "-28.4 / -17.8 / -6000.0",
+   "unit": "dB re selected audio",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "neighbour_isolation",
+   "case": "N=2048 band 100-200 Hz, guitar: neighbour audio in buffer, whole / within 20 ms of an edge / deeper than 50 ms",
+   "value": "-27.4 / -15.6 / -6000.0",
+   "unit": "dB re selected audio",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "neighbour_isolation",
+   "case": "N=4096 band 1000-2000 Hz, guitar: neighbour audio in buffer, whole / within 20 ms of an edge / deeper than 50 ms",
+   "value": "-32.7 / -22.0 / -82.3",
+   "unit": "dB re selected audio",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "neighbour_isolation",
+   "case": "N=4096 band 100-200 Hz, guitar: neighbour audio in buffer, whole / within 20 ms of an edge / deeper than 50 ms",
+   "value": "-24.7 / -12.5 / -58.9",
+   "unit": "dB re selected audio",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "neighbour_isolation",
+   "case": "N=8192 band 1000-2000 Hz, guitar: neighbour audio in buffer, whole / within 20 ms of an edge / deeper than 50 ms",
+   "value": "-27.1 / -16.0 / -90.2",
+   "unit": "dB re selected audio",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "neighbour_isolation",
+   "case": "N=8192 band 100-200 Hz, guitar: neighbour audio in buffer, whole / within 20 ms of an edge / deeper than 50 ms",
+   "value": "-22.3 / -11.0 / -53.2",
+   "unit": "dB re selected audio",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "neighbour_isolation",
+   "case": "no future context (selection ends at newest frame): tail trimmed 1536 samples, buffer vs source",
+   "value": -157.8,
+   "unit": "dB",
+   "limit": -90.0,
+   "result": "PASS"
+  },
+  {
+   "check": "mask_integrity",
+   "case": "N=2048 band 1-2 kHz: 250 Hz tone (2 octaves outside)",
+   "value": -66.1,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "mask_integrity",
+   "case": "N=2048 band 1-2 kHz: 8000 Hz tone (2 octaves outside)",
+   "value": -94.3,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "mask_integrity",
+   "case": "N=2048 band 1-2 kHz: 1500 Hz tone (in band)",
+   "value": -0.0,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "mask_integrity",
+   "case": "N=4096 band 1-2 kHz: 250 Hz tone (2 octaves outside)",
+   "value": -152.9,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "mask_integrity",
+   "case": "N=4096 band 1-2 kHz: 8000 Hz tone (2 octaves outside)",
+   "value": -187.3,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "mask_integrity",
+   "case": "N=4096 band 1-2 kHz: 1500 Hz tone (in band)",
+   "value": -0.0,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "mask_integrity",
+   "case": "N=8192 band 1-2 kHz: 250 Hz tone (2 octaves outside)",
+   "value": -171.0,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "mask_integrity",
+   "case": "N=8192 band 1-2 kHz: 8000 Hz tone (2 octaves outside)",
+   "value": -205.4,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "mask_integrity",
+   "case": "N=8192 band 1-2 kHz: 1500 Hz tone (in band)",
+   "value": -0.0,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "grain_window",
+   "case": "hann: first sample exactly 0, values in [0, 1]",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "grain_window",
+   "case": "hann: largest last sample, 20-300 ms at 44.1/96 kHz",
+   "value": 1.2687052542759147e-05,
+   "unit": "abs",
+   "limit": 0.0001,
+   "result": "PASS"
+  },
+  {
+   "check": "grain_window",
+   "case": "tukey: first sample exactly 0, values in [0, 1]",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "grain_window",
+   "case": "tukey: largest last sample, 20-300 ms at 44.1/96 kHz",
+   "value": 0.0,
+   "unit": "abs",
+   "limit": 0.0001,
+   "result": "PASS"
+  },
+  {
+   "check": "grain_window",
+   "case": "hann: deviation of 50 %-overlap sum from 1",
+   "value": 4.440892098500626e-16,
+   "unit": "abs",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "grain_clicks",
+   "case": "hann: worst edge step / steepest interior step, 40 random grains",
+   "value": 0.005,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "grain_clicks",
+   "case": "tukey: worst edge step / steepest interior step, 40 random grains",
+   "value": 0.007,
+   "unit": "ratio",
+   "limit": 1.25,
+   "result": "PASS"
+  },
+  {
+   "check": "grain_clicks",
+   "case": "rect window control: edge step / steepest interior step",
+   "value": 338.14,
+   "unit": "ratio",
+   "limit": ">= 2.0",
+   "result": "PASS"
+  },
+  {
+   "check": "determinism",
+   "case": "same seed -> identical schedule",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "determinism",
+   "case": "different seed -> different schedule",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "determinism",
+   "case": "two renders of the same cloud: float64 sha256 equal",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "determinism",
+   "case": "spectral and raw buffers share one period (same schedule addresses both)",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "determinism",
+   "case": "grains in 1 s of a 0->1 DISSOLVE ramp",
+   "value": 22,
+   "unit": "grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "pitch",
+   "case": "-12 st: measured vs intended frequency",
+   "value": 0.0006,
+   "unit": "cents",
+   "limit": 1.0,
+   "result": "PASS"
+  },
+  {
+   "check": "pitch",
+   "case": "-7 st: measured vs intended frequency",
+   "value": 0.0014,
+   "unit": "cents",
+   "limit": 1.0,
+   "result": "PASS"
+  },
+  {
+   "check": "pitch",
+   "case": "-1 st: measured vs intended frequency",
+   "value": -0.0005,
+   "unit": "cents",
+   "limit": 1.0,
+   "result": "PASS"
+  },
+  {
+   "check": "pitch",
+   "case": "+0 st: measured vs intended frequency",
+   "value": 0.0,
+   "unit": "cents",
+   "limit": 1.0,
+   "result": "PASS"
+  },
+  {
+   "check": "pitch",
+   "case": "+1 st: measured vs intended frequency",
+   "value": 0.0005,
+   "unit": "cents",
+   "limit": 1.0,
+   "result": "PASS"
+  },
+  {
+   "check": "pitch",
+   "case": "+7 st: measured vs intended frequency",
+   "value": -0.0,
+   "unit": "cents",
+   "limit": 1.0,
+   "result": "PASS"
+  },
+  {
+   "check": "pitch",
+   "case": "+12 st: measured vs intended frequency",
+   "value": -0.0,
+   "unit": "cents",
+   "limit": 1.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reverse",
+   "case": "speed 1.000: reversed read vs flipped forward read",
+   "value": -6000.0,
+   "unit": "dB",
+   "limit": -200.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reverse",
+   "case": "speed 1.498: reversed read vs flipped forward read",
+   "value": -6000.0,
+   "unit": "dB",
+   "limit": -200.0,
+   "result": "PASS"
+  },
+  {
+   "check": "reverse",
+   "case": "speed 0.500: reversed read vs flipped forward read",
+   "value": -6000.0,
+   "unit": "dB",
+   "limit": -200.0,
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "20 ms, 2/s: scheduled grains in 20 s",
+   "value": 40,
+   "unit": "grains",
+   "limit": "40 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "20 ms, 2/s: mean / max simultaneous grains (no ceiling)",
+   "value": "0.04 / 1",
+   "unit": "grains",
+   "limit": "0.04 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "20 ms, 10/s: scheduled grains in 20 s",
+   "value": 200,
+   "unit": "grains",
+   "limit": "200 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "20 ms, 10/s: mean / max simultaneous grains (no ceiling)",
+   "value": "0.20 / 2",
+   "unit": "grains",
+   "limit": "0.20 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "20 ms, 20/s: scheduled grains in 20 s",
+   "value": 400,
+   "unit": "grains",
+   "limit": "400 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "20 ms, 20/s: mean / max simultaneous grains (no ceiling)",
+   "value": "0.40 / 2",
+   "unit": "grains",
+   "limit": "0.40 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "20 ms, 50/s: scheduled grains in 20 s",
+   "value": 1000,
+   "unit": "grains",
+   "limit": "1000 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "20 ms, 50/s: mean / max simultaneous grains (no ceiling)",
+   "value": "1.00 / 2",
+   "unit": "grains",
+   "limit": "1.00 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "20 ms, 100/s: scheduled grains in 20 s",
+   "value": 1999,
+   "unit": "grains",
+   "limit": "2000 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "20 ms, 100/s: mean / max simultaneous grains (no ceiling)",
+   "value": "2.00 / 3",
+   "unit": "grains",
+   "limit": "2.00 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "100 ms, 2/s: scheduled grains in 20 s",
+   "value": 40,
+   "unit": "grains",
+   "limit": "40 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "100 ms, 2/s: mean / max simultaneous grains (no ceiling)",
+   "value": "0.20 / 1",
+   "unit": "grains",
+   "limit": "0.20 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "100 ms, 10/s: scheduled grains in 20 s",
+   "value": 200,
+   "unit": "grains",
+   "limit": "200 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "100 ms, 10/s: mean / max simultaneous grains (no ceiling)",
+   "value": "1.00 / 2",
+   "unit": "grains",
+   "limit": "1.00 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "100 ms, 20/s: scheduled grains in 20 s",
+   "value": 399,
+   "unit": "grains",
+   "limit": "400 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "100 ms, 20/s: mean / max simultaneous grains (no ceiling)",
+   "value": "2.00 / 3",
+   "unit": "grains",
+   "limit": "2.00 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "100 ms, 50/s: scheduled grains in 20 s",
+   "value": 1000,
+   "unit": "grains",
+   "limit": "1000 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "100 ms, 50/s: mean / max simultaneous grains (no ceiling)",
+   "value": "5.00 / 6",
+   "unit": "grains",
+   "limit": "5.00 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "100 ms, 100/s: scheduled grains in 20 s",
+   "value": 2000,
+   "unit": "grains",
+   "limit": "2000 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "100 ms, 100/s: mean / max simultaneous grains (no ceiling)",
+   "value": "10.00 / 11",
+   "unit": "grains",
+   "limit": "10.00 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "300 ms, 2/s: scheduled grains in 20 s",
+   "value": 40,
+   "unit": "grains",
+   "limit": "40 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "300 ms, 2/s: mean / max simultaneous grains (no ceiling)",
+   "value": "0.60 / 2",
+   "unit": "grains",
+   "limit": "0.60 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "300 ms, 10/s: scheduled grains in 20 s",
+   "value": 200,
+   "unit": "grains",
+   "limit": "200 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "300 ms, 10/s: mean / max simultaneous grains (no ceiling)",
+   "value": "3.00 / 4",
+   "unit": "grains",
+   "limit": "3.00 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "300 ms, 20/s: scheduled grains in 20 s",
+   "value": 399,
+   "unit": "grains",
+   "limit": "400 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "300 ms, 20/s: mean / max simultaneous grains (no ceiling)",
+   "value": "5.99 / 7",
+   "unit": "grains",
+   "limit": "6.00 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "300 ms, 50/s: scheduled grains in 20 s",
+   "value": 1000,
+   "unit": "grains",
+   "limit": "1000 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "300 ms, 50/s: mean / max simultaneous grains (no ceiling)",
+   "value": "15.00 / 16",
+   "unit": "grains",
+   "limit": "15.00 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "density",
+   "case": "300 ms, 100/s: scheduled grains in 20 s",
+   "value": 1999,
+   "unit": "grains",
+   "limit": "2000 +/- 2%",
+   "result": "PASS"
+  },
+  {
+   "check": "overlap",
+   "case": "300 ms, 100/s: mean / max simultaneous grains (no ceiling)",
+   "value": "30.00 / 31",
+   "unit": "grains",
+   "limit": "30.00 +/- 5%",
+   "result": "PASS"
+  },
+  {
+   "check": "polyphony",
+   "case": "300 ms at 100/s, ceiling 8: max simultaneous",
+   "value": 8,
+   "unit": "grains",
+   "limit": 8,
+   "result": "PASS"
+  },
+  {
+   "check": "polyphony",
+   "case": "300 ms at 100/s, ceiling 8: grains dropped",
+   "value": "1500 of 2030",
+   "unit": "grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "polyphony",
+   "case": "300 ms at 100/s, ceiling 16: max simultaneous",
+   "value": 16,
+   "unit": "grains",
+   "limit": 16,
+   "result": "PASS"
+  },
+  {
+   "check": "polyphony",
+   "case": "300 ms at 100/s, ceiling 16: grains dropped",
+   "value": "972 of 2030",
+   "unit": "grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "polyphony",
+   "case": "300 ms at 100/s, ceiling 32: max simultaneous",
+   "value": 31,
+   "unit": "grains",
+   "limit": 32,
+   "result": "PASS"
+  },
+  {
+   "check": "polyphony",
+   "case": "300 ms at 100/s, ceiling 32: grains dropped",
+   "value": "0 of 2030",
+   "unit": "grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "polyphony",
+   "case": "DISSOLVE = 1 default cloud, ceiling 32: grains dropped",
+   "value": 0,
+   "unit": "grains",
+   "limit": 0,
+   "result": "PASS"
+  },
+  {
+   "check": "degenerate",
+   "case": "silent buffer -> exactly silent cloud",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "degenerate",
+   "case": "0.2 s selection at N=8192 (period 5851 samples), 300 ms grains +/-12 st: finite, non-silent",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "degenerate",
+   "case": "6-sample buffer is refused",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "safety",
+   "case": "24 clouds (4 fixtures x D 0/0.5/1 x spectral/raw): non-finite renders",
+   "value": 0,
+   "unit": "count",
+   "limit": 0,
+   "result": "PASS"
+  },
+  {
+   "check": "safety",
+   "case": "same, after MEMORY envelope: float32 denormal samples",
+   "value": 0,
+   "unit": "count",
+   "limit": 0,
+   "result": "PASS"
+  },
+  {
+   "check": "stereo",
+   "case": "dual-mono source, spread 0%: mono compatibility",
+   "value": 0.0,
+   "unit": "dB",
+   "limit": ">= -3.02",
+   "result": "PASS"
+  },
+  {
+   "check": "stereo",
+   "case": "dual-mono source, spread 0%: interchannel correlation",
+   "value": 1.0,
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "dual-mono source, spread 50%: mono compatibility",
+   "value": -0.244,
+   "unit": "dB",
+   "limit": ">= -3.02",
+   "result": "PASS"
+  },
+  {
+   "check": "stereo",
+   "case": "dual-mono source, spread 50%: interchannel correlation",
+   "value": 0.891,
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "dual-mono source, spread 100%: mono compatibility",
+   "value": -0.958,
+   "unit": "dB",
+   "limit": ">= -3.02",
+   "result": "PASS"
+  },
+  {
+   "check": "stereo",
+   "case": "dual-mono source, spread 100%: interchannel correlation",
+   "value": 0.605,
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "anti-phase source stays anti-phase (the balance law cannot repair a source): correlation",
+   "value": -0.735,
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "guitar: correlation source buffer -> cloud first s / last s",
+   "value": "0.870 -> 0.679 / 0.670",
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "guitar: mono compatibility source buffer -> cloud",
+   "value": "-0.30 -> -0.87",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "vocal: correlation source buffer -> cloud first s / last s",
+   "value": "0.999 -> 0.719 / 0.802",
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "vocal: mono compatibility source buffer -> cloud",
+   "value": "-0.00 -> -0.61",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "drums: correlation source buffer -> cloud first s / last s",
+   "value": "0.976 -> 0.731 / 0.840",
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "drums: mono compatibility source buffer -> cloud",
+   "value": "-0.05 -> -0.75",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "synth: correlation source buffer -> cloud first s / last s",
+   "value": "0.018 -> 0.082 / 0.043",
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "synth: mono compatibility source buffer -> cloud",
+   "value": "-2.93 -> -2.89",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 20 ms, 2/s (overlap power 0.01): RMS re buffer",
+   "value": -17.8,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 20 ms, 2/s: peak re buffer peak / max active / dropped",
+   "value": "-0.18 / 1 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 20 ms, 5/s (overlap power 0.04): RMS re buffer",
+   "value": -13.87,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 20 ms, 5/s: peak re buffer peak / max active / dropped",
+   "value": "+0.06 / 1 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 20 ms, 10/s (overlap power 0.08): RMS re buffer",
+   "value": -10.89,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 20 ms, 10/s: peak re buffer peak / max active / dropped",
+   "value": "-0.08 / 2 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 20 ms, 20/s (overlap power 0.15): RMS re buffer",
+   "value": -7.91,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 20 ms, 20/s: peak re buffer peak / max active / dropped",
+   "value": "+0.32 / 2 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 20 ms, 50/s (overlap power 0.38): RMS re buffer",
+   "value": -3.92,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 20 ms, 50/s: peak re buffer peak / max active / dropped",
+   "value": "+1.83 / 2 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 20 ms, 100/s (overlap power 0.75): RMS re buffer",
+   "value": -0.89,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 20 ms, 100/s: peak re buffer peak / max active / dropped",
+   "value": "+3.10 / 3 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 100 ms, 2/s (overlap power 0.08): RMS re buffer",
+   "value": -10.85,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 100 ms, 2/s: peak re buffer peak / max active / dropped",
+   "value": "-0.28 / 2 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 100 ms, 5/s (overlap power 0.19): RMS re buffer",
+   "value": -6.92,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 100 ms, 5/s: peak re buffer peak / max active / dropped",
+   "value": "+0.49 / 2 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 100 ms, 10/s (overlap power 0.38): RMS re buffer",
+   "value": -3.86,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 100 ms, 10/s: peak re buffer peak / max active / dropped",
+   "value": "+2.71 / 2 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 100 ms, 20/s (overlap power 0.75): RMS re buffer",
+   "value": -0.9,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 100 ms, 20/s: peak re buffer peak / max active / dropped",
+   "value": "+2.74 / 3 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 100 ms, 50/s (overlap power 1.88): RMS re buffer",
+   "value": -0.92,
+   "unit": "dB",
+   "limit": "+/- 1.5",
+   "result": "PASS"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 100 ms, 50/s: peak re buffer peak / max active / dropped",
+   "value": "+0.21 / 6 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 100 ms, 100/s (overlap power 3.75): RMS re buffer",
+   "value": -0.88,
+   "unit": "dB",
+   "limit": "+/- 1.5",
+   "result": "PASS"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 100 ms, 100/s: peak re buffer peak / max active / dropped",
+   "value": "+0.59 / 11 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 300 ms, 2/s (overlap power 0.22): RMS re buffer",
+   "value": -6.08,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 300 ms, 2/s: peak re buffer peak / max active / dropped",
+   "value": "+2.27 / 2 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 300 ms, 5/s (overlap power 0.56): RMS re buffer",
+   "value": -2.2,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 300 ms, 5/s: peak re buffer peak / max active / dropped",
+   "value": "+2.55 / 3 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 300 ms, 10/s (overlap power 1.12): RMS re buffer",
+   "value": -0.84,
+   "unit": "dB",
+   "limit": "+/- 1.5",
+   "result": "PASS"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 300 ms, 10/s: peak re buffer peak / max active / dropped",
+   "value": "+2.45 / 4 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 300 ms, 20/s (overlap power 2.25): RMS re buffer",
+   "value": -0.9,
+   "unit": "dB",
+   "limit": "+/- 1.5",
+   "result": "PASS"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 300 ms, 20/s: peak re buffer peak / max active / dropped",
+   "value": "+0.78 / 7 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 300 ms, 50/s (overlap power 5.62): RMS re buffer",
+   "value": -0.91,
+   "unit": "dB",
+   "limit": "+/- 1.5",
+   "result": "PASS"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 300 ms, 50/s: peak re buffer peak / max active / dropped",
+   "value": "+0.70 / 16 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 300 ms, 100/s (overlap power 11.25): RMS re buffer",
+   "value": -0.88,
+   "unit": "dB",
+   "limit": "+/- 1.5",
+   "result": "PASS"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "decorrelated 300 ms, 100/s: peak re buffer peak / max active / dropped",
+   "value": "-0.36 / 31 / 0",
+   "unit": "dB / grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "coherent worst case 100 ms, 20/s, gain law told coherence=0: RMS / peak re buffer",
+   "value": "+1.25 / +1.25",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "coherent worst case 100 ms, 20/s, gain law told coherence=1: RMS / peak re buffer",
+   "value": "+0.00 / +0.00",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "coherent worst case 100 ms, 100/s, gain law told coherence=0: RMS / peak re buffer",
+   "value": "+8.24 / +8.24",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "coherent worst case 100 ms, 100/s, gain law told coherence=1: RMS / peak re buffer",
+   "value": "+0.00 / +0.00",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "coherent worst case 300 ms, 20/s, gain law told coherence=0: RMS / peak re buffer",
+   "value": "+6.02 / +6.02",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "coherent worst case 300 ms, 20/s, gain law told coherence=1: RMS / peak re buffer",
+   "value": "+0.00 / +0.00",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "coherent worst case 300 ms, 100/s, gain law told coherence=0: RMS / peak re buffer",
+   "value": "+13.01 / +13.01",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "coherent worst case 300 ms, 100/s, gain law told coherence=1: RMS / peak re buffer",
+   "value": "+0.00 / +0.00",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "amplitude_buildup",
+   "case": "hard bound max_grains*g_max*sqrt(2)*1.25 = +36.3 dB re buffer peak; measured dense cloud peak",
+   "value": 0.69,
+   "unit": "dB re buffer peak",
+   "limit": 36.3,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "noise: structural D=0 vs TRACE loop",
+   "value": -312.7,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "noise: parallel D=0 equals TRACE exactly",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "noise: parallel D=1 vs CLOUD",
+   "value": -323.2,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "noise structural: largest RMS change between settings 0.05 apart",
+   "value": 0.86,
+   "unit": "dB",
+   "limit": 1.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "noise structural: RMS range over D 0..1",
+   "value": 0.95,
+   "unit": "dB",
+   "limit": 3.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "noise parallel: largest RMS change between settings 0.05 apart",
+   "value": 0.07,
+   "unit": "dB",
+   "limit": 1.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "noise parallel: RMS range over D 0..1",
+   "value": 0.89,
+   "unit": "dB",
+   "limit": 3.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "noise structural 0->1 ramp over 8 s: largest change between 1 s RMS blocks",
+   "value": 0.96,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "guitar: structural D=0 vs TRACE loop",
+   "value": -312.9,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "guitar: parallel D=0 equals TRACE exactly",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "guitar: parallel D=1 vs CLOUD",
+   "value": -324.0,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "guitar structural: largest RMS change between settings 0.05 apart",
+   "value": 0.63,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "guitar structural: RMS range over D 0..1",
+   "value": 0.82,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "guitar parallel: largest RMS change between settings 0.05 apart",
+   "value": 0.02,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "guitar parallel: RMS range over D 0..1",
+   "value": 0.16,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "guitar structural 0->1 ramp over 8 s: largest change between 1 s RMS blocks",
+   "value": 1.01,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "vocal: structural D=0 vs TRACE loop",
+   "value": -312.7,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "vocal: parallel D=0 equals TRACE exactly",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "vocal: parallel D=1 vs CLOUD",
+   "value": -324.1,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "vocal structural: largest RMS change between settings 0.05 apart",
+   "value": 0.21,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "vocal structural: RMS range over D 0..1",
+   "value": 0.3,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "vocal parallel: largest RMS change between settings 0.05 apart",
+   "value": 0.02,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "vocal parallel: RMS range over D 0..1",
+   "value": 0.18,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "vocal structural 0->1 ramp over 8 s: largest change between 1 s RMS blocks",
+   "value": 0.49,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "drums: structural D=0 vs TRACE loop",
+   "value": -312.7,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "drums: parallel D=0 equals TRACE exactly",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "drums: parallel D=1 vs CLOUD",
+   "value": -323.7,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "drums structural: largest RMS change between settings 0.05 apart",
+   "value": 0.89,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "drums structural: RMS range over D 0..1",
+   "value": 1.36,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "drums parallel: largest RMS change between settings 0.05 apart",
+   "value": 0.05,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "drums parallel: RMS range over D 0..1",
+   "value": 0.54,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "drums structural 0->1 ramp over 8 s: largest change between 1 s RMS blocks",
+   "value": 2.13,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "synth: structural D=0 vs TRACE loop",
+   "value": -312.7,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "synth: parallel D=0 equals TRACE exactly",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "synth: parallel D=1 vs CLOUD",
+   "value": -324.1,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "synth structural: largest RMS change between settings 0.05 apart",
+   "value": 0.09,
+   "unit": "dB",
+   "limit": 1.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "synth structural: RMS range over D 0..1",
+   "value": 0.13,
+   "unit": "dB",
+   "limit": 3.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "synth parallel: largest RMS change between settings 0.05 apart",
+   "value": 0.01,
+   "unit": "dB",
+   "limit": 1.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "synth parallel: RMS range over D 0..1",
+   "value": 0.08,
+   "unit": "dB",
+   "limit": 3.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_continuity",
+   "case": "synth structural 0->1 ramp over 8 s: largest change between 1 s RMS blocks",
+   "value": 0.25,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "spectral_selection",
+   "case": "vocal 350-5000 Hz, no pitch: in-band energy fraction spectral / conventional",
+   "value": "1.0000 / 0.9915",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "spectral_selection",
+   "case": "vocal 350-5000 Hz, detune + octaves (default): in-band energy fraction spectral / conventional",
+   "value": "0.9890 / 0.9799",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "spectral_selection",
+   "case": "vocal 350-5000 Hz, +/-12 st uniform: in-band energy fraction spectral / conventional",
+   "value": "0.9850 / 0.9781",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "spectral_selection",
+   "case": "synth 2000-10000 Hz, no pitch: in-band energy fraction spectral / conventional",
+   "value": "1.0000 / 0.0177",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "spectral_selection",
+   "case": "synth 2000-10000 Hz, detune + octaves (default): in-band energy fraction spectral / conventional",
+   "value": "0.9445 / 0.0228",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "spectral_selection",
+   "case": "synth 2000-10000 Hz, +/-12 st uniform: in-band energy fraction spectral / conventional",
+   "value": "0.7292 / 0.0299",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "guitar harmonic: share of position weight in the top 20 % of the buffer (uniform = 0.20)",
+   "value": 0.265,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "guitar harmonic: total-variation distance, in-band weights vs broadband weights (0 = same guide)",
+   "value": 0.0,
+   "unit": "0..1",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "guitar transient: share of position weight in the top 20 % of the buffer (uniform = 0.20)",
+   "value": 0.414,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "guitar transient: total-variation distance, in-band weights vs broadband weights (0 = same guide)",
+   "value": 0.003,
+   "unit": "0..1",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "vocal harmonic: share of position weight in the top 20 % of the buffer (uniform = 0.20)",
+   "value": 0.211,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "vocal harmonic: total-variation distance, in-band weights vs broadband weights (0 = same guide)",
+   "value": 0.001,
+   "unit": "0..1",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "vocal transient: share of position weight in the top 20 % of the buffer (uniform = 0.20)",
+   "value": 0.323,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "vocal transient: total-variation distance, in-band weights vs broadband weights (0 = same guide)",
+   "value": 0.0,
+   "unit": "0..1",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "drums harmonic: share of position weight in the top 20 % of the buffer (uniform = 0.20)",
+   "value": 0.532,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "drums harmonic: total-variation distance, in-band weights vs broadband weights (0 = same guide)",
+   "value": 0.0,
+   "unit": "0..1",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "drums transient: share of position weight in the top 20 % of the buffer (uniform = 0.20)",
+   "value": 0.841,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "drums transient: total-variation distance, in-band weights vs broadband weights (0 = same guide)",
+   "value": 0.001,
+   "unit": "0..1",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "synth harmonic: share of position weight in the top 20 % of the buffer (uniform = 0.20)",
+   "value": 0.21,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "synth harmonic: total-variation distance, in-band weights vs broadband weights (0 = same guide)",
+   "value": 0.017,
+   "unit": "0..1",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "synth transient: share of position weight in the top 20 % of the buffer (uniform = 0.20)",
+   "value": 0.34,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "synth transient: total-variation distance, in-band weights vs broadband weights (0 = same guide)",
+   "value": 0.42,
+   "unit": "0..1",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "guitar 2-10 kHz harmonic: share of position weight in the top 20 % of the buffer (uniform = 0.20)",
+   "value": 0.385,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "guitar 2-10 kHz harmonic: total-variation distance, in-band weights vs broadband weights (0 = same guide)",
+   "value": 0.138,
+   "unit": "0..1",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "guitar 2-10 kHz transient: share of position weight in the top 20 % of the buffer (uniform = 0.20)",
+   "value": 0.407,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "guitar 2-10 kHz transient: total-variation distance, in-band weights vs broadband weights (0 = same guide)",
+   "value": 0.213,
+   "unit": "0..1",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "drums 5-16 kHz harmonic: share of position weight in the top 20 % of the buffer (uniform = 0.20)",
+   "value": 0.719,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "drums 5-16 kHz harmonic: total-variation distance, in-band weights vs broadband weights (0 = same guide)",
+   "value": 0.536,
+   "unit": "0..1",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "drums 5-16 kHz transient: share of position weight in the top 20 % of the buffer (uniform = 0.20)",
+   "value": 0.849,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "guided",
+   "case": "drums 5-16 kHz transient: total-variation distance, in-band weights vs broadband weights (0 = same guide)",
+   "value": 0.335,
+   "unit": "0..1",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory",
+   "case": "fs=44100 N=4096: capture buffer for a maximum selection (65 frames)",
+   "value": 0.508,
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory",
+   "case": "fs=44100 N=4096: reconstruction scratch (69 frames WOLA, stereo float32)",
+   "value": 0.562,
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=44100 N=4096: capture-time inverse FFTs (stereo, maximum selection)",
+   "value": 138,
+   "unit": "IFFT",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=44100 N=4096: seam search correlations (25 ms lag x 80 ms window)",
+   "value": "1103 x 3528",
+   "unit": "lags x MAC",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=44100: grain reads per second at the ceiling (32 grains, stereo, 4-tap)",
+   "value": 11289600,
+   "unit": "taps/s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=44100 N=4096: added capture latency for future context",
+   "value": 46.4,
+   "unit": "ms",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory",
+   "case": "fs=48000 N=4096: capture buffer for a maximum selection (71 frames)",
+   "value": 0.555,
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory",
+   "case": "fs=48000 N=4096: reconstruction scratch (75 frames WOLA, stereo float32)",
+   "value": 0.609,
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=48000 N=4096: capture-time inverse FFTs (stereo, maximum selection)",
+   "value": 150,
+   "unit": "IFFT",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=48000 N=4096: seam search correlations (25 ms lag x 80 ms window)",
+   "value": "1201 x 3840",
+   "unit": "lags x MAC",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=48000: grain reads per second at the ceiling (32 grains, stereo, 4-tap)",
+   "value": 12288000,
+   "unit": "taps/s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=48000 N=4096: added capture latency for future context",
+   "value": 42.7,
+   "unit": "ms",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory",
+   "case": "fs=88200 N=8192: capture buffer for a maximum selection (65 frames)",
+   "value": 1.016,
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory",
+   "case": "fs=88200 N=8192: reconstruction scratch (69 frames WOLA, stereo float32)",
+   "value": 1.125,
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=88200 N=8192: capture-time inverse FFTs (stereo, maximum selection)",
+   "value": 138,
+   "unit": "IFFT",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=88200 N=8192: seam search correlations (25 ms lag x 80 ms window)",
+   "value": "2206 x 7056",
+   "unit": "lags x MAC",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=88200: grain reads per second at the ceiling (32 grains, stereo, 4-tap)",
+   "value": 22579200,
+   "unit": "taps/s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=88200 N=8192: added capture latency for future context",
+   "value": 46.4,
+   "unit": "ms",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory",
+   "case": "fs=96000 N=8192: capture buffer for a maximum selection (71 frames)",
+   "value": 1.109,
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory",
+   "case": "fs=96000 N=8192: reconstruction scratch (75 frames WOLA, stereo float32)",
+   "value": 1.219,
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=96000 N=8192: capture-time inverse FFTs (stereo, maximum selection)",
+   "value": 150,
+   "unit": "IFFT",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=96000 N=8192: seam search correlations (25 ms lag x 80 ms window)",
+   "value": "2401 x 7680",
+   "unit": "lags x MAC",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=96000: grain reads per second at the ceiling (32 grains, stereo, 4-tap)",
+   "value": 24576000,
+   "unit": "taps/s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=96000 N=8192: added capture latency for future context",
+   "value": 42.7,
+   "unit": "ms",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory",
+   "case": "grain voice state (10 fields) x ceiling",
+   "value": 2048,
+   "unit": "bytes",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "per active grain per output sample (stereo): 8 buffer taps, ~14 mul, 1 window lookup, 2 balance gains",
+   "value": 1,
+   "unit": "unit",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "per grain start: 8 uniform draws, 1 pow2, 1 sin/cos pair, 1 sqrt",
+   "value": 1,
+   "unit": "unit",
+   "limit": null,
+   "result": "info"
+  }
+ ]
+}

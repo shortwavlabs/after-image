@@ -85,3 +85,19 @@ Engines rendered at every FFT size: `freeze_delta`, `loop_ep80`,
 
 All ghosts of one case share the ROI, mask, 30 ms onset fade, T60 and the level
 rule (raw ghost RMS over its first 2 s matched to −23 dBFS before the envelope).
+
+## P0-B: spectral granular cloud
+
+P0-B adds a time-domain granular engine fed by the same captures, without
+changing the P0-A commands above. See `docs/P0-B-FINAL-REPORT.md` and
+`docs/P0-B-SPECTRAL-GRANULAR-ARCHITECTURE.md`.
+
+```
+uv run python run_p0b.py all        # p0b-verification.json, renders/p0b/, p0b-manifest.json, p0b-metrics.json
+uv run python run_p0b.py blind      # renders/p0b/blind/, key in renders/p0b/blind-KEY-do-not-open.json
+uv run python run_p0b.py summary    # report tables
+```
+
+New code: `p0/granular.py` (engine), `p0/verify_cloud.py` (checks, limits fixed
+in the first commit of the branch), `p0/cloud_experiment.py` (listening matrix).
+Listening notes go in `listening-notes-p0b.md`.
