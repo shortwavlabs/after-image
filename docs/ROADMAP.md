@@ -13,12 +13,12 @@
 
 ## Phase 1 — Host skeleton and realtime safety
 
-- [ ] Select and record code/framework/open-source licences.
+- [x] Select and record project/framework licensing: `AGPL-3.0-only`, JUCE AGPL route. Verify the pinned JUCE version's notices as part of the implementation/release gate.
 - [ ] CMake JUCE project, minimal AU/VST3 targets (macOS), VST3 Windows CI plan.
 - [ ] Define param IDs, host state behavior and preset contract before implementation.
 - [ ] Preallocated rolling complex-frame history.
 - [ ] Reliable command handoff / single voice ghost renderer.
-- [ ] Gain smoothing and host latency reporting.
+- [ ] Gain smoothing and verify 0-sample host latency for the direct BODY through-path; measure IMPRINT-to-GHOST response separately.
 - [ ] Engine tests: null/impulse/phase/silence/stereo/block boundaries.
 
 ## Phase 2 — Signature interface
@@ -40,10 +40,11 @@
 
 ## Phase 4 — Submission
 
-- [ ] Commit correct open-source licence and third-party notices.
-- [ ] macOS sign/notarize; validate Windows installer/zip on actual Windows host.
+- [x] Commit original project open-source licence (`AGPL-3.0-only`).
+- [ ] Complete third-party notices, exact shipped-source correspondence, and dependency/asset licence inventory.
+- [ ] Build, sign and notarize macOS AU/VST3 installer; validate Windows VST3 installer on actual Windows host.
 - [ ] auval/pluginval and host smoke tests; manual rendering/automation checks.
-- [ ] Release binaries, reproduction instructions, release checksum.
+- [ ] Publish downloadable macOS and Windows installers, exact corresponding source, reproduction instructions, and SHA-256 checksums through GitHub Releases.
 - [ ] ≤3-minute concept/demo video and 30-second social clip.
 - [ ] Read official rules again; confirm submission, deadlines, asset permissions, AI/tool disclosure and release requirements.
 
@@ -55,12 +56,12 @@
 | Complex resynthesis not realtime | Preallocation, short rolling history, per-frame profiling |
 | Replayed ghost clicks | WOLA / crossfades, boundary tests |
 | UI adds CPU spikes | Rate-limited decimated visualization, no work on audio thread |
-| Framework licence conflict | Decision before bringing JUCE code |
+| Framework licence conflict | AGPLv3 project/JUCE route decided; verify pinned dependency and distributed asset licence obligations |
 | Cross-platform packaging stalls | Basic builds early; reserve final week |
 | Feature creep | One ghost, one paint selection, five continuous controls |
 
 ## Explicit approvals required
 
-- Repository licence and compatibility with framework.
+- **RESOLVED:** Project licence = AGPL-3.0-only; JUCE AGPLv3 route. See [licensing policy](LICENSING.md).
 - Target DAWs/platform order if time forces reductions.
 - Whether to prioritize **musical sustain** (phase-continuous spectral hold) or **faithful timbral playback** (frame WOLA loop) after listening.
