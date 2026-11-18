@@ -13,7 +13,7 @@ The signature interaction is **painting a musical memory**, not simply pressing 
 
 ## Status
 
-**Exploration / architecture only.** No plugin implementation, audio engine, build, or sound-quality claims yet.
+**Offline research complete; realtime implementation starting.** Python research (P0-A, P0-B, P0-C, real-audio qualification) is consolidated in [docs/RESEARCH-CONSOLIDATION.md](docs/RESEARCH-CONSOLIDATION.md): the GHOST is a granular cloud over a captured slice of recent audio. No released plugin, installer or realtime qualification exists yet.
 
 Design and acceptance criteria are proposed in the development docs on the concept branch.
 

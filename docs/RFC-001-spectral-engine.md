@@ -2,6 +2,8 @@
 
 **Status:** Early design proposal / requires P0 sonic experiments. Do not implement as validated until numerical and listening tests pass.
 
+> **Status update (2026-11-18):** offline research P0-A, P0-B, P0-C and real-audio qualification is complete and consolidated in [RESEARCH-CONSOLIDATION.md](RESEARCH-CONSOLIDATION.md). The GHOST is now **granular** (CLOUD core engine, FOCUS later, GLITCH experimental) over a captured buffer, with a parallel TRACE → CLOUD DISSOLVE and FULL / FILTERED SOURCE. Where this document describes a spectral-only ghost, that text is kept for history and is superseded by the consolidation record and `P1-A-REALTIME-ARCHITECTURE.md` (added with P1-A on `feature/p1a-realtime-core`).
+
 > **Supersession note:** [DSP-ARCHITECTURE.md](DSP-ARCHITECTURE.md) is the current normative architecture for the additive MVP. It chooses a **zero-latency direct BODY** plus an independently synthesized GHOST, ~6 s internal history/~4 s visible history, and staged capture. Earlier discussion below of delay-compensated BODY or necessarily reported global STFT latency is superseded; this RFC remains for historical comparison of resynthesis candidates.
 
 ## Proposed architecture
