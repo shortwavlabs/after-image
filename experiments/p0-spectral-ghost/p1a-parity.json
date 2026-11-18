@@ -1,11 +1,11 @@
 {
  "note": "C++ afterimage_render against p1a_reference.py; limits fixed beforehand in p1a-limits.json.",
  "code_revision": {
-  "commit": "f3672aa51eae44133fc6f264af988dbbec283c39",
+  "commit": "6a5e00cb57cd1b514bfd79ba103f03572263361a",
   "harness_dirty": false
  },
  "summary": {
-  "PASS": 136,
+  "PASS": 148,
   "FAIL": 0
  },
  "rows": [
@@ -901,6 +901,84 @@
   },
   {
    "check": "P2 FULL loop",
+   "case": "guitar fs=48000 full 0.75s D=1.0 mono",
+   "value": {
+    "period_cpp": 36000,
+    "period_ref": 36000,
+    "error_db": -160.8,
+    "rho_cpp": -0.160946,
+    "rho_ref": -0.160946
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=48000 full 0.75s D=1.0 mono",
+   "value": -141.2,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=48000 full 0.75s D=1.0 mono",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "guitar fs=48000 filtered 0.75s D=1.0 mono",
+   "value": {
+    "period_cpp": 36000,
+    "period_ref": 36000,
+    "error_db": -138.1,
+    "rho_cpp": -0.251658,
+    "rho_ref": -0.251658
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=48000 filtered 0.75s D=1.0 mono",
+   "value": -135.4,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=48000 filtered 0.75s D=1.0 mono",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
    "case": "guitar fs=88200 full 0.75s D=0.0",
    "value": {
     "period_cpp": 66150,
@@ -1749,6 +1827,84 @@
     "identical_integers": true,
     "max_pos_diff_samples": 9.094947017729282e-13,
     "max_gain_rel_diff": 2.1240786907128495e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=96000 full 0.75s D=1.0 mono",
+   "value": {
+    "period_cpp": 72000,
+    "period_ref": 72000,
+    "error_db": -161.6,
+    "rho_cpp": -0.28049,
+    "rho_ref": -0.28049
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=96000 full 0.75s D=1.0 mono",
+   "value": -141.6,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=96000 full 0.75s D=1.0 mono",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "guitar fs=96000 filtered 0.75s D=1.0 mono",
+   "value": {
+    "period_cpp": 72000,
+    "period_ref": 72000,
+    "error_db": -137.0,
+    "rho_cpp": -0.094577,
+    "rho_ref": -0.094577
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=96000 filtered 0.75s D=1.0 mono",
+   "value": -134.8,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=96000 filtered 0.75s D=1.0 mono",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
    },
    "limit": {
     "pos": 1e-06,
