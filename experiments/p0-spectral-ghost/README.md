@@ -101,3 +101,20 @@ uv run python run_p0b.py summary    # report tables
 New code: `p0/granular.py` (engine), `p0/verify_cloud.py` (checks, limits fixed
 in the first commit of the branch), `p0/cloud_experiment.py` (listening matrix).
 Listening notes go in `listening-notes-p0b.md`.
+
+## P0-C: frequency-dependent dissolution (SPLIT)
+
+P0-C splits a capture into complementary frequency bands and dissolves each band
+by a different amount, with a conventional multiband baseline for comparison.
+The P0-A and P0-B commands above are unchanged. See `docs/P0-C-FINAL-REPORT.md`
+and `docs/P0-C-FREQUENCY-DEPENDENT-ARCHITECTURE.md`.
+
+```
+uv run python run_p0c.py all        # p0c-verification.json, renders/p0c/, p0c-manifest.json, p0c-metrics.json
+uv run python run_p0c.py blind      # renders/p0c/blind/, key in renders/p0c/blind-KEY-do-not-open.json
+uv run python run_p0c.py summary    # report tables
+```
+
+New code: `p0/split.py` (engine), `p0/verify_split.py` (checks, limits fixed in
+the first commit of the branch), `p0/split_experiment.py` (listening matrix).
+Listening notes go in `listening-notes-p0c.md`.

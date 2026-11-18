@@ -1,0 +1,1873 @@
+{
+ "summary": {
+  "PASS": 66,
+  "FAIL": 0,
+  "info": 167
+ },
+ "rows": [
+  {
+   "check": "band_masks",
+   "case": "amplitude masks: |sum - 1|, 5 rate/FFT configs x 4 crossover sets x 3 widths",
+   "value": 0.0,
+   "unit": "abs",
+   "limit": 1e-12,
+   "result": "PASS"
+  },
+  {
+   "check": "band_masks",
+   "case": "cloud masks sqrt(B): |sum of squares - 1|",
+   "value": 2.220446049250313e-16,
+   "unit": "abs",
+   "limit": 1e-12,
+   "result": "PASS"
+  },
+  {
+   "check": "band_reconstruction",
+   "case": "fs=48000 N=2048 FULL source: sum of 3 TRACE bands vs source TRACE, 4 fixtures",
+   "value": -314.9,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "band_reconstruction",
+   "case": "fs=48000 N=4096 FULL source: sum of 3 TRACE bands vs source TRACE, 4 fixtures",
+   "value": -314.6,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "band_reconstruction",
+   "case": "fs=48000 N=8192 FULL source: sum of 3 TRACE bands vs source TRACE, 4 fixtures",
+   "value": -314.2,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "band_reconstruction",
+   "case": "fs=44100 N=4096 FULL source: sum of 3 TRACE bands vs source TRACE, 4 fixtures",
+   "value": -314.6,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "band_reconstruction",
+   "case": "fs=96000 N=8192 FULL source: sum of 3 TRACE bands vs source TRACE, 4 fixtures",
+   "value": -314.5,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "band_reconstruction",
+   "case": "2 bands: sum of TRACE bands vs source TRACE",
+   "value": -315.2,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "band_reconstruction",
+   "case": "5 bands: sum of TRACE bands vs source TRACE",
+   "value": -314.5,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "band_reconstruction",
+   "case": "FILTERED source 350-5000 Hz, relative crossovers [849, 2061] Hz",
+   "value": -315.3,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "band_reconstruction",
+   "case": "shared linear seam equals engines.loop_period on the source",
+   "value": -6000.0,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "conventional_crossover",
+   "case": "LR4 3-way with all-pass compensation: |sum| deviation from flat, 20 Hz - 20 kHz",
+   "value": 0.0,
+   "unit": "dB",
+   "limit": 0.1,
+   "result": "PASS"
+  },
+  {
+   "check": "conventional_crossover",
+   "case": "LR4 sum: largest group delay, 20 Hz - 20 kHz (spectral bands: 0)",
+   "value": 2.4,
+   "unit": "ms",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "conventional_crossover",
+   "case": "Butterworth-3 cloud bands: power-sum deviation from flat",
+   "value": 0.0,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "conventional_crossover",
+   "case": "LR4 sum vs input, waveform error on noise (flat magnitude, shifted phase)",
+   "value": -1.6,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "isolation",
+   "case": "125 Hz tone in band 1 (spectral TRACE band)",
+   "value": -98.8,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "isolation",
+   "case": "125 Hz tone in band 1 (spectral CLOUD band)",
+   "value": -94.8,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "isolation",
+   "case": "125 Hz tone in band 1 (LR4 band)",
+   "value": -24.6,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "isolation",
+   "case": "125 Hz tone in band 1 (Butterworth-3 band)",
+   "value": -18.1,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "isolation",
+   "case": "500 Hz tone in band 0 (spectral TRACE band)",
+   "value": -106.1,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "isolation",
+   "case": "500 Hz tone in band 0 (spectral CLOUD band)",
+   "value": -107.5,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "isolation",
+   "case": "500 Hz tone in band 0 (LR4 band)",
+   "value": -24.6,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "isolation",
+   "case": "500 Hz tone in band 0 (Butterworth-3 band)",
+   "value": -18.1,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "isolation",
+   "case": "1000 Hz tone in band 2 (spectral TRACE band)",
+   "value": -198.1,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "isolation",
+   "case": "1000 Hz tone in band 2 (spectral CLOUD band)",
+   "value": -159.8,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "isolation",
+   "case": "1000 Hz tone in band 2 (LR4 band)",
+   "value": -24.8,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "isolation",
+   "case": "1000 Hz tone in band 2 (Butterworth-3 band)",
+   "value": -18.2,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "isolation",
+   "case": "4000 Hz tone in band 1 (spectral TRACE band)",
+   "value": -164.7,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "isolation",
+   "case": "4000 Hz tone in band 1 (spectral CLOUD band)",
+   "value": -161.9,
+   "unit": "dB re source",
+   "limit": -60.0,
+   "result": "PASS"
+  },
+  {
+   "check": "isolation",
+   "case": "4000 Hz tone in band 1 (LR4 band)",
+   "value": -25.2,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "isolation",
+   "case": "4000 Hz tone in band 1 (Butterworth-3 band)",
+   "value": -18.6,
+   "unit": "dB re source",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "guitar: S2/S3 at DISSOLVE 0 vs TRACE (spectral)",
+   "value": -314.9,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "vocal: S2/S3 at DISSOLVE 0 vs TRACE (spectral)",
+   "value": -314.9,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "drums: S2/S3 at DISSOLVE 0 vs TRACE (spectral)",
+   "value": -314.6,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "synth: S2/S3 at DISSOLVE 0 vs TRACE (spectral)",
+   "value": -314.9,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "fs=44100 N=4096: S3 at DISSOLVE 0 vs TRACE",
+   "value": -315.1,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "fs=96000 N=8192: S3 at DISSOLVE 0 vs TRACE",
+   "value": -314.7,
+   "unit": "dB",
+   "limit": -120.0,
+   "result": "PASS"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "conventional (LR4) at DISSOLVE 0 vs spectral TRACE: waveform error",
+   "value": 3.7,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "dissolve_endpoint",
+   "case": "conventional (LR4) at DISSOLVE 0 vs spectral TRACE: third-octave spectrum distance",
+   "value": 0.01,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "spectral, s1 D=1.0: level re TRACE at 250 / 2000 Hz",
+   "value": "-0.06 / -0.81",
+   "unit": "dB",
+   "limit": 1.5,
+   "result": "PASS"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "spectral, s2_keep D=0.5: level re TRACE at 250 / 2000 Hz",
+   "value": "-0.14 / -0.53",
+   "unit": "dB",
+   "limit": 1.5,
+   "result": "PASS"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "spectral, s2_keep D=1.0: level re TRACE at 250 / 2000 Hz",
+   "value": "-1.27 / +0.06",
+   "unit": "dB",
+   "limit": 1.5,
+   "result": "PASS"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "spectral, s2_fade D=0.5: level re TRACE at 250 / 2000 Hz",
+   "value": "-0.14 / -0.53",
+   "unit": "dB",
+   "limit": 1.5,
+   "result": "PASS"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "spectral, s2_fade D=0.8: level re TRACE at 250 / 2000 Hz",
+   "value": "-0.41 / +0.06",
+   "unit": "dB",
+   "limit": 1.5,
+   "result": "PASS"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "spectral, s2_fade D=1.0: level re TRACE at 250 / 2000 Hz",
+   "value": "+0.15 / +0.06",
+   "unit": "dB",
+   "limit": 1.5,
+   "result": "PASS"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "spectral, s3 D=0.5: level re TRACE at 250 / 2000 Hz",
+   "value": "+0.03 / +0.02",
+   "unit": "dB",
+   "limit": 1.5,
+   "result": "PASS"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "spectral, s3 D=1.0: level re TRACE at 250 / 2000 Hz",
+   "value": "+0.21 / +0.05",
+   "unit": "dB",
+   "limit": 1.5,
+   "result": "PASS"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "rejected design (amplitude masks, shared schedule), s1 D=1.0: level re TRACE at 250 / 2000 Hz",
+   "value": "-0.22 / -1.21",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "rejected design (amplitude masks, shared schedule), s2_keep D=0.5: level re TRACE at 250 / 2000 Hz",
+   "value": "-0.52 / -0.74",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "rejected design (amplitude masks, shared schedule), s2_keep D=1.0: level re TRACE at 250 / 2000 Hz",
+   "value": "-2.66 / -0.05",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "rejected design (amplitude masks, shared schedule), s2_fade D=0.5: level re TRACE at 250 / 2000 Hz",
+   "value": "-0.52 / -0.74",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "rejected design (amplitude masks, shared schedule), s2_fade D=0.8: level re TRACE at 250 / 2000 Hz",
+   "value": "-0.41 / -0.05",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "rejected design (amplitude masks, shared schedule), s2_fade D=1.0: level re TRACE at 250 / 2000 Hz",
+   "value": "+0.17 / -0.05",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "rejected design (amplitude masks, shared schedule), s3 D=0.5: level re TRACE at 250 / 2000 Hz",
+   "value": "-1.36 / -1.20",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "rejected design (amplitude masks, shared schedule), s3 D=1.0: level re TRACE at 250 / 2000 Hz",
+   "value": "-2.91 / -2.89",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "conventional LR4 + Butterworth-3, s1 D=1.0: level re TRACE at 250 / 2000 Hz",
+   "value": "+0.05 / -0.83",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "conventional LR4 + Butterworth-3, s2_keep D=0.5: level re TRACE at 250 / 2000 Hz",
+   "value": "-0.01 / -0.55",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "conventional LR4 + Butterworth-3, s2_keep D=1.0: level re TRACE at 250 / 2000 Hz",
+   "value": "-1.18 / +0.03",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "conventional LR4 + Butterworth-3, s2_fade D=0.5: level re TRACE at 250 / 2000 Hz",
+   "value": "-0.01 / -0.55",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "conventional LR4 + Butterworth-3, s2_fade D=0.8: level re TRACE at 250 / 2000 Hz",
+   "value": "-0.45 / +0.03",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "conventional LR4 + Butterworth-3, s2_fade D=1.0: level re TRACE at 250 / 2000 Hz",
+   "value": "+0.05 / +0.03",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "conventional LR4 + Butterworth-3, s3 D=0.5: level re TRACE at 250 / 2000 Hz",
+   "value": "+0.12 / -0.05",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "crossover_hole",
+   "case": "conventional LR4 + Butterworth-3, s3 D=1.0: level re TRACE at 250 / 2000 Hz",
+   "value": "+0.20 / -0.01",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "continuity",
+   "case": "2 bands: every strategy's band amounts are non-decreasing in DISSOLVE and inside [0, 1]",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "continuity",
+   "case": "3 bands: every strategy's band amounts are non-decreasing in DISSOLVE and inside [0, 1]",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "continuity",
+   "case": "4 bands: every strategy's band amounts are non-decreasing in DISSOLVE and inside [0, 1]",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "continuity",
+   "case": "largest change of any band amount for a DISSOLVE step of 0.005",
+   "value": 0.0187,
+   "unit": "0..1",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "continuity",
+   "case": "noise s2_keep: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.26 / 0.95",
+   "unit": "dB",
+   "limit": "1.0 / 3.0",
+   "result": "PASS"
+  },
+  {
+   "check": "continuity",
+   "case": "noise s2_fade: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.26 / 0.95",
+   "unit": "dB",
+   "limit": "1.0 / 3.0",
+   "result": "PASS"
+  },
+  {
+   "check": "continuity",
+   "case": "noise s3: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.08 / 0.96",
+   "unit": "dB",
+   "limit": "1.0 / 3.0",
+   "result": "PASS"
+  },
+  {
+   "check": "continuity",
+   "case": "guitar s2_keep: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.07 / 0.33",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "continuity",
+   "case": "guitar s2_fade: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.07 / 0.33",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "continuity",
+   "case": "guitar s3: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.04 / 0.40",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "continuity",
+   "case": "vocal s2_keep: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.03 / 0.10",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "continuity",
+   "case": "vocal s2_fade: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.03 / 0.10",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "continuity",
+   "case": "vocal s3: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.03 / 0.19",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "continuity",
+   "case": "drums s2_keep: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.05 / 0.23",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "continuity",
+   "case": "drums s2_fade: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.12 / 0.51",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "continuity",
+   "case": "drums s3: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.04 / 0.39",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "continuity",
+   "case": "synth s2_keep: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.07 / 0.23",
+   "unit": "dB",
+   "limit": "1.0 / 3.0",
+   "result": "PASS"
+  },
+  {
+   "check": "continuity",
+   "case": "synth s2_fade: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.08 / 0.24",
+   "unit": "dB",
+   "limit": "1.0 / 3.0",
+   "result": "PASS"
+  },
+  {
+   "check": "continuity",
+   "case": "synth s3: largest RMS change between settings 0.05 apart / range over 0..1",
+   "value": "0.01 / 0.05",
+   "unit": "dB",
+   "limit": "1.0 / 3.0",
+   "result": "PASS"
+  },
+  {
+   "check": "continuity",
+   "case": "noise s2_keep, 0->1 ramp over 8 s: largest change between 1 s RMS blocks",
+   "value": 0.49,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "continuity",
+   "case": "noise s2_fade, 0->1 ramp over 8 s: largest change between 1 s RMS blocks",
+   "value": 0.49,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "continuity",
+   "case": "noise s3, 0->1 ramp over 8 s: largest change between 1 s RMS blocks",
+   "value": 0.33,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "polyphony",
+   "case": "band budgets sum to at most the total ceiling, 2..8 bands",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "polyphony",
+   "case": "s1 D=1.0: simultaneous grains total / per band (budget (6, 10, 16))",
+   "value": "10 / [0, 5, 5]",
+   "unit": "grains",
+   "limit": 32,
+   "result": "PASS"
+  },
+  {
+   "check": "polyphony",
+   "case": "s1 D=1.0: grains dropped per band",
+   "value": "[0, 0, 0]",
+   "unit": "grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "polyphony",
+   "case": "s2_fade D=1.0: simultaneous grains total / per band (budget (6, 10, 16))",
+   "value": "15 / [5, 5, 5]",
+   "unit": "grains",
+   "limit": 32,
+   "result": "PASS"
+  },
+  {
+   "check": "polyphony",
+   "case": "s2_fade D=1.0: grains dropped per band",
+   "value": "[0, 0, 0]",
+   "unit": "grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "polyphony",
+   "case": "s3 D=1.0: simultaneous grains total / per band (budget (6, 10, 16))",
+   "value": "15 / [5, 5, 5]",
+   "unit": "grains",
+   "limit": 32,
+   "result": "PASS"
+  },
+  {
+   "check": "polyphony",
+   "case": "s3 D=1.0: grains dropped per band",
+   "value": "[0, 0, 0]",
+   "unit": "grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "polyphony",
+   "case": "band 0 asked for 8x its density (32 grains of overlap), budget 6: max simultaneous / dropped",
+   "value": "6 / 895 of 1099",
+   "unit": "grains",
+   "limit": 6,
+   "result": "PASS"
+  },
+  {
+   "check": "polyphony",
+   "case": "band 1 asked for 8x its density (32 grains of overlap), budget 10: max simultaneous / dropped",
+   "value": "10 / 1454 of 2098",
+   "unit": "grains",
+   "limit": 10,
+   "result": "PASS"
+  },
+  {
+   "check": "polyphony",
+   "case": "band 2 asked for 8x its density (32 grains of overlap), budget 16: max simultaneous / dropped",
+   "value": "16 / 2057 of 4032",
+   "unit": "grains",
+   "limit": 16,
+   "result": "PASS"
+  },
+  {
+   "check": "determinism",
+   "case": "same seed -> identical render hash; different seed -> different",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "headroom",
+   "case": "no policy (P0-B law told coherence 0), noise: RMS re buffer max / min over 15 settings; peak max",
+   "value": "+13.01 / -0.90; +13.09",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "no policy (P0-B law told coherence 0), guitar: RMS re buffer max / min over 15 settings; peak max",
+   "value": "+13.00 / -0.22; +13.24",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "no policy (P0-B law told coherence 0), 82 Hz sine: RMS re buffer max / min over 15 settings; peak max",
+   "value": "+13.01 / -0.17; +13.24",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (5 ms knee), noise: RMS re buffer max / min over 15 settings; peak max",
+   "value": "+0.04 / -10.70; +1.24",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (5 ms knee), guitar: RMS re buffer max / min over 15 settings; peak max",
+   "value": "+4.65 / -0.36; +5.24",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (5 ms knee), 82 Hz sine: RMS re buffer max / min over 15 settings; peak max",
+   "value": "+10.55 / -0.17; +11.77",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (50 ms knee), noise: RMS re buffer max / min over 15 settings; peak max",
+   "value": "+0.04 / -13.29; +1.24",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (50 ms knee), guitar: RMS re buffer max / min over 15 settings; peak max",
+   "value": "+0.16 / -8.25; +3.29",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (50 ms knee), 82 Hz sine: RMS re buffer max / min over 15 settings; peak max",
+   "value": "+0.64 / -2.34; +8.14",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "assume coherent (amplitude normalisation), noise: RMS re buffer max / min over 15 settings; peak max",
+   "value": "+0.04 / -13.91; +1.24",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "assume coherent (amplitude normalisation), guitar: RMS re buffer max / min over 15 settings; peak max",
+   "value": "+0.01 / -12.85; +1.03",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "assume coherent (amplitude normalisation), 82 Hz sine: RMS re buffer max / min over 15 settings; peak max",
+   "value": "+0.04 / -12.68; +1.82",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (50 ms knee), spray 0 ms: RMS re buffer max / min, all buffers",
+   "value": "+0.04 / -0.01",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (5 ms knee), spray 0 ms: RMS re buffer max / min, all buffers",
+   "value": "+0.04 / -0.01",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (50 ms knee), spray 0.5 ms: RMS re buffer max / min, all buffers",
+   "value": "+0.02 / -10.82",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (5 ms knee), spray 0.5 ms: RMS re buffer max / min, all buffers",
+   "value": "+0.11 / -10.70",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (50 ms knee), spray 5 ms: RMS re buffer max / min, all buffers",
+   "value": "-1.79 / -13.29",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (5 ms knee), spray 5 ms: RMS re buffer max / min, all buffers",
+   "value": "+10.55 / -0.84",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (50 ms knee), spray 50 ms: RMS re buffer max / min, all buffers",
+   "value": "+0.64 / -0.88",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (5 ms knee), spray 50 ms: RMS re buffer max / min, all buffers",
+   "value": "+0.64 / -0.88",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (50 ms knee), spray whole buffer: RMS re buffer max / min, all buffers",
+   "value": "+0.38 / -0.90",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "coherence from spray (5 ms knee), spray whole buffer: RMS re buffer max / min, all buffers",
+   "value": "+0.38 / -0.90",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "assume coherent, zero spray: largest RMS re buffer",
+   "value": 0.04,
+   "unit": "dB",
+   "limit": 0.5,
+   "result": "PASS"
+  },
+  {
+   "check": "headroom",
+   "case": "assume coherent, full spray: quietest cloud (the price of that policy)",
+   "value": -13.91,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "fixed reservation needed to cover the worst peak with no policy",
+   "value": 13.24,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "guitar: equal-power TRACE + CLOUD at d=0.5, spray 0 ms: RMS re TRACE",
+   "value": 3.03,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "guitar: equal-power TRACE + CLOUD at d=0.5, spray 5 ms: RMS re TRACE",
+   "value": 1.02,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "guitar: equal-power TRACE + CLOUD at d=0.5, spray whole buffer: RMS re TRACE",
+   "value": -0.04,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "guitar SPLIT s1 D=1.0: RMS / peak re TRACE",
+   "value": "-0.05 / +0.65",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "guitar SPLIT s2_keep D=0.5: RMS / peak re TRACE",
+   "value": "-0.06 / +2.60",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "guitar SPLIT s2_keep D=1.0: RMS / peak re TRACE",
+   "value": "-0.25 / +5.18",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "guitar SPLIT s2_fade D=0.5: RMS / peak re TRACE",
+   "value": "-0.06 / +2.60",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "guitar SPLIT s2_fade D=0.8: RMS / peak re TRACE",
+   "value": "-0.16 / +5.79",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "guitar SPLIT s2_fade D=1.0: RMS / peak re TRACE",
+   "value": "-0.14 / +6.12",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "guitar SPLIT s3 D=0.5: RMS / peak re TRACE",
+   "value": "+0.18 / +2.53",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "headroom",
+   "case": "guitar SPLIT s3 D=1.0: RMS / peak re TRACE",
+   "value": "+0.20 / +3.38",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "dual-mono source, s1 D=1.0: mono compatibility / correlation",
+   "value": "-0.532 / 0.769",
+   "unit": "dB / corr",
+   "limit": ">= -3.02",
+   "result": "PASS"
+  },
+  {
+   "check": "stereo",
+   "case": "dual-mono source, s2_keep D=1.0: mono compatibility / correlation",
+   "value": "-0.575 / 0.752",
+   "unit": "dB / corr",
+   "limit": ">= -3.02",
+   "result": "PASS"
+  },
+  {
+   "check": "stereo",
+   "case": "dual-mono source, s2_fade D=1.0: mono compatibility / correlation",
+   "value": "-0.583 / 0.749",
+   "unit": "dB / corr",
+   "limit": ">= -3.02",
+   "result": "PASS"
+  },
+  {
+   "check": "stereo",
+   "case": "dual-mono source, s3 D=1.0: mono compatibility / correlation",
+   "value": "-0.815 / 0.658",
+   "unit": "dB / corr",
+   "limit": ">= -3.02",
+   "result": "PASS"
+  },
+  {
+   "check": "stereo",
+   "case": "guitar s1: correlation source -> first s / last s; mono compat source -> render; low band (<250 Hz) correlation source -> render",
+   "value": "0.845 -> 0.802 / 0.829; -0.35 -> -0.41; 0.894 -> 0.886",
+   "unit": "corr; dB; corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "guitar s3: correlation source -> first s / last s; mono compat source -> render; low band (<250 Hz) correlation source -> render",
+   "value": "0.845 -> 0.762 / 0.762; -0.35 -> -0.53; 0.894 -> 0.852",
+   "unit": "corr; dB; corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "vocal s1: correlation source -> first s / last s; mono compat source -> render; low band (<250 Hz) correlation source -> render",
+   "value": "0.999 -> 0.868 / 0.864; -0.00 -> -0.26; 1.000 -> 0.999",
+   "unit": "corr; dB; corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "vocal s3: correlation source -> first s / last s; mono compat source -> render; low band (<250 Hz) correlation source -> render",
+   "value": "0.999 -> 0.801 / 0.872; -0.00 -> -0.44; 1.000 -> 0.981",
+   "unit": "corr; dB; corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "drums s1: correlation source -> first s / last s; mono compat source -> render; low band (<250 Hz) correlation source -> render",
+   "value": "0.971 -> 0.910 / 0.882; -0.06 -> -0.18; 0.994 -> 0.994",
+   "unit": "corr; dB; corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "drums s3: correlation source -> first s / last s; mono compat source -> render; low band (<250 Hz) correlation source -> render",
+   "value": "0.971 -> 0.921 / 0.933; -0.06 -> -0.20; 0.994 -> 0.985",
+   "unit": "corr; dB; corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "synth s1: correlation source -> first s / last s; mono compat source -> render; low band (<250 Hz) correlation source -> render",
+   "value": "-0.069 -> -0.048 / -0.060; -3.32 -> -3.33; -0.103 -> -0.100",
+   "unit": "corr; dB; corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "stereo",
+   "case": "synth s3: correlation source -> first s / last s; mono compat source -> render; low band (<250 Hz) correlation source -> render",
+   "value": "-0.069 -> -0.102 / -0.006; -3.32 -> -3.33; -0.103 -> -0.107",
+   "unit": "corr; dB; corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "TRACE: energy between partials below 400 Hz re partial energy",
+   "value": -21.6,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "TRACE: E2 partial median frequency re TRACE / spread (IQR) / envelope peak-to-peak",
+   "value": "+0.000 c / 0.96 c / 5.2 dB",
+   "unit": "cents; cents; dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "CLOUD (unguided, no pitch): energy between partials below 400 Hz re partial energy",
+   "value": -6.9,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "CLOUD (unguided, no pitch): E2 partial median frequency re TRACE / spread (IQR) / envelope peak-to-peak",
+   "value": "-2.085 c / 73.42 c / 24.8 dB",
+   "unit": "cents; cents; dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "SPLIT s1 D=1.0: energy between partials below 400 Hz re partial energy",
+   "value": -17.6,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "SPLIT s1 D=1.0: E2 partial median frequency re TRACE / spread (IQR) / envelope peak-to-peak",
+   "value": "-0.000 c / 0.95 c / 5.2 dB",
+   "unit": "cents; cents; dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "SPLIT s2_keep D=1.0: energy between partials below 400 Hz re partial energy",
+   "value": -12.5,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "SPLIT s2_keep D=1.0: E2 partial median frequency re TRACE / spread (IQR) / envelope peak-to-peak",
+   "value": "-0.001 c / 0.95 c / 5.2 dB",
+   "unit": "cents; cents; dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "SPLIT s2_fade D=1.0: energy between partials below 400 Hz re partial energy",
+   "value": -7.0,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "SPLIT s2_fade D=1.0: E2 partial median frequency re TRACE / spread (IQR) / envelope peak-to-peak",
+   "value": "-2.081 c / 73.43 c / 24.8 dB",
+   "unit": "cents; cents; dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "SPLIT s3 D=1.0: energy between partials below 400 Hz re partial energy",
+   "value": -8.8,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "SPLIT s3 D=1.0: E2 partial median frequency re TRACE / spread (IQR) / envelope peak-to-peak",
+   "value": "+2.962 c / 48.37 c / 22.5 dB",
+   "unit": "cents; cents; dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "conventional s1 D=1.0: energy between partials below 400 Hz re partial energy",
+   "value": -17.1,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "conventional s1 D=1.0: E2 partial median frequency re TRACE / spread (IQR) / envelope peak-to-peak",
+   "value": "-0.246 c / 1.59 c / 5.6 dB",
+   "unit": "cents; cents; dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "conventional s2_keep D=1.0: energy between partials below 400 Hz re partial energy",
+   "value": -12.0,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "conventional s2_keep D=1.0: E2 partial median frequency re TRACE / spread (IQR) / envelope peak-to-peak",
+   "value": "-0.311 c / 2.49 c / 6.1 dB",
+   "unit": "cents; cents; dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "conventional s2_fade D=1.0: energy between partials below 400 Hz re partial energy",
+   "value": -7.5,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "conventional s2_fade D=1.0: E2 partial median frequency re TRACE / spread (IQR) / envelope peak-to-peak",
+   "value": "-3.843 c / 63.00 c / 20.2 dB",
+   "unit": "cents; cents; dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "conventional s3 D=1.0: energy between partials below 400 Hz re partial energy",
+   "value": -8.5,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "conventional s3 D=1.0: E2 partial median frequency re TRACE / spread (IQR) / envelope peak-to-peak",
+   "value": "+1.890 c / 49.11 c / 21.5 dB",
+   "unit": "cents; cents; dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "S1 vs CLOUD: reduction of energy between partials below 400 Hz",
+   "value": 10.8,
+   "unit": "dB",
+   "limit": ">= 6.0",
+   "result": "PASS"
+  },
+  {
+   "check": "low_frequency",
+   "case": "S1: E2 partial median frequency re TRACE",
+   "value": 0.0001,
+   "unit": "cents",
+   "limit": 1.0,
+   "result": "PASS"
+  },
+  {
+   "check": "low_frequency",
+   "case": "TRACE: waveform repetition at the loop period, low / mid / high band (1 = coherent TRACE)",
+   "value": "1.00 / 1.00 / 1.00",
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "CLOUD (unguided, no pitch): waveform repetition at the loop period, low / mid / high band (1 = coherent TRACE)",
+   "value": "-0.01 / 0.03 / -0.01",
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "SPLIT s1 D=1.0: waveform repetition at the loop period, low / mid / high band (1 = coherent TRACE)",
+   "value": "0.96 / 0.72 / -0.02",
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "SPLIT s2_keep D=1.0: waveform repetition at the loop period, low / mid / high band (1 = coherent TRACE)",
+   "value": "0.83 / 0.00 / -0.03",
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "SPLIT s2_fade D=1.0: waveform repetition at the loop period, low / mid / high band (1 = coherent TRACE)",
+   "value": "-0.00 / 0.02 / -0.03",
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "low_frequency",
+   "case": "SPLIT s3 D=1.0: waveform repetition at the loop period, low / mid / high band (1 = coherent TRACE)",
+   "value": "0.02 / -0.01 / 0.02",
+   "unit": "corr",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "transient",
+   "case": "spectral band 0: 99 % energy duration / share of energy before the click",
+   "value": "6.38 ms / 49.4 %",
+   "unit": "ms / %",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "transient",
+   "case": "spectral band 1: 99 % energy duration / share of energy before the click",
+   "value": "2.67 ms / 45.9 %",
+   "unit": "ms / %",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "transient",
+   "case": "spectral band 2: 99 % energy duration / share of energy before the click",
+   "value": "0.29 ms / 3.8 %",
+   "unit": "ms / %",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "transient",
+   "case": "spectral sum of unmodified bands: 99 % energy duration",
+   "value": 0.0,
+   "unit": "ms",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "transient",
+   "case": "LR4 band 0: 99 % energy duration / share of energy before the click",
+   "value": "3.60 ms / 0.0 %",
+   "unit": "ms / %",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "transient",
+   "case": "LR4 band 1: 99 % energy duration / share of energy before the click",
+   "value": "2.83 ms / 0.0 %",
+   "unit": "ms / %",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "transient",
+   "case": "LR4 band 2: 99 % energy duration / share of energy before the click",
+   "value": "0.25 ms / 0.0 %",
+   "unit": "ms / %",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "transient",
+   "case": "LR4 sum of unmodified bands: 99 % energy duration",
+   "value": 2.083,
+   "unit": "ms",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "degenerate",
+   "case": "silent capture -> exactly silent SPLIT, every strategy",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "degenerate",
+   "case": "0.2 s selection at N=8192 (period 5850 samples): finite, every strategy",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "degenerate",
+   "case": "invalid crossover lists refused (unsorted, equal, <= 0, >= Nyquist, empty, NaN)",
+   "value": "7 of 7",
+   "unit": "refused",
+   "limit": 7,
+   "result": "PASS"
+  },
+  {
+   "check": "degenerate",
+   "case": "crossover at 12 Hz (about one bin): exact at DISSOLVE 0, finite at 1, 15 grains",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "degenerate",
+   "case": "crossover at 23.5 kHz: exact at DISSOLVE 0, finite at 1, 15 grains",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "degenerate",
+   "case": "2 bands: exact at DISSOLVE 0, finite at 1, 10 grains",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "degenerate",
+   "case": "5 bands: exact at DISSOLVE 0, finite at 1, 24 grains",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "degenerate",
+   "case": "FILTERED 2-10 kHz source with absolute 250 / 2000 Hz crossovers (two nearly empty bands): finite",
+   "value": true,
+   "unit": "bool",
+   "limit": true,
+   "result": "PASS"
+  },
+  {
+   "check": "source",
+   "case": "guitar/long_sustain FULL, absolute crossovers [250, 2000] Hz: energy share low / mid / high",
+   "value": "0.451 / 0.544 / 0.004",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "source",
+   "case": "guitar/long_sustain FILTERED, absolute crossovers [250, 2000] Hz: energy share low / mid / high",
+   "value": "0.003 / 0.985 / 0.013",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "source",
+   "case": "guitar/long_sustain FILTERED, relative crossovers [849, 2061] Hz: energy share low / mid / high",
+   "value": "0.818 / 0.171 / 0.012",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "source",
+   "case": "vocal/mid_band_rfc FULL, absolute crossovers [250, 2000] Hz: energy share low / mid / high",
+   "value": "0.008 / 0.813 / 0.179",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "source",
+   "case": "vocal/mid_band_rfc FILTERED, absolute crossovers [250, 2000] Hz: energy share low / mid / high",
+   "value": "0.000 / 0.820 / 0.180",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "source",
+   "case": "vocal/mid_band_rfc FILTERED, relative crossovers [849, 2061] Hz: energy share low / mid / high",
+   "value": "0.400 / 0.426 / 0.174",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "source",
+   "case": "synth/upper_harmonics FULL, absolute crossovers [250, 2000] Hz: energy share low / mid / high",
+   "value": "0.600 / 0.386 / 0.014",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "source",
+   "case": "synth/upper_harmonics FILTERED, absolute crossovers [250, 2000] Hz: energy share low / mid / high",
+   "value": "0.000 / 0.240 / 0.760",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "source",
+   "case": "synth/upper_harmonics FILTERED, relative crossovers [3420, 5848] Hz: energy share low / mid / high",
+   "value": "0.915 / 0.083 / 0.002",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "edge_leak",
+   "case": "FULL source, low band: neighbour audio re selected audio, whole buffer / within 20 ms of an edge",
+   "value": "-35.6 / -23.7",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "edge_leak",
+   "case": "FULL source, low band, after the 80 ms seam crossfade: whole periodic buffer / first 20 ms",
+   "value": "-79.1 / -61.6",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "edge_leak",
+   "case": "FULL source, mid band: neighbour audio re selected audio, whole buffer / within 20 ms of an edge",
+   "value": "-36.1 / -24.9",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "edge_leak",
+   "case": "FULL source, mid band, after the 80 ms seam crossfade: whole periodic buffer / first 20 ms",
+   "value": "-79.5 / -61.4",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "edge_leak",
+   "case": "FULL source, high band: neighbour audio re selected audio, whole buffer / within 20 ms of an edge",
+   "value": "-27.6 / -19.2",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "edge_leak",
+   "case": "FULL source, high band, after the 80 ms seam crossfade: whole periodic buffer / first 20 ms",
+   "value": "-85.4 / -63.8",
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "edge_leak",
+   "case": "FULL source, sum of the three bands: neighbour audio (cancels when bands are unmodified)",
+   "value": -174.3,
+   "unit": "dB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "aliasing",
+   "case": "+12 st: 5 kHz tone arrives at 10000 Hz at / 15 kHz tone aliases to 18000 Hz at",
+   "value": "-0.0 / -0.0",
+   "unit": "dB re source tone",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "aliasing",
+   "case": "+7 st: 5 kHz tone arrives at 7492 Hz at / 15 kHz tone arrives at 22475 Hz at",
+   "value": "-0.0 / -1.2",
+   "unit": "dB re source tone",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "aliasing",
+   "case": "+0.15 st: 5 kHz tone arrives at 5044 Hz at / 15 kHz tone arrives at 15131 Hz at",
+   "value": "-0.0 / -1.2",
+   "unit": "dB re source tone",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "aliasing",
+   "case": "guitar: share of high-band (>2 kHz) energy above fs/4 = 12 kHz (aliases at +12 st) / above 16 kHz (aliases at +7 st)",
+   "value": "0.0000 / 0.0000",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "aliasing",
+   "case": "guitar: high band with octave jumps, energy landing below the 2 kHz crossover",
+   "value": 0.0397,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "aliasing",
+   "case": "vocal: share of high-band (>2 kHz) energy above fs/4 = 12 kHz (aliases at +12 st) / above 16 kHz (aliases at +7 st)",
+   "value": "0.0000 / 0.0000",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "aliasing",
+   "case": "vocal: high band with octave jumps, energy landing below the 2 kHz crossover",
+   "value": 0.0554,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "aliasing",
+   "case": "drums: share of high-band (>2 kHz) energy above fs/4 = 12 kHz (aliases at +12 st) / above 16 kHz (aliases at +7 st)",
+   "value": "0.2926 / 0.1928",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "aliasing",
+   "case": "drums: high band with octave jumps, energy landing below the 2 kHz crossover",
+   "value": 0.008,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "aliasing",
+   "case": "synth: share of high-band (>2 kHz) energy above fs/4 = 12 kHz (aliases at +12 st) / above 16 kHz (aliases at +7 st)",
+   "value": "0.0000 / 0.0000",
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "aliasing",
+   "case": "synth: high band with octave jumps, energy landing below the 2 kHz crossover",
+   "value": 0.0483,
+   "unit": "fraction",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory",
+   "case": "fs=44100 N=4096: band buffers for 3 bands (3 TRACE + 3 CLOUD, stereo float32, max selection) vs one P0-B buffer",
+   "value": "3.05 / 0.51",
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=44100 N=4096: capture-time inverse FFTs, 6 band buffers vs P0-B (stereo, max selection)",
+   "value": "828 / 138",
+   "unit": "IFFT",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=44100: conventional alternative at capture time: biquad sections x samples (LR4 + Butterworth-3, 3 bands, stereo)",
+   "value": "40 x 66560",
+   "unit": "sections x samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=44100: steady state at the total ceiling: 32 grains x 4 taps x 2 ch + 3 TRACE readers x 2 ch",
+   "value": 11554200,
+   "unit": "taps/s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory",
+   "case": "fs=48000 N=4096: band buffers for 3 bands (3 TRACE + 3 CLOUD, stereo float32, max selection) vs one P0-B buffer",
+   "value": "3.33 / 0.55",
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=48000 N=4096: capture-time inverse FFTs, 6 band buffers vs P0-B (stereo, max selection)",
+   "value": "900 / 150",
+   "unit": "IFFT",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=48000: conventional alternative at capture time: biquad sections x samples (LR4 + Butterworth-3, 3 bands, stereo)",
+   "value": "40 x 72704",
+   "unit": "sections x samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=48000: steady state at the total ceiling: 32 grains x 4 taps x 2 ch + 3 TRACE readers x 2 ch",
+   "value": 12576000,
+   "unit": "taps/s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory",
+   "case": "fs=88200 N=8192: band buffers for 3 bands (3 TRACE + 3 CLOUD, stereo float32, max selection) vs one P0-B buffer",
+   "value": "6.09 / 1.02",
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=88200 N=8192: capture-time inverse FFTs, 6 band buffers vs P0-B (stereo, max selection)",
+   "value": "828 / 138",
+   "unit": "IFFT",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=88200: conventional alternative at capture time: biquad sections x samples (LR4 + Butterworth-3, 3 bands, stereo)",
+   "value": "40 x 133120",
+   "unit": "sections x samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=88200: steady state at the total ceiling: 32 grains x 4 taps x 2 ch + 3 TRACE readers x 2 ch",
+   "value": 23108400,
+   "unit": "taps/s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "memory",
+   "case": "fs=96000 N=8192: band buffers for 3 bands (3 TRACE + 3 CLOUD, stereo float32, max selection) vs one P0-B buffer",
+   "value": "6.66 / 1.11",
+   "unit": "MiB",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=96000 N=8192: capture-time inverse FFTs, 6 band buffers vs P0-B (stereo, max selection)",
+   "value": "900 / 150",
+   "unit": "IFFT",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=96000: conventional alternative at capture time: biquad sections x samples (LR4 + Butterworth-3, 3 bands, stereo)",
+   "value": "40 x 145408",
+   "unit": "sections x samples",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "fs=96000: steady state at the total ceiling: 32 grains x 4 taps x 2 ch + 3 TRACE readers x 2 ch",
+   "value": 25152000,
+   "unit": "taps/s",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "grain pools: one per band, budgets (6, 10, 16); measured use at defaults",
+   "value": "0-5 per band, 15 total",
+   "unit": "grains",
+   "limit": null,
+   "result": "info"
+  },
+  {
+   "check": "cost",
+   "case": "shared-schedule alternative: one grain reading 3 band buffers costs 3 x the taps of one grain",
+   "value": 3,
+   "unit": "x",
+   "limit": null,
+   "result": "info"
+  }
+ ]
+}

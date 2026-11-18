@@ -1,0 +1,13 @@
+{
+ "note": "NumPy wall-clock on the machine that ran this; not a realtime indicator.",
+ "rows": [
+  {
+   "case": "spectral decomposition, 3 bands (7 reconstructions)",
+   "seconds": 0.023
+  },
+  {
+   "case": "6 s SPLIT s3 at DISSOLVE 1",
+   "seconds": 0.171
+  }
+ ]
+}
