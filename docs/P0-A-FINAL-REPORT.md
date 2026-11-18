@@ -16,7 +16,7 @@
 
 | Area | Verdict | Basis |
 |---|---|---|
-| STFT/ISTFT, capture semantics, numerical safety | **PASS** | 178 of 178 thresholded checks pass, 0 fail; 102 pytest tests pass |
+| STFT/ISTFT, capture semantics, numerical safety | **PASS** | 178 of 178 thresholded checks pass, 0 fail; 107 pytest tests pass |
 | Candidate A — Spectral Loop | **PASS** (numerical) | click-free seams by measurement, exact stereo, exact source copy; inherent periodicity is a musical question |
 | Candidate B — Spectral Sustain | **PARTIAL** | exact on stationary tones; two measured defects on non-stationary or wide material (section 4) need a design decision |
 | Distinct from conventional freeze | **PARTIAL** | measurably different behaviour, but Sustain on stationary input *is* a freeze; audible difference unverified |
@@ -67,11 +67,15 @@ uv run python run.py summary
 uv run python run.py blind
 ```
 
-`run.py all` regenerates `verification.json`, `manifest.json`, `metrics.json`, `python-timing.json` and about 0.9 GB of float32 WAVs under `renders/` (git-ignored). Two runs produce byte-identical manifests, metrics and WAVs (`tests/test_pipeline.py`).
+`run.py all` regenerates `verification.json`, `manifest.json`, `metrics.json`, `python-timing.json` and about 0.9 GB of float32 WAVs under `renders/` (git-ignored).
+
+**Determinism, as tested.** Two runs of the same commit on the same machine produce byte-identical manifests, metrics and WAVs (`tests/test_pipeline.py`). A clean checkout of the branch in a separate worktree (`uv sync --frozen`, `pytest`, `run.py all --no-wav`) reproduced `verification.json` and `metrics.json` exactly; only the commit SHA recorded in `manifest.json` and the wall-clock values in `python-timing.json` changed. Bit-identity across machines, operating systems or FFT/BLAS builds is **untested**.
+
+**Threshold provenance.** The −90 dB reconstruction target comes from the brief. The other limits (0.05 Hz frequency error, 0.5 dB sine ripple, 0.1 dB level, seam-step ratio ≤ 1.25, hard-wrap control > 2) were written down after one exploratory probe of the engines had already shown approximate values. They were not derived from those values and have not been changed since, but they were not set blind. Margins are large except for the seam ratio, which is discussed in §3 A2.
 
 ### Experiment matrix actually run
 
-- 4 sources × 17 ROI cases (full spectrum, narrow harmonic band, upper harmonics, short 0.25 s transient, long 1.5 s sustain, the RFC's 350 Hz–5 kHz selection).
+- 17 ROI cases spread over 4 sources (full spectrum, narrow harmonic band, upper harmonics, short 0.25 s transient, long 1.5 s sustain, the RFC's 350 Hz–5 kHz selection).
 - FFT 2048 / 4096 / 8192 at 48 kHz; plus 44.1 kHz/4096, 88.2 kHz/8192, 96 kHz/8192 on two cases.
 - Engines at every FFT size: `freeze_delta`, `loop_ep80`, `loop_aligned80`, `sustain_mean`. At N = 4096 also `freeze_random`, `loop_ep30`, `loop_lin80`, `loop_aligned30`, `sustain_scan`, `sustain_mean_lock`, `sustain_mean_indep`.
 - **361 ghost renders, 0 capture or engine failures, 0 non-finite.**
@@ -137,7 +141,7 @@ Seam strategies: `equal_power` (sin/cos), `linear`, and `aligned` (search the lo
 
 **A1. Ordinary overlap-add does not give a seamless loop — confirmed, and the detector works.** A hard wrap (negative control) produces a seam step 26.8×, 7.6× and 5.3× the steepest step elsewhere in the material for a sine, two close partials and a 29-harmonic tone. The metric cannot see a hard wrap in white noise (0.53), which is expected and reported as `info`.
 
-**A2. All crossfaded seams are click-free by that metric.** Largest seam-step ratio over all 171 loop renders: **1.001** (limit 1.25, set before measuring).
+**A2. Crossfaded seams are no steeper than the material, by that metric.** The gated check is the 24 synthetic rows in `verification.json` (4 materials × 3 strategies × 2 crossfade lengths): worst ratio **0.995** against a limit of 1.25. The 171 loop renders of the experiment are measured but not gated: worst ratio **1.001** (`loop_ep30`). The 1.25 limit is a judgement, not a derived bound; under a strict ≤ 1.0 limit the gated rows would still pass and that one render would fail by 0.1 %.
 
 **A3. Fixed-end crossfades change level at the seam, and the sign depends on the material.** Peak-to-peak short-time RMS, loop of a steady signal (source ripple in brackets):
 
@@ -196,6 +200,8 @@ Per bin, `ω = expected + angle( Σ_m T·X[m]·conj(X[m−1])·e^(−j·expected
 A 23 dB ripple on a single-harmonic selection is close to full amplitude nulls. It worsens with FFT size because the bins get narrower relative to the pitch movement. The baseline freeze has the same problem at N ≥ 4096. The per-bin stability figure predicts it: energy-weighted phase coherence is 0.88–0.90 on the vocal fixture against 0.97–0.9997 on guitar and synth.
 
 **B4. Phase locking removes the beating and costs something else.** This is the "observable artifact" that justified trying it. Identity locking around magnitude peaks brings the vocal ripple to 0.01–0.06 dB. But across the 17 cases at N = 4096 it also lowers crest factor by a median 2.0 dB, raises the worst-case timbre distance from 9.1 to 15.3 dB, and loses level on dense material: −2.8 dB on two partials 26 Hz apart (it merges them into one), −3.9 dB on white noise, −4.1 dB on the drum fixture. Not adopted as default.
+
+Scope of that result: it describes **this** implementation, a 5-point local-maximum peak picker with nearest-peak regions, tested on partials 2.2 bins apart at N = 4096. A finer peak picker or trough-bounded regions may separate those partials. The data do not show that phase locking in general collapses close partials.
 
 **B5. Defect: shared-frequency stereo narrows and de-correlates wide sources.** On the hard-panned detuned synth pad (source correlation −0.07, mono compatibility −3.3 dB):
 
@@ -307,7 +313,7 @@ No thresholded check fails. The following are real and are not hidden by that st
 | K4 | Loop is periodic; decaying or percussive captures become a rhythmic pattern | Musical question | §3 A6 |
 | K5 | Loop on a minimum-length ROI at N = 8192: 64 ms period, crossfade fallback | Medium | §3 A7 |
 | K6 | Peaks exceed 0 dBFS in one render after RMS matching; Sustain peaks are not bounded by input peaks | Medium | §3 A9, §4 B8 |
-| K7 | Phase locking fixes K1 but removes 3–4 dB and collapses close partials | Trade-off | §4 B4 |
+| K7 | The phase-locking variant as implemented fixes K1 but removes 3–4 dB on dense material and merges partials 2.2 bins apart | Trade-off, implementation-specific | §4 B4 |
 | K8 | Frequency estimate degrades below about 4 bins from DC (0.037 Hz at 1.2 bins) | Low | §4 B1 |
 | K9 | A seconds-based maximum ROI rejects some exact-length selections | Fixed (D2) | §1 |
 
@@ -318,7 +324,7 @@ Failures encountered during development and how they were handled:
 - The freeze/sustain equivalence test compared outputs started from different frames; fixed to start both from the same frame.
 - The first timbre-distance metric was dominated by near-empty bands (Loop scored 10 dB against the audio it copies). The metric was redefined (bands within 30 dB of total energy, 40 dB floor) before any conclusion was drawn from it.
 - A level test assumed the T60 envelope removes 1–4 dB over 2 s; it removes 7.4 dB. The expectation was corrected.
-- 6 of the 57 captures in the first full run were rejected `TOO_LONG` (K9).
+- 6 of the 57 captures in the first full run were rejected `TOO_LONG` (K9). The rule was changed to a frame count (D2); a boundary test now accepts exactly `ceil(1.5·Fs/H)` frames and rejects one more at five rate/size combinations. Note that this rule change is what turned those six rejections into renders.
 
 Limits of the evidence:
 
@@ -422,7 +428,7 @@ The fixes in step 2 are deliberately not implemented here: stacking them before 
 
 **Technical feasibility: PARTIAL.**
 
-- **PASS** — The STFT/ISTFT reference, the capture model and all three engines are numerically sound: 178 thresholded checks pass and none fail; reconstruction is −142 dB with the planned float32 storage against a −90 dB target; all 361 renders are finite, denormal-free and deterministic.
+- **PASS** — The STFT/ISTFT reference, the capture model and all three engines are numerically sound: 178 thresholded checks pass and none fail (threshold provenance in §1); reconstruction is −142 dB with the planned float32 storage against a −90 dB target; all 361 renders are finite, denormal-free and deterministic.
 - **PASS (numerical)** — Candidate A, Spectral Loop: click-free seams, exact stereo, exact copy of the source. Its open question is musical (periodicity), plus a preparation-cost decision.
 - **PARTIAL** — Candidate B, Spectral Sustain: exact on stationary tones, with two measured defects (beating on moving pitch; stereo narrowing on wide sources) that have plausible but untested remedies.
 - **NOT ASSESSED** — Realtime CPU, memory in a host, and IMPRINT latency. Operation counts are modest and consistent with the architecture; that is an estimate, not a measurement.

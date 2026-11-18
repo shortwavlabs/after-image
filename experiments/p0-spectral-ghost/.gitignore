@@ -4,3 +4,4 @@ __pycache__/
 renders/
 inputs/*
 !inputs/README.md
+.DS_Store
