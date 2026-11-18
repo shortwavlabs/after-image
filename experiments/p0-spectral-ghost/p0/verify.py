@@ -3,8 +3,16 @@
 PASS/FAIL against a threshold fixed here. These are numerical statements only;
 none of them says anything about how a render sounds.
 
-Thresholds were chosen before the measurements were taken and are not tuned to
-the results; rows marked "info" have no threshold and are reported as measured.
+Threshold provenance (stated exactly, because it matters):
+  * RECON_TARGET_DB comes from the brief and predates all code.
+  * The other limits were written down after one exploratory probe of the
+    engines had already shown the approximate values (seam ratios 0.04-0.98,
+    frequency errors < 1e-3 Hz, sine ripple 0.000 dB). They were not derived
+    from those values and have not been changed since, but they were not blind.
+  * CLICK_RATIO_MAX = 1.25 is a judgement ("a seam may be 25 % steeper than the
+    material"). Under a strict <= 1.0 limit the worst measured row passes at
+    0.995, and one experiment render (loop_ep30, 1.001) would fail.
+Rows marked "info" have no threshold and are reported as measured.
 """
 import math
 import time

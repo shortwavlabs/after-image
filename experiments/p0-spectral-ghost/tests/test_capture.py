@@ -149,3 +149,16 @@ def test_expiry_and_guard_margin():
     f2 = h.latest_id - 30
     cap = C.capture(h, req(h, f2, f2 + 20, 0.0, FS / 2, freq_feather_oct=0.0))
     assert np.allclose(cap.frames, S.stft(x, N)[f2:f2 + 21], atol=1e-4)  # complex64 storage
+
+
+@pytest.mark.parametrize("fs,n", [(48000, 2048), (48000, 4096), (48000, 8192), (44100, 4096), (96000, 8192)])
+def test_max_roi_boundary_is_a_frame_count(fs, n):
+    """Exactly ceil(1.5 * fs / H) frames is accepted; one more is TOO_LONG."""
+    h = C.SpectralHistory(fs, n, 1)
+    h.push_signal(np.random.default_rng(0).standard_normal(3 * fs) * 0.1)
+    limit = math.ceil(C.MAX_ROI_SECONDS * fs / S.hop(n))
+    cap = C.capture(h, C.CaptureRequest(h.epoch, 10, 10 + limit - 1, 20.0, fs / 2))
+    assert cap.frames.shape[0] == limit
+    with pytest.raises(C.CaptureRejected) as e:
+        C.capture(h, C.CaptureRequest(h.epoch, 10, 10 + limit, 20.0, fs / 2))
+    assert e.value.code == "TOO_LONG"

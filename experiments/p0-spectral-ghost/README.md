@@ -62,8 +62,11 @@ evidence files.
 | `python-timing.json` | NumPy wall-clock; informational, machine-dependent, **not** a realtime figure |
 | `listening-notes.md` | Template for the human listening test (empty) |
 
-`manifest.json` and `metrics.json` contain no timestamps; two runs of the same
-code produce identical files and identical WAV bytes (tested).
+`manifest.json` and `metrics.json` contain no timestamps. Two runs of the same
+commit on the same machine produce identical files and identical WAV bytes
+(tested). `manifest.json` records the git commit it was generated from, so it
+changes when the commit changes. Bit-identity across machines, BLAS/FFT builds
+or OSes has not been tested; expect last-digit differences in float results.
 
 ## Render tree
 
