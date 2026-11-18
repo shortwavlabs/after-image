@@ -53,6 +53,7 @@ void AfterimageProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     const int nch = juce::jmin (getMainBusNumOutputChannels(), buffer.getNumChannels());
     for (int c = nch; c < buffer.getNumChannels(); ++c)
         buffer.clear (c, 0, buffer.getNumSamples());
+    commandFifo.read (commandFifo.getNumReady()).forEach ([this] (int i) { dsp.submit (commands[(size_t) i]); });
     dsp.process (buffer.getArrayOfWritePointers(), nch, buffer.getNumSamples(), readParams());
 }
 
@@ -60,7 +61,16 @@ void AfterimageProcessor::processBlockBypassed (juce::AudioBuffer<float>& buffer
 {
     juce::ScopedNoDenormals noDenormals;
     const int nch = juce::jmin (getMainBusNumOutputChannels(), buffer.getNumChannels());
+    commandFifo.read (commandFifo.getNumReady()).forEach ([this] (int i) { dsp.submit (commands[(size_t) i]); });
     dsp.processBypassed (buffer.getArrayOfWritePointers(), nch, buffer.getNumSamples(), readParams());
+}
+
+bool AfterimageProcessor::postCommand (const afterimage::Command& c)
+{
+    auto scope = commandFifo.write (1);
+    if (scope.blockSize1 == 0) return false;
+    commands[(size_t) scope.startIndex1] = c;
+    return true;
 }
 
 double AfterimageProcessor::getTailLengthSeconds() const

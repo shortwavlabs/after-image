@@ -36,12 +36,18 @@ public:
     juce::AudioProcessorValueTreeState apvts;
     afterimage::Engine& engine() noexcept { return dsp; }
 
+    /** Message thread (single producer): queue an IMPRINT/CLEAR for the audio thread. False if the queue is full. */
+    bool postCommand (const afterimage::Command&);
+    afterimage::Source currentSource() const noexcept { return source->load() > 0.5f ? afterimage::Source::Filtered : afterimage::Source::Full; }
+
     static constexpr double maxT60 = 30.0;
 
 private:
     afterimage::Params readParams() const noexcept;
 
     afterimage::Engine dsp;
+    juce::AbstractFifo commandFifo { 32 };
+    std::array<afterimage::Command, 32> commands;
     std::atomic<float>* body = nullptr;
     std::atomic<float>* ghost = nullptr;
     std::atomic<float>* memory = nullptr;

@@ -188,7 +188,8 @@ private:
         bool active = false, releasing = false;
         int slot = 0;
         int64_t R = 0, t = 0;
-        double decay = 1.0, release = 1.0, releaseStep = 0.0;
+        double decay = 1.0, release = 1.0;
+        int releaseAge = 0; // samples since REPLACE/CLEAR started the raised-cosine fade-out
         SplitMix64 rng;
         double tNominal = 0.0;
         std::array<Grain, 64> pending {};

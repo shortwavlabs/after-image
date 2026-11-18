@@ -159,9 +159,9 @@ columns through a second SPSC FIFO; it never touches DSP buffers.
 
 - Two preallocated voice slots; each holds a loop buffer of up to `1.5 s + X` per channel and its grain state.
 - **IMPRINT** with no voice: the new voice starts with the MEMORY onset fade (30 ms raised cosine).
-- **REPLACE** (IMPRINT while a voice plays): the new voice fades in as above while the old one fades out linearly over
+- **REPLACE** (IMPRINT while a voice plays): the new voice fades in as above while the old one fades out with a raised cosine over
   50 ms, then is retired. Old and new overlap only during that fade.
-- **CLEAR**: the playing voice fades out over 50 ms.
+- **CLEAR**: the playing voice fades out over 50 ms (raised cosine). A first version used a linear fade; its slope corner measured 1.50× the signal's own second difference at 88.2 kHz (limit 1.5), so the fade was made C1-continuous.
 - A voice retires when its MEMORY envelope passes −100 dB (exact zeros afterwards, as in P0).
 - A capture request while two voices are still sounding (inside a 50 ms REPLACE fade) waits for the old voice to
   retire before its slot is reused.

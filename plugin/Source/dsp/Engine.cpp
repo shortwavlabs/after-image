@@ -215,7 +215,7 @@ void Engine::apply (const Command& c) noexcept
             if (v.active && ! v.releasing)
             {
                 v.releasing = true;
-                v.releaseStep = 1.0 / releaseLen;
+                v.releaseAge = 0;
             }
         return;
     }
@@ -373,7 +373,7 @@ void Engine::startVoice() noexcept
         if (v.active && ! v.releasing)
         {
             v.releasing = true;
-            v.releaseStep = 1.0 / releaseLen;
+            v.releaseAge = 0;
         }
     Voice* nv = nullptr;
     for (auto& v : voices)
@@ -502,8 +502,9 @@ void Engine::renderVoice (Voice& v, float* out) noexcept
 
     ++v.t;
     v.decay *= decayK;
-    if (v.releasing) v.release -= v.releaseStep;
-    if (v.decay < 1.0e-5 || (v.releasing && v.release <= 0.0)) v.active = false;
+    if (v.releasing) // raised cosine: no slope discontinuity where the fade starts or ends
+        v.release = 0.5 + 0.5 * std::cos (pi * (double) ++v.releaseAge / releaseLen);
+    if (v.decay < 1.0e-5 || (v.releasing && v.releaseAge >= releaseLen)) v.active = false;
 }
 
 void Engine::process (float* const* io, int nch, int n, const Params& p) noexcept { processImpl (io, nch, n, p, false); }
