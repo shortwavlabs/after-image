@@ -1,0 +1,23 @@
+{
+  "note": "Case regions are read from experiments.json (same selections as P0-A).",
+  "fs": 48000,
+  "fft_size": 4096,
+  "seed": 20261118,
+  "render": {
+    "ghost_seconds": 6.0,
+    "t60_seconds": 5.0,
+    "progression_seconds": 12.0,
+    "progression_hold_s": 2.0,
+    "progression_ramp_s": 6.0,
+    "progression_t60_seconds": 12.0,
+    "onset_fade_s": 0.03,
+    "target_rms_dbfs": -23.0,
+    "level_window_s": 2.0,
+    "xfade_s": 0.08,
+    "freq_feather_oct": 0.16666666666666666,
+    "time_feather_s": 0.05
+  },
+  "cases": ["guitar/full_spectrum", "guitar/long_sustain", "vocal/mid_band_rfc", "vocal/narrow_harmonic",
+            "drums/full_spectrum", "synth/upper_harmonics"],
+  "character_cases": ["guitar/long_sustain", "vocal/mid_band_rfc"]
+}
