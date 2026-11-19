@@ -229,6 +229,24 @@ int main (int argc, char** argv)
         if (a.startsWith ("seconds=")) seconds = a.fromFirstOccurrenceOf ("=", false, false).getDoubleValue();
         if (a == "rt=1") rt = true;
         if (a == "cpu=1") cpu = true;
+        if (a == "maskcost") // E5 evidence: the FILTERED frequency mask computed at an accepted trigger (not a build unit)
+        {
+            for (double fs : { 48000.0, 96000.0 })
+            {
+                afterimage::Engine e;
+                e.prepare (fs, 2, 64);
+                std::vector<double> t;
+                for (int k = 0; k < 2000; ++k)
+                {
+                    const auto t0 = Clock::now();
+                    e.computeMaskForTest (100.0 + k % 7, 8000.0);
+                    t.push_back (std::chrono::duration<double, std::micro> (Clock::now() - t0).count());
+                }
+                auto st = stats (t);
+                std::printf ("computeMask fs=%.0f (K=%d): median %.1f us, p99.9 %.1f us, max %.1f us\n", fs, e.fftSize() / 2 + 1, st.median, st.p999, st.max);
+            }
+            return 0;
+        }
         if (a.startsWith ("scenarios=")) scenarios = juce::StringArray::fromTokens (a.fromFirstOccurrenceOf ("=", false, false), ",", "");
         if (a.startsWith ("diagnose="))  // diagnose=fs,block,density,repeats[,rt]: max of each repeat, no gate
         {

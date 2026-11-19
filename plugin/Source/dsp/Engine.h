@@ -208,6 +208,7 @@ public:
     /** AUTO onset threshold in dB of mean band rise for a sensitivity in [0, 1] (UX contract 6). */
     static double autoThresholdDb (double sensitivity) noexcept { return 3.0 + 9.0 * (1.0 - std::clamp (sensitivity, 0.0, 1.0)); }
     int jobsActive() const noexcept { return job.state != CaptureState::Idle; }
+    void computeMaskForTest (double lowHz, double highHz) noexcept { computeMask (lowHz, highHz); } // E5 timing
     void setGrainLog (GrainRecord* records, int capacity) noexcept { log = records; logCap = capacity; logCount = 0; }
     int grainLogCount() const noexcept { return logCount; }
     void setDensityOverride (double grainsPerSecond); // stress tests and benchmark; not realtime

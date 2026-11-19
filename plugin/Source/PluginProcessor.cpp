@@ -97,9 +97,14 @@ void AfterimageProcessor::forwardTriggers (const juce::MidiBuffer& midi, bool by
     using afterimage::Outcome;
     commandFifo.read (commandFifo.getNumReady()).forEach ([this] (int i) { dsp.submit (commands[(size_t) i]); });
 
-    // automation trigger: rising edge at block resolution (P1-B architecture 5)
+    // automation trigger: rising edge at block resolution (P1-B architecture 5). The value is taken between two reads
+    // of the restore sequence: a restore that started, is running or finished since the last block resyncs instead.
+    const auto seqBefore = restoreSeq.load (std::memory_order_acquire);
     const float v = sched[5]->load();
-    if (resyncImprint.exchange (false)) lastImprint = v;
+    const auto seqAfter = restoreSeq.load (std::memory_order_acquire);
+    const bool restored = seqBefore != lastRestoreSeq || seqBefore != seqAfter || (seqBefore & 1u) != 0;
+    lastRestoreSeq = seqAfter;
+    if (resyncImprint.exchange (false) || restored) lastImprint = v;
     else if (lastImprint < 0.5f && v >= 0.5f)
     {
         Command c;
@@ -181,8 +186,9 @@ void AfterimageProcessor::setStateInformation (const void* data, int size)
     if (auto xml = getXmlFromBinary (data, size))
         if (xml->hasTagName (apvts.state.getType()))
         {
+            restoreSeq.fetch_add (1, std::memory_order_acq_rel); // odd: restoring
             apvts.replaceState (juce::ValueTree::fromXml (*xml));
-            resyncImprint = true; // a restored "on" trigger never captures
+            restoreSeq.fetch_add (1, std::memory_order_acq_rel); // even again: the audio thread resyncs, never an edge
         }
 }
 

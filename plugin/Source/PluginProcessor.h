@@ -56,6 +56,8 @@ private:
     std::atomic<float>* source = nullptr;
     std::vector<std::atomic<float>*> sched; // capture_mode .. auto_cooldown, in layout order
     std::atomic<bool> resyncImprint { true };
+    std::atomic<uint32_t> restoreSeq { 0 }; // odd while setStateInformation runs (seqlock)
+    uint32_t lastRestoreSeq = 0;
     float lastImprint = 0.0f;
     int cc64 = 0;
 

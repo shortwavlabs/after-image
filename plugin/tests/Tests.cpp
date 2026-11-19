@@ -4,6 +4,7 @@
 #include <PluginEditor.h>
 
 #include <thread>
+#include <chrono>
 #include <malloc/malloc.h>
 #include <pthread.h>
 
@@ -1654,6 +1655,43 @@ void testAutoHold()
     CHECK (autoCaptures (log).empty());
     CHECK (suppressed >= 5);
 }
+
+void testRestoreRaceFromAnotherThread()
+{
+    currentTest = "B4 state restore racing the audio thread";
+    Rig rig (48000.0, 2, 32);
+    std::vector<RequestRecord> log (4096);
+    rig.proc.engine().setRequestLog (log.data(), 4096);
+    juce::MemoryBlock stateOn, stateOff;
+    rig.set ("imprint", 1.0f);
+    rig.proc.getStateInformation (stateOn);
+    rig.set ("imprint", 0.0f);
+    rig.proc.getStateInformation (stateOff);
+    rig.run (noise (2, 96000, 1, 0.2f), 32); // trigger off, history filled
+    std::atomic<bool> stop { false };
+    std::thread audio ([&] {
+        juce::AudioBuffer<float> buf (2, 32);
+        juce::MidiBuffer midi;
+        while (! stop.load())
+        {
+            for (int c = 0; c < 2; ++c)
+                for (int i = 0; i < 32; ++i) buf.setSample (c, i, 0.1f * (float) std::sin (0.01 * i));
+            rig.proc.processBlock (buf, midi);
+        }
+    });
+    for (int k = 0; k < 2000; ++k) // a host restoring presets while audio runs: on, off, on, ...
+    {
+        const auto& st = (k % 2 == 0) ? stateOn : stateOff;
+        rig.proc.setStateInformation (st.getData(), (int) st.getSize());
+        std::this_thread::sleep_for (std::chrono::microseconds (50 + (k * 37) % 400));
+    }
+    stop = true;
+    audio.join();
+    int automation = 0;
+    for (int i = 0; i < rig.proc.engine().requestLogCount(); ++i) automation += log[(size_t) i].origin == Origin::Automation;
+    std::printf ("    2000 restores on another thread while blocks ran: %d automation requests\n", automation);
+    CHECK (automation == 0);
+}
 } // namespace
 
 int main (int argc, char** argv)
@@ -1679,7 +1717,7 @@ int main (int argc, char** argv)
                         { "c1", testRandomDeterminism }, { "c235", testRandomBoundsAndValidity }, { "c4", testRandomSilence },
                         { "c6", testRandomNoBacklog }, { "c7", testRandomSparseActivity },
                         // P1-B Stage D (experiment limits)
-                        { "d12", testAutoNotes }, { "d34", testAutoSustainedAndSilence }, { "d56", testAutoDrums }, { "b5auto", testAutoHold } };
+                        { "b4race", testRestoreRaceFromAnotherThread }, { "d12", testAutoNotes }, { "d34", testAutoSustainedAndSilence }, { "d56", testAutoDrums }, { "b5auto", testAutoHold } };
     for (auto& t : tests)
         if (only == nullptr || std::strcmp (only, t.name) == 0)
         {

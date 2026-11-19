@@ -134,7 +134,7 @@ positive control. Per §1.1 the gated benchmark E4 was **not run**. Logic, Live 
 | B1 | P1-A C++ suite unchanged: 4,304 checks pass; Python 164 pass; `p1a-parity.json` regenerated with every row and capture delay **identical** (148/148) |
 | B2 | Golden render (guitar fixture, two captures and a CLEAR, varying blocks) SHA-256 `f5f202a2…829da` from both `b0c437f` and P1-B, re-checked after Stage D |
 | B3 | 4 rates × 5 lengths: `s1` = trigger and `s0 = s1 − round(L·Fs)` exactly; 1 s at the stream start refused `BEFORE_STREAM`, never shortened. Processor: MIDI Note On and CC 64 at offsets 0, 1, 17, B−1 in blocks of 64 and 512 land on `block start + offset`; a second note in the same block is `DROPPED_RATE`; a held CC 64 does not retrigger; the automation edge lands on the block start |
-| B4 | rising edge captures once over 100 blocks held on; a one-block pulse captures; "on" restored from state, across `prepareToPlay` (48 → 96 kHz) and set during bypass: 0 captures |
+| B4 | rising edge captures once over 100 blocks held on; a one-block pulse captures; "on" restored from state, across `prepareToPlay` (48 → 96 kHz) and set during bypass: 0 captures. **Defect found in review and fixed:** a restore on another thread while audio ran fired IMPRINT in 213–238 of 2,000 restores (the resync flag was set after `replaceState`). A restore sequence counter now makes the audio thread resync whenever a restore started, ran or finished since its last block: 0 in 2,000, three runs (test `b4race`). E2 was re-run on the fixed build: 0 failures |
 | B5 | HOLD before a ghost: 0 RANDOM / AUTO captures over 20 s (RANDOM ≥ 15 and AUTO ≥ 5 suppressions), the button still captures; HOLD with a ghost keeps it 20 s; IMPRINT replaces under HOLD; 100 random toggles: no RANDOM capture within 0.75 × interval of a release, output finite; the held ghost retires with MEMORY |
 | B6 | 16 triggers 20 ms apart during a FILTERED build: at most 2 accepted, at least 0.2 s apart; all others `BUSY`; nothing queued |
 | B7 | button, MIDI and automation triggers while bypassed: one `IGNORED_BYPASS` each, 0 captures, none after resume |
@@ -224,6 +224,11 @@ gap (4.06 and 41.06 periods for the 3× and 40× stalls), so this detector works
 
 **E3 = FAIL.** Per §1.1, E4 was not run.
 
+E5 repeats of the 96 kHz / 32 rows (three each, 60 s, on the build with the restore fix; `p1b-E5-repeat-*.json`): editor
+closed 27.0 / 27.1 / 27.0 %, editor open 27.4 / 27.3 / 27.5 % at the 99.9th percentile; maxima 34–46 %. All six miss
+the 25 % limit, so the single editor-open pass above (22.3 %) was run-to-run variation. BlackHole was returned to
+48 kHz afterwards (it was at 48 kHz before E3); the MiniFuse was not used.
+
 ## 8. E5 — characterising the failure (evidence only)
 
 `docs/evidence/p1b-E5-cpu-time.json` (ordinary thread, 1 × 20 s per row, thread CPU time read around every call; the
@@ -232,16 +237,28 @@ P1-A scenario path does not read CPU time and shows 0), `docs/evidence/p1b-E5-ga
 - **Execution cost, not preemption:** in every P1-B scenario row, the CPU time of the worst callback equals its wall time,
   except one 258 µs callback (random, stress, 96 kHz / 32) that used 12.5 µs of CPU: the single preemption observed in
   those rows.
-- **The 96 kHz / 32 budget is structural:** the engine's worst callback there costs 76–98 µs of CPU (23–30 % of 333 µs).
-  That is one stereo pair of 8192-point FFTs (analysis or a FILTERED build unit) plus grains. Analysis callbacks are 1 in
-  64 (1.6 %), more than the top 0.1 %, so the 99.9th percentile is essentially the FFT callback and the 25 % limit runs
-  through it. That is a property of P1-A's scheduling (whole stereo frames per step), not of P1-B.
-- **P1-B adds no measurable cost:** 96 kHz / 32 CLOUD, P1-A scenario p99.9 67.3 µs vs MANUAL 66.1, RANDOM 67.8, AUTO
-  68.4; medians 0.71–0.79 µs in every scenario. The scheduler's own cost is below this resolution.
+- **The 96 kHz / 32 budget is tight:** the engine's worst callback there costs 76–98 µs of CPU (23–30 % of 333 µs) in
+  the benchmark. The hypothesis, not yet broken down by component, is one stereo pair of 8192-point FFTs (analysis or a
+  FILTERED build unit) plus grains: analysis callbacks are 1 in 64 (1.6 %), more than the top 0.1 %, so the 99.9th
+  percentile sits on them.
+- **No added cost shown for P1-B in the benchmark:** the unchanged P1-A scenario at 96 kHz / 32 / CLOUD has a p99.9 of
+  68.0 µs on P1-A code (E1, `b0c437f`) and 67.3 µs on P1-B code (E5 `p1a` row). The P1-B scenarios give 66.1 (MANUAL),
+  67.8 (RANDOM) and 68.4 µs (AUTO), medians 0.71–0.79 µs throughout. The scheduler's own cost was **not isolated**; it is
+  inferred to be small from these equal medians.
+- **Unexplained gap:** the device-callback p99.9 at 96 kHz / 32 (89 µs, editor closed) is about 21 µs above the
+  ordinary-thread benchmark (66–68 µs), and that gap is what crosses the 83 µs limit. There is no P1-A baseline under E3,
+  so the failure is **not shown to come from P1-B**, and not shown to be P1-A's either. Candidates, not causes: the VST3
+  wrapper, MIDI triggers, and `computeMask`, which runs a `log2`/`cos` per bin at the sample of every accepted FILTERED
+  capture, outside the build-unit schedule. Measured: 24.7 µs median / 61.5 µs max at 48 kHz (2,049 bins) and 34.7 µs /
+  54.5 µs at 96 kHz (4,097 bins). Landing in a callback that also runs an analysis FFT pair, that alone would cross the
+  limit.
 - **The host-time gaps** at 96 kHz / 64 occur only during the first 0.13 s after the device switches rate; a repeat with
   the device already at 96 kHz had none.
-- The likely remedy (outside P1-B's scope, which excludes DSP changes): split each stereo FFT step into one channel per
-  scheduled unit, halving the worst callback, then re-run the unchanged gates.
+- **Scope of E5:** it ran the whole E4 matrix (four scenarios, both densities, all rates and blocks) instrumented, once
+  each, after E3 failed. That was declared in advance as evidence-only; **no E4 result is claimed from it.**
+- Remedies to try in P1-C (not done here: P1-B excludes DSP changes and the stop rule applies): move `computeMask` into
+  the first build unit or precompute its `log2` table; split each stereo FFT step into one channel per scheduled unit;
+  measure a component breakdown; then re-run the unchanged gates.
 
 ## 9. Musical assessment — render cases (owner to listen)
 
@@ -292,8 +309,9 @@ Report anything that differs; until then host behaviour is known only through th
 ## 12. Recommended next milestone
 
 **P1-C: realtime budget and host qualification**, no new features:
-1. Split stereo FFT work into one channel per scheduled unit (analysis and FILTERED build), keeping output bit-identical
-   (parity, golden render), then re-run E3 and E4 unchanged.
+1. Break the 96 kHz / 32 callback down by component, move `computeMask` into the build schedule, split stereo FFT work
+   into one channel per scheduled unit (analysis and FILTERED build), keeping output bit-identical (parity, golden
+   render), then re-run E3 and E4 unchanged.
 2. Owner runs §10 in Logic and Live and listens to `renders/p1b/` and to live playing in all three modes.
 3. Replace the xrun instrument with a validated one (host-time continuity, or a DAW's own overload counter) before any
    realtime PASS is claimed.

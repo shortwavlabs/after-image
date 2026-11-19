@@ -96,7 +96,8 @@ setting. The UI shows the current onset strength next to the threshold.
 
 - Bypassed: dry audio passes unchanged; IMPRINT from any source is ignored; RANDOM and AUTO pause.
 - Transport is never read. The effect works on whatever the host plays through it, stopped or running.
-- Sessions and presets restore the controls, never a captured ghost and never a capture.
+- Sessions and presets restore the controls, never a captured ghost and never a capture. Note that a session saved in
+  RANDOM or AUTO restores that mode, so automatic captures resume as soon as audio plays (unless HOLD was saved on).
 
 ## 9. Deferred (not in P1-B)
 
