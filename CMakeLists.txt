@@ -68,5 +68,14 @@ if(APPLE)
     endforeach()
 endif()
 
+# P1-B hosting harness: loads the built AU/VST3 through JUCE's plugin hosting (not part of the plugin, not a DAW)
+juce_add_console_app(afterimage_host PRODUCT_NAME afterimage_host)
+target_sources(afterimage_host PRIVATE plugin/tools/Host.cpp)
+target_compile_definitions(afterimage_host PRIVATE
+    JUCE_PLUGINHOST_AU=1 JUCE_PLUGINHOST_VST3=1 JUCE_MODAL_LOOPS_PERMITTED=1 JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0
+    JUCE_USE_FLAC=0 JUCE_USE_OGGVORBIS=0 JUCE_USE_OPUS=0 JUCE_USE_WEBP=0)
+target_link_libraries(afterimage_host PRIVATE juce::juce_audio_utils
+    juce::juce_recommended_config_flags juce::juce_recommended_warning_flags)
+
 enable_testing()
 add_test(NAME afterimage_tests COMMAND afterimage_tests)
