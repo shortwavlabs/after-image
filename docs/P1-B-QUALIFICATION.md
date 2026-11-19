@@ -109,8 +109,8 @@ events is the owner's judgement; no automated measure can pass it.
 ## 2. Results summary (2026-11-19)
 
 **Verdict: PARTIAL.** Hands-free capture works and passes every functional gate (Stages B, C) and the AUTO experiment
-limits (Stage D). The first realtime hard gate, **E3, FAILED** (96 kHz / 32 samples, editor closed: 99.9th percentile
-26.7 % of the period against 25 %), and its xrun component could not be assessed because JUCE's xrun counter failed its
+limits (Stage D). The first realtime hard gate, **E3, FAILED** (96 kHz / 32 samples: 99.9th percentile 26.7 % of the
+period against 25 % in the gated run, 27.0–27.5 % in six repeats with the editor closed and open), and its xrun component could not be assessed because JUCE's xrun counter failed its
 positive control. Per §1.1 the gated benchmark E4 was **not run**. Logic, Live and listening are **NOT ASSESSED**.
 
 | Stage | Result | Evidence |
