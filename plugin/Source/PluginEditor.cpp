@@ -322,6 +322,12 @@ void AfterimageEditor::timerCallback()
     s << "MODE  " << (modeNow == afterimage::Mode::Manual ? "MANUAL: press IMPRINT (button, footswitch, MIDI)"
                      : modeNow == afterimage::Mode::Random ? "RANDOM" : "AUTO (experimental)");
     if (modeNow == afterimage::Mode::Random && st.randomDueIn.load() >= 0) s << ": next attempt in " << juce::String ((double) st.randomDueIn.load() / fs, 1) << " s";
+    if (modeNow == afterimage::Mode::Auto)
+    {
+        const char* autoStates[] = { "armed", "in event", "re-arming" };
+        s << ": " << autoStates[juce::jlimit (0, 2, st.autoState.load())] << ", onset strength " << juce::String (st.fluxDb.load(), 1) << " dB (threshold "
+          << juce::String (afterimage::Engine::autoThresholdDb (proc.apvts.getRawParameterValue ("auto_sensitivity")->load()), 1) << " dB)";
+    }
     s << (st.hold.load() ? "    HOLD ON: automatic captures suppressed (" + juce::String ((juce::int64) st.outcomes[(size_t) afterimage::Outcome::SuppressedHold].load()) + ")" : "    HOLD off") << "\n";
     const auto origin = (afterimage::Origin) st.lastOrigin.load();
     const auto outcome = (afterimage::Outcome) st.lastOutcome.load();

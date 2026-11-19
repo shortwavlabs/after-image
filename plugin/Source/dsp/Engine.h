@@ -205,6 +205,8 @@ public:
     void setRequestLog (RequestRecord* records, int capacity) noexcept { reqLog = records; reqLogCap = capacity; reqLogCount = 0; }
     int requestLogCount() const noexcept { return reqLogCount; }
     int maxRandomAttempts() const noexcept { return maxAttemptsSeen; }
+    /** AUTO onset threshold in dB of mean band rise for a sensitivity in [0, 1] (UX contract 6). */
+    static double autoThresholdDb (double sensitivity) noexcept { return 3.0 + 9.0 * (1.0 - std::clamp (sensitivity, 0.0, 1.0)); }
     int jobsActive() const noexcept { return job.state != CaptureState::Idle; }
     void setGrainLog (GrainRecord* records, int capacity) noexcept { log = records; logCap = capacity; logCount = 0; }
     int grainLogCount() const noexcept { return logCount; }
@@ -261,6 +263,8 @@ private:
     int record (const Command&, Origin, Outcome, Reject, int attempts) noexcept;
     void schedule() noexcept;
     void randomTick() noexcept;
+    void autoHop (int64_t m, float levelDb, float flux) noexcept;
+    void autoDecide() noexcept;
     void resetScheduler() noexcept;
     double meanHopPower (int64_t s0, int64_t s1) const noexcept;
     Command manualSelection (int64_t s1, Origin) const noexcept;
@@ -320,6 +324,15 @@ private:
     int64_t randomDue = -1;
     double hopEnergy = 0.0;
     std::vector<float> hopPower; // mean square of each hop's new samples, aligned with the frame history
+    std::array<float, DisplayColumn::bands> bandDb {}, prevBandDb {};
+    // AUTO detector (P1-B architecture 8): 0 armed, 1 in event, 2 re-arming
+    struct AutoDetector
+    {
+        int state = 0, quietHops = 0, calmHops = 0;
+        int64_t s0 = 0, lastCapture = -1;
+        bool pending = false;
+        int64_t pendingS0 = 0, pendingS1 = 0;
+    } autoDet;
     RequestRecord* reqLog = nullptr;
     int reqLogCap = 0, reqLogCount = 0, maxAttemptsSeen = 0;
 

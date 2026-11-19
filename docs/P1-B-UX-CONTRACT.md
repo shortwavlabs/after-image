@@ -70,7 +70,17 @@ Parameter IDs are development IDs (version 1); there is no preset contract yet.
 
 ## 6. AUTO sensitivity scale
 
-Set in Stage D from synthetic fixtures (P1-B-QUALIFICATION §1.5). Documented here once fixed.
+Fixed in Stage D on synthetic fixtures (P1-B-QUALIFICATION §1.5). AUTO's onset strength is the mean rise, in dB, of the
+display's 160 frequency bands from one analysis frame (≈ 21 ms) to the next, over the bands within 60 dB of the loudest
+one. A capture starts when that strength reaches
+
+| SENSITIVITY | 0 | 0.25 | 0.5 (default) | 0.75 | 1 |
+|---|---:|---:|---:|---:|---:|
+| threshold (dB of mean band rise) | 12.0 | 9.75 | 7.5 | 5.25 | 3.0 |
+
+and the input is above GATE. Higher sensitivity catches softer, legato note changes; lower sensitivity only reacts to
+hard attacks after quieter passages. A ±3 dB, 5 Hz tremolo rises about 2 dB per frame and does not trigger at any
+setting. The UI shows the current onset strength next to the threshold.
 
 ## 7. Status the UI must show
 

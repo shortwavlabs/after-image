@@ -1,0 +1,475 @@
+{
+ "note": "Local recordings of unknown licence (B11): counts and times only, untuned, AUTO defaults, RANDOM interval 2 s.",
+ "code_revision": {
+  "commit": "0b9c8631b8453b869a86d710df10ec2d2042b7fe",
+  "harness_dirty": false
+ },
+ "recordings": {
+  "01_distorted_guitar_chord": {
+   "seconds": 17.51,
+   "auto": {
+    "captures": 1,
+    "outcomes": {
+     "AUTO:COMPLETED": 1
+    },
+    "capture_starts_s": [
+     0.0
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 3.4
+   },
+   "random": {
+    "captures": 9,
+    "outcomes": {
+     "RANDOM:COMPLETED": 9
+    },
+    "capture_starts_s": [
+     0.363,
+     0.643,
+     2.219,
+     7.271,
+     8.598,
+     11.186,
+     12.296,
+     14.366,
+     14.844
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 30.8
+   }
+  },
+  "02_clean_electric_guitar": {
+   "seconds": 10.75,
+   "auto": {
+    "captures": 2,
+    "outcomes": {
+     "AUTO:COMPLETED": 2
+    },
+    "capture_starts_s": [
+     0.0,
+     5.423
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 11.2
+   },
+   "random": {
+    "captures": 5,
+    "outcomes": {
+     "RANDOM:COMPLETED": 5
+    },
+    "capture_starts_s": [
+     0.356,
+     0.642,
+     2.218,
+     7.264,
+     8.592
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 27.9
+   }
+  },
+  "03_acoustic_drum_break": {
+   "seconds": 11.04,
+   "auto": {
+    "captures": 4,
+    "outcomes": {
+     "AUTO:COMPLETED": 4
+    },
+    "capture_starts_s": [
+     0.0,
+     2.707,
+     5.818,
+     8.581
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 21.7
+   },
+   "random": {
+    "captures": 5,
+    "outcomes": {
+     "RANDOM:COMPLETED": 5
+    },
+    "capture_starts_s": [
+     0.356,
+     0.642,
+     2.218,
+     7.264,
+     8.592
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 27.2
+   }
+  },
+  "04_sustained_vocal": {
+   "seconds": 62.44,
+   "auto": {
+    "captures": 0,
+    "outcomes": {},
+    "capture_starts_s": [],
+    "capture_lengths_ms": [],
+    "per_minute": 0.0
+   },
+   "random": {
+    "captures": 28,
+    "outcomes": {
+     "RANDOM:NO_CANDIDATE": 3,
+     "RANDOM:COMPLETED": 28
+    },
+    "capture_starts_s": [
+     2.434,
+     2.394,
+     5.231,
+     8.678,
+     8.173,
+     10.152,
+     12.765,
+     16.692,
+     16.031,
+     18.689,
+     19.821,
+     21.913,
+     23.24,
+     25.894,
+     28.454,
+     29.061,
+     31.832,
+     35.378,
+     35.337,
+     37.454,
+     41.494,
+     42.76,
+     44.845,
+     46.883,
+     47.552,
+     51.301,
+     51.225,
+     55.044
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 26.9
+   }
+  },
+  "05_evolving_synth_pad": {
+   "seconds": 52.29,
+   "auto": {
+    "captures": 0,
+    "outcomes": {},
+    "capture_starts_s": [],
+    "capture_lengths_ms": [],
+    "per_minute": 0.0
+   },
+   "random": {
+    "captures": 26,
+    "outcomes": {
+     "RANDOM:COMPLETED": 26
+    },
+    "capture_starts_s": [
+     0.356,
+     0.642,
+     2.218,
+     7.264,
+     8.592,
+     11.178,
+     12.289,
+     14.359,
+     14.84,
+     17.674,
+     21.118,
+     20.62,
+     22.599,
+     25.209,
+     29.132,
+     28.478,
+     31.134,
+     32.266,
+     34.359,
+     35.687,
+     38.34,
+     40.897,
+     41.508,
+     44.279,
+     47.821,
+     47.784
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 29.8
+   }
+  },
+  "06_piano_chord": {
+   "seconds": 12.0,
+   "auto": {
+    "captures": 1,
+    "outcomes": {
+     "AUTO:COMPLETED": 1
+    },
+    "capture_starts_s": [
+     0.0
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 5.0
+   },
+   "random": {
+    "captures": 5,
+    "outcomes": {
+     "RANDOM:COMPLETED": 5,
+     "RANDOM:NO_CANDIDATE": 1
+    },
+    "capture_starts_s": [
+     0.363,
+     0.643,
+     2.219,
+     7.271,
+     7.529
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 25.0
+   }
+  },
+  "07_bass_sustained": {
+   "seconds": 3.67,
+   "auto": {
+    "captures": 1,
+    "outcomes": {
+     "AUTO:COMPLETED": 1
+    },
+    "capture_starts_s": [
+     0.0
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 16.4
+   },
+   "random": {
+    "captures": 2,
+    "outcomes": {
+     "RANDOM:COMPLETED": 2
+    },
+    "capture_starts_s": [
+     0.356,
+     0.642
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 32.7
+   }
+  },
+  "08_spoken_voice": {
+   "seconds": 2.15,
+   "auto": {
+    "captures": 1,
+    "outcomes": {
+     "AUTO:COMPLETED": 1
+    },
+    "capture_starts_s": [
+     0.849
+    ],
+    "capture_lengths_ms": [
+     683
+    ],
+    "per_minute": 27.9
+   },
+   "random": {
+    "captures": 1,
+    "outcomes": {
+     "RANDOM:COMPLETED": 1
+    },
+    "capture_starts_s": [
+     0.356
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 27.9
+   }
+  },
+  "09_metallic_percussion": {
+   "seconds": 3.02,
+   "auto": {
+    "captures": 1,
+    "outcomes": {
+     "AUTO:COMPLETED": 1
+    },
+    "capture_starts_s": [
+     0.0
+    ],
+    "capture_lengths_ms": [
+     464
+    ],
+    "per_minute": 19.9
+   },
+   "random": {
+    "captures": 1,
+    "outcomes": {
+     "RANDOM:COMPLETED": 1
+    },
+    "capture_starts_s": [
+     0.089
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 19.9
+   }
+  },
+  "10_ambient_field_recording": {
+   "seconds": 90.09,
+   "auto": {
+    "captures": 1,
+    "outcomes": {
+     "AUTO:COMPLETED": 1
+    },
+    "capture_starts_s": [
+     0.0
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 0.7
+   },
+   "random": {
+    "captures": 46,
+    "outcomes": {
+     "RANDOM:COMPLETED": 46
+    },
+    "capture_starts_s": [
+     0.356,
+     0.642,
+     2.218,
+     7.264,
+     8.592,
+     11.178,
+     12.289,
+     14.359,
+     14.84,
+     17.674,
+     21.118,
+     20.62,
+     22.599,
+     25.209,
+     29.132,
+     28.478,
+     31.134,
+     32.266,
+     34.359,
+     35.687,
+     38.34,
+     40.897,
+     41.508,
+     44.279,
+     47.821,
+     47.784,
+     49.9,
+     53.934,
+     55.203,
+     57.286,
+     59.323,
+     59.996,
+     63.743,
+     63.67,
+     67.604,
+     67.503,
+     69.62,
+     71.675,
+     74.29,
+     74.854,
+     78.749,
+     77.399,
+     79.479,
+     81.495,
+     85.26,
+     86.009
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 30.6
+   }
+  },
+  "11_dense_rhythmic_percussion": {
+   "seconds": 6.86,
+   "auto": {
+    "captures": 3,
+    "outcomes": {
+     "AUTO:COMPLETED": 3
+    },
+    "capture_starts_s": [
+     0.0,
+     2.962,
+     5.958
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 26.2
+   },
+   "random": {
+    "captures": 3,
+    "outcomes": {
+     "RANDOM:COMPLETED": 3
+    },
+    "capture_starts_s": [
+     0.356,
+     0.642,
+     2.218
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 26.2
+   }
+  },
+  "12_single_acoustic_pluck": {
+   "seconds": 6.99,
+   "auto": {
+    "captures": 1,
+    "outcomes": {
+     "AUTO:COMPLETED": 1
+    },
+    "capture_starts_s": [
+     0.0
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 8.6
+   },
+   "random": {
+    "captures": 3,
+    "outcomes": {
+     "RANDOM:COMPLETED": 3
+    },
+    "capture_starts_s": [
+     0.356,
+     0.642,
+     2.218
+    ],
+    "capture_lengths_ms": [
+     750
+    ],
+    "per_minute": 25.7
+   }
+  }
+ }
+}

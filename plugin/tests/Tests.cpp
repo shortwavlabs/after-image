@@ -1472,6 +1472,188 @@ void testRandomSparseActivity()
     CHECK (active);
     std::printf ("    %d RANDOM captures, all over the gate\n", captures);
 }
+
+// =============================================================================================
+// P1-B Stage D: AUTO experiment (docs/P1-B-QUALIFICATION.md 1.5); fixtures generated here
+constexpr double twoPi = 6.283185307179586;
+
+Sig plucked (double fs, int notes, double spacing, std::vector<double>& onsets)
+{
+    const int n = (int) ((1.0 + notes * spacing + 1.0) * fs);
+    Sig x (2, std::vector<float> ((size_t) n, 0.0f));
+    const double f0s[] = { 196.0, 246.94, 293.66, 329.63 };
+    for (int k = 0; k < notes; ++k)
+    {
+        const double t0 = 1.0 + k * spacing;
+        onsets.push_back (t0 * fs);
+        for (int i = (int) (t0 * fs); i < n; ++i)
+        {
+            const double t = i / fs - t0, env = std::min (1.0, t / 0.003) * std::pow (10.0, -t / 2.0); // -10 dB/s
+            double v = 0;
+            for (int h = 1; h <= 6; ++h) v += std::sin (twoPi * f0s[k % 4] * h * t) / h;
+            x[0][(size_t) i] += (float) (0.25 * env * v);
+            x[1][(size_t) i] += (float) (0.23 * env * v);
+        }
+    }
+    return x;
+}
+
+Sig tremoloChord (double fs, double seconds)
+{
+    const int n = (int) (seconds * fs);
+    Sig x (2, std::vector<float> ((size_t) n, 0.0f));
+    for (int i = (int) (0.5 * fs); i < n; ++i)
+    {
+        const double t = i / fs, fade = std::min (1.0, (t - 0.5) / 0.05), trem = std::pow (10.0, 3.0 * std::sin (twoPi * 5.0 * t) / 20.0);
+        double v = 0;
+        for (double f : { 196.0, 246.94, 293.66 })
+            for (int h = 1; h <= 4; ++h) v += std::sin (twoPi * f * h * t) / h;
+        x[0][(size_t) i] = x[1][(size_t) i] = (float) (0.1 * fade * trem * v);
+    }
+    return x;
+}
+
+Sig drums (double fs, double seconds, double period, std::vector<double>& hits)
+{
+    const int n = (int) (seconds * fs);
+    Sig x (2, std::vector<float> ((size_t) n, 0.0f));
+    std::mt19937 rng (5);
+    std::uniform_real_distribution<float> u (-1.0f, 1.0f);
+    for (double t0 = 1.0; t0 < seconds - 0.5; t0 += period)
+    {
+        hits.push_back (t0 * fs);
+        for (int i = (int) (t0 * fs); i < std::min (n, (int) ((t0 + 0.4) * fs)); ++i)
+        {
+            const double t = i / fs - t0;
+            const float v = (float) (0.6 * std::sin (twoPi * 60.0 * t) * std::exp (-t / 0.08) + 0.3 * u (rng) * std::exp (-t / 0.01));
+            x[0][(size_t) i] += v;
+            x[1][(size_t) i] += v;
+        }
+    }
+    return x;
+}
+
+std::vector<RequestRecord> autoCaptures (const std::vector<RequestRecord>& log)
+{
+    std::vector<RequestRecord> c;
+    for (auto& r : log)
+        if (r.origin == Origin::Auto && (r.outcome == Outcome::Accepted || r.outcome == Outcome::Completed)) c.push_back (r);
+    return c;
+}
+
+afterimage::Params autoParams()
+{
+    afterimage::Params p = ghostOnly();
+    p.mode = Mode::Auto; // defaults: gate -48 dBFS, sensitivity 0.5, cooldown 2 s, length 0.75 s
+    return p;
+}
+
+/** Distance from each capture start to the nearest event at or after it; also the worst event coverage. */
+void startErrors (const std::vector<RequestRecord>& caps, const std::vector<double>& events, double& worstLead, bool& allBefore)
+{
+    worstLead = 0;
+    allBefore = true;
+    for (auto& r : caps)
+    {
+        double best = 1e18;
+        for (double t : events)
+            if (t >= (double) r.s0) best = std::min (best, t - (double) r.s0);
+        allBefore &= best < 1e17;
+        worstLead = std::max (worstLead, best);
+    }
+}
+
+void testAutoNotes()
+{
+    currentTest = "D1/D2 AUTO plucked notes";
+    for (double fs : { 48000.0, 96000.0 })
+    {
+        std::vector<double> onsets;
+        auto x = plucked (fs, 10, 3.0, onsets);
+        Engine e;
+        auto caps = autoCaptures (randomRun (e, fs, x, 256, autoParams()));
+        const double H = fs <= 48000 ? 1024 : 2048, limit = 3 * H + 0.01 * fs;
+        double lead = 0;
+        bool before = true;
+        startErrors (caps, onsets, lead, before);
+        int perNoteMax = 0;
+        for (size_t k = 0; k < onsets.size(); ++k)
+        {
+            const double a = onsets[k] - limit, b = k + 1 < onsets.size() ? onsets[k + 1] - limit : 1e18;
+            perNoteMax = std::max (perNoteMax, (int) std::count_if (caps.begin(), caps.end(), [&] (auto& r) { return (double) r.s0 >= a && (double) r.s0 < b; }));
+        }
+        CHECK (caps.size() >= 9);
+        CHECK (before && lead <= limit);
+        CHECK (perNoteMax <= 1);
+        std::printf ("    fs=%.0f: %zu of 10 notes captured, worst start %.1f ms before its onset (limit %.1f), max per note %d\n", fs, caps.size(),
+                     1000 * lead / fs, 1000 * limit / fs, perNoteMax);
+    }
+}
+
+void testAutoSustainedAndSilence()
+{
+    currentTest = "D3/D4 AUTO sustained tremolo, silence, low noise";
+    const double fs = 48000;
+    {
+        Engine e;
+        auto caps = autoCaptures (randomRun (e, fs, tremoloChord (fs, 20.0), 256, autoParams()));
+        CHECK (caps.size() <= 1);
+        std::printf ("    tremolo chord: %zu captures (limit 1)\n", caps.size());
+    }
+    for (float amp : { 0.0f, 5.5e-4f }) // silence; uniform noise at about -70 dBFS RMS
+    {
+        Engine e;
+        auto caps = autoCaptures (randomRun (e, fs, noise (2, (int) (20 * fs), 2, amp), 256, autoParams()));
+        CHECK (caps.empty());
+    }
+}
+
+void testAutoDrums()
+{
+    currentTest = "D5/D6 AUTO drums and determinism";
+    for (double fs : { 44100.0, 96000.0 })
+    {
+        std::vector<double> hits;
+        auto x = drums (fs, 21.0, 0.5, hits);
+        Engine e0;
+        Sig y0;
+        auto log0 = randomRun (e0, fs, x, 1024, autoParams(), &y0);
+        auto caps = autoCaptures (log0);
+        const double H = fs <= 48000 ? 1024 : 2048, limit = 3 * H + 0.01 * fs;
+        double lead = 0;
+        bool before = true;
+        startErrors (caps, hits, lead, before);
+        CHECK (caps.size() >= 8 && caps.size() <= 11);
+        CHECK (before && lead <= limit);
+        std::printf ("    fs=%.0f: %zu captures from %zu hits, worst start %.1f ms before a hit (limit %.1f)\n", fs, caps.size(), hits.size(), 1000 * lead / fs,
+                     1000 * limit / fs);
+        for (int block : { 1, 32, 0 })
+        {
+            Engine e;
+            Sig y;
+            auto log = randomRun (e, fs, x, block, autoParams(), &y);
+            bool same = log.size() == log0.size();
+            for (size_t i = 0; same && i < log.size(); ++i) same = log[i].at == log0[i].at && log[i].s0 == log0[i].s0 && log[i].s1 == log0[i].s1;
+            CHECK (same);
+            CHECK (bitIdentical (y, y0));
+        }
+    }
+}
+
+void testAutoHold()
+{
+    currentTest = "B5 HOLD with AUTO";
+    std::vector<double> hits;
+    auto x = drums (48000.0, 21.0, 0.5, hits);
+    afterimage::Params p = autoParams();
+    p.hold = true;
+    Engine e;
+    auto log = randomRun (e, 48000.0, x, 256, p);
+    int suppressed = 0;
+    for (auto& r : log) suppressed += r.origin == Origin::Auto && r.outcome == Outcome::SuppressedHold;
+    CHECK (autoCaptures (log).empty());
+    CHECK (suppressed >= 5);
+}
 } // namespace
 
 int main (int argc, char** argv)
@@ -1495,7 +1677,9 @@ int main (int argc, char** argv)
                         { "b9", testNoAllocationsWithTriggers }, { "b10", testEditorLifecycle },
                         // P1-B Stage C
                         { "c1", testRandomDeterminism }, { "c235", testRandomBoundsAndValidity }, { "c4", testRandomSilence },
-                        { "c6", testRandomNoBacklog }, { "c7", testRandomSparseActivity } };
+                        { "c6", testRandomNoBacklog }, { "c7", testRandomSparseActivity },
+                        // P1-B Stage D (experiment limits)
+                        { "d12", testAutoNotes }, { "d34", testAutoSustainedAndSilence }, { "d56", testAutoDrums }, { "b5auto", testAutoHold } };
     for (auto& t : tests)
         if (only == nullptr || std::strcmp (only, t.name) == 0)
         {

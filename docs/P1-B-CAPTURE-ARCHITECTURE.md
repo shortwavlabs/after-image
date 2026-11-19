@@ -146,7 +146,9 @@ meets those limits.
   since the last AUTO capture elapsed. θ's scale is fixed in Stage D on synthetic fixtures and documented in the UX
   contract.
 - **Event:** start `s0 = (first sample of the detecting hop) − 2H − 10 ms`, so an attack that the flux reports up to two
-  hops late is still inside the capture. End `s1 = s0 + L` (L = `capture_length`), or earlier when the hop
+  hops late is still inside the capture. Clamped at stream sample 0 (audio before the stream start is silence, P1-A §4.3);
+  this is the only place a capture may start later than its rule says, and it never removes audio. (Added in Stage D: onsets
+  in the first 70 ms of a stream were otherwise rejected `BEFORE_STREAM`.) End `s1 = s0 + L` (L = `capture_length`), or earlier when the hop
   level stays below the gate for 2 hops after at least 0.25 s.
 - **Issue:** at the first decision slot after `s1` (the build then waits for its post-roll), subject to HOLD and busy.
 - **Hysteresis:** after an onset the detector disarms; it re-arms after 2 consecutive hops with flux < θ/2 *and* the

@@ -177,6 +177,9 @@ void Engine::prepare (double sampleRate, int numChannels, int /*maxBlockSize*/)
     overs = 0;
     displayFifo.reset();
     hopEnergy = 0.0;
+    bandDb.fill (-120.0f);
+    prevBandDb.fill (-120.0f);
+    autoDet = AutoDetector {};
     schedRng.s = schedSeed;
     firstSchedBlock = true;
     bypassedNow = false;
@@ -365,6 +368,7 @@ Reject Engine::validate (const Command& c) noexcept
 // P1-B scheduler (docs/P1-B-CAPTURE-ARCHITECTURE.md 4, 7)
 void Engine::resetScheduler() noexcept
 {
+    autoDet = AutoDetector { 0, 0, 0, 0, autoDet.lastCapture, false, 0, 0 }; // re-arm; the cooldown survives
     const double I = std::clamp ((double) cur.randomIntervalSeconds, 1.0, 16.0) * fs;
     randomDue = streamPos + (int64_t) (I * (0.75 + 0.5 * schedRng.uniform()));
 }
@@ -415,10 +419,67 @@ void Engine::randomTick() noexcept
     record (none, Origin::Random, Outcome::NoCandidate, Reject::None, maxAttempts);
 }
 
+void Engine::autoHop (int64_t m, float levelDb, float flux) noexcept
+{
+    // P1-B architecture 8. Runs at every hop in every mode (cheap), so switching to AUTO starts from current state.
+    auto& d = autoDet;
+    const double theta = autoThresholdDb ((double) cur.sensitivity);
+    const int64_t hopEnd = (m + 1) * H, L = pyRound ((double) cur.lengthSeconds * fs), minLen = pyRound (0.25 * fs);
+    const bool loud = levelDb >= cur.gateDb;
+    const bool cooled = d.lastCapture < 0 || streamPos - d.lastCapture >= (int64_t) ((double) cur.cooldownSeconds * fs);
+    if (d.state == 0)
+    {
+        if (flux >= theta && loud && cooled)
+        {
+            // an attack reported up to two hops late is still inside; before the stream start there is only silence (P1-A 4.3)
+            d.s0 = std::max<int64_t> (m * H - 2 * H - pyRound (0.01 * fs), 0);
+            d.state = 1;
+            d.quietHops = 0;
+        }
+    }
+    else if (d.state == 1)
+    {
+        d.quietHops = loud ? 0 : d.quietHops + 1;
+        const int64_t elapsed = hopEnd - d.s0;
+        int64_t s1 = -1;
+        if (elapsed >= L) s1 = d.s0 + L;
+        else if (d.quietHops >= 2 && elapsed >= minLen) s1 = std::max (d.s0 + minLen, hopEnd - 2 * H);
+        if (s1 >= 0)
+        {
+            d.pending = true;
+            d.pendingS0 = d.s0;
+            d.pendingS1 = s1;
+            d.state = 2;
+            d.calmHops = 0;
+        }
+    }
+    else
+    {
+        d.calmHops = flux < 0.5 * theta ? d.calmHops + 1 : 0;
+        if (d.calmHops >= 2) d.state = 0;
+    }
+    status.autoState.store (d.state, std::memory_order_relaxed);
+}
+
+void Engine::autoDecide() noexcept
+{
+    auto& d = autoDet;
+    if (! d.pending) return;
+    d.pending = false; // one decision per event: never retried, never queued
+    Command c = manualSelection (d.pendingS1, Origin::Auto);
+    c.s0 = d.pendingS0;
+    if (cur.hold) { record (c, Origin::Auto, Outcome::SuppressedHold, Reject::None, 0); return; }
+    if (job.state != CaptureState::Idle || freeSlot() < 0) { record (c, Origin::Auto, Outcome::SkippedBusy, Reject::None, 0); return; }
+    request (c, Origin::Auto);
+    if (job.state != CaptureState::Idle) d.lastCapture = streamPos;
+}
+
 void Engine::schedule() noexcept
 {
     if (cur.mode == Mode::Random) randomTick();
     else status.randomDueIn.store (-1, std::memory_order_relaxed);
+    if (cur.mode == Mode::Auto) autoDecide();
+    else autoDet.pending = false;
 }
 
 void Engine::analyse() noexcept
@@ -448,14 +509,35 @@ void Engine::analyse() noexcept
     }
     histIds[slot] = m;
 
+    // band levels: the display's, now computed every hop; log-spectral flux for AUTO (P1-B architecture 3)
+    float rise = 0.0f, loudest = -120.0f;
+    int counted = 0;
+    for (int b = 0; b < DisplayColumn::bands; ++b)
+    {
+        bandDb[(size_t) b] = 10.0f * std::log10 (power[(size_t) b] / bandRef + 1.0e-12f);
+        loudest = std::max (loudest, bandDb[(size_t) b]);
+    }
+    // bands within 60 dB of the frame's loudest band (and above -90 dB); both frames clamped to that floor, so leakage
+    // bands flickering near the floor cannot contribute large rises
+    const float floorDb = std::max (loudest - 60.0f, -90.0f);
+    for (int b = 0; b < DisplayColumn::bands; ++b)
+        if (bandDb[(size_t) b] > floorDb)
+        {
+            rise += bandDb[(size_t) b] - std::max (prevBandDb[(size_t) b], floorDb) > 0.0f ? bandDb[(size_t) b] - std::max (prevBandDb[(size_t) b], floorDb) : 0.0f;
+            ++counted;
+        }
+    const float flux = counted > 0 ? rise / (float) counted : 0.0f;
+    prevBandDb = bandDb;
+    status.fluxDb.store (flux, std::memory_order_relaxed);
+    autoHop (m, status.levelDb.load (std::memory_order_relaxed), flux);
+
     const auto scope = displayFifo.write (1);
     if (scope.blockSize1 > 0)
     {
         auto& col = display[(size_t) scope.startIndex1];
         col.endSample = (m + 1) * H;
         col.epoch = epochId;
-        for (int b = 0; b < DisplayColumn::bands; ++b)
-            col.db[(size_t) b] = 10.0f * std::log10 (power[(size_t) b] / bandRef + 1.0e-12f);
+        col.db = bandDb;
     }
 }
 
