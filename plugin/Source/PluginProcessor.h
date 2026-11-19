@@ -20,7 +20,7 @@ public:
     bool hasEditor() const override { return true; }
 
     const juce::String getName() const override { return "AFTERIMAGE"; }
-    bool acceptsMidi() const override { return false; }
+    bool acceptsMidi() const override { return true; } // VST3 MIDI triggers (P1-B); the AU stays aufx
     bool producesMidi() const override { return false; }
     double getTailLengthSeconds() const override;
 
@@ -44,6 +44,7 @@ public:
 
 private:
     afterimage::Params readParams() const noexcept;
+    void forwardTriggers (const juce::MidiBuffer&, bool bypassed) noexcept;
 
     afterimage::Engine dsp;
     juce::AbstractFifo commandFifo { 32 };
@@ -53,6 +54,10 @@ private:
     std::atomic<float>* memory = nullptr;
     std::atomic<float>* dissolve = nullptr;
     std::atomic<float>* source = nullptr;
+    std::vector<std::atomic<float>*> sched; // capture_mode .. auto_cooldown, in layout order
+    std::atomic<bool> resyncImprint { true };
+    float lastImprint = 0.0f;
+    int cc64 = 0;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AfterimageProcessor)
 };

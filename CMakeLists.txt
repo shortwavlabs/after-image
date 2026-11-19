@@ -22,7 +22,8 @@ juce_add_plugin(AFTERIMAGE
     FORMATS AU VST3 Standalone
     PRODUCT_NAME "AFTERIMAGE"
     IS_SYNTH FALSE
-    NEEDS_MIDI_INPUT FALSE
+    NEEDS_MIDI_INPUT TRUE                 # VST3 MIDI triggers (P1-B)
+    AU_MAIN_TYPE kAudioUnitType_Effect    # the AU stays aufx so P1-A sessions reload
     NEEDS_MIDI_OUTPUT FALSE
     COPY_PLUGIN_AFTER_BUILD FALSE)
 

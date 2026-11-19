@@ -49,6 +49,40 @@ const char* rejectName (Reject r) noexcept
     return "?";
 }
 
+const char* originName (Origin o) noexcept
+{
+    switch (o)
+    {
+        case Origin::Selection: return "SELECTION";
+        case Origin::Button: return "BUTTON";
+        case Origin::Midi: return "MIDI";
+        case Origin::Automation: return "AUTOMATION";
+        case Origin::Random: return "RANDOM";
+        case Origin::Auto: return "AUTO";
+        case Origin::None:
+        case Origin::Count: return "-";
+    }
+    return "-";
+}
+
+const char* outcomeName (Outcome o) noexcept
+{
+    switch (o)
+    {
+        case Outcome::Accepted: return "ACCEPTED";
+        case Outcome::Completed: return "COMPLETED";
+        case Outcome::Rejected: return "REJECTED";
+        case Outcome::SuppressedHold: return "SUPPRESSED_HOLD";
+        case Outcome::SkippedBusy: return "SKIPPED_BUSY";
+        case Outcome::NoCandidate: return "NO_CANDIDATE";
+        case Outcome::IgnoredBypass: return "IGNORED_BYPASS";
+        case Outcome::DroppedRate: return "DROPPED_RATE";
+        case Outcome::None:
+        case Outcome::Count: return "-";
+    }
+    return "-";
+}
+
 Engine::Engine() = default;
 Engine::~Engine() = default;
 
@@ -91,6 +125,7 @@ void Engine::prepare (double sampleRate, int numChannels, int /*maxBlockSize*/)
     raw.assign ((size_t) numCh * (size_t) rawCap, 0.0f);
     mask.assign ((size_t) K, 0.0f);
     for (auto& s : slotData) s.assign ((size_t) numCh * (size_t) slotCap, 0.0f);
+    hopPower.assign ((size_t) histFrames, 0.0f);
 
     // display: 160 log bands, 20 Hz .. fs/2
     bandOf.assign ((size_t) K, -1);
@@ -141,6 +176,16 @@ void Engine::prepare (double sampleRate, int numChannels, int /*maxBlockSize*/)
     maxActiveSeen = maxActiveTotalSeen = 0;
     overs = 0;
     displayFifo.reset();
+    hopEnergy = 0.0;
+    schedRng.s = schedSeed;
+    firstSchedBlock = true;
+    bypassedNow = false;
+    randomDue = -1;
+    reqLogCount = 0;
+    maxAttemptsSeen = 0;
+    for (auto& o : status.outcomes) o = 0;
+    status.lastOrigin = 0;
+    status.lastOutcome = 0;
     status.epoch = epochId;
     status.state = 0;
     status.lastReject = 0;
@@ -225,12 +270,70 @@ void Engine::apply (const Command& c) noexcept
             }
         return;
     }
-    if (c.epoch != epochId) return reject (Reject::StaleEpoch);
-    if (c.s0 < 0) return reject (Reject::BeforeStream);
+    if (bypassedNow)
+    {
+        record (c, c.origin, Outcome::IgnoredBypass, Reject::None, 0);
+        return;
+    }
+    request (c.type == Command::Type::Trigger ? manualSelection (streamPos, c.origin) : c, c.origin);
+}
+
+Command Engine::manualSelection (int64_t s1, Origin origin) const noexcept
+{
+    // P1-B architecture 5: the last capture-length of audio, ending exactly at the trigger sample
+    Command c;
+    c.origin = origin;
+    c.epoch = epochId;
+    c.s1 = s1;
+    c.s0 = s1 - pyRound ((double) cur.lengthSeconds * fs);
+    c.source = cur.source;
+    const double half = std::pow (2.0, 0.5 * (double) cur.bandWidthOct);
+    c.lowHz = (double) cur.bandCenterHz / half;
+    c.highHz = std::min ((double) cur.bandCenterHz * half, fs / 2);
+    return c;
+}
+
+void Engine::request (const Command& c, Origin origin, int attempts) noexcept
+{
+    const auto r = validate (c);
+    if (r != Reject::None)
+    {
+        reject (r);
+        record (c, origin, Outcome::Rejected, r, attempts);
+        return;
+    }
+    status.lastReject = (int) Reject::None;
+    job.requestIndex = record (c, origin, Outcome::Accepted, Reject::None, attempts);
+}
+
+int Engine::record (const Command& c, Origin origin, Outcome outcome, Reject r, int attempts) noexcept
+{
+    status.outcomes[(size_t) outcome].fetch_add (1, std::memory_order_relaxed);
+    status.lastOrigin.store ((int) origin, std::memory_order_relaxed);
+    status.lastOutcome.store ((int) outcome, std::memory_order_relaxed);
+    status.lastRequestReject.store ((int) r, std::memory_order_relaxed);
+    status.lastRequestS0.store (c.s0, std::memory_order_relaxed);
+    status.lastRequestS1.store (c.s1, std::memory_order_relaxed);
+    status.lastRequestAt.store (streamPos, std::memory_order_relaxed);
+    if (reqLog == nullptr || reqLogCount >= reqLogCap) return -1;
+    reqLog[reqLogCount] = { streamPos, c.s0, c.s1, c.lowHz, c.highHz, origin, outcome, r, c.source, attempts, -1 };
+    return reqLogCount++;
+}
+
+void Engine::noteUnforwarded (Origin origin, Outcome outcome) noexcept
+{
+    Command c;
+    record (c, origin, outcome, Reject::None, 0);
+}
+
+Reject Engine::validate (const Command& c) noexcept
+{
+    if (c.epoch != epochId) return Reject::StaleEpoch;
+    if (c.s0 < 0) return Reject::BeforeStream;
     const int64_t R = c.s1 - c.s0;
-    if (R < minR) return reject (Reject::TooShort);
-    if (R > maxR) return reject (Reject::TooLong);
-    if (c.s1 > streamPos) return reject (Reject::Future);
+    if (R < minR) return Reject::TooShort;
+    if (R > maxR) return Reject::TooLong;
+    if (c.s1 > streamPos) return Reject::Future;
     Job j;
     j.cmd = c;
     j.R = R;
@@ -239,29 +342,92 @@ void Engine::apply (const Command& c) noexcept
     if (c.source == Source::Filtered)
     {
         if (! std::isfinite (c.lowHz) || ! std::isfinite (c.highHz) || c.lowHz < 0.0 || c.highHz > fs / 2 || c.lowHz >= c.highHz)
-            return reject (Reject::InvalidBand);
-        if (job.state != CaptureState::Idle) return reject (Reject::Busy);
+            return Reject::InvalidBand;
+        if (job.state != CaptureState::Idle) return Reject::Busy;
         computeMask (c.lowHz, c.highHz);
         int bins = 0;
         for (auto m : mask) bins += m >= 0.5f;
-        if (bins < 3) return reject (Reject::TooFewBins);
+        if (bins < 3) return Reject::TooFewBins;
         j.mLo = c.s0 / H;
         j.mHi = (c.s0 + j.len - 1 + N) / H - 1;
-        if (j.mLo <= (streamPos / H - 1) - histFrames) return reject (Reject::Expired);
+        if (j.mLo <= (streamPos / H - 1) - histFrames) return Reject::Expired;
     }
     else if (c.s0 < streamPos - rawCap)
-        return reject (Reject::Expired);
-    if (job.state != CaptureState::Idle) return reject (Reject::Busy);
+        return Reject::Expired;
+    if (job.state != CaptureState::Idle) return Reject::Busy;
     j.nextM = j.mLo;
     j.state = CaptureState::Waiting;
     job = j;
-    status.lastReject = (int) Reject::None;
+    return Reject::None;
+}
+
+// ---------------------------------------------------------------------------------------------
+// P1-B scheduler (docs/P1-B-CAPTURE-ARCHITECTURE.md 4, 7)
+void Engine::resetScheduler() noexcept
+{
+    const double I = std::clamp ((double) cur.randomIntervalSeconds, 1.0, 16.0) * fs;
+    randomDue = streamPos + (int64_t) (I * (0.75 + 0.5 * schedRng.uniform()));
+}
+
+double Engine::meanHopPower (int64_t s0, int64_t s1) const noexcept
+{
+    const int64_t h0 = s0 / H, h1 = (s1 - 1) / H, latest = streamPos / H - 1;
+    double sum = 0.0;
+    int n = 0;
+    for (int64_t h = h0; h <= h1; ++h)
+        if (h >= 0 && h <= latest && h > latest - histFrames)
+        {
+            sum += hopPower[(size_t) (h % histFrames)];
+            ++n;
+        }
+    return n > 0 ? sum / n : 0.0;
+}
+
+void Engine::randomTick() noexcept
+{
+    if (randomDue < 0) resetScheduler();
+    status.randomDueIn.store (randomDue - streamPos, std::memory_order_relaxed);
+    if (streamPos < randomDue) return;
+    const double I = std::clamp ((double) cur.randomIntervalSeconds, 1.0, 16.0) * fs;
+    randomDue = streamPos + (int64_t) (I * (0.75 + 0.5 * schedRng.uniform())); // every tick reschedules: no backlog
+    Command none;
+    if (cur.hold) { record (none, Origin::Random, Outcome::SuppressedHold, Reject::None, 0); return; }
+    if (job.state != CaptureState::Idle || freeSlot() < 0) { record (none, Origin::Random, Outcome::SkippedBusy, Reject::None, 0); return; }
+
+    const int64_t L = pyRound ((double) cur.lengthSeconds * fs), D = X + N + H, W = pyRound (4.0 * fs);
+    const double gate = std::pow (10.0, 0.1 * (double) cur.gateDb);
+    constexpr int maxAttempts = 8;
+    for (int a = 1; a <= maxAttempts; ++a)
+    {
+        const double u = schedRng.uniform(), ub = schedRng.uniform(); // two draws per attempt, always
+        Command c = manualSelection (streamPos - D - (int64_t) (u * (double) std::max<int64_t> (W - D, 0)), Origin::Random);
+        c.s0 = c.s1 - L;
+        if (c.source == Source::Filtered)
+        {
+            const double half = std::pow (2.0, 0.5 * (double) cur.bandWidthOct), centre = (double) cur.bandCenterHz * std::pow (2.0, 2.0 * ub - 1.0);
+            c.lowHz = centre / half;
+            c.highHz = std::min (centre * half, fs / 2);
+        }
+        maxAttemptsSeen = std::max (maxAttemptsSeen, a);
+        if (c.s0 < 0 || meanHopPower (c.s0, c.s1) < gate) continue;
+        return request (c, Origin::Random, a);
+    }
+    record (none, Origin::Random, Outcome::NoCandidate, Reject::None, maxAttempts);
+}
+
+void Engine::schedule() noexcept
+{
+    if (cur.mode == Mode::Random) randomTick();
+    else status.randomDueIn.store (-1, std::memory_order_relaxed);
 }
 
 void Engine::analyse() noexcept
 {
     const int64_t m = streamPos / H - 1;
     const auto slot = (size_t) (m % histFrames);
+    hopPower[slot] = (float) (hopEnergy / ((double) H * numCh)); // the hop's new samples [mH, (m+1)H)
+    status.levelDb.store ((float) (10.0 * std::log10 (hopEnergy / ((double) H * numCh) + 1e-12)), std::memory_order_relaxed);
+    hopEnergy = 0.0;
     const int64_t first = (m + 1) * H - N;
     std::array<float, DisplayColumn::bands> power {};
     for (int c = 0; c < numCh; ++c)
@@ -313,7 +479,7 @@ void Engine::captureUnit() noexcept
     {
         if (job.copied < job.len)
         {
-            if (c.s0 < streamPos - rawCap) { job.state = CaptureState::Idle; return reject (Reject::Expired); }
+            if (c.s0 < streamPos - rawCap) { job.state = CaptureState::Idle; return expireJob(); }
             const int64_t n = std::min<int64_t> (4096, job.len - job.copied);
             for (int ch = 0; ch < numCh; ++ch)
                 for (int64_t i = 0; i < n; ++i)
@@ -325,7 +491,7 @@ void Engine::captureUnit() noexcept
     else if (job.nextM <= job.mHi)
     {
         const int64_t m = job.nextM++;
-        if (! frameAvailable (m)) { job.state = CaptureState::Idle; return reject (Reject::Expired); }
+        if (! frameAvailable (m)) { job.state = CaptureState::Idle; return expireJob(); }
         const auto hslot = (size_t) (m % histFrames);
         const int64_t off = (m + 1) * H - N - c.s0;
         const int64_t a = std::max<int64_t> (off, 0), b = std::min<int64_t> (off + N, job.len);
@@ -375,6 +541,13 @@ void Engine::captureUnit() noexcept
     startVoice();
 }
 
+void Engine::expireJob() noexcept
+{
+    reject (Reject::Expired);
+    if (reqLog != nullptr && job.requestIndex >= 0) { reqLog[job.requestIndex].outcome = Outcome::Rejected; reqLog[job.requestIndex].reject = Reject::Expired; }
+    status.outcomes[(size_t) Outcome::Rejected].fetch_add (1, std::memory_order_relaxed);
+}
+
 void Engine::startVoice() noexcept
 {
     for (auto& v : voices)
@@ -415,6 +588,13 @@ void Engine::startVoice() noexcept
     status.lastRho = (float) lastCap.rho;
     status.lastSource = (int) lastCap.source;
     status.captures.fetch_add (1, std::memory_order_relaxed);
+    status.outcomes[(size_t) Outcome::Completed].fetch_add (1, std::memory_order_relaxed);
+    if (reqLog != nullptr && job.requestIndex >= 0)
+    {
+        reqLog[job.requestIndex].outcome = Outcome::Completed;
+        reqLog[job.requestIndex].startedAt = streamPos;
+    }
+    if (status.lastRequestS1.load (std::memory_order_relaxed) == lastCap.s1) status.lastOutcome.store ((int) Outcome::Completed, std::memory_order_relaxed);
 }
 
 bool Engine::generateGrains (Voice& v, int64_t upTo) noexcept
@@ -521,7 +701,15 @@ void Engine::processBypassed (float* const* io, int nch, int n, const Params& p)
 void Engine::processImpl (float* const* io, int nch, int n, const Params& p, bool bypassed) noexcept
 {
     nch = std::min (nch, numCh);
-    if (firstBlock || (wasBypassed && ! bypassed))
+    const bool resumed = wasBypassed && ! bypassed;
+    const bool modeChanged = p.mode != cur.mode, holdReleased = cur.hold && ! p.hold;
+    cur = p;
+    bypassedNow = bypassed;
+    if (firstSchedBlock || modeChanged || holdReleased || resumed) resetScheduler(); // never replays a backlog
+    firstSchedBlock = false;
+    status.mode.store ((int) p.mode, std::memory_order_relaxed);
+    status.hold.store (p.hold ? 1 : 0, std::memory_order_relaxed);
+    if (firstBlock || resumed)
     {
         bodyGain.reset (firstBlock ? p.body : 1.0);
         ghostGain.reset (firstBlock ? p.ghost : 0.0);
@@ -550,6 +738,7 @@ void Engine::processImpl (float* const* io, int nch, int n, const Params& p, boo
         {
             x[c] = io[c][i];
             if (! std::isfinite (x[c])) { x[c] = 0.0f; ++nonFinite; sanitized = true; }
+            hopEnergy += (double) x[c] * x[c];
         }
 
         const bool unityBody = bodyGain.atRest() && exactly (bodyGain.target, 1.0);
@@ -590,7 +779,11 @@ void Engine::processImpl (float* const* io, int nch, int n, const Params& p, boo
             raw[(size_t) c * (size_t) rawCap + (size_t) (streamPos % rawCap)] = x[c < nch ? c : 0];
         ++streamPos;
         if (streamPos % H == 0) analyse();
-        if (streamPos % unitStride == unitStride / 2) captureUnit();
+        if (streamPos % unitStride == unitStride / 2)
+        {
+            captureUnit();
+            if (! bypassed) schedule();
+        }
     }
 
     int nv = 0, ng = 0;
