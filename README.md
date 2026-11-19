@@ -33,7 +33,7 @@ cmake --build ../afterimage-build -j 8
 ctest --test-dir ../afterimage-build --output-on-failure
 ```
 
-Products are in `../afterimage-build/AFTERIMAGE_artefacts/Release/{AU,VST3,Standalone}`; nothing is installed automatically. To audition in a host, copy the AU to `~/Library/Audio/Plug-Ins/Components` or the VST3 to `~/Library/Audio/Plug-Ins/VST3`. Parity against the Python reference: `uv run python run_p1a_parity.py --render ../../../afterimage-build/afterimage_render_artefacts/Release/afterimage_render` in `experiments/p0-spectral-ghost`.
+Products are in `../afterimage-build/AFTERIMAGE_artefacts/Release/{AU,VST3,Standalone}`, ad-hoc signed; nothing is installed automatically. To audition in a host, copy the AU to `~/Library/Audio/Plug-Ins/Components` and the VST3 to `~/Library/Audio/Plug-Ins/VST3`, then rescan in the host. Parity against the Python reference: `uv run python run_p1a_parity.py --render ../../../afterimage-build/afterimage_render_artefacts/Release/afterimage_render` in `experiments/p0-spectral-ghost`.
 
 ## Proposed MVP
 

@@ -58,5 +58,14 @@ target_sources(afterimage_tests PRIVATE plugin/tests/Tests.cpp)
 target_sources(afterimage_render PRIVATE plugin/tools/Render.cpp)
 target_sources(afterimage_bench PRIVATE plugin/tools/Bench.cpp)
 
+# macOS: seal each bundle with an ad-hoc signature after JUCE's post-build steps (the linker signs only the binary,
+# and the VST3's moduleinfo.json is added afterwards), so hosts see a valid signature. Not a Developer ID signature.
+if(APPLE)
+    foreach(format AU VST3 Standalone)
+        add_custom_command(TARGET AFTERIMAGE_${format} POST_BUILD VERBATIM
+            COMMAND codesign --force --deep --sign - "$<TARGET_BUNDLE_DIR:AFTERIMAGE_${format}>")
+    endforeach()
+endif()
+
 enable_testing()
 add_test(NAME afterimage_tests COMMAND afterimage_tests)

@@ -205,10 +205,11 @@ Averages are in the JSON for information only. Nothing here is a host-level real
 
 | Check | Result |
 |---|---|
-| `auval -v aufx Aftr SwLb` | **AU VALIDATION SUCCEEDED** (`docs/evidence/p1a-auval.txt`); explicit channel capabilities `[1, 1]`, `[2, 2]`; latency and tail properties verified. The AU was copied to `~/Library/Audio/Plug-Ins/Components` for the run and removed afterwards |
+| `auval -v aufx Aftr SwLb` | **AU VALIDATION SUCCEEDED** (`docs/evidence/p1a-auval.txt`); explicit channel capabilities `[1, 1]`, `[2, 2]`; latency and tail properties verified. First run: the AU was copied to `~/Library/Audio/Plug-Ins/Components` for the run and removed afterwards. Re-run on 2026-11-19 against the installed, ad-hoc-signed AU (installed at the owner's request for auditioning): passes |
 | VST3 validator, pluginval | **not run**: not installed, and not downloaded without approval |
 | DAW sessions, automation with the editor open, offline bounce, multiple instances | **not run** |
 | Standalone | builds; it uses the audio input device, so it cannot audition files by itself |
+| Code signature | bundles are sealed with an ad-hoc signature after the build (`codesign --verify --deep --strict` passes); not Developer ID, not notarised, so `spctl` rejects them, which only matters for distribution |
 
 ## 8. What the development UI does and does not do
 
