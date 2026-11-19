@@ -257,7 +257,9 @@ struct DeviceCallback final : juce::AudioIODeviceCallback
     juce::MidiBuffer midi, empty;
     std::vector<float> table;
     std::vector<double> times;
+    std::vector<uint64_t> hostTimes; // CoreAudio host time of each callback (supplementary dropout evidence)
     std::atomic<size_t> count { 0 };
+    double stallFactor = 3.0;
     int64_t stream = 0, nextNote = 0, stallAt = -1;
     double fs = 48000;
     int block = 64;
@@ -274,7 +276,7 @@ struct DeviceCallback final : juce::AudioIODeviceCallback
     }
     void audioDeviceStopped() override {}
 
-    void audioDeviceIOCallbackWithContext (const float* const*, int, float* const* out, int numOut, int n, const juce::AudioIODeviceCallbackContext&) override
+    void audioDeviceIOCallbackWithContext (const float* const*, int, float* const* out, int numOut, int n, const juce::AudioIODeviceCallbackContext& ctx) override
     {
         for (int c = 0; c < 2; ++c)
             for (int i = 0; i < n; ++i) buf.setSample (c, i, table[(size_t) ((stream + i + c * 7919) & 65535)]);
@@ -284,9 +286,13 @@ struct DeviceCallback final : juce::AudioIODeviceCallback
         const auto t0 = Clock::now();
         for (auto& p : plugins) p->processBlock (view, midi);
         const auto t1 = Clock::now();
-        if (stallAt >= 0 && stream >= stallAt) { stallAt = -1; while (Clock::now() - t1 < std::chrono::duration<double> (3.0 * n / fs)) {} } // positive control
+        if (stallAt >= 0 && stream >= stallAt) { stallAt = -1; while (Clock::now() - t1 < std::chrono::duration<double> (stallFactor * n / fs)) {} } // positive control
         const auto k = count.load (std::memory_order_relaxed);
-        if (k < times.size()) times[k] = std::chrono::duration<double, std::micro> (t1 - t0).count();
+        if (k < times.size())
+        {
+            times[k] = std::chrono::duration<double, std::micro> (t1 - t0).count();
+            hostTimes[k] = ctx.hostTimeNs != nullptr ? *ctx.hostTimeNs : 0;
+        }
         count.store (k + 1, std::memory_order_relaxed);
         for (int c = 0; c < numOut; ++c) juce::FloatVectorOperations::clear (out[c], n); // silent output
         stream += n;
@@ -333,7 +339,9 @@ int e3()
     juce::Random rng (3);
     for (auto& v : cb.table) v = 0.3f * (rng.nextFloat() * 2.0f - 1.0f);
     cb.times.resize ((size_t) (seconds * fs / block) + 1024);
+    cb.hostTimes.resize (cb.times.size());
     if (control) cb.stallAt = (int64_t) (5.0 * fs);
+    cb.stallFactor = opt ("stall", "3").getDoubleValue();
 
     std::unique_ptr<juce::DocumentWindow> window;
     std::unique_ptr<juce::AudioProcessorEditor> ed;
@@ -364,6 +372,25 @@ int e3()
     std::sort (v.begin(), v.end());
     const double period = 1e6 * actualBlock / actualFs, mx = v.back(), p999 = v[v.size() * 999 / 1000], p99 = v[v.size() * 99 / 100], med = v[v.size() / 2];
     const bool pass = xruns == 0 && mx <= 0.5 * period && p999 <= 0.25 * period;
+    // supplementary: callbacks whose host time follows the previous one by more than 1.5 periods (missed IO cycles)
+    int gaps = 0, haveHost = 0;
+    double worstGap = 0, firstGapAt = -1, lastGapAt = -1;
+    for (size_t i = 1; i < n; ++i)
+        if (cb.hostTimes[i] != 0 && cb.hostTimes[i - 1] != 0)
+        {
+            ++haveHost;
+            const double dt = (double) (cb.hostTimes[i] - cb.hostTimes[i - 1]) / 1000.0;
+            worstGap = std::max (worstGap, dt / period);
+            if (dt > 1.5 * period)
+            {
+                ++gaps;
+                const double at = (double) i * actualBlock / actualFs;
+                if (firstGapAt < 0) firstGapAt = at;
+                lastGapAt = at;
+            }
+        }
+    std::printf ("supplementary host-time check: %d callbacks with host time, %d gaps > 1.5 periods, worst interval %.2f periods, first at %.2f s, last at %.2f s\n",
+                 haveHost, gaps, worstGap, firstGapAt, lastGapAt);
     std::printf ("callbacks %zu, xruns %d, inside callback: max %.1f us (%.1f%%), p99.9 %.1f us (%.1f%%), p99 %.1f us, median %.2f us -> %s\n", n, xruns, mx,
                  100 * mx / period, p999, 100 * p999 / period, p99, med, control ? "(positive control run, not a gate)" : pass ? "PASS" : "FAIL");
     if (opt ("out").isNotEmpty())
@@ -373,7 +400,9 @@ int e3()
                                                   + ", \"callbacks\": " + juce::String ((juce::int64) n) + ", \"xruns\": " + juce::String (xruns)
                                                   + ", \"period_us\": " + juce::String (period, 2) + ", \"max_us\": " + juce::String (mx, 2)
                                                   + ", \"p999_us\": " + juce::String (p999, 2) + ", \"p99_us\": " + juce::String (p99, 2)
-                                                  + ", \"median_us\": " + juce::String (med, 3) + ", \"result\": \""
+                                                  + ", \"median_us\": " + juce::String (med, 3) + ", \"host_time_gaps\": " + juce::String (gaps)
+                                                  + ", \"worst_host_interval_periods\": " + juce::String (worstGap, 3)
+                                                  + ", \"first_gap_s\": " + juce::String (firstGapAt, 3) + ", \"last_gap_s\": " + juce::String (lastGapAt, 3) + ", \"result\": \""
                                                   + (control ? "CONTROL" : pass ? "PASS" : "FAIL") + "\"}\n");
     return control ? (xruns > 0 ? 0 : 5) : (pass ? 0 : 1);
 }

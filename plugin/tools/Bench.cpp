@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-// Worst-case callback benchmark (docs/P1-A-QUALIFICATION.md 1.4). Release build only.
-//   afterimage_bench [out=bench.json] [runs=3] [seconds=20]
+// Worst-case callback benchmark (docs/P1-A-QUALIFICATION.md 1.4, docs/P1-B-QUALIFICATION.md 1.6). Release build only.
+//   afterimage_bench [out=bench.json] [runs=3] [seconds=20] [scenarios=p1a,manual,random,auto] [cpu=1]
+// p1a is the unchanged P1-A scenario (runOnce). manual / random / auto are the P1-B stress scenarios (runP1b).
+// cpu=1 (E5, evidence only, never a gate) also reads the thread's CPU time around every call.
 // Times every processBlock of the real processor: 7 s of noise to fill the history, then an IMPRINT of a
 // maximum-length selection every 0.5 s (alternating FULL / FILTERED), DISSOLVE 0.5, at the CLOUD density and at
 // a stress density that keeps every voice at its grain ceiling. Also times single FFTs for reference.
@@ -13,6 +15,7 @@
 #include <mach/thread_policy.h>
 #include <chrono>
 #include <cstdio>
+#include <ctime>
 #include <random>
 #include <vector>
 
@@ -88,6 +91,84 @@ RunResult runOnce (double fs, int block, double density, double seconds, unsigne
     return r;
 }
 
+double threadCpuMicros()
+{
+    timespec ts {};
+    clock_gettime (CLOCK_THREAD_CPUTIME_ID, &ts);
+    return (double) ts.tv_sec * 1e6 + (double) ts.tv_nsec * 1e-3;
+}
+
+struct CpuEvidence { double maxWall = 0, cpuAtMaxWall = 0, maxCpu = 0, p999Cpu = 0; int preempted = 0; };
+
+/** P1-B stress scenarios through the real processor (MIDI, parameters, scheduler), same timing as runOnce. */
+RunResult runP1b (double fs, int block, double density, double seconds, unsigned seed, const juce::String& scenario, CpuEvidence* cpu)
+{
+    AfterimageProcessor proc;
+    proc.setRateAndBufferSizeDetails (fs, block);
+    proc.prepareToPlay (fs, block);
+    auto setParam = [&] (const char* id, float v) { proc.apvts.getParameter (id)->setValueNotifyingHost (v); };
+    setParam ("dissolve", 0.5f);
+    setParam ("capture_length", 1.0f); // 1500 ms: the longest build
+    if (scenario == "random") { setParam ("capture_mode", 0.5f); setParam ("random_interval", 0.0f); setParam ("activity_gate", 0.0f); }
+    if (scenario == "auto") { setParam ("capture_mode", 1.0f); setParam ("auto_cooldown", 0.0f); setParam ("auto_sensitivity", 1.0f); }
+    if (density > 0) proc.engine().setDensityOverride (density);
+
+    juce::AudioBuffer<float> buf (2, block);
+    juce::MidiBuffer midi, note;
+    note.addEvent (juce::MidiMessage::noteOn (1, 60, (juce::uint8) 100), 0);
+    std::mt19937 rng (seed);
+    std::uniform_real_distribution<float> u (-0.3f, 0.3f);
+    const auto hitEvery = (int64_t) (0.25 * fs);
+    const auto warm = (int64_t) (7.0 * fs), total = warm + (int64_t) (seconds * fs);
+    std::vector<double> times, cpus;
+    times.reserve ((size_t) ((total - warm) / block + 2));
+    cpus.reserve (times.capacity());
+    int64_t pos = 0, nextNote = warm, nextFlip = warm;
+    int flips = 0;
+    while (pos < total)
+    {
+        for (int c = 0; c < 2; ++c)
+            for (int i = 0; i < block; ++i)
+            {
+                const int64_t n = pos + i;
+                float v = u (rng);
+                if (scenario == "auto") // percussive: a decaying hit every 250 ms over quiet noise
+                {
+                    const double t = (double) (n % hitEvery) / fs;
+                    v = (float) (0.02 * v + std::exp (-t / 0.03) * (0.6 * std::sin (6.283185307 * 70.0 * t) + v));
+                }
+                buf.setSample (c, i, v);
+            }
+        if (pos >= nextFlip) { setParam ("source", (flips++ % 2) ? 1.0f : 0.0f); nextFlip += (int64_t) fs; } // alternate FULL / FILTERED
+        const bool trigger = scenario == "manual" && pos >= nextNote;
+        if (trigger) nextNote += (int64_t) (0.15 * fs);
+        const double c0 = cpu != nullptr ? threadCpuMicros() : 0.0;
+        const auto t0 = Clock::now();
+        proc.processBlock (buf, trigger ? note : midi);
+        const auto t1 = Clock::now();
+        const double c1 = cpu != nullptr ? threadCpuMicros() : 0.0;
+        if (pos >= warm)
+        {
+            const double wall = std::chrono::duration<double, std::micro> (t1 - t0).count();
+            times.push_back (wall);
+            if (cpu != nullptr)
+            {
+                cpus.push_back (c1 - c0);
+                if (wall > cpu->maxWall) { cpu->maxWall = wall; cpu->cpuAtMaxWall = c1 - c0; }
+                cpu->preempted += wall > 2.0 * (c1 - c0) + 50.0; // wall clock far beyond the thread's own CPU time
+            }
+        }
+        pos += block;
+    }
+    RunResult r;
+    r.s = stats (times);
+    r.captures = proc.engine().status.captures.load();
+    r.rejects = proc.engine().status.rejects.load();
+    r.maxGrainsTotal = proc.engine().maxActiveGrainsTotal();
+    if (cpu != nullptr) { auto cs = stats (cpus); cpu->maxCpu = cs.max; cpu->p999Cpu = cs.p999; }
+    return r;
+}
+
 void fftTiming (juce::String& json)
 {
     json << " \"fft_us\": {";
@@ -138,6 +219,8 @@ int main (int argc, char** argv)
     int runs = 3;
     double seconds = 20.0;
     bool rt = false; // rt=1: supplementary run on the Mach time-constraint policy (not the pre-set gate)
+    bool cpu = false;
+    juce::StringArray scenarios { "p1a" };
     for (int i = 1; i < argc; ++i)
     {
         const juce::String a (argv[i]);
@@ -145,6 +228,8 @@ int main (int argc, char** argv)
         if (a.startsWith ("runs=")) runs = a.fromFirstOccurrenceOf ("=", false, false).getIntValue();
         if (a.startsWith ("seconds=")) seconds = a.fromFirstOccurrenceOf ("=", false, false).getDoubleValue();
         if (a == "rt=1") rt = true;
+        if (a == "cpu=1") cpu = true;
+        if (a.startsWith ("scenarios=")) scenarios = juce::StringArray::fromTokens (a.fromFirstOccurrenceOf ("=", false, false), ",", "");
         if (a.startsWith ("diagnose="))  // diagnose=fs,block,density,repeats[,rt]: max of each repeat, no gate
         {
             auto t = juce::StringArray::fromTokens (a.fromFirstOccurrenceOf ("=", false, false), ",", "");
@@ -165,15 +250,23 @@ int main (int argc, char** argv)
     fftTiming (json);
     json << " \"rows\": [";
     bool first = true;
+    for (auto& scenario : scenarios)
     for (double density : { 0.0, 1000.0 })
         for (double fs : { 44100.0, 48000.0, 88200.0, 96000.0 })
             for (int block : { 1, 16, 32, 64, 1024 })
             {
                 RunResult worst;
+                CpuEvidence ev;
                 if (rt) makeRealtime (block / fs);
                 for (int r = 0; r < runs; ++r)
                 {
-                    auto res = runOnce (fs, block, density, seconds, (unsigned) r + 1);
+                    CpuEvidence e1;
+                    auto res = scenario == "p1a" ? runOnce (fs, block, density, seconds, (unsigned) r + 1)
+                                                 : runP1b (fs, block, density, seconds, (unsigned) r + 1, scenario, cpu ? &e1 : nullptr);
+                    if (e1.maxWall > ev.maxWall) { ev.maxWall = e1.maxWall; ev.cpuAtMaxWall = e1.cpuAtMaxWall; }
+                    ev.maxCpu = std::max (ev.maxCpu, e1.maxCpu);
+                    ev.p999Cpu = std::max (ev.p999Cpu, e1.p999Cpu);
+                    ev.preempted += e1.preempted;
                     if (r == 0 || res.s.max > worst.s.max) worst.s.max = res.s.max;
                     worst.s.p999 = std::max (worst.s.p999, res.s.p999);
                     worst.s.p99 = std::max (worst.s.p99, res.s.p99);
@@ -187,7 +280,7 @@ int main (int argc, char** argv)
                 const double deadline = 1e6 * block / fs;
                 const bool gated = block >= 32;
                 const bool pass = worst.s.max <= 0.5 * deadline && worst.s.p999 <= 0.25 * deadline;
-                json << (first ? "" : ",") << "\n  {\"density\": \"" << (density > 0 ? "stress 1000/s" : "CLOUD 20/s") << "\", \"fs\": " << (int) fs
+                json << (first ? "" : ",") << "\n  {\"scenario\": \"" << scenario << "\", \"density\": \"" << (density > 0 ? "stress 1000/s" : "CLOUD 20/s") << "\", \"fs\": " << (int) fs
                      << ", \"block\": " << block << ", \"deadline_us\": " << juce::String (deadline, 2) << ", \"max_us\": " << juce::String (worst.s.max, 2)
                      << ", \"p999_us\": " << juce::String (worst.s.p999, 2) << ", \"p99_us\": " << juce::String (worst.s.p99, 2)
                      << ", \"median_us\": " << juce::String (worst.s.median, 2) << ", \"mean_us\": " << juce::String (worst.s.mean, 3)
@@ -195,11 +288,17 @@ int main (int argc, char** argv)
                      << ", \"p999_pct_of_deadline\": " << juce::String (100 * worst.s.p999 / deadline, 1)
                      << ", \"callbacks\": " << (juce::int64) worst.s.callbacks << ", \"captures\": " << (juce::int64) worst.captures
                      << ", \"rejects\": " << (juce::int64) worst.rejects << ", \"max_grains_total\": " << worst.maxGrainsTotal
-                     << ", \"gate\": \"" << (gated ? (pass ? "PASS" : "FAIL") : (block == 16 ? "reported" : "correctness only")) << "\"}";
+                     << ", \"gate\": \"" << (cpu ? "evidence only" : gated ? (pass ? "PASS" : "FAIL") : (block == 16 ? "reported" : "correctness only")) << "\"";
+                if (cpu)
+                    json << ", \"cpu_max_us\": " << juce::String (ev.maxCpu, 2) << ", \"cpu_p999_us\": " << juce::String (ev.p999Cpu, 2)
+                         << ", \"cpu_at_max_wall_us\": " << juce::String (ev.cpuAtMaxWall, 2) << ", \"callbacks_wall_over_2x_cpu_plus_50us\": " << ev.preempted;
+                json << "}";
                 first = false;
-                std::printf ("%-14s fs=%6.0f block=%5d  max %8.2f us (%5.1f%%)  p99.9 %7.2f us (%5.1f%%)  median %6.2f us  %s\n",
-                             density > 0 ? "stress" : "CLOUD", fs, block, worst.s.max, 100 * worst.s.max / deadline, worst.s.p999,
-                             100 * worst.s.p999 / deadline, worst.s.median, gated ? (pass ? "PASS" : "FAIL") : "-");
+                std::printf ("%-7s %-7s fs=%6.0f block=%5d  max %8.2f us (%5.1f%%)  p99.9 %7.2f us (%5.1f%%)  median %6.2f us  %s",
+                             scenario.toRawUTF8(), density > 0 ? "stress" : "CLOUD", fs, block, worst.s.max, 100 * worst.s.max / deadline, worst.s.p999,
+                             100 * worst.s.p999 / deadline, worst.s.median, cpu ? "" : gated ? (pass ? "PASS" : "FAIL") : "-");
+                if (cpu) std::printf ("  cpu max %.1f, cpu at max wall %.1f, preempted callbacks %d", ev.maxCpu, ev.cpuAtMaxWall, ev.preempted);
+                std::printf ("\n");
                 std::fflush (stdout);
             }
     json << "\n ]\n}\n";

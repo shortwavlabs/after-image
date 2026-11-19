@@ -1,0 +1,1 @@
+{"device": "BlackHole 2ch", "rate": 48000, "block": 64, "editor": 0, "instances": 1, "control": 1, "seconds": 10, "callbacks": 7515, "xruns": 0, "period_us": 1333.33, "max_us": 104.71, "p999_us": 86.88, "p99_us": 52.12, "median_us": 2.875, "host_time_gaps": 1, "worst_host_interval_periods": 4.062, "result": "CONTROL"}
