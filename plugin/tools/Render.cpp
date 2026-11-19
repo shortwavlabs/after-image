@@ -3,6 +3,8 @@
 //
 //   afterimage_render in=x.wav out=prefix [body=0 ghost=1 dissolve=1 t60=5 seed=1 block=256 pad=2 density=0]
 //                     [imprint=at,s0,s1,full|filtered,low,high ...] [clear=at ...] [frames=m0,m1] [grainlog=1]
+//                     P1-B: [mode=manual|random|auto] [trigger=at ...] [length=0.75] [source=full|filtered] [center=1000]
+//                     [width=3] [hold=0|1] [interval=4] [gate=-48] [sens=0.5] [cooldown=2] -> prefix.requests.csv
 //
 // Writes prefix.out.wav (float32), prefix.loop.wav (last capture's loop), prefix.json, and with options
 // prefix.frames.f32 (complex64, frames x channels x K) and prefix.grains.csv.
@@ -36,7 +38,15 @@ int main (int argc, char** argv)
     {
         const juce::String a (argv[i]);
         const auto key = a.upToFirstOccurrenceOf ("=", false, false), val = a.fromFirstOccurrenceOf ("=", false, false);
-        if (key == "imprint" || key == "clear")
+        if (key == "trigger")
+        {
+            Command c;
+            c.type = Command::Type::Trigger;
+            c.origin = Origin::Button;
+            c.at = val.getLargeIntValue();
+            cmds.push_back (c);
+        }
+        else if (key == "imprint" || key == "clear")
         {
             auto t = juce::StringArray::fromTokens (val, ",", "");
             Command c;
@@ -81,6 +91,18 @@ int main (int argc, char** argv)
     }
 
     Params p { (float) num ("body", 0), (float) num ("ghost", 1), (float) num ("t60", 5), (float) num ("dissolve", 1) };
+    p.mode = opt["mode"] == "random" ? Mode::Random : opt["mode"] == "auto" ? Mode::Auto : Mode::Manual;
+    p.lengthSeconds = (float) num ("length", 0.75);
+    p.source = opt["source"] == "filtered" ? Source::Filtered : Source::Full;
+    p.bandCenterHz = (float) num ("center", 1000);
+    p.bandWidthOct = (float) num ("width", 3);
+    p.hold = num ("hold", 0) > 0.5;
+    p.randomIntervalSeconds = (float) num ("interval", 4);
+    p.gateDb = (float) num ("gate", -48);
+    p.sensitivity = (float) num ("sens", 0.5);
+    p.cooldownSeconds = (float) num ("cooldown", 2);
+    std::vector<RequestRecord> requests (100000);
+    e.setRequestLog (requests.data(), (int) requests.size());
     const int block = (int) num ("block", 256);
     juce::String json = "{\n \"fs\": " + juce::String (fs) + ", \"N\": " + juce::String (e.fftSize()) + ", \"H\": " + juce::String (e.hop())
                         + ", \"channels\": " + juce::String (nch) + ",\n \"captures\": [";
@@ -115,6 +137,15 @@ int main (int argc, char** argv)
          << ", \"max_active_grains_total\": " << e.maxActiveGrainsTotal() << ", \"overs\": " << (juce::int64) e.status.overs.load()
          << ", \"non_finite\": " << (juce::int64) e.nonFiniteInputs() << "\n}\n";
     juce::File (opt["out"] + ".json").replaceWithText (json);
+    juce::String req = "at,origin,outcome,reject,s0,s1,low_hz,high_hz,source,attempts,started_at\n";
+    for (int i = 0; i < e.requestLogCount(); ++i)
+    {
+        const auto& r = requests[(size_t) i];
+        req << (juce::int64) r.at << "," << originName (r.origin) << "," << outcomeName (r.outcome) << "," << rejectName (r.reject) << ","
+            << (juce::int64) r.s0 << "," << (juce::int64) r.s1 << "," << juce::String (r.lowHz, 3) << "," << juce::String (r.highHz, 3) << ","
+            << (r.source == Source::Full ? "full" : "filtered") << "," << r.attempts << "," << (juce::int64) r.startedAt << "\n";
+    }
+    juce::File (opt["out"] + ".requests.csv").replaceWithText (req);
     writeWav (juce::File (opt["out"] + ".out.wav"), io, fs);
 
     if (opt.count ("frames"))

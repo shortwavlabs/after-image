@@ -81,22 +81,26 @@ public:
     juce::String statusText() const { return status.getText(); }
     double knobValue (int i) const { return knobs[(size_t) i].slider->getValue(); }
     void select (int64_t s0, int64_t s1, double lowHz, double highHz) { spectrogram.setSelectionForTest (s0, s1, lowHz, highHz); }
-    void pressImprint() { imprint(); }
+    void pressImprint() { imprint(); }        // IMPRINT SELECTION (the drawn rectangle)
+    void pressTrigger() { trigger(); }        // one-action IMPRINT (last capture length)
     SpectrogramView& view() { return spectrogram; }
 
 private:
     void timerCallback() override;
     void addKnob (const char* id, const char* name);
+    void addChoice (const char* id, juce::ComboBox&, std::unique_ptr<ParameterLink>&);
     void imprint();
+    void trigger();
 
     AfterimageProcessor& proc;
     SpectrogramView spectrogram;
     struct Knob { std::unique_ptr<juce::Slider> slider; std::unique_ptr<juce::Label> label; std::unique_ptr<ParameterLink> link; };
     std::vector<Knob> knobs;
-    juce::ComboBox source;
-    std::unique_ptr<ParameterLink> sourceLink;
-    juce::TextButton imprintButton { "IMPRINT" }, clearButton { "CLEAR" };
-    juce::Label status, selectionInfo;
+    juce::ComboBox source, mode, length;
+    std::unique_ptr<ParameterLink> sourceLink, modeLink, lengthLink, holdLink;
+    juce::ToggleButton hold { "HOLD" };
+    juce::TextButton imprintButton { "IMPRINT SELECTION" }, triggerButton { "IMPRINT" }, clearButton { "CLEAR" };
+    juce::Label status, selectionInfo, engineInfo;
     float peakHold = 0.0f;
     int peakHoldTicks = 0;
 };

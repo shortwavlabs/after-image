@@ -1,0 +1,221 @@
+{
+ "note": "Original synthetic material only. WAVs in renders/p1b/ (git-ignored). BODY 1, GHOST 0.7, DISSOLVE 0.5, MEMORY 6 s; MANUAL triggers every 3 s; RANDOM interval 2 s; AUTO defaults. Listening is the owner's.",
+ "code_revision": {
+  "commit": "0b9c8631b8453b869a86d710df10ec2d2042b7fe",
+  "harness_dirty": false
+ },
+ "cases": {
+  "riff": {
+   "manual": {
+    "captures": 5,
+    "outcomes": {
+     "BUTTON:COMPLETED": 5
+    },
+    "capture_starts_s": [
+     1.25,
+     4.25,
+     7.25,
+     10.25,
+     13.25
+    ],
+    "capture_lengths_ms": [
+     750
+    ]
+   },
+   "random": {
+    "captures": 9,
+    "outcomes": {
+     "RANDOM:COMPLETED": 9
+    },
+    "capture_starts_s": [
+     0.363,
+     0.643,
+     2.219,
+     7.271,
+     8.598,
+     11.186,
+     12.296,
+     14.366,
+     14.844
+    ],
+    "capture_lengths_ms": [
+     750
+    ]
+   },
+   "auto": {
+    "captures": 5,
+    "outcomes": {
+     "AUTO:COMPLETED": 5
+    },
+    "capture_starts_s": [
+     0.929,
+     3.745,
+     6.539,
+     9.355,
+     12.15
+    ],
+    "capture_lengths_ms": [
+     750
+    ]
+   }
+  },
+  "sustained_chord": {
+   "manual": {
+    "captures": 5,
+    "outcomes": {
+     "BUTTON:COMPLETED": 5
+    },
+    "capture_starts_s": [
+     1.25,
+     4.25,
+     7.25,
+     10.25,
+     13.25
+    ],
+    "capture_lengths_ms": [
+     750
+    ]
+   },
+   "random": {
+    "captures": 10,
+    "outcomes": {
+     "RANDOM:COMPLETED": 10
+    },
+    "capture_starts_s": [
+     0.363,
+     0.643,
+     2.219,
+     7.271,
+     8.598,
+     11.186,
+     12.296,
+     14.366,
+     14.844,
+     17.68
+    ],
+    "capture_lengths_ms": [
+     750
+    ]
+   },
+   "auto": {
+    "captures": 3,
+    "outcomes": {
+     "AUTO:COMPLETED": 3
+    },
+    "capture_starts_s": [
+     0.929,
+     6.945,
+     12.939
+    ],
+    "capture_lengths_ms": [
+     750
+    ]
+   }
+  },
+  "drum_loop": {
+   "manual": {
+    "captures": 5,
+    "outcomes": {
+     "BUTTON:COMPLETED": 5
+    },
+    "capture_starts_s": [
+     1.25,
+     4.25,
+     7.25,
+     10.25,
+     13.25
+    ],
+    "capture_lengths_ms": [
+     750
+    ]
+   },
+   "random": {
+    "captures": 9,
+    "outcomes": {
+     "RANDOM:COMPLETED": 9
+    },
+    "capture_starts_s": [
+     0.363,
+     0.643,
+     2.219,
+     7.271,
+     8.598,
+     11.186,
+     12.296,
+     14.366,
+     14.844
+    ],
+    "capture_lengths_ms": [
+     750
+    ]
+   },
+   "auto": {
+    "captures": 6,
+    "outcomes": {
+     "AUTO:COMPLETED": 6
+    },
+    "capture_starts_s": [
+     0.0,
+     2.934,
+     5.942,
+     8.929,
+     11.937,
+     14.945
+    ],
+    "capture_lengths_ms": [
+     750
+    ]
+   }
+  },
+  "sustained_synth": {
+   "manual": {
+    "captures": 5,
+    "outcomes": {
+     "BUTTON:COMPLETED": 5
+    },
+    "capture_starts_s": [
+     1.25,
+     4.25,
+     7.25,
+     10.25,
+     13.25
+    ],
+    "capture_lengths_ms": [
+     750
+    ]
+   },
+   "random": {
+    "captures": 9,
+    "outcomes": {
+     "RANDOM:COMPLETED": 9
+    },
+    "capture_starts_s": [
+     0.363,
+     0.643,
+     2.219,
+     7.271,
+     8.598,
+     11.186,
+     12.296,
+     14.366,
+     14.844
+    ],
+    "capture_lengths_ms": [
+     750
+    ]
+   },
+   "auto": {
+    "captures": 1,
+    "outcomes": {
+     "AUTO:COMPLETED": 1
+    },
+    "capture_starts_s": [
+     0.0
+    ],
+    "capture_lengths_ms": [
+     750
+    ]
+   }
+  }
+ }
+}

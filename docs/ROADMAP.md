@@ -29,6 +29,14 @@ Scope and gates: `P1-A-REALTIME-ARCHITECTURE.md` (added with P1-A on `feature/p1
 - [x] Gain smoothing; 0-sample latency and bit-exact BODY verified; IMPRINT-to-GHOST delay measured.
 - [x] Engine tests: null/impulse/silence/stereo/block boundaries, plus parity with the Python reference.
 
+## Phase 1b — P1-B performance capture (current)
+
+Hands-free capture after the owner's first audition: MANUAL / RANDOM / AUTO capture modes, HOLD, footswitch and MIDI
+triggers, a development UI that does not need the spectrogram. Scope, contract and results:
+[P1-B-CAPTURE-ARCHITECTURE.md](P1-B-CAPTURE-ARCHITECTURE.md), [P1-B-UX-CONTRACT.md](P1-B-UX-CONTRACT.md),
+[P1-B-QUALIFICATION.md](P1-B-QUALIFICATION.md). Deferred: FREEZE VIEW, the PERFORMANCE PAD, MIDI to the AU, FOCUS and
+GLITCH engines, the production UI.
+
 P1-A open items: host-level validation beyond `auval` (pluginval, DAW sessions, automation with the editor open), a realtime benchmark inside a host, Windows, listening to the C++ engine.
 
 ## Phase 2 — Signature interface

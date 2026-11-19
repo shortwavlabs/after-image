@@ -85,5 +85,7 @@ Polyphonic pitch tracking; arbitrary high-quality offline time stretching; multi
 6. **DECIDED for P1-A (2026-11-18), revisit by ear:** the loop period equals the selected duration; the seam crossfade uses 80 ms of audio *after* the selection (post-roll). See [P1-A architecture](P1-A-REALTIME-ARCHITECTURE.md) §4.2.
 7. **DECIDED for P1-A:** captures are not normalised; GHOST defaults to −6 dB; no limiter; output peak and overs are shown. §9 of the P1-A architecture.
 8. **DECIDED for P1-A:** development parameter IDs `body`, `ghost`, `memory_t60`, `dissolve`, `source` (version 1). IMPRINT and CLEAR are not host parameters. Not yet a preset contract.
+9. **DECIDED for P1-B (2026-11-19), after the owner's first guitar audition:** hands-free capture is the primary workflow; the spectrogram selection stays as an advanced option. Capture modes MANUAL (one-action IMPRINT of the last 250–1500 ms), RANDOM and AUTO (experimental), plus a latched HOLD. See [P1-B UX contract](P1-B-UX-CONTRACT.md).
+10. **DECIDED for P1-B, revisits decision 8:** IMPRINT is now also an automatable trigger parameter (`imprint`, rising edge, never fired by state restore), and HOLD is a parameter, so footswitches work through host controller assignment. VST3 accepts MIDI Note On / CC 64 as IMPRINT; the AU stays a plain effect (`aufx`) without MIDI.
 
 **Project management:** Preserve validated tests as gates, write up every stop/decision, avoid speculative performance claims.

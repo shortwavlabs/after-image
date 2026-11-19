@@ -192,36 +192,62 @@ void SpectrogramView::updateSelection()
 AfterimageEditor::AfterimageEditor (AfterimageProcessor& p) : AudioProcessorEditor (&p), proc (p), spectrogram (p)
 {
     addAndMakeVisible (spectrogram);
-    addKnob ("body", "BODY");
-    addKnob ("ghost", "GHOST");
-    addKnob ("memory_t60", "MEMORY");
-    addKnob ("dissolve", "DISSOLVE");
+    for (auto [id, name] : { std::pair { "body", "BODY" }, { "ghost", "GHOST" }, { "memory_t60", "MEMORY" }, { "dissolve", "DISSOLVE" },
+                             { "band_center", "BAND CENTRE" }, { "band_width", "BAND WIDTH" }, { "random_interval", "INTERVAL" },
+                             { "activity_gate", "GATE" }, { "auto_sensitivity", "AUTO SENS" }, { "auto_cooldown", "COOLDOWN" } })
+        addKnob (id, name);
 
-    auto* srcParam = dynamic_cast<juce::RangedAudioParameter*> (proc.apvts.getParameter ("source"));
-    source.addItemList ({ "FULL", "FILTERED" }, 1);
-    sourceLink = std::make_unique<ParameterLink> (*srcParam, [this] (float v) { source.setSelectedItemIndex (v > 0.5f ? 1 : 0, juce::dontSendNotification); });
-    source.onChange = [this] { sourceLink->setNormalised ((float) source.getSelectedItemIndex(), true); };
-    sourceLink->refresh();
-    addAndMakeVisible (source);
+    addChoice ("source", source, sourceLink);
+    addChoice ("capture_mode", mode, modeLink);
+    addChoice ("capture_length", length, lengthLink);
 
+    auto* holdParam = dynamic_cast<juce::RangedAudioParameter*> (proc.apvts.getParameter ("hold"));
+    holdLink = std::make_unique<ParameterLink> (*holdParam, [this] (float v) { hold.setToggleState (v > 0.5f, juce::dontSendNotification); });
+    hold.onClick = [this] { holdLink->setNormalised (hold.getToggleState() ? 1.0f : 0.0f, true); };
+    holdLink->refresh();
+    addAndMakeVisible (hold);
+
+    triggerButton.onClick = [this] { trigger(); };
     imprintButton.onClick = [this] { imprint(); };
     clearButton.onClick = [this] {
         afterimage::Command c;
         c.type = afterimage::Command::Type::Clear;
         proc.postCommand (c);
     };
-    imprintButton.setColour (juce::TextButton::buttonColourId, violet.darker (0.6f));
-    addAndMakeVisible (imprintButton);
-    addAndMakeVisible (clearButton);
-    for (auto* l : { &status, &selectionInfo })
+    triggerButton.setColour (juce::TextButton::buttonColourId, violet.darker (0.4f));
+    imprintButton.setColour (juce::TextButton::buttonColourId, violet.darker (0.8f));
+    for (auto* b : { &triggerButton, &imprintButton, &clearButton }) addAndMakeVisible (*b);
+    for (auto* l : { &status, &selectionInfo, &engineInfo })
     {
         l->setFont (juce::FontOptions (13.0f));
         l->setColour (juce::Label::textColourId, juce::Colours::lightgrey);
         l->setJustificationType (juce::Justification::topLeft);
         addAndMakeVisible (*l);
     }
-    setSize (960, 600);
+    engineInfo.setText ("Playback engine: CLOUD. DISSOLVE crossfades TRACE (the captured loop itself) into CLOUD (granular). "
+                        "FOCUS and GLITCH are research engines, not in this build.", juce::dontSendNotification);
+    setSize (1000, 720);
     startTimerHz (30);
+}
+
+void AfterimageEditor::addChoice (const char* id, juce::ComboBox& box, std::unique_ptr<ParameterLink>& link)
+{
+    auto* param = dynamic_cast<juce::AudioParameterChoice*> (proc.apvts.getParameter (id));
+    box.addItemList (param->choices, 1);
+    const int n = param->choices.size();
+    link = std::make_unique<ParameterLink> (*param, [&box, n] (float v) { box.setSelectedItemIndex (juce::roundToInt (v * (float) (n - 1)), juce::dontSendNotification); });
+    auto* l = link.get();
+    box.onChange = [&box, l, n] { l->setNormalised ((float) box.getSelectedItemIndex() / (float) (n - 1), true); };
+    link->refresh();
+    addAndMakeVisible (box);
+}
+
+void AfterimageEditor::trigger()
+{
+    afterimage::Command c;
+    c.type = afterimage::Command::Type::Trigger;
+    c.origin = afterimage::Origin::Button;
+    proc.postCommand (c);
 }
 
 AfterimageEditor::~AfterimageEditor() { stopTimer(); }
@@ -259,13 +285,14 @@ void AfterimageEditor::imprint()
     c.source = proc.currentSource();
     c.lowHz = sel.lowHz;
     c.highHz = std::min (sel.highHz, proc.engine().sampleRate() / 2);
+    c.origin = afterimage::Origin::Selection;
     proc.postCommand (c);
 }
 
 void AfterimageEditor::timerCallback()
 {
     for (auto& k : knobs) k.link->poll();
-    sourceLink->poll();
+    for (auto* l : { sourceLink.get(), modeLink.get(), lengthLink.get(), holdLink.get() }) l->poll();
     spectrogram.pull();
     spectrogram.repaint();
 
@@ -290,6 +317,31 @@ void AfterimageEditor::timerCallback()
     s << "output peak  " << (peakHold > 0 ? juce::String (juce::Decibels::gainToDecibels (peakHold), 1) + " dBFS" : juce::String ("-inf")) << "   overs > 0 dBFS: "
       << (juce::int64) st.overs.load() << (peakHold > 1.0f ? "   OVER 0 dBFS (no limiter)" : "") << "\n";
     s << "non-finite input samples replaced: " << (juce::int64) st.nonFinite.load() << "\n";
+    // P1-B capture workflow
+    const auto modeNow = (afterimage::Mode) st.mode.load();
+    s << "MODE  " << (modeNow == afterimage::Mode::Manual ? "MANUAL: press IMPRINT (button, footswitch, MIDI)"
+                     : modeNow == afterimage::Mode::Random ? "RANDOM" : "AUTO (experimental)");
+    if (modeNow == afterimage::Mode::Random && st.randomDueIn.load() >= 0) s << ": next attempt in " << juce::String ((double) st.randomDueIn.load() / fs, 1) << " s";
+    if (modeNow == afterimage::Mode::Auto)
+    {
+        const char* autoStates[] = { "armed", "in event", "re-arming" };
+        s << ": " << autoStates[juce::jlimit (0, 2, st.autoState.load())] << ", onset strength " << juce::String (st.fluxDb.load(), 1) << " dB (threshold "
+          << juce::String (afterimage::Engine::autoThresholdDb (proc.apvts.getRawParameterValue ("auto_sensitivity")->load()), 1) << " dB)";
+    }
+    s << (st.hold.load() ? "    HOLD ON: automatic captures suppressed (" + juce::String ((juce::int64) st.outcomes[(size_t) afterimage::Outcome::SuppressedHold].load()) + ")" : "    HOLD off") << "\n";
+    const auto origin = (afterimage::Origin) st.lastOrigin.load();
+    const auto outcome = (afterimage::Outcome) st.lastOutcome.load();
+    if (origin == afterimage::Origin::None)
+        s << "last request  none\n";
+    else
+    {
+        s << "last request  " << afterimage::originName (origin) << " -> " << afterimage::outcomeName (outcome);
+        if (outcome == afterimage::Outcome::Rejected) s << " (" << afterimage::rejectName ((afterimage::Reject) st.lastRequestReject.load()) << ")";
+        if (outcome == afterimage::Outcome::Accepted && st.state.load() == 1) s << " (queued: waiting for post-roll)";
+        if (st.lastRequestS1.load() > st.lastRequestS0.load()) s << ", " << ms (st.lastRequestS1.load() - st.lastRequestS0.load());
+        s << ", " << juce::String ((double) (st.samplesSeen.load() - st.lastRequestAt.load()) / fs, 1) << " s ago\n";
+    }
+    s << "input  " << juce::String (st.levelDb.load(), 1) << " dBFS (gate " << juce::String (proc.apvts.getRawParameterValue ("activity_gate")->load(), 0) << " dBFS)\n";
     s << juce::String (fs, 0) << " Hz, N " << e.fftSize() << ", hop " << e.hop() << ", epoch " << (int) st.epoch.load() << ", latency 0 samples";
     status.setText (s, juce::dontSendNotification);
     status.setColour (juce::Label::textColourId, peakHold > 1.0f ? amber : juce::Colours::lightgrey);
@@ -313,22 +365,22 @@ void AfterimageEditor::paint (juce::Graphics& g)
     g.drawText ("AFTERIMAGE", 16, 8, 300, 24, juce::Justification::left);
     g.setColour (juce::Colours::grey);
     g.setFont (juce::FontOptions (12.0f));
-    g.drawText ("P1-A development interface -- not the product UI", getWidth() - 416, 12, 400, 18, juce::Justification::right);
+    g.drawText ("P1-B development interface -- not the product UI", getWidth() - 416, 12, 400, 18, juce::Justification::right);
 }
 
 void AfterimageEditor::resized()
 {
     auto r = getLocalBounds().reduced (16);
     r.removeFromTop (28);
-    spectrogram.setBounds (r.removeFromTop (280));
-    r.removeFromTop (6);
-    selectionInfo.setBounds (r.removeFromTop (20));
-    r.removeFromTop (6);
-    auto row = r.removeFromTop (120);
-    auto buttons = row.removeFromRight (180);
-    imprintButton.setBounds (buttons.removeFromTop (40).reduced (4));
-    clearButton.setBounds (buttons.removeFromTop (40).reduced (4));
-    source.setBounds (buttons.removeFromTop (34).reduced (4));
+    engineInfo.setBounds (r.removeFromTop (20));
+    auto strip = r.removeFromTop (48); // performance strip: everything needed to play, no spectrogram
+    mode.setBounds (strip.removeFromLeft (130).reduced (4, 8));
+    length.setBounds (strip.removeFromLeft (110).reduced (4, 8));
+    source.setBounds (strip.removeFromLeft (120).reduced (4, 8));
+    hold.setBounds (strip.removeFromLeft (90).reduced (4, 8));
+    clearButton.setBounds (strip.removeFromRight (110).reduced (4, 4));
+    triggerButton.setBounds (strip.reduced (4, 2));
+    auto row = r.removeFromTop (112);
     const int w = row.getWidth() / (int) knobs.size();
     for (auto& k : knobs)
     {
@@ -336,5 +388,9 @@ void AfterimageEditor::resized()
         k.label->setBounds (cell.removeFromTop (18));
         k.slider->setBounds (cell);
     }
-    status.setBounds (r.reduced (0, 6));
+    status.setBounds (r.removeFromTop (190).reduced (0, 4));
+    auto info = r.removeFromTop (28);
+    imprintButton.setBounds (info.removeFromRight (180).reduced (2));
+    selectionInfo.setBounds (info);
+    spectrogram.setBounds (r);
 }
