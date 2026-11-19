@@ -1,0 +1,2199 @@
+{
+ "note": "C++ afterimage_render against p1a_reference.py; limits fixed beforehand in p1a-limits.json.",
+ "code_revision": {
+  "commit": "6a5e00cb57cd1b514bfd79ba103f03572263361a",
+  "harness_dirty": false
+ },
+ "summary": {
+  "PASS": 148,
+  "FAIL": 0
+ },
+ "rows": [
+  {
+   "check": "P1 STFT frames",
+   "case": "guitar fs=44100 N=4096 frames 0-40",
+   "value": -138.1,
+   "limit": -100.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P1 STFT frames",
+   "case": "guitar fs=48000 N=4096 frames 0-40",
+   "value": -137.8,
+   "limit": -100.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P1 STFT frames",
+   "case": "guitar fs=88200 N=8192 frames 0-40",
+   "value": -137.8,
+   "limit": -100.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P1 STFT frames",
+   "case": "guitar fs=96000 N=8192 frames 0-40",
+   "value": -137.7,
+   "limit": -100.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=44100 full 0.75s D=0.0",
+   "value": {
+    "period_cpp": 33075,
+    "period_ref": 33075,
+    "error_db": -161.6,
+    "rho_cpp": -0.155325,
+    "rho_ref": -0.155325
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P5 TRACE",
+   "case": "guitar fs=44100 full 0.75s D=0.0",
+   "value": -151.2,
+   "limit": -100.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=44100 full 0.75s D=0.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=44100 full 0.75s D=1.0",
+   "value": {
+    "period_cpp": 33075,
+    "period_ref": 33075,
+    "error_db": -161.6,
+    "rho_cpp": -0.155325,
+    "rho_ref": -0.155325
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=44100 full 0.75s D=1.0",
+   "value": -140.3,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=44100 full 0.75s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "drums fs=44100 full 0.75s D=0.5",
+   "value": {
+    "period_cpp": 33075,
+    "period_ref": 33075,
+    "error_db": -156.1,
+    "rho_cpp": -0.001455,
+    "rho_ref": -0.001455
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P7 D=0.5",
+   "case": "drums fs=44100 full 0.75s D=0.5",
+   "value": -142.7,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "drums fs=44100 full 0.75s D=0.5",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "vocal fs=44100 full 0.20s D=1.0",
+   "value": {
+    "period_cpp": 8820,
+    "period_ref": 8820,
+    "error_db": -156.1,
+    "rho_cpp": -0.015342,
+    "rho_ref": -0.015342
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "vocal fs=44100 full 0.20s D=1.0",
+   "value": -140.6,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "vocal fs=44100 full 0.20s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "synth fs=44100 full 1.50s D=1.0",
+   "value": {
+    "period_cpp": 66150,
+    "period_ref": 66150,
+    "error_db": -164.8,
+    "rho_cpp": 0.247594,
+    "rho_ref": 0.247594
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "synth fs=44100 full 1.50s D=1.0",
+   "value": -140.4,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "synth fs=44100 full 1.50s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "guitar fs=44100 filtered 0.75s D=0.0",
+   "value": {
+    "period_cpp": 33075,
+    "period_ref": 33075,
+    "error_db": -137.7,
+    "rho_cpp": -0.33385,
+    "rho_ref": -0.33385
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P5 TRACE",
+   "case": "guitar fs=44100 filtered 0.75s D=0.0",
+   "value": -137.5,
+   "limit": -100.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=44100 filtered 0.75s D=0.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "guitar fs=44100 filtered 0.75s D=1.0",
+   "value": {
+    "period_cpp": 33075,
+    "period_ref": 33075,
+    "error_db": -137.7,
+    "rho_cpp": -0.33385,
+    "rho_ref": -0.33385
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=44100 filtered 0.75s D=1.0",
+   "value": -134.9,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=44100 filtered 0.75s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "drums fs=44100 filtered 0.75s D=0.5",
+   "value": {
+    "period_cpp": 33075,
+    "period_ref": 33075,
+    "error_db": -137.0,
+    "rho_cpp": 0.069539,
+    "rho_ref": 0.069539
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P7 D=0.5",
+   "case": "drums fs=44100 filtered 0.75s D=0.5",
+   "value": -135.5,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "drums fs=44100 filtered 0.75s D=0.5",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "vocal fs=44100 filtered 0.20s D=1.0",
+   "value": {
+    "period_cpp": 8820,
+    "period_ref": 8820,
+    "error_db": -138.4,
+    "rho_cpp": -0.018685,
+    "rho_ref": -0.018685
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "vocal fs=44100 filtered 0.20s D=1.0",
+   "value": -135.9,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "vocal fs=44100 filtered 0.20s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "synth fs=44100 filtered 1.50s D=1.0",
+   "value": {
+    "period_cpp": 66150,
+    "period_ref": 66150,
+    "error_db": -138.1,
+    "rho_cpp": 0.028319,
+    "rho_ref": 0.028319
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "synth fs=44100 filtered 1.50s D=1.0",
+   "value": -135.3,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "synth fs=44100 filtered 1.50s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=44100 full 0.75s D=1.0 density=400/s",
+   "value": {
+    "period_cpp": 33075,
+    "period_ref": 33075,
+    "error_db": -161.6,
+    "rho_cpp": -0.155325,
+    "rho_ref": -0.155325
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=44100 full 0.75s D=1.0 density=400/s",
+   "value": -137.7,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=44100 full 0.75s D=1.0 density=400/s",
+   "value": {
+    "grains": 880,
+    "dropped": 528,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 2.1240786907128495e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=48000 full 0.75s D=0.0",
+   "value": {
+    "period_cpp": 36000,
+    "period_ref": 36000,
+    "error_db": -160.8,
+    "rho_cpp": -0.157711,
+    "rho_ref": -0.157711
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P5 TRACE",
+   "case": "guitar fs=48000 full 0.75s D=0.0",
+   "value": -151.1,
+   "limit": -100.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=48000 full 0.75s D=0.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=48000 full 0.75s D=1.0",
+   "value": {
+    "period_cpp": 36000,
+    "period_ref": 36000,
+    "error_db": -160.8,
+    "rho_cpp": -0.157711,
+    "rho_ref": -0.157711
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=48000 full 0.75s D=1.0",
+   "value": -140.4,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=48000 full 0.75s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "drums fs=48000 full 0.75s D=0.5",
+   "value": {
+    "period_cpp": 36000,
+    "period_ref": 36000,
+    "error_db": -156.0,
+    "rho_cpp": -0.000983,
+    "rho_ref": -0.000983
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P7 D=0.5",
+   "case": "drums fs=48000 full 0.75s D=0.5",
+   "value": -142.0,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "drums fs=48000 full 0.75s D=0.5",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "vocal fs=48000 full 0.20s D=1.0",
+   "value": {
+    "period_cpp": 9600,
+    "period_ref": 9600,
+    "error_db": -156.2,
+    "rho_cpp": -0.014667,
+    "rho_ref": -0.014667
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "vocal fs=48000 full 0.20s D=1.0",
+   "value": -140.9,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "vocal fs=48000 full 0.20s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "synth fs=48000 full 1.50s D=1.0",
+   "value": {
+    "period_cpp": 72000,
+    "period_ref": 72000,
+    "error_db": -164.9,
+    "rho_cpp": 0.247594,
+    "rho_ref": 0.247594
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "synth fs=48000 full 1.50s D=1.0",
+   "value": -140.8,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "synth fs=48000 full 1.50s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "guitar fs=48000 filtered 0.75s D=0.0",
+   "value": {
+    "period_cpp": 36000,
+    "period_ref": 36000,
+    "error_db": -138.5,
+    "rho_cpp": -0.341003,
+    "rho_ref": -0.341003
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P5 TRACE",
+   "case": "guitar fs=48000 filtered 0.75s D=0.0",
+   "value": -138.2,
+   "limit": -100.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=48000 filtered 0.75s D=0.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "guitar fs=48000 filtered 0.75s D=1.0",
+   "value": {
+    "period_cpp": 36000,
+    "period_ref": 36000,
+    "error_db": -138.5,
+    "rho_cpp": -0.341003,
+    "rho_ref": -0.341003
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=48000 filtered 0.75s D=1.0",
+   "value": -135.4,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=48000 filtered 0.75s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "drums fs=48000 filtered 0.75s D=0.5",
+   "value": {
+    "period_cpp": 36000,
+    "period_ref": 36000,
+    "error_db": -137.0,
+    "rho_cpp": -0.008834,
+    "rho_ref": -0.008834
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P7 D=0.5",
+   "case": "drums fs=48000 filtered 0.75s D=0.5",
+   "value": -135.3,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "drums fs=48000 filtered 0.75s D=0.5",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "vocal fs=48000 filtered 0.20s D=1.0",
+   "value": {
+    "period_cpp": 9600,
+    "period_ref": 9600,
+    "error_db": -139.4,
+    "rho_cpp": -0.017986,
+    "rho_ref": -0.017986
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "vocal fs=48000 filtered 0.20s D=1.0",
+   "value": -136.6,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "vocal fs=48000 filtered 0.20s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "synth fs=48000 filtered 1.50s D=1.0",
+   "value": {
+    "period_cpp": 72000,
+    "period_ref": 72000,
+    "error_db": -137.8,
+    "rho_cpp": 0.029135,
+    "rho_ref": 0.029135
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "synth fs=48000 filtered 1.50s D=1.0",
+   "value": -135.1,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "synth fs=48000 filtered 1.50s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=48000 full 0.75s D=1.0 density=400/s",
+   "value": {
+    "period_cpp": 36000,
+    "period_ref": 36000,
+    "error_db": -160.8,
+    "rho_cpp": -0.157711,
+    "rho_ref": -0.157711
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=48000 full 0.75s D=1.0 density=400/s",
+   "value": -138.2,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=48000 full 0.75s D=1.0 density=400/s",
+   "value": {
+    "grains": 880,
+    "dropped": 528,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 2.1240786907128495e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=48000 full 0.75s D=1.0 mono",
+   "value": {
+    "period_cpp": 36000,
+    "period_ref": 36000,
+    "error_db": -160.8,
+    "rho_cpp": -0.160946,
+    "rho_ref": -0.160946
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=48000 full 0.75s D=1.0 mono",
+   "value": -141.2,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=48000 full 0.75s D=1.0 mono",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "guitar fs=48000 filtered 0.75s D=1.0 mono",
+   "value": {
+    "period_cpp": 36000,
+    "period_ref": 36000,
+    "error_db": -138.1,
+    "rho_cpp": -0.251658,
+    "rho_ref": -0.251658
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=48000 filtered 0.75s D=1.0 mono",
+   "value": -135.4,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=48000 filtered 0.75s D=1.0 mono",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=88200 full 0.75s D=0.0",
+   "value": {
+    "period_cpp": 66150,
+    "period_ref": 66150,
+    "error_db": -160.8,
+    "rho_cpp": -0.152516,
+    "rho_ref": -0.152516
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P5 TRACE",
+   "case": "guitar fs=88200 full 0.75s D=0.0",
+   "value": -151.1,
+   "limit": -100.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=88200 full 0.75s D=0.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=88200 full 0.75s D=1.0",
+   "value": {
+    "period_cpp": 66150,
+    "period_ref": 66150,
+    "error_db": -160.8,
+    "rho_cpp": -0.152516,
+    "rho_ref": -0.152516
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=88200 full 0.75s D=1.0",
+   "value": -140.5,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=88200 full 0.75s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "drums fs=88200 full 0.75s D=0.5",
+   "value": {
+    "period_cpp": 66150,
+    "period_ref": 66150,
+    "error_db": -155.8,
+    "rho_cpp": -0.003663,
+    "rho_ref": -0.003663
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P7 D=0.5",
+   "case": "drums fs=88200 full 0.75s D=0.5",
+   "value": -142.0,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "drums fs=88200 full 0.75s D=0.5",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "vocal fs=88200 full 0.20s D=1.0",
+   "value": {
+    "period_cpp": 17640,
+    "period_ref": 17640,
+    "error_db": -156.2,
+    "rho_cpp": -0.014317,
+    "rho_ref": -0.014317
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "vocal fs=88200 full 0.20s D=1.0",
+   "value": -140.6,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "vocal fs=88200 full 0.20s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "synth fs=88200 full 1.50s D=1.0",
+   "value": {
+    "period_cpp": 132300,
+    "period_ref": 132300,
+    "error_db": -164.8,
+    "rho_cpp": 0.247594,
+    "rho_ref": 0.247594
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "synth fs=88200 full 1.50s D=1.0",
+   "value": -140.7,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "synth fs=88200 full 1.50s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "guitar fs=88200 filtered 0.75s D=0.0",
+   "value": {
+    "period_cpp": 66150,
+    "period_ref": 66150,
+    "error_db": -136.1,
+    "rho_cpp": -0.460522,
+    "rho_ref": -0.460522
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P5 TRACE",
+   "case": "guitar fs=88200 filtered 0.75s D=0.0",
+   "value": -136.0,
+   "limit": -100.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=88200 filtered 0.75s D=0.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "guitar fs=88200 filtered 0.75s D=1.0",
+   "value": {
+    "period_cpp": 66150,
+    "period_ref": 66150,
+    "error_db": -136.1,
+    "rho_cpp": -0.460522,
+    "rho_ref": -0.460522
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=88200 filtered 0.75s D=1.0",
+   "value": -133.6,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=88200 filtered 0.75s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "drums fs=88200 filtered 0.75s D=0.5",
+   "value": {
+    "period_cpp": 66150,
+    "period_ref": 66150,
+    "error_db": -135.1,
+    "rho_cpp": -0.040666,
+    "rho_ref": -0.040666
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P7 D=0.5",
+   "case": "drums fs=88200 filtered 0.75s D=0.5",
+   "value": -133.5,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "drums fs=88200 filtered 0.75s D=0.5",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "vocal fs=88200 filtered 0.20s D=1.0",
+   "value": {
+    "period_cpp": 17640,
+    "period_ref": 17640,
+    "error_db": -136.6,
+    "rho_cpp": -0.017644,
+    "rho_ref": -0.017644
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "vocal fs=88200 filtered 0.20s D=1.0",
+   "value": -134.4,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "vocal fs=88200 filtered 0.20s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "synth fs=88200 filtered 1.50s D=1.0",
+   "value": {
+    "period_cpp": 132300,
+    "period_ref": 132300,
+    "error_db": -136.6,
+    "rho_cpp": 0.028397,
+    "rho_ref": 0.028397
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "synth fs=88200 filtered 1.50s D=1.0",
+   "value": -134.3,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "synth fs=88200 filtered 1.50s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=88200 full 0.75s D=1.0 density=400/s",
+   "value": {
+    "period_cpp": 66150,
+    "period_ref": 66150,
+    "error_db": -160.8,
+    "rho_cpp": -0.152516,
+    "rho_ref": -0.152516
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=88200 full 0.75s D=1.0 density=400/s",
+   "value": -138.2,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=88200 full 0.75s D=1.0 density=400/s",
+   "value": {
+    "grains": 880,
+    "dropped": 528,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 2.1240786907128495e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=96000 full 0.75s D=0.0",
+   "value": {
+    "period_cpp": 72000,
+    "period_ref": 72000,
+    "error_db": -161.5,
+    "rho_cpp": -0.271893,
+    "rho_ref": -0.271893
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P5 TRACE",
+   "case": "guitar fs=96000 full 0.75s D=0.0",
+   "value": -151.2,
+   "limit": -100.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=96000 full 0.75s D=0.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=96000 full 0.75s D=1.0",
+   "value": {
+    "period_cpp": 72000,
+    "period_ref": 72000,
+    "error_db": -161.5,
+    "rho_cpp": -0.271893,
+    "rho_ref": -0.271893
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=96000 full 0.75s D=1.0",
+   "value": -141.0,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=96000 full 0.75s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "drums fs=96000 full 0.75s D=0.5",
+   "value": {
+    "period_cpp": 72000,
+    "period_ref": 72000,
+    "error_db": -155.9,
+    "rho_cpp": -0.002227,
+    "rho_ref": -0.002227
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P7 D=0.5",
+   "case": "drums fs=96000 full 0.75s D=0.5",
+   "value": -142.4,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "drums fs=96000 full 0.75s D=0.5",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "vocal fs=96000 full 0.20s D=1.0",
+   "value": {
+    "period_cpp": 19200,
+    "period_ref": 19200,
+    "error_db": -156.2,
+    "rho_cpp": -0.014788,
+    "rho_ref": -0.014788
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "vocal fs=96000 full 0.20s D=1.0",
+   "value": -140.7,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "vocal fs=96000 full 0.20s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "synth fs=96000 full 1.50s D=1.0",
+   "value": {
+    "period_cpp": 144000,
+    "period_ref": 144000,
+    "error_db": -164.8,
+    "rho_cpp": 0.247594,
+    "rho_ref": 0.247594
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "synth fs=96000 full 1.50s D=1.0",
+   "value": -140.9,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "synth fs=96000 full 1.50s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "guitar fs=96000 filtered 0.75s D=0.0",
+   "value": {
+    "period_cpp": 72000,
+    "period_ref": 72000,
+    "error_db": -137.1,
+    "rho_cpp": -0.313849,
+    "rho_ref": -0.313849
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P5 TRACE",
+   "case": "guitar fs=96000 filtered 0.75s D=0.0",
+   "value": -137.0,
+   "limit": -100.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=96000 filtered 0.75s D=0.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "guitar fs=96000 filtered 0.75s D=1.0",
+   "value": {
+    "period_cpp": 72000,
+    "period_ref": 72000,
+    "error_db": -137.1,
+    "rho_cpp": -0.313849,
+    "rho_ref": -0.313849
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=96000 filtered 0.75s D=1.0",
+   "value": -134.7,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=96000 filtered 0.75s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "drums fs=96000 filtered 0.75s D=0.5",
+   "value": {
+    "period_cpp": 72000,
+    "period_ref": 72000,
+    "error_db": -135.1,
+    "rho_cpp": -0.037933,
+    "rho_ref": -0.037933
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P7 D=0.5",
+   "case": "drums fs=96000 filtered 0.75s D=0.5",
+   "value": -133.7,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "drums fs=96000 filtered 0.75s D=0.5",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "vocal fs=96000 filtered 0.20s D=1.0",
+   "value": {
+    "period_cpp": 19200,
+    "period_ref": 19200,
+    "error_db": -136.8,
+    "rho_cpp": -0.018093,
+    "rho_ref": -0.018093
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "vocal fs=96000 filtered 0.20s D=1.0",
+   "value": -134.7,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "vocal fs=96000 filtered 0.20s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "synth fs=96000 filtered 1.50s D=1.0",
+   "value": {
+    "period_cpp": 144000,
+    "period_ref": 144000,
+    "error_db": -136.1,
+    "rho_cpp": 0.029207,
+    "rho_ref": 0.029207
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "synth fs=96000 filtered 1.50s D=1.0",
+   "value": -133.9,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "synth fs=96000 filtered 1.50s D=1.0",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 4.547473508864641e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=96000 full 0.75s D=1.0 density=400/s",
+   "value": {
+    "period_cpp": 72000,
+    "period_ref": 72000,
+    "error_db": -161.5,
+    "rho_cpp": -0.271893,
+    "rho_ref": -0.271893
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=96000 full 0.75s D=1.0 density=400/s",
+   "value": -137.5,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=96000 full 0.75s D=1.0 density=400/s",
+   "value": {
+    "grains": 880,
+    "dropped": 528,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 2.1240786907128495e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P2 FULL loop",
+   "case": "guitar fs=96000 full 0.75s D=1.0 mono",
+   "value": {
+    "period_cpp": 72000,
+    "period_ref": 72000,
+    "error_db": -161.6,
+    "rho_cpp": -0.28049,
+    "rho_ref": -0.28049
+   },
+   "limit": -120.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=96000 full 0.75s D=1.0 mono",
+   "value": -141.6,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=96000 full 0.75s D=1.0 mono",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  },
+  {
+   "check": "P3 FILTERED loop",
+   "case": "guitar fs=96000 filtered 0.75s D=1.0 mono",
+   "value": {
+    "period_cpp": 72000,
+    "period_ref": 72000,
+    "error_db": -137.0,
+    "rho_cpp": -0.094577,
+    "rho_ref": -0.094577
+   },
+   "limit": -90.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P6 CLOUD",
+   "case": "guitar fs=96000 filtered 0.75s D=1.0 mono",
+   "value": -134.8,
+   "limit": -80.0,
+   "unit": "dB",
+   "result": "PASS"
+  },
+  {
+   "check": "P4 grain table",
+   "case": "guitar fs=96000 filtered 0.75s D=1.0 mono",
+   "value": {
+    "grains": 45,
+    "dropped": 0,
+    "identical_integers": true,
+    "max_pos_diff_samples": 9.094947017729282e-13,
+    "max_gain_rel_diff": 1.6994183837937271e-12
+   },
+   "limit": {
+    "pos": 1e-06,
+    "gain_rel": 1e-06
+   },
+   "unit": "",
+   "result": "PASS"
+  }
+ ],
+ "capture_delay": [
+  {
+   "case": "guitar fs=44100 full 0.75s D=0.0",
+   "accepted_at": 132300,
+   "started_at": 132960,
+   "delay_samples": 660,
+   "delay_ms": 15.0
+  },
+  {
+   "case": "guitar fs=44100 full 0.75s D=1.0",
+   "accepted_at": 132300,
+   "started_at": 132960,
+   "delay_samples": 660,
+   "delay_ms": 15.0
+  },
+  {
+   "case": "drums fs=44100 full 0.75s D=0.5",
+   "accepted_at": 132300,
+   "started_at": 132960,
+   "delay_samples": 660,
+   "delay_ms": 15.0
+  },
+  {
+   "case": "vocal fs=44100 full 0.20s D=1.0",
+   "accepted_at": 132300,
+   "started_at": 132640,
+   "delay_samples": 340,
+   "delay_ms": 7.7
+  },
+  {
+   "case": "synth fs=44100 full 1.50s D=1.0",
+   "accepted_at": 132300,
+   "started_at": 133536,
+   "delay_samples": 1236,
+   "delay_ms": 28.0
+  },
+  {
+   "case": "guitar fs=44100 filtered 0.75s D=0.0",
+   "accepted_at": 132300,
+   "started_at": 134880,
+   "delay_samples": 2580,
+   "delay_ms": 58.5
+  },
+  {
+   "case": "guitar fs=44100 filtered 0.75s D=1.0",
+   "accepted_at": 132300,
+   "started_at": 134880,
+   "delay_samples": 2580,
+   "delay_ms": 58.5
+  },
+  {
+   "case": "drums fs=44100 filtered 0.75s D=0.5",
+   "accepted_at": 132300,
+   "started_at": 134880,
+   "delay_samples": 2580,
+   "delay_ms": 58.5
+  },
+  {
+   "case": "vocal fs=44100 filtered 0.20s D=1.0",
+   "accepted_at": 132300,
+   "started_at": 133408,
+   "delay_samples": 1108,
+   "delay_ms": 25.1
+  },
+  {
+   "case": "synth fs=44100 filtered 1.50s D=1.0",
+   "accepted_at": 132300,
+   "started_at": 136992,
+   "delay_samples": 4692,
+   "delay_ms": 106.4
+  },
+  {
+   "case": "guitar fs=48000 full 0.75s D=0.0",
+   "accepted_at": 144000,
+   "started_at": 144736,
+   "delay_samples": 736,
+   "delay_ms": 15.3
+  },
+  {
+   "case": "guitar fs=48000 full 0.75s D=1.0",
+   "accepted_at": 144000,
+   "started_at": 144736,
+   "delay_samples": 736,
+   "delay_ms": 15.3
+  },
+  {
+   "case": "drums fs=48000 full 0.75s D=0.5",
+   "accepted_at": 144000,
+   "started_at": 144736,
+   "delay_samples": 736,
+   "delay_ms": 15.3
+  },
+  {
+   "case": "vocal fs=48000 full 0.20s D=1.0",
+   "accepted_at": 144000,
+   "started_at": 144352,
+   "delay_samples": 352,
+   "delay_ms": 7.3
+  },
+  {
+   "case": "synth fs=48000 full 1.50s D=1.0",
+   "accepted_at": 144000,
+   "started_at": 145312,
+   "delay_samples": 1312,
+   "delay_ms": 27.3
+  },
+  {
+   "case": "guitar fs=48000 filtered 0.75s D=0.0",
+   "accepted_at": 144000,
+   "started_at": 146848,
+   "delay_samples": 2848,
+   "delay_ms": 59.3
+  },
+  {
+   "case": "guitar fs=48000 filtered 0.75s D=1.0",
+   "accepted_at": 144000,
+   "started_at": 146848,
+   "delay_samples": 2848,
+   "delay_ms": 59.3
+  },
+  {
+   "case": "drums fs=48000 filtered 0.75s D=0.5",
+   "accepted_at": 144000,
+   "started_at": 146848,
+   "delay_samples": 2848,
+   "delay_ms": 59.3
+  },
+  {
+   "case": "vocal fs=48000 filtered 0.20s D=1.0",
+   "accepted_at": 144000,
+   "started_at": 145184,
+   "delay_samples": 1184,
+   "delay_ms": 24.7
+  },
+  {
+   "case": "synth fs=48000 filtered 1.50s D=1.0",
+   "accepted_at": 144000,
+   "started_at": 149088,
+   "delay_samples": 5088,
+   "delay_ms": 106.0
+  },
+  {
+   "case": "guitar fs=88200 full 0.75s D=0.0",
+   "accepted_at": 264600,
+   "started_at": 265824,
+   "delay_samples": 1224,
+   "delay_ms": 13.9
+  },
+  {
+   "case": "guitar fs=88200 full 0.75s D=1.0",
+   "accepted_at": 264600,
+   "started_at": 265824,
+   "delay_samples": 1224,
+   "delay_ms": 13.9
+  },
+  {
+   "case": "drums fs=88200 full 0.75s D=0.5",
+   "accepted_at": 264600,
+   "started_at": 265824,
+   "delay_samples": 1224,
+   "delay_ms": 13.9
+  },
+  {
+   "case": "vocal fs=88200 full 0.20s D=1.0",
+   "accepted_at": 264600,
+   "started_at": 265120,
+   "delay_samples": 520,
+   "delay_ms": 5.9
+  },
+  {
+   "case": "synth fs=88200 full 1.50s D=1.0",
+   "accepted_at": 264600,
+   "started_at": 266912,
+   "delay_samples": 2312,
+   "delay_ms": 26.2
+  },
+  {
+   "case": "guitar fs=88200 filtered 0.75s D=0.0",
+   "accepted_at": 264600,
+   "started_at": 267168,
+   "delay_samples": 2568,
+   "delay_ms": 29.1
+  },
+  {
+   "case": "guitar fs=88200 filtered 0.75s D=1.0",
+   "accepted_at": 264600,
+   "started_at": 267168,
+   "delay_samples": 2568,
+   "delay_ms": 29.1
+  },
+  {
+   "case": "drums fs=88200 filtered 0.75s D=0.5",
+   "accepted_at": 264600,
+   "started_at": 267168,
+   "delay_samples": 2568,
+   "delay_ms": 29.1
+  },
+  {
+   "case": "vocal fs=88200 filtered 0.20s D=1.0",
+   "accepted_at": 264600,
+   "started_at": 265696,
+   "delay_samples": 1096,
+   "delay_ms": 12.4
+  },
+  {
+   "case": "synth fs=88200 filtered 1.50s D=1.0",
+   "accepted_at": 264600,
+   "started_at": 269280,
+   "delay_samples": 4680,
+   "delay_ms": 53.1
+  },
+  {
+   "case": "guitar fs=96000 full 0.75s D=0.0",
+   "accepted_at": 288000,
+   "started_at": 289376,
+   "delay_samples": 1376,
+   "delay_ms": 14.3
+  },
+  {
+   "case": "guitar fs=96000 full 0.75s D=1.0",
+   "accepted_at": 288000,
+   "started_at": 289376,
+   "delay_samples": 1376,
+   "delay_ms": 14.3
+  },
+  {
+   "case": "drums fs=96000 full 0.75s D=0.5",
+   "accepted_at": 288000,
+   "started_at": 289376,
+   "delay_samples": 1376,
+   "delay_ms": 14.3
+  },
+  {
+   "case": "vocal fs=96000 full 0.20s D=1.0",
+   "accepted_at": 288000,
+   "started_at": 288544,
+   "delay_samples": 544,
+   "delay_ms": 5.7
+  },
+  {
+   "case": "synth fs=96000 full 1.50s D=1.0",
+   "accepted_at": 288000,
+   "started_at": 290528,
+   "delay_samples": 2528,
+   "delay_ms": 26.3
+  },
+  {
+   "case": "guitar fs=96000 filtered 0.75s D=0.0",
+   "accepted_at": 288000,
+   "started_at": 290848,
+   "delay_samples": 2848,
+   "delay_ms": 29.7
+  },
+  {
+   "case": "guitar fs=96000 filtered 0.75s D=1.0",
+   "accepted_at": 288000,
+   "started_at": 290848,
+   "delay_samples": 2848,
+   "delay_ms": 29.7
+  },
+  {
+   "case": "drums fs=96000 filtered 0.75s D=0.5",
+   "accepted_at": 288000,
+   "started_at": 290848,
+   "delay_samples": 2848,
+   "delay_ms": 29.7
+  },
+  {
+   "case": "vocal fs=96000 filtered 0.20s D=1.0",
+   "accepted_at": 288000,
+   "started_at": 289184,
+   "delay_samples": 1184,
+   "delay_ms": 12.3
+  },
+  {
+   "case": "synth fs=96000 filtered 1.50s D=1.0",
+   "accepted_at": 288000,
+   "started_at": 293088,
+   "delay_samples": 5088,
+   "delay_ms": 53.0
+  }
+ ]
+}

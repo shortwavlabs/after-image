@@ -142,6 +142,9 @@ implementation or an owner decision.
 | B11 | Licences of the 12 Freesound recordings unknown; no Freesound IDs in the files | Real-audio §7 | Owner fills the provenance table; until then no redistribution of the audio or renders |
 | B12 | No realtime C++ performance measurement exists | All reports | C++ benchmarks (P1-A onwards) |
 
+Status of each item after the P1-A implementation: [P1-A-QUALIFICATION.md](P1-A-QUALIFICATION.md) §10. The register
+itself is not edited: an item closes only when it is verified in a host and, where it matters, by ear.
+
 ## 6. Integration gates run before merging
 
 Run on 2026-11-18 against the PR heads listed above, before any merge. "Clean worktree" means a fresh
@@ -166,4 +169,21 @@ implementation must treat samples before the stream start as silence.
 
 ## 7. Merge record
 
-Filled in after the merges.
+Each PR was marked ready, retargeted to `main` once its predecessor had merged (so it carried only its own phase), and
+merged with a normal merge commit pinned to the verified head (`gh pr merge --merge --match-head-commit`). After each
+merge, `git diff main <merged head>` was empty.
+
+| PR | Head merged | Files | Merge commit on `main` |
+|---|---|---:|---|
+| shortwavlabs/after-image#2 P0-A | `0d755ba` | 26 | `ed283ea` |
+| shortwavlabs/after-image#3 P0-B | `62a3d26` | 16 | `4dd7cde` |
+| shortwavlabs/after-image#4 P0-C | `f80845d` | 15 | `32cbb9c` |
+| shortwavlabs/after-image#5 real audio + consolidation | `b48a06b` | 21 | `2db8e2e` |
+
+**`main` after the merges: `2db8e2e48deec68f08096dbc639bdd6cec802a01`.** Verified in a clean worktree of that commit
+(empty `inputs/`, `uv sync --frozen`): 159 tests pass; `run.py`, `run_p0b.py` and `run_p0c.py all --no-wav` regenerate
+every verification and metrics file byte-identical (only the three manifests' commit line and the timing files
+change). No release was tagged. The research branches were left in place.
+
+This section was written on `feature/p1a-realtime-core`, after the merge, because the merged commit cannot record its
+own SHA.

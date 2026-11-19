@@ -1,0 +1,14 @@
+{
+ "note": "P1-A parity limits, fixed before the comparison ran (docs/P1-A-QUALIFICATION.md section 1). Error = 20 log10(rms(test - ref) / rms(ref)).",
+ "A1_schedule_vs_p0": "identical",
+ "A2_filtered_vs_p0_capture_buffer_db": -200.0,
+ "A3_render_vs_p0_render_db": -200.0,
+ "P1_stft_frames_db": -100.0,
+ "P2_full_loop_db": -120.0,
+ "P3_filtered_loop_db": -90.0,
+ "P4_grain_position_abs": 1e-6,
+ "P4_grain_gain_rel": 1e-6,
+ "P5_trace_db": -100.0,
+ "P6_cloud_db": -80.0,
+ "P7_parallel_half_db": -80.0
+}

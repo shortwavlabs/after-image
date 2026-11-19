@@ -15,7 +15,25 @@ The signature interaction is **painting a musical memory**, not simply pressing 
 
 **Offline research complete; realtime implementation starting.** Python research (P0-A, P0-B, P0-C, real-audio qualification) is consolidated in [docs/RESEARCH-CONSOLIDATION.md](docs/RESEARCH-CONSOLIDATION.md): the GHOST is a granular cloud over a captured slice of recent audio. No released plugin, installer or realtime qualification exists yet.
 
-Design and acceptance criteria are proposed in the development docs on the concept branch.
+**P1-A (in progress, `feature/p1a-realtime-core`):** a JUCE 9 plugin (AU, VST3, Standalone; macOS only so far) with a zero-latency BODY, C++ STFT history and capture, the CLOUD engine with a parallel TRACE → CLOUD DISSOLVE, and a minimal development interface. See [docs/P1-A-REALTIME-ARCHITECTURE.md](docs/P1-A-REALTIME-ARCHITECTURE.md) and [docs/P1-A-QUALIFICATION.md](docs/P1-A-QUALIFICATION.md).
+
+## Build (macOS, development)
+
+Requires CMake ≥ 3.22, Xcode command-line tools and network access on first configure (JUCE 9.0.5 is fetched by commit).
+
+Build out of the source tree (the repository has no ignore rule for build folders):
+
+```bash
+cmake -S . -B ../afterimage-build -DCMAKE_BUILD_TYPE=Release
+```
+```bash
+cmake --build ../afterimage-build -j 8
+```
+```bash
+ctest --test-dir ../afterimage-build --output-on-failure
+```
+
+Products are in `../afterimage-build/AFTERIMAGE_artefacts/Release/{AU,VST3,Standalone}`, ad-hoc signed; nothing is installed automatically. To audition in a host, copy the AU to `~/Library/Audio/Plug-Ins/Components` and the VST3 to `~/Library/Audio/Plug-Ins/VST3`, then rescan in the host. Parity against the Python reference: `uv run python run_p1a_parity.py --render ../../../afterimage-build/afterimage_render_artefacts/Release/afterimage_render` in `experiments/p0-spectral-ghost`.
 
 ## Proposed MVP
 

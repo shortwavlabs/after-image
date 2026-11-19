@@ -82,5 +82,8 @@ Polyphonic pitch tracking; arbitrary high-quality offline time stretching; multi
 3. **RESOLVED (provisional, 2026-11-18):** neither as the main ghost; granular CLOUD over a captured buffer, with the frame loop kept as the TRACE end of DISSOLVE. Sustain was not preferred in any listening set.
 4. **DEFERRED:** IMPRINT MIDI/host automation beyond GUI trigger, pending event and state-restore contract.
 5. Whether transient routing receives a dedicated parameter.
+6. **DECIDED for P1-A (2026-11-18), revisit by ear:** the loop period equals the selected duration; the seam crossfade uses 80 ms of audio *after* the selection (post-roll). See [P1-A architecture](P1-A-REALTIME-ARCHITECTURE.md) §4.2.
+7. **DECIDED for P1-A:** captures are not normalised; GHOST defaults to −6 dB; no limiter; output peak and overs are shown. §9 of the P1-A architecture.
+8. **DECIDED for P1-A:** development parameter IDs `body`, `ghost`, `memory_t60`, `dissolve`, `source` (version 1). IMPRINT and CLEAR are not host parameters. Not yet a preset contract.
 
 **Project management:** Preserve validated tests as gates, write up every stop/decision, avoid speculative performance claims.

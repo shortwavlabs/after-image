@@ -1,0 +1,40 @@
+# Diagnostic repeats of the one row that failed the pre-set gate (88.2 kHz, block 32, stress 1000 grains/s).
+# 10 repeats x 20 s on an ordinary thread, then 10 on the Mach time-constraint policy. Not a gate.
+diagnostic fs=88200 block=32 density=1000 realtime_policy=no
+  repeat  1: max    92.62 us  p99.9  80.38 us
+  repeat  2: max    95.00 us  p99.9  75.25 us
+  repeat  3: max    92.62 us  p99.9  74.88 us
+  repeat  4: max    94.92 us  p99.9  74.71 us
+  repeat  5: max    95.58 us  p99.9  75.17 us
+  repeat  6: max    98.83 us  p99.9  75.42 us
+  repeat  7: max    95.88 us  p99.9  75.04 us
+  repeat  8: max    93.79 us  p99.9  76.58 us
+  repeat  9: max    95.38 us  p99.9  75.04 us
+  repeat 10: max    94.67 us  p99.9  74.92 us
+diagnostic fs=88200 block=32 density=1000 realtime_policy=yes
+  repeat  1: max    93.29 us  p99.9  81.71 us
+  repeat  2: max    90.96 us  p99.9  84.21 us
+  repeat  3: max    91.67 us  p99.9  86.62 us
+  repeat  4: max    90.79 us  p99.9  85.62 us
+  repeat  5: max    92.04 us  p99.9  81.88 us
+  repeat  6: max    88.62 us  p99.9  81.96 us
+  repeat  7: max    92.33 us  p99.9  86.54 us
+  repeat  8: max    94.21 us  p99.9  81.42 us
+  repeat  9: max    94.25 us  p99.9  86.42 us
+  repeat 10: max    91.96 us  p99.9  82.54 us
+
+# Earlier session of the same diagnostic (same binary scenario, run once before the file above was written;
+# transcribed from its console output). Ordinary thread: 2 of 10 repeats had outliers.
+diagnostic fs=88200 block=32 density=1000 realtime_policy=no
+  repeat  1: max    99.54 us  p99.9  79.58 us
+  repeat  2: max   101.54 us  p99.9  76.79 us
+  repeat  3: max    93.75 us  p99.9  74.54 us
+  repeat  4: max   933.46 us  p99.9  78.42 us
+  repeat  5: max    99.54 us  p99.9  77.58 us
+  repeat  6: max   385.33 us  p99.9  77.12 us
+  repeat  7: max    97.17 us  p99.9  76.21 us
+  repeat  8: max    95.50 us  p99.9  77.25 us
+  repeat  9: max    95.75 us  p99.9  77.75 us
+  repeat 10: max   100.08 us  p99.9  77.42 us
+diagnostic fs=88200 block=32 density=1000 realtime_policy=yes
+  repeats 1-10: max 85.46-92.79 us, p99.9 77.79-81.71 us
